@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -29,14 +31,28 @@ class MyHomePage extends StatelessWidget {
             width: 360,
             height: 270,
           ),
-          Center(
-            child: Text(
-              "Следите за своим ментальным состоянием оцкнивая его по шкале с семью градациями"
-            ),
+          Container(
+            color: Colors.green,
+            alignment: Alignment.center,
+            padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+            child:  Text(
+                  "Следите за своим ментальным состоянием оцкнивая его по шкале с семью градациями",
+                style: TextStyle(fontSize: 16)
+              ),
           ),
-          FlatButton(
-              onPressed: () { print("Next button pressed"); },
-              child: Text("Далее")
+          Container(
+            color: Colors.yellow,
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+            child: FlatButton (
+              color: Colors.blue,
+                height: 60,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                ),
+                onPressed: () { print("Next button pressed"); },
+                child: Text("Далее")
+            )
           )
         ],
       )
