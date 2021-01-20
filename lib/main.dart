@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
+
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -23,11 +22,24 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null,
-      body: Center(
-        child: Text(
-          "Hellow world"
-        ),
-      ),
+      body: Column(
+        children: [
+          Container(
+            color: Colors.red,
+            width: 360,
+            height: 270,
+          ),
+          Center(
+            child: Text(
+              "Следите за своим ментальным состоянием оцкнивая его по шкале с семью градациями"
+            ),
+          ),
+          FlatButton(
+              onPressed: () { print("Next button pressed"); },
+              child: Text("Далее")
+          )
+        ],
+      )
     );
   }
 }
