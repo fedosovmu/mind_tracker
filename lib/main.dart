@@ -28,7 +28,7 @@ class MyHomePage extends StatelessWidget {
         children: [
           Container(
             color: Colors.red,
-            width: 360,
+            width: double.infinity,
             height: 270,
           ),
           Container(
@@ -36,7 +36,7 @@ class MyHomePage extends StatelessWidget {
             alignment: Alignment.center,
             padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
             child:  Text(
-                  "Следите за своим ментальным состоянием оцкнивая его по шкале с семью градациями",
+                "Следите за своим ментальным состоянием оцкнивая его по шкале с семью градациями",
                 style: TextStyle(fontSize: 16)
               ),
           ),
@@ -51,7 +51,10 @@ class MyHomePage extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(16)),
                 ),
                 onPressed: () { print("Next button pressed"); },
-                child: Text("Далее")
+                child: Text(
+                  "Далее",
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                )
             )
           )
         ],
