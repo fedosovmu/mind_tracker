@@ -13,6 +13,10 @@ class OnBoardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final device_screen_width = MediaQuery.of(context).size.width;
+    const design_screen_width = 360;
+    final scale = device_screen_width / design_screen_width;
+
     return Scaffold(
         backgroundColor: const Color(0xFF322A42),
         appBar: null,
@@ -34,7 +38,7 @@ class OnBoardingPage extends StatelessWidget {
                   padding: EdgeInsets.only(top: 18, left: 16, right: 16),
                   child:  Text(
                       pageTexts[pageNumber],
-                      textScaleFactor: 1.0,
+                      textScaleFactor: scale,
                       style: TextStyle(
                           fontSize: 16,
                           color: Color(0xFFF9EFF6),
@@ -56,6 +60,7 @@ class OnBoardingPage extends StatelessWidget {
                     onPressed: () { print("Next button pressed"); },
                     child: Text(
                       "Далее",
+                      textScaleFactor: scale,
                       style: TextStyle(fontSize: 18, color: Colors.white),
                     )
                 )
