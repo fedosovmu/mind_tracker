@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 
 
 class OnBoardingPage extends StatelessWidget {
-
+  final pageNumber = 1;
+  static const pageTexts = {
+    1: "Следите за своим ментальным состоянием оценивая его по шкале с семью градациями.",
+    2: "Важно делать отметки несколько раз в день, устанавливаете напоминания в удобное время.",
+    3: "Отмечайте, что произошло за день. Приложение поможет вам проанализировать, как привычки  влияют на ваш внутренний баланс.",
+    4: "Чем дольше вы ведёте записи, тем более ценные данные получите. Вы убедитесь в очевидных связях между  событиями и эмоциями  и обнаружите неочевидные."
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +26,20 @@ class OnBoardingPage extends StatelessWidget {
                   width: double.infinity,
                   height: 400,
                 ),
-                Container(
+                SizedBox(
                   height: 15,
                 ),
                 Container(
                   alignment: Alignment.center,
-                  padding: EdgeInsets.symmetric(vertical: 18, horizontal: 16),
+                  padding: EdgeInsets.only(top: 18, left: 16, right: 16),
                   child:  Text(
-                      "Следите за своим ментальным состоянием оценивая его по шкале с семью градациями",
-                      style: TextStyle(fontSize: 16, color: Color(0xFFF9EFF6))
+                      pageTexts[pageNumber],
+                      textScaleFactor: 1.0,
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Color(0xFFF9EFF6),
+                          fontFamily: "Roboto",
+                      )
                   ),
                 ),
               ],
