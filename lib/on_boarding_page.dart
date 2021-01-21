@@ -11,11 +11,20 @@ class OnBoardingPage extends StatelessWidget {
     4: "Чем дольше вы ведёте записи, тем более ценные данные получите. Вы убедитесь в очевидных связях между  событиями и эмоциями  и обнаружите неочевидные."
   };
 
-  @override
-  Widget build(BuildContext context) {
+  var dp_scale = null;
+  void set_dp_scale(context) {
     final device_screen_width = MediaQuery.of(context).size.width;
     const design_screen_width = 360;
-    final scale = device_screen_width / design_screen_width;
+    dp_scale = device_screen_width / design_screen_width;
+  }
+
+  double dp(pixels) {
+    return (pixels * dp_scale);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    set_dp_scale(context);
 
     return Scaffold(
         backgroundColor: const Color(0xFF322A42),
@@ -28,19 +37,18 @@ class OnBoardingPage extends StatelessWidget {
                 Container(
                   color: const Color(0xFF261E35),
                   width: double.infinity,
-                  height: 400,
+                  height: dp(370),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: dp(55),
                 ),
                 Container(
                   alignment: Alignment.center,
-                  padding: EdgeInsets.only(top: 18, left: 16, right: 16),
+                  padding: EdgeInsets.only(left: dp(16), right: dp(16)),
                   child:  Text(
                       pageTexts[pageNumber],
-                      textScaleFactor: scale,
                       style: TextStyle(
-                          fontSize: 16,
+                          fontSize: dp(16),
                           color: Color(0xFFF9EFF6),
                           fontFamily: "Roboto",
                       )
@@ -50,18 +58,17 @@ class OnBoardingPage extends StatelessWidget {
             ),
             Container(
                 width: double.infinity,
-                padding: EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                padding: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
                 child: FlatButton (
                     color: const Color(0xFF674A7A),
-                    height: 60,
+                    height: dp(60),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(16)),
                     ),
                     onPressed: () { print("Next button pressed"); },
                     child: Text(
                       "Далее",
-                      textScaleFactor: scale,
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+                      style: TextStyle(fontSize: dp(18), color: Colors.white),
                     )
                 )
             )
