@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 
 class OnBoardingPage extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey,
+        backgroundColor: const Color(0xFF322A42),
         appBar: null,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -14,31 +16,28 @@ class OnBoardingPage extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  color: Colors.red,
+                  color: const Color(0xFF261E35),
                   width: double.infinity,
                   height: 400,
                 ),
                 Container(
-                  color: Colors.purple,
                   height: 15,
                 ),
                 Container(
-                  color: Colors.green,
                   alignment: Alignment.center,
                   padding: EdgeInsets.symmetric(vertical: 18, horizontal: 16),
                   child:  Text(
                       "Следите за своим ментальным состоянием оценивая его по шкале с семью градациями",
-                      style: TextStyle(fontSize: 16)
+                      style: TextStyle(fontSize: 16, color: Color(0xFFF9EFF6))
                   ),
                 ),
               ],
             ),
             Container(
-                color: Colors.yellow,
                 width: double.infinity,
                 padding: EdgeInsets.only(left: 16, right: 16, bottom: 8),
                 child: FlatButton (
-                    color: Colors.blue,
+                    color: const Color(0xFF674A7A),
                     height: 60,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(16)),

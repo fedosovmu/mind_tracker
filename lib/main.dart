@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'on_boarding_page.dart';
 
 
-void main() => runApp(MyApp());
+void main() => runApp(MindTrackerApp());
 
 
-class MyApp extends StatelessWidget {
+class MindTrackerApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
