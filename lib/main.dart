@@ -25,25 +25,34 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: null,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            color: Colors.red,
-            width: double.infinity,
-            height: 270,
-          ),
-          Container(
-            color: Colors.green,
-            alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-            child:  Text(
-                "Следите за своим ментальным состоянием оцкнивая его по шкале с семью градациями",
-                style: TextStyle(fontSize: 16)
+          Column(
+            children: [
+              Container(
+                color: Colors.red,
+                width: double.infinity,
+                height: 400,
               ),
+              Container(
+                color: Colors.purple,
+                height: 15,
+              ),
+              Container(
+                color: Colors.green,
+                alignment: Alignment.center,
+                padding: EdgeInsets.symmetric(vertical: 18, horizontal: 16),
+                child:  Text(
+                    "Следите за своим ментальным состоянием оценивая его по шкале с семью градациями",
+                    style: TextStyle(fontSize: 16)
+                ),
+              ),
+            ],
           ),
           Container(
             color: Colors.yellow,
             width: double.infinity,
-            padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+            padding: EdgeInsets.only(left: 16, right: 16, bottom: 8),
             child: FlatButton (
               color: Colors.blue,
                 height: 60,
