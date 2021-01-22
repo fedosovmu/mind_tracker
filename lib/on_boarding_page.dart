@@ -28,17 +28,13 @@ class OnBoardingPage extends StatelessWidget {
       return;
     }
     var nextPage = _pageNumber + 1;
-    //Navigator.of(context).pushNamed('on_boarding_page/$nextPage');
-    //Navigator.of(context).push(
-    //  MaterialPageRoute(builder: (context) => OnBoardingPage(nextPage))
-    //);
     Navigator.of(context).push(
       PageRouteBuilder(
           pageBuilder: (context, _, __) => OnBoardingPage(nextPage),
           transitionsBuilder: (___, animation, ____, child) {
-            return FadeTransition(
-              opacity: animation,
-              child: child,
+            return SlideTransition(
+                position: animation.drive(Tween(begin: Offset(1.0, 0.0), end: Offset.zero)),
+                child: child,
             );
           }
       )

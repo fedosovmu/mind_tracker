@@ -22,13 +22,7 @@ class MindTrackerApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: 'on_boarding_page/1',
-      routes: {
-        'on_boarding_page/1': (context) => OnBoardingPage(1),
-        'on_boarding_page/2': (context) => OnBoardingPage(2),
-        'on_boarding_page/3': (context) => OnBoardingPage(3),
-        'on_boarding_page/4': (context) => OnBoardingPage(4),
-      }
+      home: OnBoardingPage(1),
     );
   }
 }
