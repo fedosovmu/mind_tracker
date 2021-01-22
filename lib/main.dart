@@ -22,7 +22,21 @@ class MindTrackerApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: OnBoardingPage(),
+      home: OnBoardingPage(1),
+      routes: <String, WidgetBuilder>{
+        'on_boarding_page/1': (BuildContext context) {
+          return OnBoardingPage(1);
+        },
+        'on_boarding_page/2': (BuildContext contect) {
+          return OnBoardingPage(2);
+        },
+        'on_boarding_page/3': (BuildContext context) {
+          return OnBoardingPage(3);
+        },
+        'on_boarding_page/4': (BuildContext contect) {
+          return OnBoardingPage(4);
+        }
+      },
     );
   }
 }

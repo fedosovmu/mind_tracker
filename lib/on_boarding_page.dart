@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 
 
 class OnBoardingPage extends StatelessWidget {
-  final pageNumber = 1;
+  var pageNumber;
+  OnBoardingPage (int page) {
+    this.pageNumber = page;
+  }
+
+  //final pageNumber = 1;
   static const pageTexts = {
     1: "Следите за своим ментальным состоянием оценивая его по шкале с семью градациями.",
     2: "Важно делать отметки несколько раз в день, устанавливаете напоминания в удобное время.",
@@ -16,6 +21,14 @@ class OnBoardingPage extends StatelessWidget {
     3: "assets/images/onboarding/butterfly.png",
     4: "assets/images/onboarding/monkey.png"
   };
+
+  void goToNextPage(BuildContext context) {
+    var nextPage = pageNumber + 1;
+    if (nextPage > 4) {
+      nextPage = 1;
+    }
+    Navigator.pushNamed(context, 'on_boarding_page/$nextPage');
+  }
 
   var dpScale;
   void setDpScale(context) {
@@ -73,7 +86,7 @@ class OnBoardingPage extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(16)),
                     ),
-                    onPressed: () { print("Next button pressed"); },
+                    onPressed: () { goToNextPage(context); },
                     child: Text(
                       "Далее",
                       style: TextStyle(fontSize: dp(18), color: Colors.white),
