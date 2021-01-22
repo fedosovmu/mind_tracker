@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 
 
 class OnBoardingPage extends StatelessWidget {
-  var pageNumber;
+  var _pageNumber;
   OnBoardingPage (int page) {
-    this.pageNumber = page;
+    this._pageNumber = page;
   }
 
   //final pageNumber = 1;
-  static const pageTexts = {
+  static const _pageTexts = {
     1: "Следите за своим ментальным состоянием оценивая его по шкале с семью градациями.",
     2: "Важно делать отметки несколько раз в день, устанавливаете напоминания в удобное время.",
     3: "Отмечайте, что произошло за день. Приложение поможет вам проанализировать, как привычки  влияют на ваш внутренний баланс.",
     4: "Чем дольше вы ведёте записи, тем более ценные данные получите. Вы убедитесь в очевидных связях между  событиями и эмоциями  и обнаружите неочевидные."
   };
-  static const pathsToImages = {
+  static const _pathsToImages = {
     1: "assets/images/onboarding/lamp.png",
     2: "assets/images/onboarding/fishes.png",
     3: "assets/images/onboarding/butterfly.png",
@@ -23,22 +23,37 @@ class OnBoardingPage extends StatelessWidget {
   };
 
   void goToNextPage(BuildContext context) {
-    var nextPage = pageNumber + 1;
-    if (nextPage > 4) {
-      nextPage = 1;
+    if (_pageNumber >= 4) {
+      print('This is END page');
+      return;
     }
-    Navigator.pushNamed(context, 'on_boarding_page/$nextPage');
+    var nextPage = _pageNumber + 1;
+    //Navigator.of(context).pushNamed('on_boarding_page/$nextPage');
+    //Navigator.of(context).push(
+    //  MaterialPageRoute(builder: (context) => OnBoardingPage(nextPage))
+    //);
+    Navigator.of(context).push(
+      PageRouteBuilder(
+          pageBuilder: (context, _, __) => OnBoardingPage(nextPage),
+          transitionsBuilder: (___, animation, ____, child) {
+            return FadeTransition(
+              opacity: animation,
+              child: child,
+            );
+          }
+      )
+    );
   }
 
-  var dpScale;
+  var _dpScale;
   void setDpScale(context) {
     final deviceScreenWidth = MediaQuery.of(context).size.width;
     const designScreenWidth = 360;
-    dpScale = deviceScreenWidth / designScreenWidth;
+    _dpScale = deviceScreenWidth / designScreenWidth;
   }
 
   double dp(pixels) {
-    return (pixels * dpScale);
+    return (pixels * _dpScale);
   }
 
   @override
@@ -57,7 +72,7 @@ class OnBoardingPage extends StatelessWidget {
                   height: dp(24),
                 ),
                 Image(
-                  image: AssetImage(pathsToImages[pageNumber]),
+                  image: AssetImage(_pathsToImages[_pageNumber]),
                   height: dp(370),
                 ),
                 SizedBox(
@@ -67,7 +82,7 @@ class OnBoardingPage extends StatelessWidget {
                   alignment: Alignment.center,
                   padding: EdgeInsets.only(left: dp(16), right: dp(16)),
                   child:  Text(
-                      pageTexts[pageNumber],
+                      _pageTexts[_pageNumber],
                       style: TextStyle(
                           fontSize: dp(16),
                           color: Color(0xFFF9EFF6),
