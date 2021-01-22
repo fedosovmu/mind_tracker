@@ -10,21 +10,27 @@ class OnBoardingPage extends StatelessWidget {
     3: "Отмечайте, что произошло за день. Приложение поможет вам проанализировать, как привычки  влияют на ваш внутренний баланс.",
     4: "Чем дольше вы ведёте записи, тем более ценные данные получите. Вы убедитесь в очевидных связях между  событиями и эмоциями  и обнаружите неочевидные."
   };
+  static const pathsToPictures = {
+    1: "assets/images/onboarding/lamp.png",
+    2: "assets/images/onboarding/fishes.png",
+    3: "assets/images/onboarding/butterfly.png",
+    4: "assets/images/onboarding/monkey.png"
+  };
 
-  var dp_scale = null;
-  void set_dp_scale(context) {
-    final device_screen_width = MediaQuery.of(context).size.width;
-    const design_screen_width = 360;
-    dp_scale = device_screen_width / design_screen_width;
+  var dpScale = null;
+  void setDpScale(context) {
+    final deviceScreenWidth = MediaQuery.of(context).size.width;
+    const designScreenWidth = 360;
+    dpScale = deviceScreenWidth / designScreenWidth;
   }
 
   double dp(pixels) {
-    return (pixels * dp_scale);
+    return (pixels * dpScale);
   }
 
   @override
   Widget build(BuildContext context) {
-    set_dp_scale(context);
+    setDpScale(context);
 
     return Scaffold(
         backgroundColor: const Color(0xFF322A42),
