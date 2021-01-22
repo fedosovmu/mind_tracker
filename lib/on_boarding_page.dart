@@ -10,14 +10,14 @@ class OnBoardingPage extends StatelessWidget {
     3: "Отмечайте, что произошло за день. Приложение поможет вам проанализировать, как привычки  влияют на ваш внутренний баланс.",
     4: "Чем дольше вы ведёте записи, тем более ценные данные получите. Вы убедитесь в очевидных связях между  событиями и эмоциями  и обнаружите неочевидные."
   };
-  static const pathsToPictures = {
+  static const pathsToImages = {
     1: "assets/images/onboarding/lamp.png",
     2: "assets/images/onboarding/fishes.png",
     3: "assets/images/onboarding/butterfly.png",
     4: "assets/images/onboarding/monkey.png"
   };
 
-  var dpScale = null;
+  var dpScale;
   void setDpScale(context) {
     final deviceScreenWidth = MediaQuery.of(context).size.width;
     const designScreenWidth = 360;
@@ -40,9 +40,11 @@ class OnBoardingPage extends StatelessWidget {
           children: [
             Column(
               children: [
-                Container(
-                  color: const Color(0xFF261E35),
-                  width: double.infinity,
+                SizedBox(
+                  height: dp(24),
+                ),
+                Image(
+                  image: AssetImage(pathsToImages[pageNumber]),
                   height: dp(370),
                 ),
                 SizedBox(
