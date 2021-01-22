@@ -71,8 +71,31 @@ class OnBoardingPage extends StatelessWidget {
                   image: AssetImage(_pathsToImages[_pageNumber]),
                   height: dp(370),
                 ),
-                SizedBox(
+                Container(
                   height: dp(55),
+                  padding: EdgeInsets.only(bottom: dp(18)),
+                  alignment: Alignment.bottomCenter,
+                  child: SizedBox(
+                    width: dp(54),
+                    height: dp(9),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: List.generate(4, (index) {
+                          var circle_color = Color(0xFF261E35);
+                          if (index+1 == _pageNumber) {
+                            circle_color = Color(0xFFD3B2CA);
+                          }
+                          return Container(
+                            width: dp(9),
+                            decoration: BoxDecoration(
+                              color: circle_color,
+                              shape: BoxShape.circle
+                            ),
+                          );
+                        }
+                      )
+                    ),
+                  ),
                 ),
                 Container(
                   alignment: Alignment.center,
