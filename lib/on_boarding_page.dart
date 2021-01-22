@@ -32,8 +32,8 @@ class OnBoardingPage extends StatelessWidget {
       PageRouteBuilder(
           pageBuilder: (context, _, __) => OnBoardingPage(nextPage),
           transitionsBuilder: (___, animation, ____, child) {
-            return SlideTransition(
-                position: animation.drive(Tween(begin: Offset(1.0, 0.0), end: Offset.zero)),
+            return FadeTransition(
+                opacity: animation,
                 child: child,
             );
           }
