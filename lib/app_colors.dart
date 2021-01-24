@@ -30,8 +30,10 @@ class AppColors {
     } as dynamic,
   };
 
+  static final _backgroundColor = _designColors['Purple']['Dark'];
+
   static final onboardingPage = {
-    'backgroundColor': _designColors['Purple']['Dark'],
+    'backgroundColor': _backgroundColor,
     'circleColor': _designColors['Purple']['SuperDark'],
     'activeCircleColor': _designColors['Purple']['Light'],
     'secondaryTextColor': _designColors['SilverWhite'],
@@ -40,6 +42,7 @@ class AppColors {
   };
 
   static final moodAssessmentPage = {
-    'backgroundColor': _designColors['Purple']['Dark'],
+    'backgroundColor': _backgroundColor,
+    'appBarTextColor': _designColors['White'],
   };
 }

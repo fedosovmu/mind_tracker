@@ -115,7 +115,12 @@ class OnboardingPage extends StatelessWidget {
                     onPressed: () { goToNextPage(context); },
                     child: Text(
                       "Далее",
-                      style: TextStyle(fontSize: dp(18), color: AppColors.onboardingPage['nextButtonTextColor']),
+                      style: TextStyle(
+                        fontSize: dp(18),
+                        color: AppColors.onboardingPage['nextButtonTextColor'],
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.w500,
+                      ),
                     )
                 )
             )
