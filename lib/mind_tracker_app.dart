@@ -12,7 +12,6 @@ class MindTrackerApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown
     ]);
-    Metrics.setDpScale();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',

@@ -9,7 +9,6 @@ class OnboardingPage extends StatelessWidget {
     this._pageNumber = page;
   }
 
-  //final pageNumber = 1;
   static const _pageTexts = {
     1: "Следите за своим ментальным состоянием оценивая его по шкале с семью градациями.",
     2: "Важно делать отметки несколько раз в день, устанавливайте напоминания в удобное время.",
