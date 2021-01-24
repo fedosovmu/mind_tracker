@@ -1,10 +1,11 @@
 import 'dart:ffi';
 import 'package:flutter/material.dart';
+import 'app_colors.dart';
 
 
-class OnBoardingPage extends StatelessWidget {
+class OnboardingPage extends StatelessWidget {
   var _pageNumber;
-  OnBoardingPage (int page) {
+  OnboardingPage (int page) {
     this._pageNumber = page;
   }
 
@@ -30,7 +31,7 @@ class OnBoardingPage extends StatelessWidget {
     var nextPage = _pageNumber + 1;
     Navigator.of(context).push(
       PageRouteBuilder(
-          pageBuilder: (context, _, __) => OnBoardingPage(nextPage),
+          pageBuilder: (context, _, __) => OnboardingPage(nextPage),
           transitionsBuilder: (___, animation, ____, child) {
             return FadeTransition(
                 opacity: animation,
@@ -57,7 +58,8 @@ class OnBoardingPage extends StatelessWidget {
     setDpScale(context);
 
     return Scaffold(
-        backgroundColor: const Color(0xFF322A42),
+        //backgroundColor: const Color(0xFF322A42),
+      backgroundColor: AppColors.onboardingPage['backgroundColor'],
         appBar: null,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,9 +83,9 @@ class OnBoardingPage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: List.generate(4, (index) {
-                          var circle_color = Color(0xFF261E35);
+                          var circle_color = AppColors.onboardingPage['circleColor'];
                           if (index+1 == _pageNumber) {
-                            circle_color = Color(0xFFD3B2CA);
+                            circle_color = AppColors.onboardingPage['activeCircleColor'];
                           }
                           return Container(
                             width: dp(9),
@@ -104,7 +106,7 @@ class OnBoardingPage extends StatelessWidget {
                       _pageTexts[_pageNumber],
                       style: TextStyle(
                           fontSize: dp(16),
-                          color: Color(0xFFF9EFF6),
+                          color: AppColors.onboardingPage['secondaryTextColor'],
                           fontFamily: "Roboto",
                       )
                   ),
@@ -115,7 +117,7 @@ class OnBoardingPage extends StatelessWidget {
                 width: double.infinity,
                 padding: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
                 child: FlatButton (
-                    color: const Color(0xFF674A7A),
+                    color: AppColors.onboardingPage['nextButtonColor'],
                     height: dp(60),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(16)),
@@ -123,7 +125,7 @@ class OnBoardingPage extends StatelessWidget {
                     onPressed: () { goToNextPage(context); },
                     child: Text(
                       "Далее",
-                      style: TextStyle(fontSize: dp(18), color: Colors.white),
+                      style: TextStyle(fontSize: dp(18), color: AppColors.onboardingPage['nextButtonTextColor']),
                     )
                 )
             )
