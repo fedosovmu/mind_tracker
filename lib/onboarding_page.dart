@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
 import 'metrics.dart';
+import 'mood_assessment_page.dart';
 
 
 class OnboardingPage extends StatelessWidget {
@@ -23,21 +24,23 @@ class OnboardingPage extends StatelessWidget {
   };
 
   void goToNextPage(BuildContext context) {
+    var nextPage;
     if (_pageNumber >= 4) {
-      print('This is END page');
-      return;
+      nextPage = MoodAssessmentPage();
     }
-    var nextPage = _pageNumber + 1;
+    else {
+      nextPage = OnboardingPage(_pageNumber + 1);
+    }
     Navigator.of(context).push(
-      PageRouteBuilder(
-          pageBuilder: (context, _, __) => OnboardingPage(nextPage),
-          transitionsBuilder: (___, animation, ____, child) {
-            return FadeTransition(
+        PageRouteBuilder(
+            pageBuilder: (context, _, __) => nextPage,
+            transitionsBuilder: (___, animation, ____, child) {
+              return FadeTransition(
                 opacity: animation,
                 child: child,
-            );
-          }
-      )
+              );
+            }
+        )
     );
   }
 
@@ -94,6 +97,7 @@ class OnboardingPage extends StatelessWidget {
                           fontSize: dp(16),
                           color: AppColors.onboardingPage['secondaryTextColor'],
                           fontFamily: "Roboto",
+                          fontWeight: FontWeight.w500,
                       )
                   ),
                 ),

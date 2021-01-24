@@ -12,7 +12,8 @@ class MoodAssessmentPage extends StatelessWidget {
           'Как ваше настроение?',
           style: TextStyle(
             fontSize: dp(20),
-
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w700,
           ),
         ),
         backgroundColor: AppColors.moodAssessmentPage['backgroundColor'],
