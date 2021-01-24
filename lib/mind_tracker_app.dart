@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'metrics.dart';
 import 'onboarding_page.dart';
 
 
