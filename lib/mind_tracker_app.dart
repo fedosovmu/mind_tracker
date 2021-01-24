@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'metrics.dart';
 import 'onboarding_page.dart';
 
 
@@ -11,6 +12,7 @@ class MindTrackerApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown
     ]);
+    Metrics.setDpScale();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',

@@ -1,6 +1,6 @@
-import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
+import 'metrics.dart';
 
 
 class OnboardingPage extends StatelessWidget {
@@ -42,21 +42,8 @@ class OnboardingPage extends StatelessWidget {
     );
   }
 
-  var _dpScale;
-  void setDpScale(context) {
-    final deviceScreenWidth = MediaQuery.of(context).size.width;
-    const designScreenWidth = 360;
-    _dpScale = deviceScreenWidth / designScreenWidth;
-  }
-
-  double dp(pixels) {
-    return (pixels * _dpScale);
-  }
-
   @override
   Widget build(BuildContext context) {
-    setDpScale(context);
-
     return Scaffold(
         //backgroundColor: const Color(0xFF322A42),
       backgroundColor: AppColors.onboardingPage['backgroundColor'],
