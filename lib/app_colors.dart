@@ -38,4 +38,8 @@ class AppColors {
     'nextButtonColor': _designColors['MainColors']['CTA'],
     'nextButtonTextColor': _designColors['White'],
   };
+
+  static final moodAssessmentPage = {
+    'backgroundColor': _designColors['Purple']['Dark'],
+  };
 }
