@@ -3,7 +3,17 @@ import 'app_colors.dart';
 import 'metrics.dart';
 
 
-class MoodAssessmentPage extends StatelessWidget {
+class MoodAssessmentPage extends StatefulWidget {
+  MoodAssessmentPage({Key key}) : super(key: key);
+
+  @override
+  _MoodAssessmentPageState createState() => _MoodAssessmentPageState();
+}
+
+class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
+  double _currentSliderValue = 4;
+  int _currentMood = 4;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +93,7 @@ class MoodAssessmentPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Настроение',
+                            'Настроение $_currentSliderValue',
                             style: TextStyle(
                               color: AppColors.moodAssessmentPage['moodAssessorSecondaryTextColor'],
                               fontSize: dp(14),
@@ -104,8 +114,20 @@ class MoodAssessmentPage extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      color: Colors.blue,
                       height: dp(59),
+                      padding: EdgeInsets.symmetric(horizontal: dp(3)),
+                      child: Slider(
+                        value: _currentSliderValue,
+                        min: 1,
+                        max: 7,
+                        divisions: 6,
+                        onChanged: (double value) {
+                          setState(() {
+                            _currentSliderValue = value;
+                            _currentMood = value.round();
+                          });
+                        },
+                      ),
                     )
                   ],
                 ),
@@ -113,7 +135,7 @@ class MoodAssessmentPage extends StatelessWidget {
               Positioned(
                 top: 0,
                 child: Image.asset(
-                  'assets/images/mood_assessment/mood_spheres/4.png',
+                  'assets/images/mood_assessment/mood_spheres/$_currentMood.png',
                   height: dp(200),
                 )
               ),
@@ -143,7 +165,7 @@ class MoodAssessmentPage extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            color: AppColors.moodAssessmentPage['assessMoodButtonColor'],
+            color: AppColors.moodAssessmentPage['moodColors']['$_currentMood'],
             height: dp(60),
             minWidth: double.infinity,
             shape: RoundedRectangleBorder(

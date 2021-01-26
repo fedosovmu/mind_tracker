@@ -44,7 +44,6 @@ class AppColors {
   static final moodAssessmentPage = {
     'backgroundColor': _backgroundColor,
     'appBarTextColor': _designColors['White'],
-    'assessMoodButtonColor': _designColors['MoodColors']['4'],
     'assessMoodButtonTextColor': _designColors['White'],
     'skipButtonTextColor': Color(0xFFACA5BA),
     'moodAssessorBackgroundColor': _designColors['Purple']['SuperDark'],
