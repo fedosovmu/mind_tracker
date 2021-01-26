@@ -136,7 +136,7 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
               Positioned(
                 top: 0,
                 child: Image.asset(
-                  'assets/images/mood_assessment/mood_spheres/$_currentMood.png',
+                  AppContent.moodAssessmentPage['pathsToMoodSpheres'][_currentMood],
                   height: dp(200),
                 )
               ),

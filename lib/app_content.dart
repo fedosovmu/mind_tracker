@@ -18,8 +18,13 @@ class AppContent {
     'nextButtonText': 'Далее'
   };
 
-  static const moodAssessmentPage = {
+  static final moodAssessmentPage = {
     'headerText': 'Как ваше настроение?',
+    'pathsToMoodSpheres': Map.fromIterable(
+        List.generate(7, (i) => i + 1),
+        key: (item) => item,
+        value: (item) => 'assets/images/mood_assessment/mood_spheres/$item.png'
+    ),
     'moodNames': {
       1: 'Ужасно',
       2: 'Плохо',
