@@ -28,6 +28,12 @@ class MoodAssessmentPage extends StatelessWidget {
       ),
       body: Container(
         color: AppColors.moodAssessmentPage['backgroundColor'],
+        // Тестирую верстку на экранах разной высоты
+        //height: dp(400),
+        //height: dp(450),
+        //height: dp(512),
+        //height: dp(600),
+        //height: dp(650),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -43,7 +49,7 @@ class MoodAssessmentPage extends StatelessWidget {
     return Expanded(
       child: Center(
         child: Container(
-          height: dp(278),
+          height: dp(295),
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
@@ -106,10 +112,9 @@ class MoodAssessmentPage extends StatelessWidget {
               ),
               Positioned(
                 top: 0,
-                child: Container(
-                  color: AppColors.moodAssessmentPage['moodColors']['4'],
-                  width: dp(114),
-                  height: dp(114),
+                child: Image.asset(
+                  'assets/images/mood_assessment/mood_spheres/4.png',
+                  height: dp(192),
                 )
               ),
             ],
