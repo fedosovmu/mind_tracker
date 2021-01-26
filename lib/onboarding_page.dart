@@ -11,13 +11,6 @@ class OnboardingPage extends StatelessWidget {
     this._pageNumber = page;
   }
 
-  static const _pathsToImages = {
-    1: "assets/images/onboarding/lamp.png",
-    2: "assets/images/onboarding/fishes.png",
-    3: "assets/images/onboarding/butterfly.png",
-    4: "assets/images/onboarding/monkey.png"
-  };
-
   void goToNextPage(BuildContext context) {
     var nextPage;
     if (_pageNumber >= 4) {
