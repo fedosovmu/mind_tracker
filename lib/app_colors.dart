@@ -45,7 +45,6 @@ class AppColors {
     'backgroundColor': _backgroundColor,
     'appBarTextColor': _designColors['White'],
     'assessMoodButtonTextColor': _designColors['White'],
-    'skipButtonTextColor': Color(0xFFACA5BA),
     'moodAssessorBackgroundColor': _designColors['Purple']['SuperDark'],
     'moodAssessorMoodTextColor': _designColors['White'],
     'moodAssessorSecondaryTextColor': _designColors['Purple']['Light'],

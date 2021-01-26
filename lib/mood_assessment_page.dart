@@ -58,7 +58,9 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
 
   Widget _buildMoodAssessor() {
     return Expanded(
-      child: Center(
+      child: Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.only(bottom: dp(60)),
         child: Container(
           height: dp(300),
           child: Stack(
@@ -149,45 +151,26 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
 
   Widget _buildBottomButtons() {
     return Container(
-      height: dp(136),
+      height: dp(68),
       width: double.infinity,
       padding: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          FlatButton(
-            onPressed: () {print('Assess Mood');},
-            child: Text(
-              AppContent.moodAssessmentPage['assessButtonText'],
-              style: TextStyle(
-                color: AppColors.moodAssessmentPage['assessMoodButtonTextColor'],
-                fontSize: dp(18),
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            color: AppColors.moodAssessmentPage['moodColors'][_currentMood],
-            height: dp(60),
-            minWidth: double.infinity,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(dp(16)))
-            ),
+      child: FlatButton(
+        onPressed: () {print('Assess Mood');},
+        child: Text(
+          AppContent.moodAssessmentPage['assessButtonText'],
+          style: TextStyle(
+            color: AppColors.moodAssessmentPage['assessMoodButtonTextColor'],
+            fontSize: dp(18),
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.w500,
           ),
-          FlatButton(
-            onPressed: () {print('Skip');},
-            child: Text(
-              AppContent.moodAssessmentPage['skipButtonText'],
-              style: TextStyle(
-                color: AppColors.moodAssessmentPage['skipButtonTextColor'],
-                fontSize: dp(18),
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            height: dp(60),
-            minWidth: dp(150),
-          ),
-        ],
+        ),
+        color: AppColors.moodAssessmentPage['moodColors'][_currentMood],
+        height: dp(60),
+        minWidth: double.infinity,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(dp(16)))
+        ),
       ),
     );
   }
