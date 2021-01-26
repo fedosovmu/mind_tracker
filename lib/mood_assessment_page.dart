@@ -116,22 +116,7 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
                         ],
                       ),
                     ),
-                    Container(
-                      height: dp(59),
-                      padding: EdgeInsets.symmetric(horizontal: dp(3)),
-                      child: Slider(
-                        value: _currentSliderValue,
-                        min: 1,
-                        max: 7,
-                        divisions: 6,
-                        onChanged: (double value) {
-                          setState(() {
-                            _currentSliderValue = value;
-                            _currentMood = value.round();
-                          });
-                        },
-                      ),
-                    )
+                    _buildMoodAssessorSlider()
                   ],
                 ),
               ),
@@ -144,6 +129,41 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
               ),
             ],
           ),
+        ),
+      )
+    );
+  }
+
+  Widget _buildMoodAssessorSlider() {
+    return Container(
+      color: Colors.green,
+      height: dp(59),
+      padding: EdgeInsets.symmetric(horizontal: dp(3)),
+      child: SliderTheme(
+        data: SliderThemeData(
+            thumbShape: RoundSliderThumbShape(
+                enabledThumbRadius: 0,
+                disabledThumbRadius: 0,
+                pressedElevation: 0
+            ),
+            thumbColor: Color(0x00),
+            overlayColor: Color(0x00),
+            activeTrackColor: Color(0x00),
+            inactiveTrackColor: Color(0x00),
+            activeTickMarkColor: Color(0x00),
+            inactiveTickMarkColor: Color(0x00)
+        ),
+        child: Slider(
+          value: _currentSliderValue,
+          min: 1,
+          max: 7,
+          divisions: 6,
+          onChanged: (double value) {
+            setState(() {
+              _currentSliderValue = value;
+              _currentMood = value.round();
+            });
+          },
         ),
       )
     );
