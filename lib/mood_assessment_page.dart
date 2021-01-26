@@ -151,7 +151,7 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
           ),
           Positioned(
             top: dp(21),
-            left: dp(16) + (_currentMood - 1) * dp(270 / 6),
+            left: dp(22) + (_currentMood - 1) * dp(43),
             child: Container(
               width: dp(24),
               height: dp(24),
@@ -165,7 +165,7 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
                 height: dp(13.33),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.moodAssessmentPage['sliderCursorCenterColors'][_currentMood],
+                  color: AppColors.moodAssessmentPage['sliderCursorColors'][_currentMood],
                 ),
               ),
             )

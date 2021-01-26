@@ -49,7 +49,7 @@ class AppColors {
     'moodAssessorMoodTextColor': _designColors['White'],
     'moodAssessorSecondaryTextColor': _designColors['Purple']['Light'],
     'moodColors':  _designColors['MoodColors'],
-    'sliderCursorCenterColors': {
+    'sliderCursorColors': {
       1: _designColors['Black'],
       2: _designColors['MoodColors'][2],
       3: _designColors['MoodColors'][3],
