@@ -37,5 +37,6 @@ class AppContent {
     'secondaryMoodText': 'Настроение',
     'secondaryPullText': 'Потяни',
     'assessButtonText': 'Оценить',
+    'skipButtonText': 'Пропустить',
   };
 }

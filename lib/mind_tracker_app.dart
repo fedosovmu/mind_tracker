@@ -19,7 +19,7 @@ class MindTrackerApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       //home: OnboardingPage(1),
-      home: MoodAssessmentPage(),
+      home: MoodAssessmentPage(showSkipButton: false),
     );
   }
 }

@@ -14,7 +14,7 @@ class OnboardingPage extends StatelessWidget {
   void goToNextPage(BuildContext context) {
     var nextPage;
     if (_pageNumber >= 4) {
-      nextPage = MoodAssessmentPage();
+      nextPage = MoodAssessmentPage(showSkipButton: true,);
     }
     else {
       nextPage = OnboardingPage(_pageNumber + 1);

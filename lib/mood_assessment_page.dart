@@ -5,13 +5,21 @@ import 'metrics.dart';
 
 
 class MoodAssessmentPage extends StatefulWidget {
-  MoodAssessmentPage({Key key}) : super(key: key);
+  MoodAssessmentPage({Key key, bool showSkipButton}) : super(key: key) {
+    _showSkipButton = showSkipButton;
+  }
+
+  var _showSkipButton;
 
   @override
-  _MoodAssessmentPageState createState() => _MoodAssessmentPageState();
+  _MoodAssessmentPageState createState() => _MoodAssessmentPageState(_showSkipButton);
 }
 
 class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
+  _MoodAssessmentPageState(showSkipButton) {
+    _showSkipButton = showSkipButton;
+  }
+  var _showSkipButton;
   double _currentSliderValue = 4;
   int _currentMood = 4;
 
@@ -32,19 +40,12 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
         elevation: 0,
         titleSpacing: 0,
         toolbarHeight: dp(56),
-        leading: Container(
-          //color: Colors.yellow,
-        ),
+        leading: Container(),
+        //IconButton(),
         leadingWidth: dp(56),
       ),
       body: Container(
         color: AppColors.moodAssessmentPage['backgroundColor'],
-        // Тестирую верстку на экранах разной высоты
-        //height: dp(400),
-        //height: dp(450),
-        //height: dp(512),
-        //height: dp(600),
-        //height: dp(650),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -230,28 +231,58 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
   }
 
   Widget _buildBottomButtons() {
+    var buttonsHeight;
+    if (_showSkipButton) {
+      buttonsHeight = dp(136);
+    }
+    else {
+      buttonsHeight = dp(68);
+    }
     return Container(
-      height: dp(68),
+      height: buttonsHeight,
       width: double.infinity,
       padding: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
-      child: FlatButton(
-        onPressed: () {print('Assess Mood');},
-        child: Text(
-          AppContent.moodAssessmentPage['assessButtonText'],
-          style: TextStyle(
-            color: AppColors.moodAssessmentPage['assessMoodButtonTextColor'],
-            fontSize: dp(18),
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w500,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          FlatButton(
+            onPressed: () {print('Assess Mood');},
+            child: Text(
+              AppContent.moodAssessmentPage['assessButtonText'],
+              style: TextStyle(
+                color: AppColors.moodAssessmentPage['assessMoodButtonTextColor'],
+                fontSize: dp(18),
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            color: AppColors.moodAssessmentPage['moodColors'][_currentMood],
+            height: dp(60),
+            minWidth: double.infinity,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(dp(16)))
+            ),
           ),
-        ),
-        color: AppColors.moodAssessmentPage['moodColors'][_currentMood],
-        height: dp(60),
-        minWidth: double.infinity,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(dp(16)))
+          (_showSkipButton ? _buildSkipButton() : const SizedBox.shrink())
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSkipButton() {
+    return FlatButton(
+      onPressed: () {print('Skip');},
+      child: Text(
+        AppContent.moodAssessmentPage['skipButtonText'],
+        style: TextStyle(
+          color: AppColors.moodAssessmentPage['skipButtonTextColor'],
+          fontSize: dp(18),
+          fontFamily: 'Roboto',
+          fontWeight: FontWeight.w400,
         ),
       ),
+      height: dp(60),
+      minWidth: dp(150),
     );
   }
 }
