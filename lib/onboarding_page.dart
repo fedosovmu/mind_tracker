@@ -110,7 +110,7 @@ class OnboardingPage extends StatelessWidget {
                     color: AppColors.onboardingPage['nextButtonColor'],
                     height: dp(60),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                      borderRadius: BorderRadius.all(Radius.circular(dp(16))),
                     ),
                     onPressed: () { goToNextPage(context); },
                     child: Text(
