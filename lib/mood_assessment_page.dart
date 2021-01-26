@@ -18,7 +18,6 @@ class MoodAssessmentPage extends StatelessWidget {
           ),
         ),
         backgroundColor: AppColors.moodAssessmentPage['backgroundColor'],
-        //backgroundColor: Colors.red,
         elevation: 0,
         titleSpacing: 0,
         toolbarHeight: dp(56),
@@ -44,19 +43,71 @@ class MoodAssessmentPage extends StatelessWidget {
     return Expanded(
       child: Center(
         child: Container(
-          color: Colors.yellow,
           height: dp(278),
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
               Container(
-                color: Colors.blue,
                 height: dp(209),
+                margin: EdgeInsets.symmetric(horizontal: dp(16)),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(dp(16))),
+                  color: AppColors.moodAssessmentPage['moodAssessorBackgroundColor'],
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      height: dp(47),
+                      alignment: Alignment.topCenter,
+                      child: Text(
+                        'Нормальное',
+                        style: TextStyle(
+                          color: AppColors.moodAssessmentPage['moodAssessorMoodTextColor'],
+                          fontSize: dp(20),
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w500
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: dp(37),
+                      padding: EdgeInsets.symmetric(horizontal: dp(29)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Настроение',
+                            style: TextStyle(
+                              color: AppColors.moodAssessmentPage['moodAssessorSecondaryTextColor'],
+                              fontSize: dp(14),
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w400
+                            ),
+                          ),
+                          Text(
+                            'Потяни',
+                            style: TextStyle(
+                              color: AppColors.moodAssessmentPage['moodAssessorSecondaryTextColor'],
+                              fontSize: dp(14),
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.w400
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      color: Colors.blue,
+                      height: dp(59),
+                    )
+                  ],
+                ),
               ),
               Positioned(
                 top: 0,
                 child: Container(
-                  color: Colors.red,
+                  color: AppColors.moodAssessmentPage['moodColors']['4'],
                   width: dp(114),
                   height: dp(114),
                 )
