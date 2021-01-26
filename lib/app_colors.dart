@@ -13,13 +13,13 @@ class AppColors {
       'CTA': Color(0xFF674A7A),
     } as dynamic,
     'MoodColors': {
-      '1': Color(0xFF674A7A),
-      '2': Color(0xFFA43485),
-      '3': Color(0xFFEC4B68),
-      '4': Color(0xFFFF709B),
-      '5': Color(0xFF6C8AF3),
-      '6': Color(0xFF02C1B6),
-      '7': Color(0xFF30BA00),
+      1: Color(0xFF674A7A),
+      2: Color(0xFFA43485),
+      3: Color(0xFFEC4B68),
+      4: Color(0xFFFF709B),
+      5: Color(0xFF6C8AF3),
+      6: Color(0xFF02C1B6),
+      7: Color(0xFF30BA00),
     } as dynamic,
     'Purple': {
       'MegaDark': Color(0xFF191327),
@@ -50,13 +50,13 @@ class AppColors {
     'moodAssessorMoodTextColor': _designColors['White'],
     'moodAssessorSecondaryTextColor': _designColors['Purple']['Light'],
     'moodColors': {
-      '1': _designColors['MoodColors']['1'],
-      '2': _designColors['MoodColors']['2'],
-      '3': _designColors['MoodColors']['3'],
-      '4': _designColors['MoodColors']['4'],
-      '5': _designColors['MoodColors']['5'],
-      '6': _designColors['MoodColors']['6'],
-      '7': _designColors['MoodColors']['7'],
+      1: _designColors['MoodColors'][1],
+      2: _designColors['MoodColors'][2],
+      3: _designColors['MoodColors'][3],
+      4: _designColors['MoodColors'][4],
+      5: _designColors['MoodColors'][5],
+      6: _designColors['MoodColors'][6],
+      7: _designColors['MoodColors'][7],
     }
   };
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
+import 'app_content.dart';
 import 'metrics.dart';
 
 
@@ -19,7 +20,7 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Как ваше настроение?',
+          AppContent.moodAssessmentPage['headerText'],
           style: TextStyle(
             fontSize: dp(20),
             color: AppColors.moodAssessmentPage['appBarTextColor'],
@@ -77,7 +78,7 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
                       height: dp(47),
                       alignment: Alignment.topCenter,
                       child: Text(
-                        'Нормально',
+                        AppContent.moodAssessmentPage['moodNames'][_currentMood],
                         style: TextStyle(
                           color: AppColors.moodAssessmentPage['moodAssessorMoodTextColor'],
                           fontSize: dp(20),
@@ -93,7 +94,7 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Настроение $_currentSliderValue',
+                            AppContent.moodAssessmentPage['secondaryMoodText'],
                             style: TextStyle(
                               color: AppColors.moodAssessmentPage['moodAssessorSecondaryTextColor'],
                               fontSize: dp(14),
@@ -102,7 +103,7 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
                             ),
                           ),
                           Text(
-                            'Потяни',
+                            AppContent.moodAssessmentPage['secondaryPullText'],
                             style: TextStyle(
                               color: AppColors.moodAssessmentPage['moodAssessorSecondaryTextColor'],
                               fontSize: dp(14),
@@ -157,7 +158,7 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
           FlatButton(
             onPressed: () {print('Assess Mood');},
             child: Text(
-              'Оценить',
+              AppContent.moodAssessmentPage['assessButtonText'],
               style: TextStyle(
                 color: AppColors.moodAssessmentPage['assessMoodButtonTextColor'],
                 fontSize: dp(18),
@@ -165,7 +166,7 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            color: AppColors.moodAssessmentPage['moodColors']['$_currentMood'],
+            color: AppColors.moodAssessmentPage['moodColors'][_currentMood],
             height: dp(60),
             minWidth: double.infinity,
             shape: RoundedRectangleBorder(
@@ -175,7 +176,7 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
           FlatButton(
             onPressed: () {print('Skip');},
             child: Text(
-              'Пропустить',
+              AppContent.moodAssessmentPage['skipButtonText'],
               style: TextStyle(
                 color: AppColors.moodAssessmentPage['skipButtonTextColor'],
                 fontSize: dp(18),

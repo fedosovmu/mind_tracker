@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'app_colors.dart';
+import 'app_content.dart';
 import 'metrics.dart';
 import 'mood_assessment_page.dart';
 
@@ -10,12 +11,6 @@ class OnboardingPage extends StatelessWidget {
     this._pageNumber = page;
   }
 
-  static const _pageTexts = {
-    1: "Следите за своим ментальным состоянием оценивая его по шкале с семью градациями.",
-    2: "Важно делать отметки несколько раз в день, устанавливайте напоминания в удобное время.",
-    3: "Отмечайте, что произошло за день. Приложение поможет вам проанализировать, как привычки  влияют на ваш внутренний баланс.",
-    4: "Чем дольше вы ведёте записи, тем более ценные данные получите. Вы убедитесь в очевидных связях между  событиями и эмоциями  и обнаружите неочевидные."
-  };
   static const _pathsToImages = {
     1: "assets/images/onboarding/lamp.png",
     2: "assets/images/onboarding/fishes.png",
@@ -59,7 +54,7 @@ class OnboardingPage extends StatelessWidget {
                   height: dp(24),
                 ),
                 Image(
-                  image: AssetImage(_pathsToImages[_pageNumber]),
+                  image: AssetImage(AppContent.onboardingPage['pathsToImages'][_pageNumber]),
                   height: dp(370),
                 ),
                 Container(
@@ -92,7 +87,7 @@ class OnboardingPage extends StatelessWidget {
                   alignment: Alignment.center,
                   padding: EdgeInsets.only(left: dp(16), right: dp(16)),
                   child:  Text(
-                      _pageTexts[_pageNumber],
+                      AppContent.onboardingPage['pageTexts'][_pageNumber],
                       style: TextStyle(
                           fontSize: dp(16),
                           color: AppColors.onboardingPage['secondaryTextColor'],
@@ -114,7 +109,7 @@ class OnboardingPage extends StatelessWidget {
                     ),
                     onPressed: () { goToNextPage(context); },
                     child: Text(
-                      "Далее",
+                      AppContent.onboardingPage['nextButtonText'],
                       style: TextStyle(
                         fontSize: dp(18),
                         color: AppColors.onboardingPage['nextButtonTextColor'],
