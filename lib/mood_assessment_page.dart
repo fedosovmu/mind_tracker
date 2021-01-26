@@ -67,7 +67,7 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
             alignment: Alignment.bottomCenter,
             children: [
               Container(
-                height: dp(209),
+                height: dp(210),
                 margin: EdgeInsets.symmetric(horizontal: dp(16)),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(dp(16))),
@@ -77,8 +77,7 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Container(
-                      height: dp(47),
-                      alignment: Alignment.topCenter,
+                      alignment: Alignment.bottomCenter,
                       child: Text(
                         AppContent.moodAssessmentPage['moodNames'][_currentMood],
                         style: TextStyle(
@@ -90,7 +89,8 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
                       ),
                     ),
                     Container(
-                      height: dp(37),
+                      alignment: Alignment.bottomCenter,
+                      height: dp(40),
                       padding: EdgeInsets.symmetric(horizontal: dp(29)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -136,35 +136,71 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
 
   Widget _buildMoodAssessorSlider() {
     return Container(
-      color: Colors.green,
-      height: dp(59),
-      padding: EdgeInsets.symmetric(horizontal: dp(3)),
-      child: SliderTheme(
-        data: SliderThemeData(
-            thumbShape: RoundSliderThumbShape(
-                enabledThumbRadius: 0,
-                disabledThumbRadius: 0,
-                pressedElevation: 0
+      //color: Colors.green,
+      height: dp(80),
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          Positioned(
+            top: dp(26),
+            child: Image.asset(
+              'assets/images/mood_assessment/mood_slider.png',
+              width: dp(270),
+              color: AppColors.moodAssessmentPage['moodColors'][_currentMood],
             ),
-            thumbColor: Color(0x00),
-            overlayColor: Color(0x00),
-            activeTrackColor: Color(0x00),
-            inactiveTrackColor: Color(0x00),
-            activeTickMarkColor: Color(0x00),
-            inactiveTickMarkColor: Color(0x00)
-        ),
-        child: Slider(
-          value: _currentSliderValue,
-          min: 1,
-          max: 7,
-          divisions: 6,
-          onChanged: (double value) {
-            setState(() {
-              _currentSliderValue = value;
-              _currentMood = value.round();
-            });
-          },
-        ),
+          ),
+          Positioned(
+            top: dp(21),
+            left: dp(16) + (_currentMood - 1) * dp(270 / 6),
+            child: Container(
+              width: dp(24),
+              height: dp(24),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+              ),
+              child: Container(
+                width: dp(13.33),
+                height: dp(13.33),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppColors.moodAssessmentPage['sliderCursorCenterColors'][_currentMood],
+                ),
+              ),
+            )
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: dp(13)),
+            child: SliderTheme(
+              data: SliderThemeData(
+                  thumbShape: RoundSliderThumbShape(
+                      enabledThumbRadius: 0,
+                      disabledThumbRadius: 0,
+                      pressedElevation: 0
+                  ),
+                  thumbColor: Color(0x00),
+                  overlayColor: Color(0x00),
+                  activeTrackColor: Color(0x00),
+                  inactiveTrackColor: Color(0x00),
+                  activeTickMarkColor: Color(0x00),
+                  inactiveTickMarkColor: Color(0x00)
+              ),
+              child: Slider(
+                value: _currentSliderValue,
+                min: 1,
+                max: 7,
+                divisions: 6,
+                onChanged: (double value) {
+                  setState(() {
+                    _currentSliderValue = value;
+                    _currentMood = value.round();
+                  });
+                },
+              ),
+            ),
+          ),
+        ],
       )
     );
   }
