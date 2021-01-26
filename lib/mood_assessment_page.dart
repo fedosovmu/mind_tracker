@@ -49,7 +49,7 @@ class MoodAssessmentPage extends StatelessWidget {
     return Expanded(
       child: Center(
         child: Container(
-          height: dp(295),
+          height: dp(300),
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
@@ -67,7 +67,7 @@ class MoodAssessmentPage extends StatelessWidget {
                       height: dp(47),
                       alignment: Alignment.topCenter,
                       child: Text(
-                        'Нормальное',
+                        'Нормально',
                         style: TextStyle(
                           color: AppColors.moodAssessmentPage['moodAssessorMoodTextColor'],
                           fontSize: dp(20),
@@ -114,7 +114,7 @@ class MoodAssessmentPage extends StatelessWidget {
                 top: 0,
                 child: Image.asset(
                   'assets/images/mood_assessment/mood_spheres/4.png',
-                  height: dp(192),
+                  height: dp(200),
                 )
               ),
             ],
@@ -125,7 +125,7 @@ class MoodAssessmentPage extends StatelessWidget {
   }
 
   Widget _buildBottomButtons() {
-    return           Container(
+    return Container(
       height: dp(136),
       width: double.infinity,
       padding: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
