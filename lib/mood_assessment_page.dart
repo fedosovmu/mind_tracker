@@ -170,6 +170,30 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
               ),
             )
           ),
+          Positioned(
+            bottom: dp(13),
+              child: Container(
+                width: dp(258),
+                height: dp(20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: List.generate(7, (index) {
+                    var color;
+                    if (index + 1 == _currentMood) {
+                      color = AppColors.moodAssessmentPage['sliderCursorColors'][_currentMood];
+                    }
+                    else {
+                      color = AppColors.moodAssessmentPage['sliderScaleNeutralColor'];
+                    }
+                    return Container(
+                      color: color,
+                      width: dp(2),
+                      height: dp(16),
+                    );
+                  }),
+                )
+              )
+          ),
           Container(
             padding: EdgeInsets.symmetric(horizontal: dp(13)),
             child: SliderTheme(
@@ -179,12 +203,12 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
                       disabledThumbRadius: 0,
                       pressedElevation: 0
                   ),
-                  thumbColor: Color(0x00),
-                  overlayColor: Color(0x00),
-                  activeTrackColor: Color(0x00),
-                  inactiveTrackColor: Color(0x00),
-                  activeTickMarkColor: Color(0x00),
-                  inactiveTickMarkColor: Color(0x00)
+                  thumbColor: const Color(0x00),
+                  overlayColor: const Color(0x00),
+                  activeTrackColor: const Color(0x00),
+                  inactiveTrackColor: const Color(0x00),
+                  activeTickMarkColor: const Color(0x00),
+                  inactiveTickMarkColor: const Color(0x00)
               ),
               child: Slider(
                 value: _currentSliderValue,

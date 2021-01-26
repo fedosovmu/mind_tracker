@@ -57,6 +57,7 @@ class AppColors {
       5: _designColors['MoodColors'][5],
       6: _designColors['MoodColors'][6],
       7: _designColors['MoodColors'][7],
-    } as dynamic
+    } as dynamic,
+    'sliderScaleNeutralColor': Color(0xFF322A42)
   };
 }
