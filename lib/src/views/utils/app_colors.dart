@@ -42,15 +42,15 @@ class AppColors {
 
   static final screensData = {
     'onboardingScreen': {
-      'circleColor': _designColors['Purple']['SuperDark'],
-      'activeCircleColor': _designColors['Purple']['Light'],
-      'nextButtonColor': _designColors['MainColors']['CTA'],
+      'circle': _designColors['Purple']['SuperDark'],
+      'activeCircle': _designColors['Purple']['Light'],
+      'nextButton': _designColors['MainColors']['CTA'],
     } as dynamic,
 
     'moodAssessmentScreen': {
-      'moodAssessorBackgroundColor': _designColors['Purple']['SuperDark'],
-      'moodColors':  _designColors['MoodColors'],
-      'sliderCursorColors': {
+      'moodAssessorBackground': _designColors['Purple']['SuperDark'],
+      'moods':  _designColors['MoodColors'],
+      'sliderCursor': {
         1: _designColors['Black'],
         2: _designColors['MoodColors'][2],
         3: _designColors['MoodColors'][3],
@@ -59,7 +59,7 @@ class AppColors {
         6: _designColors['MoodColors'][6],
         7: _designColors['MoodColors'][7],
       } as dynamic,
-      'sliderScaleNeutralColor': Color(0xFF322A42)
+      'sliderScaleNeutral': Color(0xFF322A42)
     },
   };
 }

@@ -61,9 +61,9 @@ class OnboardingScreen extends StatelessWidget with ScreenData {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: List.generate(4, (index) {
-                          var circle_color = colors['circleColor'];
+                          var circle_color = colors['circle'];
                           if (index+1 == _screenNumber) {
-                            circle_color = colors['activeCircleColor'];
+                            circle_color = colors['activeCircle'];
                           }
                           return Container(
                             width: dp(9),
@@ -82,7 +82,7 @@ class OnboardingScreen extends StatelessWidget with ScreenData {
                   padding: EdgeInsets.only(left: dp(16), right: dp(16)),
                   child:  Text(
                       content['screenTexts'][_screenNumber],
-                      style: textStyles['secondaryTextStyle'],
+                      style: textStyles['secondary'],
                   ),
                 ),
               ],
@@ -92,14 +92,14 @@ class OnboardingScreen extends StatelessWidget with ScreenData {
                 height: dp(68),
                 padding: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
                 child: RaisedButton (
-                    color: colors['nextButtonColor'],
+                    color: colors['nextButton'],
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(dp(16))),
                     ),
                     onPressed: () { goToNextScreen(context); },
                     child: Text(
                       content['nextButtonText'],
-                      style: textStyles['nextButtonTextStyle'],
+                      style: textStyles['nextButton'],
                     )
                 )
             )
