@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'app_colors.dart';
-import 'app_content.dart';
-import 'metrics.dart';
+import '../utils/app_colors.dart';
+import '../utils/app_content.dart';
+import '../utils/metrics.dart';
 
 
-class MoodAssessmentPage extends StatefulWidget {
-  MoodAssessmentPage({Key key, bool showSkipButton}) : super(key: key) {
+class MoodAssessmentScreen extends StatefulWidget {
+  MoodAssessmentScreen({Key key, bool showSkipButton}) : super(key: key) {
     _showSkipButton = showSkipButton;
   }
 
   var _showSkipButton;
 
   @override
-  _MoodAssessmentPageState createState() => _MoodAssessmentPageState(_showSkipButton);
+  _MoodAssessmentScreenState createState() => _MoodAssessmentScreenState(_showSkipButton);
 }
 
-class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
-  _MoodAssessmentPageState(showSkipButton) {
+class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
+  _MoodAssessmentScreenState(showSkipButton) {
     _showSkipButton = showSkipButton;
   }
   bool _showSkipButton;
@@ -28,10 +28,10 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          AppContent.moodAssessmentPage['headerText'],
+          AppContent.moodAssessmentScreen['headerText'],
           style: TextStyle(
             fontSize: dp(20),
-            color: AppColors.moodAssessmentPage['appBarTextColor'],
+            color: AppColors.moodAssessmentScreen['appBarTextColor'],
             fontFamily: 'Roboto',
             fontWeight: FontWeight.w700,
           ),
@@ -41,7 +41,7 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
         toolbarHeight: dp(56),
         leading: IconButton(
           icon: Image.asset(
-            AppContent.moodAssessmentPage['pathToCloseIcon'],
+            AppContent.moodAssessmentScreen['pathToCloseIcon'],
             height: dp(32),
             width: dp(32),
           ),
@@ -81,7 +81,7 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
                 margin: EdgeInsets.symmetric(horizontal: dp(16)),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(dp(16))),
-                  color: AppColors.moodAssessmentPage['moodAssessorBackgroundColor'],
+                  color: AppColors.moodAssessmentScreen['moodAssessorBackgroundColor'],
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -89,9 +89,9 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
                     Container(
                       alignment: Alignment.bottomCenter,
                       child: Text(
-                        AppContent.moodAssessmentPage['moodNames'][_currentMood],
+                        AppContent.moodAssessmentScreen['moodNames'][_currentMood],
                         style: TextStyle(
-                          color: AppColors.moodAssessmentPage['moodAssessorMoodTextColor'],
+                          color: AppColors.moodAssessmentScreen['moodAssessorMoodTextColor'],
                           fontSize: dp(20),
                           fontFamily: 'Roboto',
                           fontWeight: FontWeight.w500
@@ -106,18 +106,18 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            AppContent.moodAssessmentPage['secondaryMoodText'],
+                            AppContent.moodAssessmentScreen['secondaryMoodText'],
                             style: TextStyle(
-                              color: AppColors.moodAssessmentPage['moodAssessorSecondaryTextColor'],
+                              color: AppColors.moodAssessmentScreen['moodAssessorSecondaryTextColor'],
                               fontSize: dp(14),
                               fontFamily: 'Roboto',
                               fontWeight: FontWeight.w400
                             ),
                           ),
                           Text(
-                            AppContent.moodAssessmentPage['secondaryPullText'],
+                            AppContent.moodAssessmentScreen['secondaryPullText'],
                             style: TextStyle(
-                              color: AppColors.moodAssessmentPage['moodAssessorSecondaryTextColor'],
+                              color: AppColors.moodAssessmentScreen['moodAssessorSecondaryTextColor'],
                               fontSize: dp(14),
                               fontFamily: 'Roboto',
                               fontWeight: FontWeight.w400
@@ -133,7 +133,7 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
               Positioned(
                 top: 0,
                 child: Image.asset(
-                  AppContent.moodAssessmentPage['pathsToMoodSpheres'][_currentMood],
+                  AppContent.moodAssessmentScreen['pathsToMoodSpheres'][_currentMood],
                   height: dp(200),
                 )
               ),
@@ -154,9 +154,9 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
           Positioned(
             top: dp(26),
             child: Image.asset(
-              AppContent.moodAssessmentPage['pathToMoodSliderImage'],
+              AppContent.moodAssessmentScreen['pathToMoodSliderImage'],
               width: dp(270),
-              color: AppColors.moodAssessmentPage['moodColors'][_currentMood],
+              color: AppColors.moodAssessmentScreen['moodColors'][_currentMood],
             ),
           ),
           Positioned(
@@ -175,7 +175,7 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
                 height: dp(13.33),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.moodAssessmentPage['sliderCursorColors'][_currentMood],
+                  color: AppColors.moodAssessmentScreen['sliderCursorColors'][_currentMood],
                 ),
               ),
             )
@@ -190,10 +190,10 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
                   children: List.generate(7, (index) {
                     var color;
                     if (index + 1 == _currentMood) {
-                      color = AppColors.moodAssessmentPage['sliderCursorColors'][_currentMood];
+                      color = AppColors.moodAssessmentScreen['sliderCursorColors'][_currentMood];
                     }
                     else {
-                      color = AppColors.moodAssessmentPage['sliderScaleNeutralColor'];
+                      color = AppColors.moodAssessmentScreen['sliderScaleNeutralColor'];
                     }
                     return Container(
                       color: color,
@@ -257,15 +257,15 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
           FlatButton(
             onPressed: () {print('Assess Mood');},
             child: Text(
-              AppContent.moodAssessmentPage['assessButtonText'],
+              AppContent.moodAssessmentScreen['assessButtonText'],
               style: TextStyle(
-                color: AppColors.moodAssessmentPage['assessMoodButtonTextColor'],
+                color: AppColors.moodAssessmentScreen['assessMoodButtonTextColor'],
                 fontSize: dp(18),
                 fontFamily: 'Roboto',
                 fontWeight: FontWeight.w500,
               ),
             ),
-            color: AppColors.moodAssessmentPage['moodColors'][_currentMood],
+            color: AppColors.moodAssessmentScreen['moodColors'][_currentMood],
             height: dp(60),
             minWidth: double.infinity,
             shape: RoundedRectangleBorder(
@@ -282,9 +282,9 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
     return FlatButton(
       onPressed: () {print('Skip');},
       child: Text(
-        AppContent.moodAssessmentPage['skipButtonText'],
+        AppContent.moodAssessmentScreen['skipButtonText'],
         style: TextStyle(
-          color: AppColors.moodAssessmentPage['skipButtonTextColor'],
+          color: AppColors.moodAssessmentScreen['skipButtonTextColor'],
           fontSize: dp(18),
           fontFamily: 'Roboto',
           fontWeight: FontWeight.w400,

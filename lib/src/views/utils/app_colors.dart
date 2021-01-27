@@ -35,7 +35,7 @@ class AppColors {
     'backgroundColor': _designColors['Purple']['Dark'],
   };
 
-  static final onboardingPage = {
+  static final onboardingScreen = {
     'circleColor': _designColors['Purple']['SuperDark'],
     'activeCircleColor': _designColors['Purple']['Light'],
     'secondaryTextColor': _designColors['SilverWhite'],
@@ -43,7 +43,7 @@ class AppColors {
     'nextButtonTextColor': _designColors['White'],
   };
 
-  static final moodAssessmentPage = {
+  static final moodAssessmentScreen = {
     'appBarTextColor': _designColors['White'],
     'assessMoodButtonTextColor': _designColors['White'],
     'skipButtonTextColor': Color(0xFFACA5BA),

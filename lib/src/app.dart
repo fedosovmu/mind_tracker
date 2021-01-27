@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mind_tracker/mood_assessment_page.dart';
-import 'onboarding_page.dart';
-import 'app_colors.dart';
+import 'package:mind_tracker/src/views/ui/mood_assessment_screen.dart';
+import 'views/ui/onboarding_screen.dart';
+import 'views/utils/app_colors.dart';
 
 
 class MindTrackerApp extends StatelessWidget {
@@ -23,8 +23,8 @@ class MindTrackerApp extends StatelessWidget {
         ),
         canvasColor: AppColors.app['backgroundColor'],
       ),
-      home: OnboardingPage(1),
-      //home: MoodAssessmentPage(showSkipButton: false),
+      home: OnboardingScreen(1),
+      //home: MoodAssessmentScreen(showSkipButton: false),
     );
   }
 }

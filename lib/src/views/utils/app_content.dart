@@ -2,7 +2,7 @@
 
 
 class AppContent {
-  static const onboardingPage = {
+  static const onboardingScreen = {
     'pageTexts': {
       1: "Следите за своим ментальным состоянием оценивая его по шкале с семью градациями.",
       2: "Важно делать отметки несколько раз в день, устанавливайте напоминания в удобное время.",
@@ -18,7 +18,7 @@ class AppContent {
     'nextButtonText': 'Далее'
   };
 
-  static final moodAssessmentPage = {
+  static final moodAssessmentScreen = {
     'headerText': 'Как ваше настроение?',
     'pathToCloseIcon': 'assets/icons/close.png',
     'pathsToMoodSpheres': Map.fromIterable(

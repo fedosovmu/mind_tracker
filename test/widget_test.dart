@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mind_tracker/mind_tracker_app.dart';
+import 'package:mind_tracker/src/app.dart';
 
 import 'package:mind_tracker/main.dart';
 

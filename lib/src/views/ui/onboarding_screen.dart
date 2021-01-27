@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
-import 'app_colors.dart';
-import 'app_content.dart';
-import 'metrics.dart';
-import 'mood_assessment_page.dart';
+import '../utils/app_colors.dart';
+import '../utils/app_content.dart';
+import '../utils/metrics.dart';
+import 'mood_assessment_screen.dart';
 
 
-class OnboardingPage extends StatelessWidget {
-  var _pageNumber;
-  OnboardingPage (int page) {
-    this._pageNumber = page;
+class OnboardingScreen extends StatelessWidget {
+  var _screenNumber;
+  OnboardingScreen (int screen) {
+    this._screenNumber = screen;
   }
 
-  void goToNextPage(BuildContext context) {
-    var nextPage;
-    if (_pageNumber >= 4) {
-      nextPage = MoodAssessmentPage(showSkipButton: true,);
+  void goToNextScreen(BuildContext context) {
+    var nextScreen;
+    if (_screenNumber >= 4) {
+      nextScreen = MoodAssessmentScreen(showSkipButton: true,);
     }
     else {
-      nextPage = OnboardingPage(_pageNumber + 1);
+      nextScreen = OnboardingScreen(_screenNumber + 1);
     }
     Navigator.of(context).push(
         PageRouteBuilder(
-            pageBuilder: (context, _, __) => nextPage,
+            pageBuilder: (context, _, __) => nextScreen,
             transitionsBuilder: (___, animation, ____, child) {
               return FadeTransition(
                 opacity: animation,
@@ -45,7 +45,7 @@ class OnboardingPage extends StatelessWidget {
                   height: dp(24),
                 ),
                 Image(
-                  image: AssetImage(AppContent.onboardingPage['pathsToImages'][_pageNumber]),
+                  image: AssetImage(AppContent.onboardingScreen['pathsToImages'][_screenNumber]),
                   height: dp(370),
                 ),
                 Container(
@@ -58,9 +58,9 @@ class OnboardingPage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: List.generate(4, (index) {
-                          var circle_color = AppColors.onboardingPage['circleColor'];
-                          if (index+1 == _pageNumber) {
-                            circle_color = AppColors.onboardingPage['activeCircleColor'];
+                          var circle_color = AppColors.onboardingScreen['circleColor'];
+                          if (index+1 == _screenNumber) {
+                            circle_color = AppColors.onboardingScreen['activeCircleColor'];
                           }
                           return Container(
                             width: dp(9),
@@ -78,10 +78,10 @@ class OnboardingPage extends StatelessWidget {
                   alignment: Alignment.center,
                   padding: EdgeInsets.only(left: dp(16), right: dp(16)),
                   child:  Text(
-                      AppContent.onboardingPage['pageTexts'][_pageNumber],
+                      AppContent.onboardingScreen['pageTexts'][_screenNumber],
                       style: TextStyle(
                           fontSize: dp(16),
-                          color: AppColors.onboardingPage['secondaryTextColor'],
+                          color: AppColors.onboardingScreen['secondaryTextColor'],
                           fontFamily: "Roboto",
                           fontWeight: FontWeight.w500,
                       )
@@ -93,17 +93,17 @@ class OnboardingPage extends StatelessWidget {
                 width: double.infinity,
                 padding: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
                 child: FlatButton (
-                    color: AppColors.onboardingPage['nextButtonColor'],
+                    color: AppColors.onboardingScreen['nextButtonColor'],
                     height: dp(60),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(dp(16))),
                     ),
-                    onPressed: () { goToNextPage(context); },
+                    onPressed: () { goToNextScreen(context); },
                     child: Text(
-                      AppContent.onboardingPage['nextButtonText'],
+                      AppContent.onboardingScreen['nextButtonText'],
                       style: TextStyle(
                         fontSize: dp(18),
-                        color: AppColors.onboardingPage['nextButtonTextColor'],
+                        color: AppColors.onboardingScreen['nextButtonTextColor'],
                         fontFamily: 'Roboto',
                         fontWeight: FontWeight.w500,
                       ),
