@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
+import '../utils/app_text_styles.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_content.dart';
-import '../utils/app_text_styles.dart';
 import '../utils/metrics.dart';
 import 'mood_assessment_screen.dart';
+import '../utils/screen_data.dart';
 
 
-class OnboardingScreen extends StatelessWidget {
-  static const _screenName = 'onboardingScreen';
-  var _content = AppContent.screensData[_screenName];
-  var _colors = AppColors.screensData[_screenName];
-  var _textStyles = AppTextStyles.screensData[_screenName];
-
+class OnboardingScreen extends StatelessWidget with ScreenData {
   var _screenNumber;
   OnboardingScreen (int screen) {
     this._screenNumber = screen;
+    setScreenData('onboardingScreen');
   }
 
   void goToNextScreen(BuildContext context) {
@@ -51,7 +48,7 @@ class OnboardingScreen extends StatelessWidget {
                   height: dp(24),
                 ),
                 Image(
-                  image: AssetImage(_content['pathsToImages'][_screenNumber]),
+                  image: AssetImage(content['pathsToImages'][_screenNumber]),
                   height: dp(370),
                 ),
                 Container(
@@ -64,9 +61,9 @@ class OnboardingScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: List.generate(4, (index) {
-                          var circle_color = _colors['circleColor'];
+                          var circle_color = colors['circleColor'];
                           if (index+1 == _screenNumber) {
-                            circle_color = _colors['activeCircleColor'];
+                            circle_color = colors['activeCircleColor'];
                           }
                           return Container(
                             width: dp(9),
@@ -84,8 +81,8 @@ class OnboardingScreen extends StatelessWidget {
                   alignment: Alignment.center,
                   padding: EdgeInsets.only(left: dp(16), right: dp(16)),
                   child:  Text(
-                      _content['screenTexts'][_screenNumber],
-                      style: _textStyles['secondaryTextStyle'],
+                      content['screenTexts'][_screenNumber],
+                      style: textStyles['secondaryTextStyle'],
                   ),
                 ),
               ],
@@ -95,14 +92,14 @@ class OnboardingScreen extends StatelessWidget {
                 height: dp(68),
                 padding: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
                 child: RaisedButton (
-                    color: _colors['nextButtonColor'],
+                    color: colors['nextButtonColor'],
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(dp(16))),
                     ),
                     onPressed: () { goToNextScreen(context); },
                     child: Text(
-                      _content['nextButtonText'],
-                      style: _textStyles['nextButtonTextStyle'],
+                      content['nextButtonText'],
+                      style: textStyles['nextButtonTextStyle'],
                     )
                 )
             )

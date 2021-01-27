@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mind_tracker/src/views/utils/app_text_styles.dart';
+import '../utils/screen_data.dart';
+import '../utils/app_text_styles.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_content.dart';
 import '../utils/metrics.dart';
@@ -15,14 +16,10 @@ class MoodAssessmentScreen extends StatefulWidget {
   _MoodAssessmentScreenState createState() => _MoodAssessmentScreenState(_showSkipButton);
 }
 
-class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
-  static const _screenName = 'moodAssessmentScreen';
-  var _content = AppContent.screensData[_screenName];
-  var _colors = AppColors.screensData[_screenName];
-  var _textStyles = AppTextStyles.screensData[_screenName];
-
+class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with ScreenData {
   _MoodAssessmentScreenState(showSkipButton) {
     _showSkipButton = showSkipButton;
+    setScreenData('moodAssessmentScreen');
   }
   bool _showSkipButton;
   double _currentSliderValue = 4;
@@ -33,15 +30,15 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _content['headerText'],
-          style: _textStyles['titleTextStyle'],
+          content['headerText'],
+          style: textStyles['titleTextStyle'],
         ),
         elevation: 0,
         titleSpacing: 0,
         toolbarHeight: dp(56),
         leading: IconButton(
           icon: Image.asset(
-            _content['pathToCloseIcon'],
+            content['pathToCloseIcon'],
             height: dp(32),
             width: dp(32),
           ),
@@ -77,7 +74,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                 margin: EdgeInsets.symmetric(horizontal: dp(16)),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(dp(16))),
-                  color: _colors['moodAssessorBackgroundColor'],
+                  color: colors['moodAssessorBackgroundColor'],
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -85,8 +82,8 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                     Container(
                       alignment: Alignment.bottomCenter,
                       child: Text(
-                        _content['moodNames'][_currentMood],
-                        style: _textStyles['moodAssessorMoodTextStyle'],
+                        content['moodNames'][_currentMood],
+                        style: textStyles['moodAssessorMoodTextStyle'],
                       ),
                     ),
                     Container(
@@ -97,12 +94,12 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            _content['secondaryMoodText'],
-                            style: _textStyles['moodAssessorSecondaryTextStyle'],
+                            content['secondaryMoodText'],
+                            style: textStyles['moodAssessorSecondaryTextStyle'],
                           ),
                           Text(
-                            _content['secondaryPullText'],
-                            style: _textStyles['moodAssessorSecondaryTextStyle'],
+                            content['secondaryPullText'],
+                            style: textStyles['moodAssessorSecondaryTextStyle'],
                           )
                         ],
                       ),
@@ -114,7 +111,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
               Positioned(
                 top: 0,
                 child: Image.asset(
-                  _content['pathsToMoodSpheres'][_currentMood],
+                  content['pathsToMoodSpheres'][_currentMood],
                   height: dp(200),
                 )
               ),
@@ -135,9 +132,9 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
           Positioned(
             top: dp(26),
             child: Image.asset(
-              _content['pathToMoodSliderImage'],
+              content['pathToMoodSliderImage'],
               width: dp(270),
-              color: _colors['moodColors'][_currentMood],
+              color: colors['moodColors'][_currentMood],
             ),
           ),
           Positioned(
@@ -156,7 +153,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                 height: dp(13.33),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: _colors['sliderCursorColors'][_currentMood],
+                  color: colors['sliderCursorColors'][_currentMood],
                 ),
               ),
             )
@@ -171,10 +168,10 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                   children: List.generate(7, (index) {
                     var color;
                     if (index + 1 == _currentMood) {
-                      color = _colors['sliderCursorColors'][_currentMood];
+                      color = colors['sliderCursorColors'][_currentMood];
                     }
                     else {
-                      color = _colors['sliderScaleNeutralColor'];
+                      color = colors['sliderScaleNeutralColor'];
                     }
                     return Container(
                       color: color,
@@ -241,10 +238,10 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
             child: RaisedButton(
               onPressed: () {print('Assess Mood $_currentMood');},
               child: Text(
-                _content['assessButtonText'],
-                style: _textStyles['assessMoodButtonTextStyle'],
+                content['assessButtonText'],
+                style: textStyles['assessMoodButtonTextStyle'],
               ),
-              color: _colors['moodColors'][_currentMood],
+              color: colors['moodColors'][_currentMood],
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(dp(16)))
               ),
@@ -260,8 +257,8 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
     return FlatButton(
       onPressed: () {print('Skip');},
       child: Text(
-        _content['skipButtonText'],
-        style: _textStyles['skipButtonTextStyle'],
+        content['skipButtonText'],
+        style: textStyles['skipButtonTextStyle'],
       ),
       height: dp(60),
       minWidth: dp(150),

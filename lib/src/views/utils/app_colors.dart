@@ -48,7 +48,6 @@ class AppColors {
     } as dynamic,
 
     'moodAssessmentScreen': {
-      'appBarTextColor': _designColors['White'],
       'moodAssessorBackgroundColor': _designColors['Purple']['SuperDark'],
       'moodColors':  _designColors['MoodColors'],
       'sliderCursorColors': {
