@@ -7,9 +7,10 @@ import 'mood_assessment_screen.dart';
 
 
 class OnboardingScreen extends StatelessWidget {
-  var _content = AppContent.onboardingScreen;
-  var _colors = AppColors.onboardingScreen;
-  var _textStyles = AppTextStyles.onboardingScreen;
+  static const _screenName = 'onboardingScreen';
+  var _content = AppContent.screensData[_screenName];
+  var _colors = AppColors.screensData[_screenName];
+  var _textStyles = AppTextStyles.screensData[_screenName];
 
   var _screenNumber;
   OnboardingScreen (int screen) {

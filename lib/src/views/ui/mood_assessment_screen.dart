@@ -16,9 +16,10 @@ class MoodAssessmentScreen extends StatefulWidget {
 }
 
 class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
-  var _content = AppContent.moodAssessmentScreen;
-  var _colors = AppColors.moodAssessmentScreen;
-  var _textStyles = AppTextStyles.moodAssessmentScreen;
+  static const _screenName = 'moodAssessmentScreen';
+  var _content = AppContent.screensData[_screenName];
+  var _colors = AppColors.screensData[_screenName];
+  var _textStyles = AppTextStyles.screensData[_screenName];
 
   _MoodAssessmentScreenState(showSkipButton) {
     _showSkipButton = showSkipButton;
@@ -238,7 +239,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
             height: dp(60),
             width: double.infinity,
             child: RaisedButton(
-              onPressed: () {print('Assess Mood');},
+              onPressed: () {print('Assess Mood $_currentMood');},
               child: Text(
                 _content['assessButtonText'],
                 style: _textStyles['assessMoodButtonTextStyle'],

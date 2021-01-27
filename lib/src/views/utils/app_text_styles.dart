@@ -47,20 +47,22 @@ class AppTextStyles {
     ),
   };
 
-  static final onboardingScreen = {
-    'secondaryTextStyle': _designStyles['Basic H1'].copyWith(
-        color: _textColors['silverWhite']),
-    'nextButtonTextStyle': _designStyles['Button/Medium']
-  };
+  static final screensData = {
+    'onboardingScreen': {
+      'secondaryTextStyle': _designStyles['Basic H1'].copyWith(
+          color: _textColors['silverWhite']),
+      'nextButtonTextStyle': _designStyles['Button/Medium']
+    } as dynamic,
 
-  static final moodAssessmentScreen = {
-    'titleTextStyle': _designStyles['Title H1'],
-    'assessMoodButtonTextStyle': _designStyles['Button/Medium'],
-    'skipButtonTextStyle': _designStyles['Button/Basic'].copyWith(
-        color: Color(0xFFACA5BA)),
-    'moodAssessorMoodTextStyle': _designStyles['Title H1'].copyWith(
-        fontWeight: FontWeight.w500),
-    'moodAssessorSecondaryTextStyle': _designStyles['Basic'].copyWith(
-        color: _textColors['purpleLight']),
+    'moodAssessmentScreen': {
+      'titleTextStyle': _designStyles['Title H1'],
+      'assessMoodButtonTextStyle': _designStyles['Button/Medium'],
+      'skipButtonTextStyle': _designStyles['Button/Basic'].copyWith(
+          color: Color(0xFFACA5BA)),
+      'moodAssessorMoodTextStyle': _designStyles['Title H1'].copyWith(
+          fontWeight: FontWeight.w500),
+      'moodAssessorSecondaryTextStyle': _designStyles['Basic'].copyWith(
+          color: _textColors['purpleLight']),
+    } as dynamic
   };
 }
