@@ -19,7 +19,7 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
   _MoodAssessmentPageState(showSkipButton) {
     _showSkipButton = showSkipButton;
   }
-  var _showSkipButton;
+  bool _showSkipButton;
   double _currentSliderValue = 4;
   int _currentMood = 4;
 
@@ -36,22 +36,31 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
             fontWeight: FontWeight.w700,
           ),
         ),
-        backgroundColor: AppColors.moodAssessmentPage['backgroundColor'],
         elevation: 0,
         titleSpacing: 0,
         toolbarHeight: dp(56),
-        leading: Container(),
+        leading: IconButton(
+          icon: Image.asset(
+            AppContent.moodAssessmentPage['pathToCloseIcon'],
+            height: dp(32),
+            width: dp(32),
+          ),
+          onPressed: () {print('Close'); },
+        ),
         //IconButton(),
         leadingWidth: dp(56),
       ),
-      body: Container(
-        color: AppColors.moodAssessmentPage['backgroundColor'],
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            _buildMoodAssessor(),
-            _buildBottomButtons(),
-          ],
+      body: SafeArea(
+        top: false,
+        bottom: true,
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              _buildMoodAssessor(),
+              _buildBottomButtons(),
+            ],
+          ),
         ),
       ),
     );
@@ -145,7 +154,7 @@ class _MoodAssessmentPageState extends State<MoodAssessmentPage> {
           Positioned(
             top: dp(26),
             child: Image.asset(
-              'assets/images/mood_assessment/mood_slider.png',
+              AppContent.moodAssessmentPage['pathToMoodSliderImage'],
               width: dp(270),
               color: AppColors.moodAssessmentPage['moodColors'][_currentMood],
             ),
