@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_content.dart';
+import '../utils/app_text_styles.dart';
 import '../utils/metrics.dart';
 import 'mood_assessment_screen.dart';
 
@@ -78,35 +79,25 @@ class OnboardingScreen extends StatelessWidget {
                   alignment: Alignment.center,
                   padding: EdgeInsets.only(left: dp(16), right: dp(16)),
                   child:  Text(
-                      AppContent.onboardingScreen['pageTexts'][_screenNumber],
-                      style: TextStyle(
-                          fontSize: dp(16),
-                          color: AppColors.onboardingScreen['secondaryTextColor'],
-                          fontFamily: "Roboto",
-                          fontWeight: FontWeight.w500,
-                      )
+                      AppContent.onboardingScreen['screenTexts'][_screenNumber],
+                      style: AppTextStyles.onboardingScreen['secondaryTextStyle'],
                   ),
                 ),
               ],
             ),
             Container(
                 width: double.infinity,
+                height: dp(68),
                 padding: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
-                child: FlatButton (
+                child: RaisedButton (
                     color: AppColors.onboardingScreen['nextButtonColor'],
-                    height: dp(60),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(dp(16))),
                     ),
                     onPressed: () { goToNextScreen(context); },
                     child: Text(
                       AppContent.onboardingScreen['nextButtonText'],
-                      style: TextStyle(
-                        fontSize: dp(18),
-                        color: AppColors.onboardingScreen['nextButtonTextColor'],
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: AppTextStyles.onboardingScreen['nextButtonTextStyle'],
                     )
                 )
             )

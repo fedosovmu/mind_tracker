@@ -30,26 +30,25 @@ class AppColors {
     } as dynamic,
   };
 
-  static final app = {
-    'appBarColor': _designColors['Purple']['Dark'],
+  static final appTheme = {
     'backgroundColor': _designColors['Purple']['Dark'],
+  };
+
+  static final textColors = {
+    'white': _designColors['White'],
+    'silverWhite': _designColors['SilverWhite'],
+    'purpleLight': _designColors['Purple']['Light'],
   };
 
   static final onboardingScreen = {
     'circleColor': _designColors['Purple']['SuperDark'],
     'activeCircleColor': _designColors['Purple']['Light'],
-    'secondaryTextColor': _designColors['SilverWhite'],
     'nextButtonColor': _designColors['MainColors']['CTA'],
-    'nextButtonTextColor': _designColors['White'],
   };
 
   static final moodAssessmentScreen = {
     'appBarTextColor': _designColors['White'],
-    'assessMoodButtonTextColor': _designColors['White'],
-    'skipButtonTextColor': Color(0xFFACA5BA),
     'moodAssessorBackgroundColor': _designColors['Purple']['SuperDark'],
-    'moodAssessorMoodTextColor': _designColors['White'],
-    'moodAssessorSecondaryTextColor': _designColors['Purple']['Light'],
     'moodColors':  _designColors['MoodColors'],
     'sliderCursorColors': {
       1: _designColors['Black'],
