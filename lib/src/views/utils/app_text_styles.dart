@@ -4,7 +4,8 @@ import 'app_colors.dart';
 
 
 class AppTextStyles {
-  static const _defaultTextColor = Colors.white;
+  static final _textColors = AppColors.textColors;
+  static final _defaultTextColor = _textColors['white'];
   static const _fontFamily = 'Roboto';
 
   static final _designStyles = {
@@ -48,7 +49,7 @@ class AppTextStyles {
 
   static final onboardingScreen = {
     'secondaryTextStyle': _designStyles['Basic H1'].copyWith(
-        color: AppColors.textColors['silverWhite']),
+        color: _textColors['silverWhite']),
     'nextButtonTextStyle': _designStyles['Button/Medium']
   };
 
@@ -60,6 +61,6 @@ class AppTextStyles {
     'moodAssessorMoodTextStyle': _designStyles['Title H1'].copyWith(
         fontWeight: FontWeight.w500),
     'moodAssessorSecondaryTextStyle': _designStyles['Basic'].copyWith(
-        color: AppColors.textColors['purpleLight']),
+        color: _textColors['purpleLight']),
   };
 }

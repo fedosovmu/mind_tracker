@@ -7,6 +7,10 @@ import 'mood_assessment_screen.dart';
 
 
 class OnboardingScreen extends StatelessWidget {
+  var _content = AppContent.onboardingScreen;
+  var _colors = AppColors.onboardingScreen;
+  var _textStyles = AppTextStyles.onboardingScreen;
+
   var _screenNumber;
   OnboardingScreen (int screen) {
     this._screenNumber = screen;
@@ -46,7 +50,7 @@ class OnboardingScreen extends StatelessWidget {
                   height: dp(24),
                 ),
                 Image(
-                  image: AssetImage(AppContent.onboardingScreen['pathsToImages'][_screenNumber]),
+                  image: AssetImage(_content['pathsToImages'][_screenNumber]),
                   height: dp(370),
                 ),
                 Container(
@@ -59,9 +63,9 @@ class OnboardingScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: List.generate(4, (index) {
-                          var circle_color = AppColors.onboardingScreen['circleColor'];
+                          var circle_color = _colors['circleColor'];
                           if (index+1 == _screenNumber) {
-                            circle_color = AppColors.onboardingScreen['activeCircleColor'];
+                            circle_color = _colors['activeCircleColor'];
                           }
                           return Container(
                             width: dp(9),
@@ -79,8 +83,8 @@ class OnboardingScreen extends StatelessWidget {
                   alignment: Alignment.center,
                   padding: EdgeInsets.only(left: dp(16), right: dp(16)),
                   child:  Text(
-                      AppContent.onboardingScreen['screenTexts'][_screenNumber],
-                      style: AppTextStyles.onboardingScreen['secondaryTextStyle'],
+                      _content['screenTexts'][_screenNumber],
+                      style: _textStyles['secondaryTextStyle'],
                   ),
                 ),
               ],
@@ -90,14 +94,14 @@ class OnboardingScreen extends StatelessWidget {
                 height: dp(68),
                 padding: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
                 child: RaisedButton (
-                    color: AppColors.onboardingScreen['nextButtonColor'],
+                    color: _colors['nextButtonColor'],
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(dp(16))),
                     ),
                     onPressed: () { goToNextScreen(context); },
                     child: Text(
-                      AppContent.onboardingScreen['nextButtonText'],
-                      style: AppTextStyles.onboardingScreen['nextButtonTextStyle'],
+                      _content['nextButtonText'],
+                      style: _textStyles['nextButtonTextStyle'],
                     )
                 )
             )
