@@ -4,14 +4,14 @@ import '../utils/app_colors.dart';
 import '../utils/app_content.dart';
 import '../utils/metrics.dart';
 import 'mood_assessment_screen.dart';
-import '../utils/screen_data.dart';
+import '../utils/widget_data.dart';
 
 
-class OnboardingScreen extends StatelessWidget with ScreenData {
+class OnboardingScreen extends StatelessWidget with WidgetData {
   var _screenNumber;
   OnboardingScreen (int screen) {
     this._screenNumber = screen;
-    setScreenData('onboardingScreen');
+    setData('onboardingScreen');
   }
 
   void goToNextScreen(BuildContext context) {

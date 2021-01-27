@@ -2,7 +2,7 @@
 
 
 class AppContent {
-  static final screensData = {
+  static final widgetsData = {
     'onboardingScreen': const {
       'screenTexts': {
         1: "Следите за своим ментальным состоянием оценивая его по шкале с семью градациями.",

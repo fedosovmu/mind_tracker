@@ -47,7 +47,7 @@ class AppTextStyles {
     ),
   };
 
-  static final screensData = {
+  static final widgetsData = {
     'onboardingScreen': {
       'secondary': _designStyles['Basic H1'].copyWith(
           color: _textColors['silverWhite']),

@@ -40,7 +40,7 @@ class AppColors {
     'purpleLight': _designColors['Purple']['Light'],
   };
 
-  static final screensData = {
+  static final widgetsData = {
     'onboardingScreen': {
       'circle': _designColors['Purple']['SuperDark'],
       'activeCircle': _designColors['Purple']['Light'],

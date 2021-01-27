@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../utils/screen_data.dart';
+import '../utils/widget_data.dart';
 import '../utils/app_text_styles.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_content.dart';
@@ -16,10 +16,10 @@ class MoodAssessmentScreen extends StatefulWidget {
   _MoodAssessmentScreenState createState() => _MoodAssessmentScreenState(_showSkipButton);
 }
 
-class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with ScreenData {
+class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with WidgetData {
   _MoodAssessmentScreenState(showSkipButton) {
     _showSkipButton = showSkipButton;
-    setScreenData('moodAssessmentScreen');
+    setData('moodAssessmentScreen');
   }
   bool _showSkipButton;
   double _currentSliderValue = 4;
