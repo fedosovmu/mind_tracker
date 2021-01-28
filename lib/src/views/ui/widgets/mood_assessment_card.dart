@@ -80,5 +80,4 @@ class MoodAssessmentCard extends StatelessWidget with WidgetData {
       ),
     );
   }
-
 }
