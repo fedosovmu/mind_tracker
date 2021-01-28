@@ -14,10 +14,13 @@ class MindTrackerApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown
     ]);
+    SystemChrome.setSystemUIOverlayStyle(
+        appSystemUiOverlayStyle
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: AppTheme,
+      theme: appTheme,
       //home: OnboardingScreen(1),
       //home: MoodAssessmentScreen(showSkipButton: false),
       home: MainScreen(),
