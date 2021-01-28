@@ -43,5 +43,9 @@ class AppContent {
       'assessButtonText': 'Оценить',
       'skipButtonText': 'Пропустить',
     } as dynamic,
+
+    'mainScreen': {
+      'title': 'Ваше настроение'
+    } as dynamic,
   };
 }

@@ -10,7 +10,7 @@ mixin WidgetData {
   var colors;
   var textStyles;
 
-  void setData(String widgetName) {
+  void setWidgetName(String widgetName) {
     content = AppContent.widgetsData[widgetName];
     colors = AppColors.widgetsData[widgetName];
     textStyles = AppTextStyles.widgetsData[widgetName];

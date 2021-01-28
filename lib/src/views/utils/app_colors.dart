@@ -30,17 +30,18 @@ class AppColors {
     } as dynamic,
   };
 
-  static final appTheme = {
-    'backgroundColor': _designColors['Purple']['Dark'],
-  };
-
-  static final textColors = {
-    'white': _designColors['White'],
-    'silverWhite': _designColors['SilverWhite'],
-    'purpleLight': _designColors['Purple']['Light'],
-  };
-
   static final widgetsData = {
+    'appTheme': {
+      'background': _designColors['Purple']['Dark'],
+      'accent':_designColors['MainColors']['CTA'],
+    } as dynamic,
+
+    'text': {
+      'white': _designColors['White'],
+      'silverWhite': _designColors['SilverWhite'],
+      'purpleLight': _designColors['Purple']['Light'],
+    } as dynamic,
+
     'onboardingScreen': {
       'circle': _designColors['Purple']['SuperDark'],
       'activeCircle': _designColors['Purple']['Light'],
@@ -61,5 +62,12 @@ class AppColors {
       } as dynamic,
       'sliderScaleNeutral': Color(0xFF322A42)
     },
+
+    'mainScreen': {
+      'moodAssessmentCard': {
+        'background': _designColors['Purple']['SuperDark'],
+        'eventCountCircle': _designColors['Purple']['Dark'],
+      }
+    } as dynamic,
   };
 }

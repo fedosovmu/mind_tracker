@@ -4,7 +4,7 @@ import 'app_colors.dart';
 
 
 class AppTextStyles {
-  static final _textColors = AppColors.textColors;
+  static final _textColors = AppColors.widgetsData['text'];
   static final _defaultTextColor = _textColors['white'];
   static const _fontFamily = 'Roboto';
 
@@ -63,6 +63,17 @@ class AppTextStyles {
           fontWeight: FontWeight.w500),
       'moodAssessorSecondary': _designStyles['Basic'].copyWith(
           color: _textColors['purpleLight']),
-    } as dynamic
+    } as dynamic,
+
+    'mainScreen': {
+      'title': _designStyles['Title H1'],
+      'moodAssessmentCard': {
+        'dayTime': _designStyles['Basic'].copyWith(
+            color: _textColors['purpleLight']),
+        'mood': _designStyles['Title H1'],
+        'events': _designStyles['Basic'].copyWith(
+            color: _textColors['purpleLight']),
+      } as dynamic,
+    },
   };
 }

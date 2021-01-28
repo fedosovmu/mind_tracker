@@ -19,7 +19,7 @@ class MoodAssessmentScreen extends StatefulWidget {
 class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with WidgetData {
   _MoodAssessmentScreenState(showSkipButton) {
     _showSkipButton = showSkipButton;
-    setData('moodAssessmentScreen');
+    setWidgetName('moodAssessmentScreen');
   }
   bool _showSkipButton;
   double _currentSliderValue = 4;
@@ -33,7 +33,6 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
           content['headerText'],
           style: textStyles['title'],
         ),
-        elevation: 0,
         titleSpacing: 0,
         toolbarHeight: dp(56),
         leading: IconButton(

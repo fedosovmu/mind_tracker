@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mind_tracker/src/views/ui/main_screen.dart';
 import 'views/utils/app_theme.dart';
 import 'views/ui/onboarding_screen.dart';
 import 'views/ui/mood_assessment_screen.dart';
@@ -17,8 +18,9 @@ class MindTrackerApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: AppTheme,
-      home: OnboardingScreen(1),
+      //home: OnboardingScreen(1),
       //home: MoodAssessmentScreen(showSkipButton: false),
+      home: MainScreen(),
     );
   }
 }
