@@ -4,10 +4,14 @@ import '../../utils/metrics.dart';
 
 
 class MoodAssessmentCard extends StatelessWidget with WidgetData {
-  var _mood;
+  int _mood;
+  int _eventNumber;
+  String _dateTimeString;
 
-  MoodAssessmentCard (mood) {
+  MoodAssessmentCard ({int mood, int eventNumber, String dateTimeString}) {
     _mood = mood;
+    _eventNumber = eventNumber;
+    _dateTimeString = dateTimeString;
   }
 
 
@@ -27,14 +31,14 @@ class MoodAssessmentCard extends StatelessWidget with WidgetData {
               Container(
                 height: dp(41),
                 child: Text(
-                  'День  |  09:21',
+                  _dateTimeString,
                   style: textStyles['dayTime'],
                 ),
               ),
               Container(
                 height: dp(41),
                 child: Text(
-                  'Неплохо',
+                  content['moodNames'][_mood],
                   style: textStyles['mood'],
                 ),
               ),
@@ -48,7 +52,7 @@ class MoodAssessmentCard extends StatelessWidget with WidgetData {
                         height: dp(24),
                         padding: EdgeInsets.only(left: dp(8.5), top: dp(4)),
                         child: Text(
-                          '${_mood}',
+                          '${_eventNumber}',
                           style: textStyles['events'],
                         ),
                         decoration: BoxDecoration(
@@ -60,7 +64,7 @@ class MoodAssessmentCard extends StatelessWidget with WidgetData {
                         width: dp(8),
                       ),
                       Text(
-                        'Событий',
+                        content['getEventWord'](_mood),
                         style: textStyles['events'],
                       ),
                     ],

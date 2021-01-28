@@ -30,7 +30,12 @@ class MainScreen extends StatelessWidget with WidgetData {
         titleSpacing: dp(16),
       ),
       body: ListView (
-        children: List.generate(4, (index) => MoodAssessmentCard(_moodAssess)),
+        children: List.generate(4, (index) =>
+            MoodAssessmentCard(
+              mood: index+1,
+              eventNumber: index+1, 
+              dateTimeString: 'День  |  09:21',)
+        ),
       )
     );
   }

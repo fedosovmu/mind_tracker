@@ -2,6 +2,16 @@
 
 
 class AppContent {
+  static const _moodNames = {
+    1: 'Ужасно',
+    2: 'Плохо',
+    3: 'Не очень',
+    4: 'Нормально',
+    5: 'Хорошо',
+    6: 'Отлично',
+    7: 'Восхитительно',
+  };
+
   static final widgetsData = {
     'onboardingScreen': const {
       'screenTexts': {
@@ -29,15 +39,7 @@ class AppContent {
               item) => 'assets/images/mood_assessment/mood_spheres/$item.png'
       ),
       'pathToMoodSliderImage': 'assets/images/mood_assessment/mood_slider.png',
-      'moodNames': {
-        1: 'Ужасно',
-        2: 'Плохо',
-        3: 'Не очень',
-        4: 'Нормально',
-        5: 'Хорошо',
-        6: 'Отлично',
-        7: 'Восхитительно',
-      } as dynamic,
+      'moodNames': _moodNames,
       'secondaryMoodText': 'Настроение',
       'secondaryPullText': 'Потяни',
       'assessButtonText': 'Оценить',
@@ -47,5 +49,18 @@ class AppContent {
     'mainScreen': {
       'title': 'Ваше настроение'
     },
+
+    'moodAssessmentCard': {
+      'moodNames': _moodNames,
+      'getEventWord': (int eventsNumber) {
+        if (eventsNumber == 1) {
+          return 'Событие';
+        } else if (eventsNumber > 1 && eventsNumber <= 4) {
+          return 'События';
+        } else {
+          return 'Событий';
+        }
+      } as dynamic,
+    }
   };
 }
