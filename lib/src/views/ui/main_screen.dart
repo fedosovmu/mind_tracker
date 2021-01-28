@@ -33,7 +33,7 @@ class MainScreen extends StatelessWidget with WidgetData {
         children: List.generate(4, (index) =>
             MoodAssessmentCard(
               mood: index+1,
-              eventNumber: index+1, 
+              eventNumber: index+1,
               dateTimeString: 'День  |  09:21',)
         ),
       )

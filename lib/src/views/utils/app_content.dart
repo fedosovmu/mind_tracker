@@ -53,9 +53,9 @@ class AppContent {
     'moodAssessmentCard': {
       'moodNames': _moodNames,
       'getEventWord': (int eventsNumber) {
-        if (eventsNumber == 1) {
+        if (eventsNumber % 10 == 1) {
           return 'Событие';
-        } else if (eventsNumber > 1 && eventsNumber <= 4) {
+        } else if (eventsNumber % 10 > 1 && eventsNumber % 10 <= 4) {
           return 'События';
         } else {
           return 'Событий';
