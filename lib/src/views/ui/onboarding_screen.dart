@@ -14,7 +14,7 @@ class OnboardingScreen extends StatelessWidget with WidgetData {
     setWidgetName('onboardingScreen');
   }
 
-  void goToNextScreen(BuildContext context) {
+  void _goToNextScreen(BuildContext context) {
     var nextScreen;
     if (_screenNumber >= 4) {
       nextScreen = MoodAssessmentScreen(showSkipButton: true,);
@@ -96,7 +96,7 @@ class OnboardingScreen extends StatelessWidget with WidgetData {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(dp(16))),
                     ),
-                    onPressed: () { goToNextScreen(context); },
+                    onPressed: () { _goToNextScreen(context); },
                     child: Text(
                       content['nextButtonText'],
                       style: textStyles['nextButton'],

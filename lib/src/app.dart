@@ -18,9 +18,9 @@ class MindTrackerApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: AppTheme,
-      //home: OnboardingScreen(1),
+      home: OnboardingScreen(1),
       //home: MoodAssessmentScreen(showSkipButton: false),
-      home: MainScreen(),
+      //home: MainScreen(),
     );
   }
 }

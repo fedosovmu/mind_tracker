@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/views/ui/main_screen.dart';
 import '../utils/widget_data.dart';
 import '../utils/app_text_styles.dart';
 import '../utils/app_colors.dart';
@@ -25,6 +26,20 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
   double _currentSliderValue = 4;
   int _currentMood = 4;
 
+  void _goToNextScreen(moodAssess) {
+    Navigator.of(context).push(
+        PageRouteBuilder(
+            pageBuilder: (context, _, __) => MainScreen(moodAssess: moodAssess),
+            transitionsBuilder: (___, animation, ____, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            }
+        )
+    );
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -234,7 +249,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
             height: dp(60),
             width: double.infinity,
             child: RaisedButton(
-              onPressed: () {print('Assess Mood $_currentMood');},
+              onPressed: () {_goToNextScreen(_currentMood);},
               child: Text(
                 content['assessButtonText'],
                 style: textStyles['assessMoodButton'],
@@ -253,7 +268,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
 
   Widget _buildSkipButton() {
     return FlatButton(
-      onPressed: () {print('Skip');},
+      onPressed: () {_goToNextScreen(null);},
       child: Text(
         content['skipButtonText'],
         style: textStyles['skipButton'],

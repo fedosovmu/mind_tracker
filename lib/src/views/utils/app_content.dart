@@ -17,7 +17,7 @@ class AppContent {
         4: "assets/images/onboarding/monkey.png"
       } as dynamic,
       'nextButtonText': 'Далее'
-    } as dynamic,
+    },
 
     'moodAssessmentScreen': {
       'headerText': 'Как ваше настроение?',
@@ -42,10 +42,10 @@ class AppContent {
       'secondaryPullText': 'Потяни',
       'assessButtonText': 'Оценить',
       'skipButtonText': 'Пропустить',
-    } as dynamic,
+    },
 
     'mainScreen': {
       'title': 'Ваше настроение'
-    } as dynamic,
+    },
   };
 }

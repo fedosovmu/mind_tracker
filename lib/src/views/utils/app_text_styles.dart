@@ -52,7 +52,7 @@ class AppTextStyles {
       'secondary': _designStyles['Basic H1'].copyWith(
           color: _textColors['silverWhite']),
       'nextButton': _designStyles['Button/Medium']
-    } as dynamic,
+    },
 
     'moodAssessmentScreen': {
       'title': _designStyles['Title H1'],
@@ -63,17 +63,18 @@ class AppTextStyles {
           fontWeight: FontWeight.w500),
       'moodAssessorSecondary': _designStyles['Basic'].copyWith(
           color: _textColors['purpleLight']),
-    } as dynamic,
+    },
 
     'mainScreen': {
       'title': _designStyles['Title H1'],
-      'moodAssessmentCard': {
-        'dayTime': _designStyles['Basic'].copyWith(
-            color: _textColors['purpleLight']),
-        'mood': _designStyles['Title H1'],
-        'events': _designStyles['Basic'].copyWith(
-            color: _textColors['purpleLight']),
-      } as dynamic,
+    },
+
+    'moodAssessmentCard': {
+      'dayTime': _designStyles['Basic'].copyWith(
+          color: _textColors['purpleLight']),
+      'mood': _designStyles['Title H1'],
+      'events': _designStyles['Basic'].copyWith(
+          color: _textColors['purpleLight']),
     },
   };
 }

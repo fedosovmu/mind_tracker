@@ -34,19 +34,19 @@ class AppColors {
     'appTheme': {
       'background': _designColors['Purple']['Dark'],
       'accent':_designColors['MainColors']['CTA'],
-    } as dynamic,
+    },
 
     'text': {
       'white': _designColors['White'],
       'silverWhite': _designColors['SilverWhite'],
       'purpleLight': _designColors['Purple']['Light'],
-    } as dynamic,
+    },
 
     'onboardingScreen': {
       'circle': _designColors['Purple']['SuperDark'],
       'activeCircle': _designColors['Purple']['Light'],
       'nextButton': _designColors['MainColors']['CTA'],
-    } as dynamic,
+    },
 
     'moodAssessmentScreen': {
       'moodAssessorBackground': _designColors['Purple']['SuperDark'],
@@ -63,11 +63,11 @@ class AppColors {
       'sliderScaleNeutral': Color(0xFF322A42)
     },
 
-    'mainScreen': {
-      'moodAssessmentCard': {
-        'background': _designColors['Purple']['SuperDark'],
-        'eventCountCircle': _designColors['Purple']['Dark'],
-      }
-    } as dynamic,
+    'mainScreen': {},
+
+    'moodAssessmentCard': {
+      'background': _designColors['Purple']['SuperDark'],
+      'eventCountCircle': _designColors['Purple']['Dark'],
+    },
   };
 }
