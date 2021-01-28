@@ -64,7 +64,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
         alignment: Alignment.center,
         padding: EdgeInsets.only(bottom: dp(60)),
         child: Container(
-          height: dp(300),
+          height: dp(314),
           child: Stack(
             alignment: Alignment.bottomCenter,
             children: [
@@ -108,10 +108,10 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
                 ),
               ),
               Positioned(
-                top: 0,
+                top: 10,
                 child: Image.asset(
                   content['pathsToMoodSpheres'][_currentMood],
-                  height: dp(200),
+                  height: dp(214),
                 )
               ),
             ],
