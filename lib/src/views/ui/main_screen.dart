@@ -35,12 +35,15 @@ class _MainScreenState extends State<MainScreen> with WidgetData {
   }
 
   Widget _buildCardListView() {
-    final moodAssessmentCards = List.generate(1, (index) =>
-        MoodAssessmentCard(
-          mood: widget._moodAssess,
-          eventNumber: widget._moodAssess,
-          dateTimeString: 'День  |  09:21',)
-    );
+    var moodAssessmentCards = [];
+    if (widget._moodAssess != null) {
+      moodAssessmentCards = List.generate(1, (index) =>
+          MoodAssessmentCard(
+            mood: widget._moodAssess,
+            eventNumber: widget._moodAssess,
+            dateTimeString: 'День  |  09:21',)
+      );
+    }
 
     final moodSpheres = List.generate(moodAssessmentCards.length, (index) {
       var mood = moodAssessmentCards[index].mood;
