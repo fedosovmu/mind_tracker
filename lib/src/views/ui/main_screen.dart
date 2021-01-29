@@ -4,11 +4,6 @@ import '../utils/widget_data.dart';
 import '../utils/metrics.dart';
 import 'widgets/mood_assessment_card.dart';
 
-import 'dart:ui' as ui;
-import 'dart:typed_data';
-import 'dart:async';
-import 'dart:io';
-
 
 class MainScreen extends StatefulWidget with WidgetData {
   var _moodAssess;
@@ -62,7 +57,10 @@ class _MainScreenState extends State<MainScreen> with WidgetData {
       child: Stack(
           children:[
             Column(
-              children: moodAssessmentCards,
+              children: [
+                ...moodAssessmentCards,
+                SizedBox(height: dp(30),)
+              ],
             ),
             ...moodSpheres,
           ]

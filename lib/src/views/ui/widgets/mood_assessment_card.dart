@@ -62,7 +62,7 @@ class MoodAssessmentCard extends StatelessWidget with WidgetData {
                       width: dp(8),
                     ),
                     Text(
-                      content['getEventWord'](mood),
+                      content['getEventWord'](_eventNumber),
                       style: textStyles['events'],
                     ),
                   ],
