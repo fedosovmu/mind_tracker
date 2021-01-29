@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../utils/widget_data.dart';
 import '../utils/metrics.dart';
 import 'widgets/mood_assessment_card.dart';
+
+import 'dart:ui' as ui;
+import 'dart:typed_data';
+import 'dart:async';
+import 'dart:io';
 
 
 class MainScreen extends StatefulWidget with WidgetData {
@@ -12,17 +18,26 @@ class MainScreen extends StatefulWidget with WidgetData {
   }
 
   @override
-  State<StatefulWidget> createState() => _MainScreenState();
+  _MainScreenState createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State with WidgetData {
-  var _futureString;
-  var _futureImage;
+class _MainScreenState extends State<MainScreen> with WidgetData {
+  ui.Image _image;
 
   @override
   void initState() {
     super.initState();
-    _futureString = _getFutureString();
+    _loadImage();
+  }
+
+  _loadImage () async {
+    ByteData bd = await rootBundle.load('assets/images/common/mood_spheres/5.png');
+    final Uint8List bytes = Uint8List.view(bd.buffer);
+    final ui.Codec codec = await ui.instantiateImageCodec(bytes);
+    final ui.Image image = (await codec.getNextFrame()).image;
+    setState(() {
+      _image = image;
+    });
   }
 
   @override
@@ -39,52 +54,29 @@ class _MainScreenState extends State with WidgetData {
       ),
       body: Container(
         color: Colors.yellow,
-        child: FutureBuilder<String>(
-          future: _futureString,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return Container(color: Colors.green);
-            } else {
-              return Container(color: Colors.red);
-            }
-          },
-
-        ),
+        child: CustomPaint(
+          foregroundPainter: _SpherePainter(_image),
+          child: Container(
+            color: Colors.blue
+          ),
+        )
       )
     );
-  }
-
-  Future<String> _getFutureString() async {
-    await Future.delayed(Duration(seconds: 3));
-    return Future.value('This in future');
-  }
-
-  Future<Image> _loadImage() async {
-    _futureImage = await Image.asset('assets/images/common/mood_spheres/5.png');
-    return _futureImage;
   }
 }
 
 class _SpherePainter extends CustomPainter {
-  var _image;
+  ui.Image _image;
 
-  _SpherePainter () {
-    var image = Image.asset('assets/images/common/mood_spheres/5.png');
+  _SpherePainter (image) : super () {
+    _image = image;
   }
 
   @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-        ..color = Color(0x5000FF00);
-
-    const sphereImageAspectRatio = 257 / 214;
-    const sphereImageWidth = 200;
-    const sphereImageHeigth = sphereImageWidth / sphereImageAspectRatio;
-    final rect = Rect.fromLTWH(dp(360 - sphereImageWidth-16), dp(0), dp(sphereImageWidth), dp(sphereImageHeigth));
-    Offset imagePos = Offset(dp(100), dp(100));
-
-    canvas.drawRect(rect, paint);
-    //canvas.drawImage(_image, imagePos, paint);
+  Future paint(Canvas canvas, Size size) async {
+    if (_image != null) {
+      canvas.drawImage(_image, Offset.zero, Paint());
+    }
   }
 
   @override
