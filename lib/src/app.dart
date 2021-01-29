@@ -4,7 +4,7 @@ import 'views/utils/metrics.dart';
 import 'views/utils/app_theme.dart';
 import 'views/ui/onboarding_screen.dart';
 import 'views/ui/mood_assessment_screen.dart';
-import 'views/ui/main_screen.dart';
+import 'views/ui/main_screen/main_screen.dart';
 
 
 class MindTrackerApp extends StatelessWidget {

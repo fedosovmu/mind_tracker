@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../utils/widget_data.dart';
-import '../utils/metrics.dart';
-import 'widgets/mood_assessment_card.dart';
-import 'widgets/empty_mood_assessment_card.dart';
+import '../../utils/widget_data.dart';
+import '../../utils/metrics.dart';
+import 'mood_assessment_card.dart';
+import 'empty_mood_assessment_card.dart';
 
 
 class MainScreen extends StatefulWidget with WidgetData {
@@ -23,6 +23,7 @@ class _MainScreenState extends State<MainScreen> with WidgetData {
     setWidgetName('mainScreen');
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           content['title'],
           style: textStyles['title'],

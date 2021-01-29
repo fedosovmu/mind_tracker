@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mind_tracker/src/views/ui/main_screen.dart';
+import 'package:mind_tracker/src/views/ui/main_screen/main_screen.dart';
 import '../utils/widget_data.dart';
 import '../utils/app_text_styles.dart';
 import '../utils/app_colors.dart';
