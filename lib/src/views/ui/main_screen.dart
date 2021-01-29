@@ -35,6 +35,7 @@ class _MainScreenState extends State<MainScreen> with WidgetData {
     final Uint8List bytes = Uint8List.view(bd.buffer);
     final ui.Codec codec = await ui.instantiateImageCodec(bytes);
     final ui.Image image = (await codec.getNextFrame()).image;
+
     setState(() {
       _image = image;
     });
@@ -53,11 +54,17 @@ class _MainScreenState extends State<MainScreen> with WidgetData {
         titleSpacing: dp(16),
       ),
       body: Container(
-        color: Colors.yellow,
         child: CustomPaint(
           foregroundPainter: _SpherePainter(_image),
           child: Container(
-            color: Colors.blue
+            child: ListView (
+              children: List.generate(4, (index) =>
+              MoodAssessmentCard(
+                mood: index+1,
+                eventNumber: index+1,
+                dateTimeString: 'День  |  09:21',)
+              )
+            )
           ),
         )
       )
@@ -75,7 +82,9 @@ class _SpherePainter extends CustomPainter {
   @override
   Future paint(Canvas canvas, Size size) async {
     if (_image != null) {
-      canvas.drawImage(_image, Offset.zero, Paint());
+      canvas
+      ..scale(0.5)
+      ..drawImage(_image, Offset(340, -30), Paint());
     }
   }
 
