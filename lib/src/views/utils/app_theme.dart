@@ -5,7 +5,8 @@ import 'metrics.dart';
 
 
 final colors = AppColors.widgetsData['appTheme'];
-final appTheme  = ThemeData(
+
+final appTheme = ThemeData(
   appBarTheme: AppBarTheme(
     color: colors['background'],
     elevation: 0,

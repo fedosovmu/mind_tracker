@@ -8,6 +8,7 @@ class MainScreen extends StatelessWidget with WidgetData {
   var _moodAssess;
 
   MainScreen ({int moodAssess = null}) {
+    setWidgetName('mainScreen');
     if (moodAssess != null) {
       _moodAssess = moodAssess;
     } else {
@@ -17,7 +18,6 @@ class MainScreen extends StatelessWidget with WidgetData {
 
   @override
   Widget build(BuildContext context) {
-    setWidgetName('mainScreen');
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -47,20 +47,18 @@ class MainScreen extends StatelessWidget with WidgetData {
 class _SpherePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    var paint = Paint()
-        ..color = Colors.red
-        ..strokeWidth = dp(5)
-        ..strokeCap = StrokeCap.round;
+    final paint = Paint()
+        ..color = Color(0x5000FF00);
 
-    Offset startingPoint = Offset(0, size.height / 2);
-    Offset endingPoint = Offset(size.width, size.height / 2);
+    const sphereImageAspectRatio = 257 / 214;
+    const sphereImageWidth = 180;
+    const sphereImageHeigth = sphereImageWidth / sphereImageAspectRatio;
+    final rect = Rect.fromLTWH(dp(360 - sphereImageWidth-16), dp(0), dp(sphereImageWidth), dp(sphereImageHeigth));
 
-    canvas.drawLine(startingPoint, endingPoint, paint);
+    canvas.drawRect(rect, paint);
+
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
-  }
-  
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
