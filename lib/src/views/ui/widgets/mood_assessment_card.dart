@@ -4,12 +4,11 @@ import '../../utils/metrics.dart';
 
 
 class MoodAssessmentCard extends StatelessWidget with WidgetData {
-  int _mood;
+  final int mood;
   int _eventNumber;
   String _dateTimeString;
 
-  MoodAssessmentCard ({int mood, int eventNumber, String dateTimeString}) {
-    _mood = mood;
+  MoodAssessmentCard ({this.mood, int eventNumber, String dateTimeString}) {
     _eventNumber = eventNumber;
     _dateTimeString = dateTimeString;
   }
@@ -20,59 +19,57 @@ class MoodAssessmentCard extends StatelessWidget with WidgetData {
     setWidgetName('moodAssessmentCard');
     return Container(
       margin: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(12)),
+      padding: EdgeInsets.only(top: dp(16), left: dp(24), bottom: dp(14)),
+      alignment: Alignment.topLeft,
       width: double.infinity,
       height: dp(136),
-      child: Container(
-        alignment: Alignment.topLeft,
-        margin: EdgeInsets.only(top: dp(16), left: dp(24), bottom: dp(14)),
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: dp(41),
-                child: Text(
-                  _dateTimeString,
-                  style: textStyles['dayTime'],
-                ),
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: dp(41),
+              child: Text(
+                _dateTimeString,
+                style: textStyles['dayTime'],
               ),
-              Container(
-                height: dp(41),
-                child: Text(
-                  content['moodNames'][_mood],
-                  style: textStyles['mood'],
-                ),
+            ),
+            Container(
+              height: dp(41),
+              child: Text(
+                content['moodNames'][mood],
+                style: textStyles['mood'],
               ),
-              Expanded(
-                child: Container(
-                  //color: Colors.blue,
-                  child: Row(
-                    children: [
-                      Container(
-                        width: dp(24),
-                        height: dp(24),
-                        padding: EdgeInsets.only(left: dp(8.5), top: dp(4)),
-                        child: Text(
-                          '${_eventNumber}',
-                          style: textStyles['events'],
-                        ),
-                        decoration: BoxDecoration(
-                          color: colors['eventCountCircle'],
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      SizedBox(
-                        width: dp(8),
-                      ),
-                      Text(
-                        content['getEventWord'](_mood),
+            ),
+            Expanded(
+              child: Container(
+                //color: Colors.blue,
+                child: Row(
+                  children: [
+                    Container(
+                      width: dp(24),
+                      height: dp(24),
+                      padding: EdgeInsets.only(left: dp(8.5), top: dp(4)),
+                      child: Text(
+                        '${_eventNumber}',
                         style: textStyles['events'],
                       ),
-                    ],
-                  ),
+                      decoration: BoxDecoration(
+                        color: colors['eventCountCircle'],
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    SizedBox(
+                      width: dp(8),
+                    ),
+                    Text(
+                      content['getEventWord'](mood),
+                      style: textStyles['events'],
+                    ),
+                  ],
                 ),
-              )
-            ]
-        ),
+              ),
+            )
+          ]
       ),
       decoration: BoxDecoration(
         color: colors['background'],

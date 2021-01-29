@@ -22,25 +22,6 @@ class MainScreen extends StatefulWidget with WidgetData {
 }
 
 class _MainScreenState extends State<MainScreen> with WidgetData {
-  ui.Image _image;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadImage();
-  }
-
-  _loadImage () async {
-    ByteData bd = await rootBundle.load('assets/images/common/mood_spheres/5.png');
-    final Uint8List bytes = Uint8List.view(bd.buffer);
-    final ui.Codec codec = await ui.instantiateImageCodec(bytes);
-    final ui.Image image = (await codec.getNextFrame()).image;
-
-    setState(() {
-      _image = image;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     setWidgetName('mainScreen');
@@ -53,41 +34,35 @@ class _MainScreenState extends State<MainScreen> with WidgetData {
         toolbarHeight: dp(56),
         titleSpacing: dp(16),
       ),
-      body: Container(
-        child: CustomPaint(
-          foregroundPainter: _SpherePainter(_image),
-          child: Container(
-            child: ListView (
-              children: List.generate(4, (index) =>
-              MoodAssessmentCard(
-                mood: index+1,
-                eventNumber: index+1,
-                dateTimeString: 'День  |  09:21',)
-              )
-            )
-          ),
-        )
-      )
+      body: _buildCardListView()
     );
   }
-}
 
-class _SpherePainter extends CustomPainter {
-  ui.Image _image;
+  Widget _buildCardListView() {
+    var moodAssessmentCards = List.generate(3, (index) =>
+        MoodAssessmentCard(
+          mood: 7 - index,
+          eventNumber: index+1,
+          dateTimeString: 'День  |  09:21',)
+    );
 
-  _SpherePainter (image) : super () {
-    _image = image;
+    return Stack(
+        children:[
+          ListView (
+              children: moodAssessmentCards
+          ),
+          ...List.generate(moodAssessmentCards.length, (index) {
+            var mood = moodAssessmentCards[index].mood;
+            return Positioned(
+              top: dp(dp(-5) + index * dp(136)),
+              left: dp(160),
+              child: Image.asset(
+                'assets/images/common/mood_spheres/$mood.png',
+                scale: dp(2),
+              )
+            );
+          })
+        ]
+    );
   }
-
-  @override
-  Future paint(Canvas canvas, Size size) async {
-    if (_image != null) {
-      canvas
-      ..scale(0.5)
-      ..drawImage(_image, Offset(340, -30), Paint());
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
