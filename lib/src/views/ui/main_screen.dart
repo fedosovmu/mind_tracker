@@ -39,30 +39,34 @@ class _MainScreenState extends State<MainScreen> with WidgetData {
   }
 
   Widget _buildCardListView() {
-    var moodAssessmentCards = List.generate(3, (index) =>
+    final moodAssessmentCards = List.generate(7, (index) =>
         MoodAssessmentCard(
           mood: 7 - index,
           eventNumber: index+1,
           dateTimeString: 'День  |  09:21',)
     );
 
-    return Stack(
-        children:[
-          ListView (
-              children: moodAssessmentCards
-          ),
-          ...List.generate(moodAssessmentCards.length, (index) {
-            var mood = moodAssessmentCards[index].mood;
-            return Positioned(
-              top: dp(dp(-5) + index * dp(136)),
-              left: dp(160),
-              child: Image.asset(
-                'assets/images/common/mood_spheres/$mood.png',
-                scale: dp(2),
-              )
-            );
-          })
-        ]
+    final moodSpheres = List.generate(moodAssessmentCards.length, (index) {
+      var mood = moodAssessmentCards[index].mood;
+      return Positioned(
+          top: dp(dp(-5) + index * dp(136)),
+          left: dp(160),
+          child: Image.asset(
+            'assets/images/common/mood_spheres/$mood.png',
+            scale: dp(2),
+          )
+      );
+    });
+
+    return SingleChildScrollView(
+      child: Stack(
+          children:[
+            Column(
+              children: moodAssessmentCards,
+            ),
+            ...moodSpheres,
+          ]
+      ),
     );
   }
 }
