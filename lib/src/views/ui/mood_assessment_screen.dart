@@ -14,15 +14,13 @@ class MoodAssessmentScreen extends StatefulWidget {
   }
 
   @override
-  _MoodAssessmentScreenState createState() => _MoodAssessmentScreenState(_showSkipButton);
+  _MoodAssessmentScreenState createState() => _MoodAssessmentScreenState();
 }
 
 class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with WidgetData {
-  _MoodAssessmentScreenState(showSkipButton) {
-    _showSkipButton = showSkipButton;
+  _MoodAssessmentScreenState() {
     setWidgetName('moodAssessmentScreen');
   }
-  bool _showSkipButton;
   double _currentSliderValue = 4;
   int _currentMood = 4;
 
@@ -232,7 +230,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
 
   Widget _buildBottomButtons() {
     var buttonsHeight;
-    if (_showSkipButton) {
+    if (widget._showSkipButton) {
       buttonsHeight = dp(136);
     }
     else {
@@ -260,7 +258,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
               ),
             ),
           ),
-          (_showSkipButton ? _buildSkipButton() : const SizedBox.shrink())
+          (widget._showSkipButton ? _buildSkipButton() : const SizedBox.shrink())
         ],
       ),
     );

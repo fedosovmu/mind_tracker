@@ -9,8 +9,8 @@ import '../utils/widget_data.dart';
 
 class OnboardingScreen extends StatelessWidget with WidgetData {
   var _screenNumber;
-  OnboardingScreen (int screen) {
-    this._screenNumber = screen;
+  OnboardingScreen ({int screenNumber = 1}) {
+    this._screenNumber = screenNumber;
     setWidgetName('onboardingScreen');
   }
 
@@ -20,7 +20,7 @@ class OnboardingScreen extends StatelessWidget with WidgetData {
       nextScreen = MoodAssessmentScreen(showSkipButton: true,);
     }
     else {
-      nextScreen = OnboardingScreen(_screenNumber + 1);
+      nextScreen = OnboardingScreen(screenNumber: _screenNumber + 1);
     }
     Navigator.of(context).push(
         PageRouteBuilder(
