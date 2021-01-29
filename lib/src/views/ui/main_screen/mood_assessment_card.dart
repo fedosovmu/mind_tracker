@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/views/utils/custom_colors.dart';
 import '../../utils/widget_data.dart';
 import '../../utils/metrics.dart';
 
@@ -52,7 +53,7 @@ class MoodAssessmentCard extends StatelessWidget with WidgetData {
                         style: textStyles['events'],
                       ),
                       decoration: BoxDecoration(
-                        color: colors['eventCountCircle'],
+                        color: CustomColors.purpleDark,
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -70,7 +71,7 @@ class MoodAssessmentCard extends StatelessWidget with WidgetData {
           ]
       ),
       decoration: BoxDecoration(
-        color: colors['background'],
+        color: CustomColors.purpleSuperDark,
         borderRadius: BorderRadius.all(Radius.circular(dp(16))),
       ),
     );

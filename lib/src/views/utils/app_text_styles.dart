@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'metrics.dart';
-import 'app_colors.dart';
+import 'custom_colors.dart';
 
 
 class AppTextStyles {
-  static final _textColors = AppColors.widgetsData['text'];
-  static final _defaultTextColor = _textColors['white'];
+  static final _defaultTextColor = CustomColors.white;
   static const _fontFamily = 'Roboto';
+
+  static final _basicTextStyle = TextStyle(
+      color: CustomColors.white,
+      fontFamily: 'Roboto'
+  );
 
   static final _designStyles = {
     'Title H1': TextStyle(
@@ -50,7 +54,7 @@ class AppTextStyles {
   static final widgetsData = {
     'onboardingScreen': {
       'secondary': _designStyles['Basic H1'].copyWith(
-          color: _textColors['silverWhite']),
+          color: CustomColors.silverWhite),
       'nextButton': _designStyles['Button/Medium']
     },
 
@@ -62,7 +66,7 @@ class AppTextStyles {
       'moodAssessorMood': _designStyles['Title H1'].copyWith(
           fontWeight: FontWeight.w500),
       'moodAssessorSecondary': _designStyles['Basic'].copyWith(
-          color: _textColors['purpleLight']),
+          color: CustomColors.purpleLight),
     },
 
     'mainScreen': {
@@ -71,10 +75,10 @@ class AppTextStyles {
 
     'moodAssessmentCard': {
       'dayTime': _designStyles['Basic'].copyWith(
-          color: _textColors['purpleLight']),
+          color: CustomColors.purpleLight),
       'mood': _designStyles['Title H1'],
       'events': _designStyles['Basic'].copyWith(
-          color: _textColors['purpleLight']),
+          color: CustomColors.purpleLight),
     },
 
     'emptyMoodAssessmentCard': {

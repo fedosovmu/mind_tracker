@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'app_colors.dart';
+import 'custom_colors.dart';
 import 'metrics.dart';
 
 
-final colors = AppColors.widgetsData['appTheme'];
+final colors = CustomColors;
 
 final appTheme = ThemeData(
   appBarTheme: AppBarTheme(
-    color: colors['background'],
+    color: CustomColors.purpleDark,
     elevation: 0,
   ),
-  accentColor: colors['accent'],
+  accentColor: CustomColors.main,
   brightness: Brightness.dark,
-  primaryColor: colors['background'],
-  scaffoldBackgroundColor: colors['background'],
+  primaryColor: CustomColors.purpleDark,
+  scaffoldBackgroundColor: CustomColors.purpleDark,
 );
 
 final appSystemUiOverlayStyle = SystemUiOverlayStyle(
-  systemNavigationBarColor: colors['background']
+  systemNavigationBarColor: CustomColors.purpleDark
 );

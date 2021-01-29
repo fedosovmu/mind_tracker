@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/views/utils/custom_colors.dart';
 import '../../utils/widget_data.dart';
 import '../../utils/metrics.dart';
 
@@ -12,7 +13,7 @@ class EmptyMoodAssessmentCard extends StatelessWidget with WidgetData {
       width: double.infinity,
       height: dp(136),
       decoration: BoxDecoration(
-        color: colors['background'],
+        color: CustomColors.purpleSuperDark,
         borderRadius: BorderRadius.all(Radius.circular(dp(16))),
       ),
       child: Container(
@@ -26,7 +27,7 @@ class EmptyMoodAssessmentCard extends StatelessWidget with WidgetData {
               height: dp(46),
               child: FlatButton(
                 onPressed: () { print('Assess'); },
-                color: colors['button'],
+                color: CustomColors.main,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(dp(12))
                 ),
@@ -40,7 +41,7 @@ class EmptyMoodAssessmentCard extends StatelessWidget with WidgetData {
               width: dp(96),
               height: dp(96),
               decoration: BoxDecoration(
-                color: colors['emptySphere'],
+                color: CustomColors.purpleDark,
                 shape: BoxShape.circle
               ),
             )

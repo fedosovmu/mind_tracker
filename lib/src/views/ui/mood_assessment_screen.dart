@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/ui/main_screen/main_screen.dart';
 import '../utils/widget_data.dart';
 import '../utils/app_text_styles.dart';
-import '../utils/app_colors.dart';
+import '../utils/custom_colors.dart';
 import '../utils/app_content.dart';
 import '../utils/metrics.dart';
 
@@ -86,7 +86,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
                 margin: EdgeInsets.symmetric(horizontal: dp(16)),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(dp(16))),
-                  color: colors['moodAssessorBackground'],
+                  color: CustomColors.purpleSuperDark,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -145,7 +145,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
             child: Image.asset(
               content['pathToMoodSliderImage'],
               width: dp(270),
-              color: colors['moods'][_currentMood],
+              color: CustomColors.moods[_currentMood],
             ),
           ),
           Positioned(
@@ -164,7 +164,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
                 height: dp(13.33),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: colors['sliderCursor'][_currentMood],
+                  color: CustomColors.moods[_currentMood],
                 ),
               ),
             )
@@ -179,10 +179,10 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
                   children: List.generate(7, (index) {
                     var color;
                     if (index + 1 == _currentMood) {
-                      color = colors['sliderCursor'][_currentMood];
+                      color = CustomColors.moods[_currentMood];
                     }
                     else {
-                      color = colors['sliderScaleNeutral'];
+                      color = CustomColors.purpleSuperDark;
                     }
                     return Container(
                       color: color,
@@ -252,7 +252,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
                 content['assessButtonText'],
                 style: textStyles['assessMoodButton'],
               ),
-              color: colors['moods'][_currentMood],
+              color: CustomColors.moods[_currentMood],
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(dp(16)))
               ),

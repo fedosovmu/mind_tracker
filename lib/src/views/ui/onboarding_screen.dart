@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/app_text_styles.dart';
-import '../utils/app_colors.dart';
+import '../utils/custom_colors.dart';
 import '../utils/app_content.dart';
 import '../utils/metrics.dart';
 import 'mood_assessment_screen.dart';
@@ -61,9 +61,9 @@ class OnboardingScreen extends StatelessWidget with WidgetData {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: List.generate(4, (index) {
-                          var circle_color = colors['circle'];
+                          var circle_color = CustomColors.purpleSuperDark;
                           if (index+1 == _screenNumber) {
-                            circle_color = colors['activeCircle'];
+                            circle_color = CustomColors.purpleLight;
                           }
                           return Container(
                             width: dp(9),
@@ -92,7 +92,7 @@ class OnboardingScreen extends StatelessWidget with WidgetData {
                 height: dp(68),
                 padding: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
                 child: FlatButton (
-                    color: colors['nextButton'],
+                    color: CustomColors.main,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(dp(16))),
                     ),
