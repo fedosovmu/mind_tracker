@@ -76,5 +76,9 @@ class AppTextStyles {
       'events': _designStyles['Basic'].copyWith(
           color: _textColors['purpleLight']),
     },
+
+    'emptyMoodAssessmentCard': {
+      'button': _designStyles['Button/Medium'],
+    },
   };
 }

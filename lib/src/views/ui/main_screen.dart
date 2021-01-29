@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import '../utils/widget_data.dart';
 import '../utils/metrics.dart';
 import 'widgets/mood_assessment_card.dart';
+import 'widgets/empty_mood_assessment_card.dart';
 
 
 class MainScreen extends StatefulWidget with WidgetData {
@@ -34,23 +35,25 @@ class _MainScreenState extends State<MainScreen> with WidgetData {
   }
 
   Widget _buildCardListView() {
-    final moodAssessmentCards = List.generate(7, (index) =>
+    final moodAssessmentCards = List.generate(1, (index) =>
         MoodAssessmentCard(
-          mood: 7 - index,
-          eventNumber: index+1,
+          mood: widget._moodAssess,
+          eventNumber: widget._moodAssess,
           dateTimeString: 'День  |  09:21',)
     );
 
     final moodSpheres = List.generate(moodAssessmentCards.length, (index) {
       var mood = moodAssessmentCards[index].mood;
-      return Positioned(
-          top: dp(dp(-5) + index * dp(136)),
-          left: dp(160),
-          child: Image.asset(
-            'assets/images/common/mood_spheres/$mood.png',
-            scale: dp(2),
-          )
-      );
+      if (mood != null) {
+        return Positioned(
+            top: dp(dp(-5) + index * dp(136)),
+            left: dp(160),
+            child: Image.asset(
+              'assets/images/common/mood_spheres/$mood.png',
+              scale: dp(2),
+            )
+        );
+      }
     });
 
     return SingleChildScrollView(
@@ -59,7 +62,7 @@ class _MainScreenState extends State<MainScreen> with WidgetData {
             Column(
               children: [
                 ...moodAssessmentCards,
-                SizedBox(height: dp(30),)
+                EmptyMoodAssessmentCard()
               ],
             ),
             ...moodSpheres,

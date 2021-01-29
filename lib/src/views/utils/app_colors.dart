@@ -69,5 +69,11 @@ class AppColors {
       'background': _designColors['Purple']['SuperDark'],
       'eventCountCircle': _designColors['Purple']['Dark'],
     },
+
+    'emptyMoodAssessmentCard': {
+      'background': _designColors['Purple']['SuperDark'],
+      'emptySphere': _designColors['Purple']['Dark'],
+      'button': _designColors['MainColors']['CTA'],
+    },
   };
 }

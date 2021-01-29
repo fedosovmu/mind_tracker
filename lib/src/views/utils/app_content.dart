@@ -61,6 +61,10 @@ class AppContent {
           return 'Событий';
         }
       } as dynamic,
+    },
+
+    'emptyMoodAssessmentCard': {
+      'buttonText': 'Оценить'
     }
   };
 }

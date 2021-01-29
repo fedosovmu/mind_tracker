@@ -91,7 +91,7 @@ class OnboardingScreen extends StatelessWidget with WidgetData {
                 width: double.infinity,
                 height: dp(68),
                 padding: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
-                child: RaisedButton (
+                child: FlatButton (
                     color: colors['nextButton'],
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(dp(16))),

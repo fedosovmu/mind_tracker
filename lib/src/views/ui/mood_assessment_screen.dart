@@ -246,7 +246,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
           SizedBox(
             height: dp(60),
             width: double.infinity,
-            child: RaisedButton(
+            child: FlatButton(
               onPressed: () {_goToNextScreen(_currentMood);},
               child: Text(
                 content['assessButtonText'],

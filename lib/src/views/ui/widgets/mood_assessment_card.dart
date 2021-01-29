@@ -4,15 +4,13 @@ import '../../utils/metrics.dart';
 
 
 class MoodAssessmentCard extends StatelessWidget with WidgetData {
-  final int mood;
-  int _eventNumber;
+  int mood;
+  int eventNumber;
   String _dateTimeString;
 
-  MoodAssessmentCard ({this.mood, int eventNumber, String dateTimeString}) {
-    _eventNumber = eventNumber;
+  MoodAssessmentCard ({this.mood, this.eventNumber, String dateTimeString}) {
     _dateTimeString = dateTimeString;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +48,7 @@ class MoodAssessmentCard extends StatelessWidget with WidgetData {
                       height: dp(24),
                       padding: EdgeInsets.only(left: dp(8.5), top: dp(4)),
                       child: Text(
-                        '${_eventNumber}',
+                        '${eventNumber}',
                         style: textStyles['events'],
                       ),
                       decoration: BoxDecoration(
@@ -62,7 +60,7 @@ class MoodAssessmentCard extends StatelessWidget with WidgetData {
                       width: dp(8),
                     ),
                     Text(
-                      content['getEventWord'](_eventNumber),
+                      content['getEventWord'](eventNumber),
                       style: textStyles['events'],
                     ),
                   ],
