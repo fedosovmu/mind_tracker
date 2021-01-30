@@ -36,7 +36,7 @@ mixin Content {
     },
 
     'moodAssessmentScreen': {
-      'headerText': 'Как ваше настроение?',
+      'titleText': 'Как ваше настроение?',
       'pathToCloseIcon': 'assets/icons/close.png',
       'pathsToMoodSpheres': Map.fromIterable(
           List.generate(7, (i) => i + 1),

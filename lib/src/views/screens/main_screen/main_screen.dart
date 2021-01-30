@@ -5,6 +5,7 @@ import 'package:mind_tracker/src/views/utils/custom_text_styles.dart';
 import '../../utils/metrics.dart';
 import 'mood_assessment_card.dart';
 import 'empty_mood_assessment_card.dart';
+import '../../common_widgets/main_app_bar.dart';
 
 
 class MainScreen extends StatefulWidget {
@@ -23,14 +24,8 @@ class _MainScreenState extends State<MainScreen> with Content {
   Widget build(BuildContext context) {
     setWidgetName('mainScreen');
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(
-          content['title'],
-          style: CustomTextStyles.titleH1,
-        ),
-        toolbarHeight: dp(56),
-        titleSpacing: dp(16),
+      appBar: MainAppBar(
+        title: content['title'],
       ),
       body: _buildCardListView()
     );

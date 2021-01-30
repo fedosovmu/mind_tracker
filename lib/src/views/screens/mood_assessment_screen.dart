@@ -4,6 +4,7 @@ import '../utils/custom_text_styles.dart';
 import '../utils/custom_colors.dart';
 import '../utils/content.dart';
 import '../utils/metrics.dart';
+import '../common_widgets/main_app_bar.dart';
 
 
 class MoodAssessmentScreen extends StatefulWidget {
@@ -40,13 +41,8 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          content['headerText'],
-          style: CustomTextStyles.titleH1,
-        ),
-        titleSpacing: 0,
-        toolbarHeight: dp(56),
+      appBar: MainAppBar(
+        title: content['titleText'],
         leading: IconButton(
           icon: Image.asset(
             content['pathToCloseIcon'],
@@ -55,8 +51,6 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
           ),
           onPressed: () {print('Close'); },
         ),
-        //IconButton(),
-        leadingWidth: dp(56),
       ),
       body: Container(
         child: Column(
