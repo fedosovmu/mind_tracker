@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/utils/custom_colors.dart';
+import 'package:mind_tracker/src/views/utils/custom_text_styles.dart';
 import '../../utils/widget_data.dart';
 import '../../utils/metrics.dart';
 
@@ -29,14 +30,14 @@ class MoodAssessmentCard extends StatelessWidget with WidgetData {
               height: dp(41),
               child: Text(
                 _dateTimeString,
-                style: textStyles['dayTime'],
+                style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
               ),
             ),
             Container(
               height: dp(41),
               child: Text(
                 content['moodNames'][mood],
-                style: textStyles['mood'],
+                style: CustomTextStyles.titleH1,
               ),
             ),
             Expanded(
@@ -50,7 +51,7 @@ class MoodAssessmentCard extends StatelessWidget with WidgetData {
                       padding: EdgeInsets.only(left: dp(8.5), top: dp(4)),
                       child: Text(
                         '${eventNumber}',
-                        style: textStyles['events'],
+                        style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
                       ),
                       decoration: BoxDecoration(
                         color: CustomColors.purpleDark,
@@ -62,7 +63,7 @@ class MoodAssessmentCard extends StatelessWidget with WidgetData {
                     ),
                     Text(
                       content['getEventWord'](eventNumber),
-                      style: textStyles['events'],
+                      style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
                     ),
                   ],
                 ),

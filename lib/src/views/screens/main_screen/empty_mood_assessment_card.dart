@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/utils/custom_colors.dart';
+import 'package:mind_tracker/src/views/utils/custom_text_styles.dart';
 import '../../utils/widget_data.dart';
 import '../../utils/metrics.dart';
 
@@ -33,7 +34,7 @@ class EmptyMoodAssessmentCard extends StatelessWidget with WidgetData {
                 ),
                 child: Text(
                   content['buttonText'],
-                  style: textStyles['button'],
+                  style: CustomTextStyles.buttonMedium,
                 ),
               ),
             ),

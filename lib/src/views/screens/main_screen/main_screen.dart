@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mind_tracker/src/views/utils/custom_text_styles.dart';
 import '../../utils/widget_data.dart';
 import '../../utils/metrics.dart';
 import 'mood_assessment_card.dart';
@@ -26,7 +27,7 @@ class _MainScreenState extends State<MainScreen> with WidgetData {
         automaticallyImplyLeading: false,
         title: Text(
           content['title'],
-          style: textStyles['title'],
+          style: CustomTextStyles.titleH1,
         ),
         toolbarHeight: dp(56),
         titleSpacing: dp(16),

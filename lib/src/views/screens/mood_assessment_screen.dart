@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mind_tracker/src/views/ui/main_screen/main_screen.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/main_screen.dart';
 import '../utils/widget_data.dart';
-import '../utils/app_text_styles.dart';
+import '../utils/custom_text_styles.dart';
 import '../utils/custom_colors.dart';
 import '../utils/app_content.dart';
 import '../utils/metrics.dart';
@@ -44,7 +44,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
       appBar: AppBar(
         title: Text(
           content['headerText'],
-          style: textStyles['title'],
+          style: CustomTextStyles.titleH1,
         ),
         titleSpacing: 0,
         toolbarHeight: dp(56),
@@ -95,7 +95,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
                       alignment: Alignment.bottomCenter,
                       child: Text(
                         content['moodNames'][_currentMood],
-                        style: textStyles['moodAssessorMood'],
+                        style: CustomTextStyles.titleH1,
                       ),
                     ),
                     Container(
@@ -107,11 +107,11 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
                         children: [
                           Text(
                             content['secondaryMoodText'],
-                            style: textStyles['moodAssessorSecondary'],
+                            style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
                           ),
                           Text(
                             content['secondaryPullText'],
-                            style: textStyles['moodAssessorSecondary'],
+                            style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
                           )
                         ],
                       ),
@@ -250,7 +250,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
               onPressed: () {_goToNextScreen(_currentMood);},
               child: Text(
                 content['assessButtonText'],
-                style: textStyles['assessMoodButton'],
+                style: CustomTextStyles.buttonMedium,
               ),
               color: CustomColors.moods[_currentMood],
               shape: RoundedRectangleBorder(
@@ -269,7 +269,9 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
       onPressed: () {_goToNextScreen(null);},
       child: Text(
         content['skipButtonText'],
-        style: textStyles['skipButton'],
+        style: CustomTextStyles.buttonBasic.copyWith(
+          color: Color(0xFFACA5BA)
+        ),
       ),
       height: dp(60),
       minWidth: dp(150),

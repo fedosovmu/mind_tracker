@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../utils/app_text_styles.dart';
+import '../utils/custom_text_styles.dart';
 import '../utils/custom_colors.dart';
 import '../utils/app_content.dart';
 import '../utils/metrics.dart';
@@ -82,7 +82,7 @@ class OnboardingScreen extends StatelessWidget with WidgetData {
                   padding: EdgeInsets.only(left: dp(16), right: dp(16)),
                   child:  Text(
                       content['screenTexts'][_screenNumber],
-                      style: textStyles['secondary'],
+                      style: CustomTextStyles.basicH1Medium.copyWith(color: CustomColors.silverWhite),
                   ),
                 ),
               ],
@@ -99,7 +99,7 @@ class OnboardingScreen extends StatelessWidget with WidgetData {
                     onPressed: () { _goToNextScreen(context); },
                     child: Text(
                       content['nextButtonText'],
-                      style: textStyles['nextButton'],
+                      style: CustomTextStyles.buttonMedium,
                     )
                 )
             )
