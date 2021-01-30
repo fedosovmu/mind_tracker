@@ -18,5 +18,6 @@ final appTheme = ThemeData(
 );
 
 final appSystemUiOverlayStyle = SystemUiOverlayStyle(
+  statusBarColor: CustomColors.purpleDark,
   systemNavigationBarColor: CustomColors.purpleDark
 );

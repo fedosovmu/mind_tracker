@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/main_screen.dart';
-import '../utils/widget_data.dart';
 import '../utils/custom_text_styles.dart';
 import '../utils/custom_colors.dart';
-import '../utils/app_content.dart';
+import '../utils/content.dart';
 import '../utils/metrics.dart';
 
 
@@ -17,7 +16,7 @@ class MoodAssessmentScreen extends StatefulWidget {
   _MoodAssessmentScreenState createState() => _MoodAssessmentScreenState();
 }
 
-class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with WidgetData {
+class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Content {
   _MoodAssessmentScreenState() {
     setWidgetName('moodAssessmentScreen');
   }

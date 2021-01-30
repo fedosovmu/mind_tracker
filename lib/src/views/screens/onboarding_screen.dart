@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import '../utils/custom_text_styles.dart';
 import '../utils/custom_colors.dart';
-import '../utils/app_content.dart';
+import '../utils/content.dart';
 import '../utils/metrics.dart';
 import 'mood_assessment_screen.dart';
-import '../utils/widget_data.dart';
 
 
-class OnboardingScreen extends StatelessWidget with WidgetData {
+class OnboardingScreen extends StatelessWidget with Content {
   var _screenNumber;
   OnboardingScreen ({int screenNumber = 1}) {
     this._screenNumber = screenNumber;

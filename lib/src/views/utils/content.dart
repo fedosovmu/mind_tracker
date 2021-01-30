@@ -1,7 +1,13 @@
 
 
 
-class AppContent {
+mixin Content {
+  var content;
+
+  void setWidgetName(String widgetName) {
+    content = Content._widgetsData[widgetName];
+  }
+
   static const _moodNames = {
     1: 'Ужасно',
     2: 'Плохо',
@@ -12,7 +18,7 @@ class AppContent {
     7: 'Восхитительно',
   };
 
-  static final widgetsData = {
+  static final _widgetsData = {
     'onboardingScreen': const {
       'screenTexts': {
         1: "Следите за своим ментальным состоянием оценивая его по шкале с семью градациями.",

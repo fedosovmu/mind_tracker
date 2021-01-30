@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mind_tracker/src/views/utils/content.dart';
 import 'package:mind_tracker/src/views/utils/custom_text_styles.dart';
-import '../../utils/widget_data.dart';
 import '../../utils/metrics.dart';
 import 'mood_assessment_card.dart';
 import 'empty_mood_assessment_card.dart';
 
 
-class MainScreen extends StatefulWidget with WidgetData {
+class MainScreen extends StatefulWidget {
   var _moodAssess;
 
   MainScreen({int moodAssess = null}) {
@@ -18,7 +18,7 @@ class MainScreen extends StatefulWidget with WidgetData {
   _MainScreenState createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> with WidgetData {
+class _MainScreenState extends State<MainScreen> with Content {
   @override
   Widget build(BuildContext context) {
     setWidgetName('mainScreen');
