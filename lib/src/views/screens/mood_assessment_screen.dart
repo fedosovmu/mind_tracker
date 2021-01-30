@@ -9,8 +9,8 @@ import '../common_widgets/main_app_bar.dart';
 
 class MoodAssessmentScreen extends StatefulWidget {
   var _showSkipButton;
-  MoodAssessmentScreen({Key key, bool showSkipButton = false}) : super(key: key) {
-    _showSkipButton = showSkipButton;
+  MoodAssessmentScreen({Key key, bool firstStart = false}) : super(key: key) {
+    _showSkipButton = firstStart;
   }
 
   @override
