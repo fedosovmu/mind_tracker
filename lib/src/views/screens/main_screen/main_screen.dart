@@ -6,6 +6,7 @@ import '../../utils/metrics.dart';
 import 'mood_assessment_card.dart';
 import 'empty_mood_assessment_card.dart';
 import '../../common_widgets/main_app_bar.dart';
+import '../../common_widgets/main_bottom_navigation_bar.dart';
 
 
 class MainScreen extends StatefulWidget {
@@ -27,7 +28,8 @@ class _MainScreenState extends State<MainScreen> with Content {
       appBar: MainAppBar(
         title: content['title'],
       ),
-      body: _buildCardListView()
+      body: _buildCardListView(),
+      bottomNavigationBar: MainBottomNavigationBar(),
     );
   }
 
@@ -37,8 +39,8 @@ class _MainScreenState extends State<MainScreen> with Content {
       moodAssessmentCards = List.generate(1, (index) =>
           MoodAssessmentCard(
             mood: widget._moodAssess,
-            eventNumber: widget._moodAssess,
-            dateTimeString: 'День  |  09:21',)
+            eventNumber: widget._moodAssess
+          )
       );
     }
 

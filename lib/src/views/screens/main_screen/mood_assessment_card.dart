@@ -8,11 +8,8 @@ import '../../utils/metrics.dart';
 class MoodAssessmentCard extends StatelessWidget with Content {
   int mood;
   int eventNumber;
-  String _dateTimeString;
 
-  MoodAssessmentCard ({this.mood, this.eventNumber, String dateTimeString}) {
-    _dateTimeString = dateTimeString;
-  }
+  MoodAssessmentCard ({this.mood, this.eventNumber});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +26,7 @@ class MoodAssessmentCard extends StatelessWidget with Content {
             Container(
               height: dp(41),
               child: Text(
-                _dateTimeString,
+                'День  |  09:21',
                 style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
               ),
             ),

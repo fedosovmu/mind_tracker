@@ -27,7 +27,7 @@ class EmptyMoodAssessmentCard extends StatelessWidget with Content {
               width: dp(164),
               height: dp(46),
               child: FlatButton(
-                onPressed: () { print('Assess'); },
+                onPressed: () { print('Empty card button pressed'); },
                 color: CustomColors.main,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(dp(12))
