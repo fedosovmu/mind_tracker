@@ -8,7 +8,7 @@ mixin Content {
     content = Content._widgetsData[widgetName];
   }
 
-  static const _moodNames = {
+  static const moodNames = {
     1: 'Ужасно',
     2: 'Плохо',
     3: 'Не очень',
@@ -24,7 +24,7 @@ mixin Content {
         1: "Следите за своим ментальным состоянием оценивая его по шкале с семью градациями.",
         2: "Важно делать отметки несколько раз в день, устанавливайте напоминания в удобное время.",
         3: "Отмечайте, что произошло за день. Приложение поможет вам проанализировать, как привычки  влияют на ваш внутренний баланс.",
-        4: "Чем дольше вы ведёте записи, тем более ценные данные получите. Вы убедитесь в очевидных связях между  событиями и эмоциями  и обнаружите неочевидные."
+        4: "Чем дольше вы ведёте записи, тем более ценные данные получите. Вы убедитесь в очевидных связях между событиями и эмоциями и обнаружите неочевидные."
       } as dynamic,
       'pathsToImages': {
         1: "assets/images/onboarding/lamp.png",
@@ -45,7 +45,7 @@ mixin Content {
               item) => 'assets/images/common/mood_spheres/$item.png'
       ),
       'pathToMoodSliderImage': 'assets/images/mood_assessment/mood_slider.png',
-      'moodNames': _moodNames,
+      'moodNames': moodNames,
       'secondaryMoodText': 'Настроение',
       'secondaryPullText': 'Потяни',
       'assessButtonText': 'Оценить',
@@ -57,7 +57,7 @@ mixin Content {
     },
 
     'moodAssessmentCard': {
-      'moodNames': _moodNames,
+      'moodNames': moodNames,
       'getEventWord': (int eventsNumber) {
         if ((eventsNumber % 10) == 1) {
           return 'Событие';
