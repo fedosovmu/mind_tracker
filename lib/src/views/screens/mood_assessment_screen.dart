@@ -182,7 +182,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Widget
                       color = CustomColors.moods[_currentMood];
                     }
                     else {
-                      color = CustomColors.purpleSuperDark;
+                      color = CustomColors.purpleDark;
                     }
                     return Container(
                       color: color,

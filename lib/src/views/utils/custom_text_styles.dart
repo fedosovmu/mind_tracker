@@ -16,7 +16,7 @@ class CustomTextStyles {
       fontSize: dp(20),
       fontWeight: FontWeight.w700
   );
-  static final basicH1Medium = _basic.copyWith( // OLD basic H1
+  static final basicH1Medium = _basic.copyWith(
     fontSize: dp(16),
     fontWeight: FontWeight.w500
   );
