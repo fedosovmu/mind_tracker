@@ -24,6 +24,9 @@ class SignedIcon extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             icon,
+            SizedBox(
+              height: dp(4)
+            ),
             Text(
               text,
               style: CustomTextStyles.basic.copyWith(
