@@ -6,25 +6,26 @@ import '../utils/metrics.dart';
 
 
 class SignedIcon extends StatelessWidget {
+  final Widget icon;
+  final String text;
+
+  SignedIcon({this.icon, this.text});
+
   @override
   Widget build(BuildContext context) {
     return Container(
+      //color: Colors.red,
       padding: EdgeInsets.only(top: dp(8)),
       child: IconButton(
         padding: EdgeInsets.zero,
         splashRadius: dp(44),
-        iconSize: dp(60),
+        iconSize: dp(80),
         icon: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/icons/home.png',
-              color: CustomColors.purpleTextSecondary,
-              width: dp(24),
-              height: dp(24),
-            ),
+            icon,
             Text(
-              'Главный',
+              text,
               style: CustomTextStyles.basic.copyWith(
                   color: CustomColors.silverWhite),
             ),
