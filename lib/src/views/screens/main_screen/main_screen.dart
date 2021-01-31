@@ -28,14 +28,7 @@ class _MainScreenState extends State<MainScreen> with Content {
       navigationBar: CustomAppBar(
           title: content['title']
       ),
-        child: HomePage()
-    );
-      Scaffold(
-      appBar: CustomAppBar(
-        title: content['title'],
-      ),
-      body: HomePage(moodAssess: widget._newMoodAssess),
-      bottomNavigationBar: CustomBottomNavigationBar(),
+        child: HomePage(moodAssess: widget._newMoodAssess)
     );
   }
 }
