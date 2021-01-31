@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../utils/metrics.dart';
 import '../utils/custom_text_styles.dart';
@@ -17,13 +18,15 @@ class CustomBottomNavigationBar extends StatelessWidget {
             height: dp(1),
           ),
           Expanded(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: dp(46)),
+            child: Material(
               color: CustomColors.purpleSuperDark,
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: List.generate(
-                      3, (index) => SignedIcon())
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: dp(46)),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: List.generate(
+                        3, (index) => SignedIcon())
+                ),
               ),
             ),
           ),
