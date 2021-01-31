@@ -23,9 +23,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: dp(46)),
                 child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: List.generate(
-                        3, (index) => SignedIcon())
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: List.generate(3, (index) => SignedIcon())
                 ),
               ),
             ),
