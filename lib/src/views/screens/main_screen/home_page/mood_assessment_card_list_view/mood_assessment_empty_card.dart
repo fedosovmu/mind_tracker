@@ -5,7 +5,7 @@ import 'package:mind_tracker/src/views/utils/custom_text_styles.dart';
 import '../../../../utils/metrics.dart';
 
 
-class EmptyMoodAssessmentCard extends StatelessWidget with Content {
+class MoodAssessmentEmptyCard extends StatelessWidget with Content {
   @override
   Widget build(BuildContext context) {
     loadContent('emptyMoodAssessmentCard');

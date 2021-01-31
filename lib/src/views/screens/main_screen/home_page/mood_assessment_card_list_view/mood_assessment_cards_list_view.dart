@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:mind_tracker/src/business_logic/models/mood_assess.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'mood_assessment_card.dart';
-import 'empty_mood_assessment_card.dart';
+import 'mood_assessment_empty_card.dart';
 
 
 class MoodAssessmentCardsListView extends StatelessWidget {
@@ -41,7 +41,7 @@ class MoodAssessmentCardsListView extends StatelessWidget {
             Column(
               children: [
                 ...moodAssessmentCards,
-                EmptyMoodAssessmentCard()
+                MoodAssessmentEmptyCard()
               ],
             ),
             ...moodSpheres,

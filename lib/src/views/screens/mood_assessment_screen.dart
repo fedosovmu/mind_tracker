@@ -25,10 +25,10 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
   double _currentSliderValue = 4;
   int _currentMood = 4;
 
-  void _goToNextScreen() {
+  void _goToNextScreen({MoodAssess newMoodAssess}) {
     Navigator.of(context).push(
         PageRouteBuilder(
-            pageBuilder: (context, _, __) => MainScreen(newMoodAssess: MoodAssess(mood: _currentMood)),
+            pageBuilder: (context, _, __) => MainScreen(newMoodAssess: newMoodAssess),
             transitionsBuilder: (___, animation, ____, child) {
               return FadeTransition(
                 opacity: animation,
@@ -241,7 +241,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
             height: dp(60),
             width: double.infinity,
             child: FlatButton(
-              onPressed: () {_goToNextScreen();},
+              onPressed: () {_goToNextScreen(newMoodAssess: MoodAssess(mood: _currentMood));},
               child: Text(
                 content['assessButtonText'],
                 style: CustomTextStyles.buttonMedium,
