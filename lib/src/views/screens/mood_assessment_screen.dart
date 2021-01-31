@@ -5,7 +5,7 @@ import '../utils/custom_colors.dart';
 import '../utils/content.dart';
 import '../utils/metrics.dart';
 import '../common_widgets/custom_app_bar.dart';
-import '../../business_logic/models/mood_assess.dart';
+import '../../business_logic/models/mood_assessment.dart';
 
 
 class MoodAssessmentScreen extends StatefulWidget {
@@ -25,7 +25,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
   double _currentSliderValue = 4;
   int _currentMood = 4;
 
-  void _goToNextScreen({MoodAssess newMoodAssess}) {
+  void _goToNextScreen({MoodAssessment newMoodAssess}) {
     Navigator.of(context).push(
         PageRouteBuilder(
             pageBuilder: (context, _, __) => MainScreen(newMoodAssess: newMoodAssess),
@@ -241,7 +241,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
             height: dp(60),
             width: double.infinity,
             child: FlatButton(
-              onPressed: () {_goToNextScreen(newMoodAssess: MoodAssess(mood: _currentMood));},
+              onPressed: () {_goToNextScreen(newMoodAssess: MoodAssessment(mood: _currentMood));},
               child: Text(
                 content['assessButtonText'],
                 style: CustomTextStyles.buttonMedium,

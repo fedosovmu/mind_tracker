@@ -8,13 +8,13 @@ import 'home_page/mood_assessment_card_list_view/mood_assessment_card.dart';
 import 'home_page/mood_assessment_card_list_view/mood_assessment_empty_card.dart';
 import '../../common_widgets/custom_app_bar.dart';
 import '../../common_widgets/custom_bottom_navigation_bar.dart';
-import '../../../business_logic/models/mood_assess.dart';
+import '../../../business_logic/models/mood_assessment.dart';
 
 
 class MainScreen extends StatefulWidget {
-  MoodAssess _newMoodAssess;
+  MoodAssessment _newMoodAssess;
 
-  MainScreen({MoodAssess newMoodAssess = null}) {
+  MainScreen({MoodAssessment newMoodAssess}) {
     _newMoodAssess = newMoodAssess;
   }
 

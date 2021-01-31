@@ -9,8 +9,8 @@ import 'signed_icon.dart';
 class CustomBottomNavigationBar extends StatelessWidget {
   static const _pathsToIcons = [
     'assets/icons/home.png',
-    'assets/icons/analytic.png',
-    'assets/icons/setting.png'
+    'assets/icons/analytics.png',
+    'assets/icons/settings.png'
   ];
   static const _texts = ['Главный', 'Аналитика', 'Настройки'];
 

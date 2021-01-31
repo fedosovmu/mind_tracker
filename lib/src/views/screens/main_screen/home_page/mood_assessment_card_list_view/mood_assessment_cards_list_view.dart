@@ -1,12 +1,12 @@
 import 'package:flutter/widgets.dart';
-import 'package:mind_tracker/src/business_logic/models/mood_assess.dart';
+import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'mood_assessment_card.dart';
 import 'mood_assessment_empty_card.dart';
 
 
 class MoodAssessmentCardsListView extends StatelessWidget {
-  MoodAssess _moodAssess;
+  MoodAssessment _moodAssess;
 
   MoodAssessmentCardsListView (moodAssess) {
     _moodAssess = moodAssess;
