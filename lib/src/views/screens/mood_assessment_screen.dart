@@ -5,6 +5,7 @@ import '../utils/custom_colors.dart';
 import '../utils/content.dart';
 import '../utils/metrics.dart';
 import '../common_widgets/custom_app_bar.dart';
+import '../../business_logic/models/mood_assess.dart';
 
 
 class MoodAssessmentScreen extends StatefulWidget {
@@ -24,10 +25,10 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
   double _currentSliderValue = 4;
   int _currentMood = 4;
 
-  void _goToNextScreen(moodAssess) {
+  void _goToNextScreen() {
     Navigator.of(context).push(
         PageRouteBuilder(
-            pageBuilder: (context, _, __) => MainScreen(moodAssess: moodAssess),
+            pageBuilder: (context, _, __) => MainScreen(newMoodAssess: MoodAssess(mood: _currentMood)),
             transitionsBuilder: (___, animation, ____, child) {
               return FadeTransition(
                 opacity: animation,
@@ -240,7 +241,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
             height: dp(60),
             width: double.infinity,
             child: FlatButton(
-              onPressed: () {_goToNextScreen(_currentMood);},
+              onPressed: () {_goToNextScreen();},
               child: Text(
                 content['assessButtonText'],
                 style: CustomTextStyles.buttonMedium,
@@ -259,7 +260,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
 
   Widget _buildSkipButton() {
     return FlatButton(
-      onPressed: () {_goToNextScreen(null);},
+      onPressed: () {_goToNextScreen();},
       child: Text(
         content['skipButtonText'],
         style: CustomTextStyles.buttonBasic.copyWith(

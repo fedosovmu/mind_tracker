@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/business_logic/models/mood_assess.dart';
 import 'package:mind_tracker/src/views/utils/content.dart';
 import 'package:mind_tracker/src/views/utils/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/custom_text_styles.dart';
-import '../../utils/metrics.dart';
+import '../../../../utils/metrics.dart';
 
 
 class MoodAssessmentCard extends StatelessWidget with Content {
-  int mood;
-  int eventNumber;
+  MoodAssess moodAssess;
 
-  MoodAssessmentCard ({this.mood, this.eventNumber});
+  MoodAssessmentCard (this.moodAssess);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class MoodAssessmentCard extends StatelessWidget with Content {
             Container(
               height: dp(41),
               child: Text(
-                content['moodNames'][mood],
+                content['moodNames'][moodAssess.mood],
                 style: CustomTextStyles.titleH1,
               ),
             ),
@@ -47,7 +47,7 @@ class MoodAssessmentCard extends StatelessWidget with Content {
                       height: dp(24),
                       padding: EdgeInsets.only(left: dp(8.5), top: dp(4)),
                       child: Text(
-                        '${eventNumber}',
+                        '${moodAssess.mood}',
                         style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
                       ),
                       decoration: BoxDecoration(
@@ -59,7 +59,7 @@ class MoodAssessmentCard extends StatelessWidget with Content {
                       width: dp(8),
                     ),
                     Text(
-                      content['getEventWord'](eventNumber),
+                      content['getEventWord'](moodAssess.mood),
                       style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
                     ),
                   ],
