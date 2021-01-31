@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'views/utils/metrics.dart';
 import 'views/utils/app_theme.dart';
 import 'views/screens/onboarding_screen.dart';
 import 'views/screens/mood_assessment_screen.dart';

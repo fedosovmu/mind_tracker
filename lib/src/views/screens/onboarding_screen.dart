@@ -10,7 +10,7 @@ class OnboardingScreen extends StatelessWidget with Content {
   var _screenNumber;
   OnboardingScreen ({int screenNumber = 1}) {
     this._screenNumber = screenNumber;
-    setWidgetName('onboardingScreen');
+    loadContent('onboardingScreen');
   }
 
   void _goToNextScreen(BuildContext context) {

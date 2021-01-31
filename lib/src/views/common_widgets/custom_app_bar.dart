@@ -4,13 +4,12 @@ import '../utils/custom_colors.dart';
 import '../utils/metrics.dart';
 
 
-class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final leading;
-  static final toolbarHeight = dp(56);
-
-
-  MainAppBar ({this.title, this.leading});
+  static final _toolbarHeight = dp(56);
+  
+  CustomAppBar ({this.title, this.leading});
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +23,12 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
         style: CustomTextStyles.titleH1,
       ),
       leading: leading,
-      toolbarHeight: toolbarHeight,
+      toolbarHeight: _toolbarHeight,
       titleSpacing: leading == null ? dp(16) : 0.0,
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(toolbarHeight);
+  Size get preferredSize => Size.fromHeight(_toolbarHeight);
 
 }

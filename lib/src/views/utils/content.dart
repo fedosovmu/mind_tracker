@@ -4,7 +4,7 @@
 mixin Content {
   var content;
 
-  void setWidgetName(String widgetName) {
+  void loadContent(String widgetName) {
     content = Content._widgetsData[widgetName];
   }
 

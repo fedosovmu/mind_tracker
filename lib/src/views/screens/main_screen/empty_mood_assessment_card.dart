@@ -8,7 +8,7 @@ import '../../utils/metrics.dart';
 class EmptyMoodAssessmentCard extends StatelessWidget with Content {
   @override
   Widget build(BuildContext context) {
-    setWidgetName('emptyMoodAssessmentCard');
+    loadContent('emptyMoodAssessmentCard');
     return Container(
       margin: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(12)),
       width: double.infinity,

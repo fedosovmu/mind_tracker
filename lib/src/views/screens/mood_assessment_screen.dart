@@ -4,7 +4,7 @@ import '../utils/custom_text_styles.dart';
 import '../utils/custom_colors.dart';
 import '../utils/content.dart';
 import '../utils/metrics.dart';
-import '../common_widgets/main_app_bar.dart';
+import '../common_widgets/custom_app_bar.dart';
 
 
 class MoodAssessmentScreen extends StatefulWidget {
@@ -19,7 +19,7 @@ class MoodAssessmentScreen extends StatefulWidget {
 
 class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Content {
   _MoodAssessmentScreenState() {
-    setWidgetName('moodAssessmentScreen');
+    loadContent('moodAssessmentScreen');
   }
   double _currentSliderValue = 4;
   int _currentMood = 4;
@@ -41,7 +41,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(
+      appBar: CustomAppBar(
         title: content['titleText'],
         leading: IconButton(
           icon: Image.asset(

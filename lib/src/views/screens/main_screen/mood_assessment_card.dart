@@ -13,7 +13,7 @@ class MoodAssessmentCard extends StatelessWidget with Content {
 
   @override
   Widget build(BuildContext context) {
-    setWidgetName('moodAssessmentCard');
+    loadContent('moodAssessmentCard');
     return Container(
       margin: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(12)),
       padding: EdgeInsets.only(top: dp(16), left: dp(24), bottom: dp(14)),
