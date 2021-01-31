@@ -9,7 +9,8 @@ class CustomTextStyles {
 
   static const _basic = TextStyle(
       color: CustomColors.white,
-      fontFamily: 'Roboto'
+      fontFamily: 'Roboto',
+      decoration: TextDecoration.none
   );
 
   static final titleH1 = _basic.copyWith(

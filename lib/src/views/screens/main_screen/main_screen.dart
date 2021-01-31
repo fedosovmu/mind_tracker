@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/home_page/home_page.dart';
 import 'package:mind_tracker/src/views/utils/content.dart';
 import 'package:mind_tracker/src/views/utils/custom_text_styles.dart';
-import '../../utils/metrics.dart';
-import 'home_page/mood_assessment_card_list_view/mood_assessment_card.dart';
-import 'home_page/mood_assessment_card_list_view/mood_assessment_empty_card.dart';
-import '../../common_widgets/custom_app_bar.dart';
-import '../../common_widgets/custom_bottom_navigation_bar.dart';
-import '../../../business_logic/models/mood_assessment.dart';
+import 'package:mind_tracker/src/views/utils/metrics.dart';
+import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
+import 'package:mind_tracker/src/views/common_widgets/custom_bottom_navigation_bar.dart';
+import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 
 
 class MainScreen extends StatefulWidget {
@@ -26,7 +24,13 @@ class _MainScreenState extends State<MainScreen> with Content {
   @override
   Widget build(BuildContext context) {
     loadContent('mainScreen');
-    return Scaffold(
+    return CupertinoPageScaffold(
+      navigationBar: CustomAppBar(
+          title: content['title']
+      ),
+        child: HomePage()
+    );
+      Scaffold(
       appBar: CustomAppBar(
         title: content['title'],
       ),

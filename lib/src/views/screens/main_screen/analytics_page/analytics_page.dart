@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import '../../utils/metrics.dart';
+import '../../../utils/metrics.dart';
 
 
 class AnalyticsPage extends StatelessWidget {

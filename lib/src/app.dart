@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 import 'views/utils/app_theme.dart';
 import 'views/screens/onboarding_screen.dart';
 import 'views/screens/mood_assessment_screen.dart';
@@ -22,7 +23,7 @@ class MindTrackerApp extends StatelessWidget {
       theme: appTheme,
       //home: OnboardingScreen(),
       home: MoodAssessmentScreen(firstStart: true),
-      //home: MainScreen(moodAssess: 5),
+      //home: MainScreen(newMoodAssess: MoodAssessment(mood: 5)),
     );
   }
 }
