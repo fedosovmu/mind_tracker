@@ -6,6 +6,7 @@ import 'custom_colors.dart';
 final appTheme = ThemeData(
   brightness: Brightness.dark,
   scaffoldBackgroundColor: CustomColors.purpleDark,
+  accentColor: CustomColors.main,
 );
 
 const appSystemUiOverlayStyle = SystemUiOverlayStyle(

@@ -19,6 +19,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with Content {
+  List<MoodAssessment> _moodAssessments = [];
+
   @override
   Widget build(BuildContext context) {
     loadContent('homePage');
@@ -26,10 +28,13 @@ class _HomePageState extends State<HomePage> with Content {
       appBar: CustomAppBar(
         title: content['title'],
       ),
-      body:  MoodAssessmentCardsListView(
-          moodAssessments: widget._moodAssessments,
+      body: MoodAssessmentCardsListView(
+        moodAssessments: _moodAssessments,
         emptyCardOnPressed: () {
             print('PRESS EMPTY');
+            setState(() {
+              _moodAssessments.add(MoodAssessment(id: 2, mood: 7));
+            });
         },
       )
     );

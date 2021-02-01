@@ -30,7 +30,4 @@ class CustomBottomNavigationBar extends CupertinoTabBar {
       label: _texts[index]
     ))
   );
-
-  @override
-  Size get preferredSize => Size.fromHeight(dp(154));
 }
