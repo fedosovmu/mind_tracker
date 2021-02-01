@@ -28,9 +28,9 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
   void _goToNextScreen({MoodAssessment newMoodAssessment}) {
     Navigator.of(context).push(
         PageRouteBuilder(
-            pageBuilder: (context, _, __) => MainScreen(
+            pageBuilder: (context, _, __) => newMoodAssessment != null ? MainScreen(
                 todayMoodAssessments: [newMoodAssessment]
-            ),
+            ) : MainScreen(),
             transitionsBuilder: (___, animation, ____, child) {
               return FadeTransition(
                 opacity: animation,

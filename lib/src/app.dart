@@ -23,7 +23,7 @@ class MindTrackerApp extends StatelessWidget {
       theme: appTheme,
       //home: OnboardingScreen(),
       home: MoodAssessmentScreen(firstStart: true),
-      //home: MainScreen(newMoodAssess: MoodAssessment(mood: 5)),
+      //home: MainScreen(),
     );
   }
 }
