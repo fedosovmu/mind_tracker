@@ -6,6 +6,10 @@ import '../../../../utils/metrics.dart';
 
 
 class MoodAssessmentEmptyCard extends StatelessWidget with Content {
+  final onPressed;
+
+  MoodAssessmentEmptyCard({this.onPressed});
+
   @override
   Widget build(BuildContext context) {
     loadContent('emptyMoodAssessmentCard');
@@ -27,7 +31,7 @@ class MoodAssessmentEmptyCard extends StatelessWidget with Content {
               width: dp(164),
               height: dp(46),
               child: FlatButton(
-                onPressed: () { print('Empty card button pressed'); },
+                onPressed: onPressed,
                 color: CustomColors.main,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(dp(12))

@@ -7,13 +7,18 @@ import '../../../../business_logic/services/database_provider.dart';
 import '../../../utils/custom_text_styles.dart';
 
 
-class HomePage extends StatelessWidget with Content {
-  MoodAssessment _newMoodAssess;
+class HomePage extends StatefulWidget {
+  List<MoodAssessment> _moodAssessments;
 
-  HomePage ({MoodAssessment newMoodAssess}) {
-    _newMoodAssess = newMoodAssess;
+  HomePage ({List<MoodAssessment> moodAssessments = const []}) {
+    _moodAssessments = moodAssessments;
   }
 
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> with Content {
   @override
   Widget build(BuildContext context) {
     loadContent('homePage');
@@ -21,14 +26,10 @@ class HomePage extends StatelessWidget with Content {
       appBar: CustomAppBar(
         title: content['title'],
       ),
-      body: FutureBuilder<List<MoodAssessment>>(
-        future: DatabaseProvider.db.getMoodAssessments(),
-        builder: (BuildContext context, AsyncSnapshot<List<MoodAssessment>> snapshot) {
-          if (snapshot.hasData) {
-            return MoodAssessmentCardsListView(moodAssessments: snapshot.data);
-          } else {
-            return SizedBox.expand();
-          }
+      body:  MoodAssessmentCardsListView(
+          moodAssessments: widget._moodAssessments,
+        emptyCardOnPressed: () {
+            print('PRESS EMPTY');
         },
       )
     );
