@@ -42,7 +42,7 @@ class _CalendarPageState extends State<CalendarPage> {
       builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
         if (snapshot.hasData) {
           return Text(
-            text,
+            snapshot.data,
             style: CustomTextStyles.basicH1Medium,
           );
         } else {
