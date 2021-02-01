@@ -13,11 +13,6 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
-  Future<String> _calculation = Future<String>.delayed(
-    Duration(seconds: 2),
-        () => 'Data Loaded',
-  );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,13 +31,12 @@ class _CalendarPageState extends State<CalendarPage> {
   }
 
   Widget _buildText() {
-    //var text = DatabaseProvider.db.getMoodAssessments().toString();
     return FutureBuilder<List<MoodAssessment>>(
       future: DatabaseProvider.db.getMoodAssessments(),
       builder: (BuildContext context, AsyncSnapshot<List<MoodAssessment>> snapshot) {
         if (snapshot.hasData) {
           return Text(
-            snapshot.data[0].toString(),
+            snapshot.data.toString(),
             style: CustomTextStyles.basicH1Medium,
           );
         } else {

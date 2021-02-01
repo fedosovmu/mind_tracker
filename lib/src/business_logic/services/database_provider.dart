@@ -44,6 +44,11 @@ class DatabaseProvider {
     );
   }
 
+  deleteAllMoodAssessments() async {
+    final db = await database;
+    db.delete('mood_assessments');
+  }
+
   Future<List<MoodAssessment>> getMoodAssessments () async {
     final db = await database;
 
