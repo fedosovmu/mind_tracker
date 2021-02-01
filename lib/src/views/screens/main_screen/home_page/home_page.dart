@@ -20,6 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with Content {
   List<MoodAssessment> _moodAssessments = [];
+  var _newMoodAseesmentNumber = 7;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,8 @@ class _HomePageState extends State<HomePage> with Content {
         emptyCardOnPressed: () {
             print('PRESS EMPTY');
             setState(() {
-              _moodAssessments.add(MoodAssessment(id: 2, mood: 7));
+              _moodAssessments.add(MoodAssessment(id: _newMoodAseesmentNumber, mood: _newMoodAseesmentNumber));
+              _newMoodAseesmentNumber = _newMoodAseesmentNumber == 1 ? 7 : _newMoodAseesmentNumber - 1;
             });
         },
       )

@@ -19,8 +19,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
-  var i = 0;
   @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
@@ -32,7 +30,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget _tabBuilder (context, index) {
     switch(index) {
       case 0:
-        return HomePage(moodAssessments: i % 2 == 0 ? [widget._newMoodAssess] : []);
+        return HomePage(moodAssessments: [widget._newMoodAssess]);
         break;
       case 1:
         return AnalyticsPage();
