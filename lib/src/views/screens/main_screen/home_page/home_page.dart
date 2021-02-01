@@ -7,8 +7,8 @@ import '../../../../business_logic/models/mood_assessment.dart';
 class HomePage extends StatelessWidget {
   MoodAssessment _newMoodAssess;
 
-  HomePage ({MoodAssessment moodAssess}) {
-    _newMoodAssess = moodAssess;
+  HomePage ({MoodAssessment newMoodAssess}) {
+    _newMoodAssess = newMoodAssess;
   }
 
   @override

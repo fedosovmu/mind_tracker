@@ -33,19 +33,10 @@ class _MainScreenState extends State<MainScreen> with Content {
     );
   }
 
-  Widget _buildHomePage() {
-    return CupertinoPageScaffold(
-        navigationBar: CustomAppBar(
-            title: content['title']
-        ),
-        child: HomePage(moodAssess: widget._newMoodAssess)
-    );
-  }
-
   Widget _tabBuilder (context, index) {
     switch(index) {
       case 0:
-        return HomePage();
+        return HomePage(newMoodAssess: widget._newMoodAssess);
         break;
       case 1:
         return AnalyticsPage();
