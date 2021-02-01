@@ -6,20 +6,16 @@ import 'mood_assessment_empty_card.dart';
 
 
 class MoodAssessmentCardsListView extends StatelessWidget {
-  MoodAssessment _moodAssess;
+  final List<MoodAssessment> moodAssessments;
 
-  MoodAssessmentCardsListView (moodAssess) {
-    _moodAssess = moodAssess;
-  }
+  MoodAssessmentCardsListView ({this.moodAssessments = const []});
 
   @override
   Widget build(BuildContext context) {
-    var moodAssessmentCards = [];
-    if (_moodAssess != null) {
-      moodAssessmentCards = List.generate(1, (index) =>
-          MoodAssessmentCard(_moodAssess)
+    var moodAssessmentCards = List.generate(moodAssessments.length, (index) =>
+          MoodAssessmentCard(moodAssessments[index])
       );
-    }
+
 
     final moodSpheres = List.generate(moodAssessmentCards.length, (index) {
       var mood = moodAssessmentCards[index].moodAssess.mood;
