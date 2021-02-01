@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../utils/metrics.dart';
@@ -6,49 +7,30 @@ import '../utils/custom_colors.dart';
 import 'signed_icon.dart';
 
 
-class CustomBottomNavigationBar extends StatelessWidget {
+class CustomBottomNavigationBar extends CupertinoTabBar {
   static const _pathsToIcons = [
     'assets/icons/home.png',
     'assets/icons/analytics.png',
     'assets/icons/settings.png'
   ];
-  static const _texts = ['Главный', 'Аналитика', 'Настройки'];
+  static const _texts = ['Главный', 'Аналитика', 'Календарь'];
+  static final _textStyle = CustomTextStyles.basic.copyWith(fontSize: 14);
+  static const _activeColor = CustomColors.silverWhite;
+  static const _inactiveColor = CustomColors.purpleTextSecondary;
+
+  CustomBottomNavigationBar () : super(
+    border: Border(top: BorderSide(color: Color(0xFF766379))),
+    backgroundColor: CustomColors.purpleSuperDark,
+    activeColor: CustomColors.silverWhite,
+    inactiveColor: CustomColors.silverWhite,
+    iconSize: 32,
+    items: List.generate(3, (index) => BottomNavigationBarItem(
+        activeIcon: Image.asset(_pathsToIcons[index], height: 32),
+        icon: Image.asset(_pathsToIcons[index], height: 32, color: _inactiveColor),
+      label: _texts[index]
+    ))
+  );
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: dp(56),
-      child: Column(
-        children: [
-          Container(
-            color: Color(0xFF766379),
-            height: dp(1),
-          ),
-          Expanded(
-            child: Material(
-              color: CustomColors.purpleSuperDark,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: dp(30)),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: List.generate(3, (index) {
-                    return SignedIcon(
-                      icon: Image.asset(
-                        _pathsToIcons[index],
-                        color: index == 0 ? CustomColors.silverWhite : CustomColors.purpleTextSecondary,
-                        width: dp(24),
-                        height: dp(24),
-                      ),
-                      text: _texts[index]
-                    );
-                  })
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  Size get preferredSize => Size.fromHeight(dp(154));
 }

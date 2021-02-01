@@ -26,30 +26,7 @@ class _MainScreenState extends State<MainScreen> with Content {
   Widget build(BuildContext context) {
     loadContent('homePage');
     return CupertinoTabScaffold(
-        tabBar: CupertinoTabBar(
-          border: Border(top: BorderSide(color: Color(0xFF766379))),
-          backgroundColor: CustomColors.purpleSuperDark,
-          activeColor: CustomColors.silverWhite,
-          inactiveColor: CustomColors.silverWhite,
-          iconSize: dp(24),
-          items: [
-            BottomNavigationBarItem(
-              activeIcon: Image.asset('assets/icons/home.png', height: dp(24)),
-              icon: Image.asset('assets/icons/home.png', height: dp(24), color: CustomColors.purpleTextSecondary),
-              title: Text('Главный', style: CustomTextStyles.basic)
-            ),
-            BottomNavigationBarItem(
-              activeIcon: Image.asset('assets/icons/analytics.png', height: dp(24)),
-              icon: Image.asset('assets/icons/analytics.png', height: dp(24), color: CustomColors.purpleTextSecondary),
-              title: Text('Аналитика', style: CustomTextStyles.basic)
-            ),
-            BottomNavigationBarItem(
-                activeIcon: Image.asset('assets/icons/settings.png', height: dp(24)),
-                icon: Image.asset('assets/icons/settings.png', height: dp(24), color: CustomColors.purpleTextSecondary),
-              title: Text('Календарь', style: CustomTextStyles.basic)
-            )
-          ],
-        ),
+        tabBar: CustomBottomNavigationBar(),
         tabBuilder: (context, i) {
           return _buildHomePage();
         }
