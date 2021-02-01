@@ -8,10 +8,10 @@ import 'calendar_page/calendar_page.dart';
 
 
 class MainScreen extends StatefulWidget {
-  MoodAssessment _newMoodAssess;
+  List<MoodAssessment> _todayMoodAssessments;
 
-  MainScreen({MoodAssessment newMoodAssess}) {
-    _newMoodAssess = newMoodAssess;
+  MainScreen({List<MoodAssessment> todayMoodAssessments = const []}) {
+    _todayMoodAssessments = todayMoodAssessments;
   }
 
   @override
@@ -30,7 +30,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget _tabBuilder (context, index) {
     switch(index) {
       case 0:
-        return HomePage(moodAssessments: [widget._newMoodAssess]);
+        return HomePage(moodAssessments: widget._todayMoodAssessments);
         break;
       case 1:
         return AnalyticsPage();
