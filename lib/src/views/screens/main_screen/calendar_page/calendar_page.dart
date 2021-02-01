@@ -36,13 +36,13 @@ class _CalendarPageState extends State<CalendarPage> {
   }
 
   Widget _buildText() {
-    var text = DatabaseProvider.db.getMoodAssessments().toString();
-    return FutureBuilder<String>(
-      future: _calculation,
-      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+    //var text = DatabaseProvider.db.getMoodAssessments().toString();
+    return FutureBuilder<List<MoodAssessment>>(
+      future: DatabaseProvider.db.getMoodAssessments(),
+      builder: (BuildContext context, AsyncSnapshot<List<MoodAssessment>> snapshot) {
         if (snapshot.hasData) {
           return Text(
-            snapshot.data,
+            snapshot.data[0].toString(),
             style: CustomTextStyles.basicH1Medium,
           );
         } else {

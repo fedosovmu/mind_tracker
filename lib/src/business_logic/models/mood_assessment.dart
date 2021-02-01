@@ -15,7 +15,7 @@ class MoodAssessment {
 
   @override
   String toString() {
-    return 'Dog{id: $id, mood: $mood}';
+    return '{id: $id, mood: $mood}';
   }
 
 }
