@@ -12,4 +12,10 @@ class MoodAssessment {
       'mood': mood,
     };
   }
+
+  @override
+  String toString() {
+    return 'Dog{id: $id, mood: $mood}';
+  }
+
 }

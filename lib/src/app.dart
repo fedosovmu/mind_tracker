@@ -22,8 +22,8 @@ class MindTrackerApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: appTheme,
       //home: OnboardingScreen(),
-      home: MoodAssessmentScreen(firstStart: true),
-      //home: MainScreen(newMoodAssess: MoodAssessment(mood: 5)),
+      //home: MoodAssessmentScreen(firstStart: true),
+      home: MainScreen(newMoodAssess: MoodAssessment(mood: 5)),
     );
   }
 }

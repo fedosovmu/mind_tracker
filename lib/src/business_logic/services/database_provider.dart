@@ -44,4 +44,17 @@ class DatabaseProvider {
     );
   }
 
+  Future<List<MoodAssessment>> getMoodAssessments () async {
+    final db = await database;
+
+    final List<Map<String, dynamic>> maps = await db.query('mood_assessments');
+    print(maps);
+    return List.generate(maps.length, (i) {
+        return MoodAssessment(
+          id: maps[i]['id'],
+          mood: maps[i]['mood']
+        );
+    });
+  }
+
 }

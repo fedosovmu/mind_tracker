@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
 import '../../../utils/metrics.dart';
-import '../../../../business_logic/services/database.dart';
+import '../../../../business_logic/services/database_provider.dart';
 import '../../../../business_logic/models/mood_assessment.dart';
 
 
