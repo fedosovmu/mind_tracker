@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
   List<MoodAssessment> _moodAssessments = [];
 
   HomePage ({List<MoodAssessment> moodAssessments}) {
-    _moodAssessments = moodAssessments;
+    _moodAssessments.addAll(moodAssessments);
   }
 
   @override
@@ -20,17 +20,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with Content {
-  List<MoodAssessment> _moodAssessments;
+  List<MoodAssessment> _moodAssessments = [];
   var _newMoodAseesmentNumber = 7;
 
   @override
   void initState() {
     super.initState();
-    _moodAssessments = [...widget._moodAssessments];
-    DatabaseProvider.db.getMoodAssessments().then((value) {
-      print('LOADID');
-      DatabaseProvider.db.getMoodAssessments().then((value) => _moodAssessments.add(value[0]));
-      //_moodAssessments.add(MoodAssessment(id: 10, mood: 4));
+    _moodAssessments.addAll(widget._moodAssessments);
+    DatabaseProvider.db.getMoodAssessments().then((moodAssessments) {
+      setState(() {
+        _moodAssessments.addAll(moodAssessments);
+      });
     });
   }
 

@@ -8,10 +8,10 @@ import 'calendar_page/calendar_page.dart';
 
 
 class MainScreen extends StatefulWidget {
-  List<MoodAssessment> _todayMoodAssessments;
+  List<MoodAssessment> _todayMoodAssessments = [];
 
-  MainScreen({List<MoodAssessment> todayMoodAssessments = const []}) {
-    _todayMoodAssessments = todayMoodAssessments;
+  MainScreen({List<MoodAssessment> todayMoodAssessments}) {
+    _todayMoodAssessments.addAll(todayMoodAssessments);
   }
 
   @override
