@@ -1,9 +1,15 @@
 
 
 class MoodAssessment {
-  int mood;
+  final int id;
+  final int mood;
 
-  MoodAssessment({mood}) {
-    this.mood = mood;
+  MoodAssessment({this.id, this.mood});
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'mood': mood,
+    };
   }
 }

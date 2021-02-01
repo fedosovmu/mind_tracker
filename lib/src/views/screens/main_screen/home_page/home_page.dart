@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
+import 'package:mind_tracker/src/views/utils/content.dart';
 import 'mood_assessment_card_list_view/mood_assessment_cards_list_view.dart';
 import '../../../../business_logic/models/mood_assessment.dart';
 
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatelessWidget with Content {
   MoodAssessment _newMoodAssess;
 
   HomePage ({MoodAssessment newMoodAssess}) {
@@ -13,9 +14,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    loadContent('homePage');
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Ваше настроение',
+        title: content['title'],
       ),
       body: MoodAssessmentCardsListView(_newMoodAssess),
     );
