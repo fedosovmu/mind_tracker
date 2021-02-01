@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/home_page/home_page.dart';
 import 'package:mind_tracker/src/views/utils/content.dart';
@@ -23,12 +22,12 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> with Content {
   @override
   Widget build(BuildContext context) {
-    loadContent('mainScreen');
+    loadContent('homePage');
     return CupertinoPageScaffold(
       navigationBar: CustomAppBar(
           title: content['title']
       ),
-        child: HomePage(moodAssess: widget._newMoodAssess)
+      child: HomePage(moodAssess: widget._newMoodAssess)
     );
   }
 }

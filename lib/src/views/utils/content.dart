@@ -52,7 +52,7 @@ mixin Content {
       'skipButtonText': 'Пропустить',
     },
 
-    'mainScreen': {
+    'homePage': {
       'title': 'Ваше настроение'
     },
 
