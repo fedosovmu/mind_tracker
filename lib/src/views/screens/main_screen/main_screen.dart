@@ -8,6 +8,8 @@ import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_bottom_navigation_bar.dart';
 import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
+import 'calendar_page/calendar_page.dart';
+import 'analytics_page/analytics_page.dart';
 
 
 class MainScreen extends StatefulWidget {
@@ -27,9 +29,7 @@ class _MainScreenState extends State<MainScreen> with Content {
     loadContent('homePage');
     return CupertinoTabScaffold(
         tabBar: CustomBottomNavigationBar(),
-        tabBuilder: (context, i) {
-          return _buildHomePage();
-        }
+        tabBuilder: _tabBuilder
     );
   }
 
@@ -40,5 +40,19 @@ class _MainScreenState extends State<MainScreen> with Content {
         ),
         child: HomePage(moodAssess: widget._newMoodAssess)
     );
+  }
+
+  Widget _tabBuilder (context, index) {
+    switch(index) {
+      case 0:
+        return HomePage();
+        break;
+      case 1:
+        return AnalyticsPage();
+        break;
+      case 2:
+        return CalendarPage();
+        break;
+    }
   }
 }

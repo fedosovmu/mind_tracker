@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import '../../../utils/metrics.dart';
 
 
-class SettingsPage extends StatelessWidget {
+class CalendarPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
