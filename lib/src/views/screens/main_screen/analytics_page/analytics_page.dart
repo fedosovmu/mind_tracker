@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/business_logic/models/today_mood_sssessments.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
+import 'package:provider/provider.dart';
 import '../../../utils/metrics.dart';
 import '../../../../business_logic/services/database_provider.dart';
 import '../../../../business_logic/models/mood_assessment.dart';
@@ -22,10 +24,9 @@ class AnalyticsPage extends StatelessWidget {
               color: Colors.green,
               child: FlatButton(
                 onPressed: () {
-                  print('Insert mood to DB');
-                  DatabaseProvider.db.insertMoodAssessment(MoodAssessment(id: 1, mood: 3));
+                  print('---');
                 },
-                child: Text('Вставить в БД'),
+                child: Text('---'),
               ),
             ),
             Container(
@@ -34,10 +35,9 @@ class AnalyticsPage extends StatelessWidget {
               color: Colors.red,
               child:  FlatButton(
                 onPressed: () {
-                  print('Delete all moods from DB');
-                  DatabaseProvider.db.deleteAllMoodAssessments();
+                  Provider.of<TodayMoodAssessments>(context, listen: false).removeAll();
                 },
-                child: Text('Удалить все из БД'),
+                child: Text('Удалить все оценки'),
               ),
             )
           ],

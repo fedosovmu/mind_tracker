@@ -25,6 +25,7 @@ class DatabaseProvider {
     return await openDatabase(
       join(getDatabasesPath().toString(), _databaseName),
       onCreate: (db, version) {
+        print('Create tables in DB'); // TODO: delete this line
         return db.execute(
             "CREATE TABLE IF NOT EXISTS mood_assessments"
                 "(id INTEGER PRIMARY KEY, "
@@ -36,6 +37,7 @@ class DatabaseProvider {
   }
 
   insertMoodAssessment(MoodAssessment moodAssessment) async {
+    print('Insert mood to DB'); // TODO: delete this line
     final Database db = await database;
     await db.insert(
       'mood_assessments',
@@ -45,6 +47,7 @@ class DatabaseProvider {
   }
 
   deleteAllMoodAssessments() async {
+    print('Delete all mood assessments from DB'); // TODO: delete this line
     final db = await database;
     db.delete('mood_assessments');
   }
@@ -53,7 +56,7 @@ class DatabaseProvider {
     final db = await database;
 
     final List<Map<String, dynamic>> maps = await db.query('mood_assessments');
-    print(maps); // TODO: Delete this line
+    print('Get mood assessments from DB: $maps'); // TODO: Delete this line
     return List.generate(maps.length, (i) {
         return MoodAssessment(
           id: maps[i]['id'],
