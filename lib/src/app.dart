@@ -6,6 +6,7 @@ import 'views/screens/onboarding_screen.dart';
 import 'views/screens/mood_assessment_screen.dart';
 import 'views/screens/main_screen/main_screen.dart';
 import 'business_logic/models/initial_app_data.dart';
+import 'package:provider/provider.dart';
 
 
 class MindTrackerApp extends StatelessWidget {
@@ -26,9 +27,9 @@ class MindTrackerApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: appTheme,
-      home: OnboardingScreen(),
+      //home: OnboardingScreen(),
       //home: MoodAssessmentScreen(firstStart: true),
-      //home: MainScreen(todayMoodAssessments: []),
+      home: MainScreen(todayMoodAssessments: []),
     );
   }
 }
