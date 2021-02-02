@@ -32,7 +32,8 @@ mixin Content {
         3: "assets/images/onboarding/butterfly.png",
         4: "assets/images/onboarding/monkey.png"
       } as dynamic,
-      'nextButtonText': 'Далее'
+      'nextButtonNextText': 'Далее',
+      'nextButtonStartText': 'Начать',
     },
 
     'moodAssessmentScreen': {

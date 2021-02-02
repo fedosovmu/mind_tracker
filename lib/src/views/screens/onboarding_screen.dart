@@ -8,20 +8,34 @@ import 'mood_assessment_screen.dart';
 
 class OnboardingScreen extends StatelessWidget with Content {
   var _pageNumber;
+  static const _pageCount = 4;
   OnboardingScreen ({int pageNumber = 1}) {
     this._pageNumber = pageNumber;
     loadContent('onboardingScreen');
   }
 
+  bool _isThisLastPage() {
+    return _pageNumber == _pageCount;
+  }
+
   void _goToNextScreen(BuildContext context) {
     var nextScreenPath;
-    if (_pageNumber >= 4) {
-      nextScreenPath = '/moodAssessment/first';
+    if (_pageNumber >= _pageCount) {
+      Navigator.pushNamed(context, '/moodAssessment/firstStart');
     }
     else {
-      nextScreenPath = '/onboarding/${_pageNumber+1}';
+      Navigator.of(context).push(
+          PageRouteBuilder(
+              pageBuilder: (context, _, __) => OnboardingScreen(pageNumber: _pageNumber+1),
+              transitionsBuilder: (___, animation, ____, child) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              }
+          )
+      );
     }
-    Navigator.pushNamed(context, nextScreenPath);
   }
 
   @override
@@ -87,7 +101,7 @@ class OnboardingScreen extends StatelessWidget with Content {
                     ),
                     onPressed: () { _goToNextScreen(context); },
                     child: Text(
-                      content['nextButtonText'],
+                      _isThisLastPage() ? content['nextButtonStartText'] : content['nextButtonNextText'],
                       style: CustomTextStyles.buttonMedium,
                     )
                 )
