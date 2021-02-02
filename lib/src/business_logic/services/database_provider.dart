@@ -37,7 +37,7 @@ class DatabaseProvider {
   }
 
   insertMoodAssessment(MoodAssessment moodAssessment) async {
-    print('Insert mood to DB'); // TODO: delete this line
+    print('Insert mood assessment to DB: $moodAssessment'); // TODO: delete this line
     final Database db = await database;
     await db.insert(
       'mood_assessments',

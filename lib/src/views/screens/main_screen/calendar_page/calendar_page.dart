@@ -24,13 +24,14 @@ class _CalendarPageState extends State<CalendarPage> {
           width: dp(100),
           height: dp(100),
           color: Colors.green,
-          child: _buildText(),
+          child: _buildDatabaseDataText(),
         ),
       ),
     );
   }
 
-  Widget _buildText() {
+  Widget _buildDatabaseDataText() {
+    print('Rebuild Database data text');
     return FutureBuilder<List<MoodAssessment>>(
       future: DatabaseProvider.db.getMoodAssessments(),
       builder: (BuildContext context, AsyncSnapshot<List<MoodAssessment>> snapshot) {
