@@ -27,15 +27,16 @@ class MindTrackerApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: appTheme,
-      initialRoute: '/moodAssessment',
+      initialRoute: '/onboarding',
       routes: {
         '/onboarding': (context) => OnboardingScreen(),
+        '/onboarding/2': (context) => OnboardingScreen(pageNumber: 2),
+        '/onboarding/3': (context) => OnboardingScreen(pageNumber: 3),
+        '/onboarding/4': (context) => OnboardingScreen(pageNumber: 4),
         '/moodAssessment': (context) => MoodAssessmentScreen(),
+        '/moodAssessment/first': (context) => MoodAssessmentScreen(firstStart: true),
         '/main': (context) => MainScreen(todayMoodAssessments: []),
       },
-      //home: OnboardingScreen(),
-      //home: MoodAssessmentScreen(firstStart: true),
-      //home: MainScreen(todayMoodAssessments: []),
     );
   }
 }

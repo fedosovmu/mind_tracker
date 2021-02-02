@@ -7,31 +7,21 @@ import 'mood_assessment_screen.dart';
 
 
 class OnboardingScreen extends StatelessWidget with Content {
-  var _screenNumber;
-  OnboardingScreen ({int screenNumber = 1}) {
-    this._screenNumber = screenNumber;
+  var _pageNumber;
+  OnboardingScreen ({int pageNumber = 1}) {
+    this._pageNumber = pageNumber;
     loadContent('onboardingScreen');
   }
 
   void _goToNextScreen(BuildContext context) {
-    var nextScreen;
-    if (_screenNumber >= 4) {
-      nextScreen = MoodAssessmentScreen();
+    var nextScreenPath;
+    if (_pageNumber >= 4) {
+      nextScreenPath = '/moodAssessment/first';
     }
     else {
-      nextScreen = OnboardingScreen(screenNumber: _screenNumber + 1);
+      nextScreenPath = '/onboarding/${_pageNumber+1}';
     }
-    Navigator.of(context).push(
-        PageRouteBuilder(
-            pageBuilder: (context, _, __) => nextScreen,
-            transitionsBuilder: (___, animation, ____, child) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            }
-        )
-    );
+    Navigator.pushNamed(context, nextScreenPath);
   }
 
   @override
@@ -47,7 +37,7 @@ class OnboardingScreen extends StatelessWidget with Content {
                   height: dp(24),
                 ),
                 Image(
-                  image: AssetImage(content['pathsToImages'][_screenNumber]),
+                  image: AssetImage(content['pathsToImages'][_pageNumber]),
                   height: dp(370),
                 ),
                 Container(
@@ -61,7 +51,7 @@ class OnboardingScreen extends StatelessWidget with Content {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: List.generate(4, (index) {
                           var circle_color = CustomColors.purpleSuperDark;
-                          if (index+1 == _screenNumber) {
+                          if (index+1 == _pageNumber) {
                             circle_color = CustomColors.purpleLight;
                           }
                           return Container(
@@ -80,7 +70,7 @@ class OnboardingScreen extends StatelessWidget with Content {
                   alignment: Alignment.center,
                   padding: EdgeInsets.only(left: dp(16), right: dp(16)),
                   child:  Text(
-                      content['screenTexts'][_screenNumber],
+                      content['screenTexts'][_pageNumber],
                       style: CustomTextStyles.basicH1Medium.copyWith(color: CustomColors.silverWhite),
                   ),
                 ),

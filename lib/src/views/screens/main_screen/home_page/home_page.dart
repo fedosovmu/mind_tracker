@@ -32,13 +32,6 @@ class _HomePageState extends State<HomePage> with Content {
       ),
       body: MoodAssessmentCardsListView(
         moodAssessments: _moodAssessments,
-        emptyCardOnPressed: () {
-            print('PRESS EMPTY');
-            setState(() {
-              _moodAssessments.add(MoodAssessment(id: _newMoodAseesmentNumber, mood: _newMoodAseesmentNumber));
-              _newMoodAseesmentNumber = _newMoodAseesmentNumber == 1 ? 7 : _newMoodAseesmentNumber - 1;
-            });
-        },
       )
     );
   }

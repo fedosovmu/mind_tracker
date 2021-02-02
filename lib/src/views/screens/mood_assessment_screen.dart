@@ -9,6 +9,9 @@ import '../../business_logic/models/mood_assessment.dart';
 
 
 class MoodAssessmentScreen extends StatefulWidget {
+  final firstStart;
+  MoodAssessmentScreen({Key key, bool this.firstStart = false});
+
   @override
   _MoodAssessmentScreenState createState() => _MoodAssessmentScreenState();
 }
@@ -20,20 +23,12 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
   double _currentSliderValue = 4;
   int _currentMood = 4;
 
-  void _goToNextScreen({MoodAssessment newMoodAssessment}) {
-    Navigator.of(context).push(
-        PageRouteBuilder(
-            pageBuilder: (context, _, __) => MainScreen(
-                todayMoodAssessments: newMoodAssessment != null ? [newMoodAssessment] : []
-            ),
-            transitionsBuilder: (___, animation, ____, child) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            }
-        )
-    );
+  void _goToNextScreen() {
+    if (widget.firstStart) {
+      Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
+    } else {
+      Navigator.pop(context); 
+    }
   }
   
   @override
@@ -228,7 +223,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
         height: dp(60),
         width: double.infinity,
         child: FlatButton(
-          onPressed: () {_goToNextScreen(newMoodAssessment: MoodAssessment(mood: _currentMood));},
+          onPressed: () {_goToNextScreen();},
           child: Text(
             content['assessButtonText'],
             style: CustomTextStyles.buttonMedium,

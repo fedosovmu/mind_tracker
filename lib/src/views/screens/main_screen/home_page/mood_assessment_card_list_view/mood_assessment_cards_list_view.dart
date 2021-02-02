@@ -6,10 +6,9 @@ import 'mood_assessment_empty_card.dart';
 
 
 class MoodAssessmentCardsListView extends StatelessWidget {
-  final emptyCardOnPressed;
   final List<MoodAssessment> moodAssessments;
 
-  MoodAssessmentCardsListView ({@required this.emptyCardOnPressed, this.moodAssessments = const []});
+  MoodAssessmentCardsListView ({this.moodAssessments = const []});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,7 @@ class MoodAssessmentCardsListView extends StatelessWidget {
             Column(
               children: [
                 ...moodAssessmentCards,
-                MoodAssessmentEmptyCard(onPressed: emptyCardOnPressed)
+                MoodAssessmentEmptyCard()
               ],
             ),
             ...moodSpheres,
