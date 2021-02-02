@@ -24,19 +24,6 @@ class _HomePageState extends State<HomePage> with Content {
   var _newMoodAseesmentNumber = 7;
 
   @override
-  void initState() {
-    super.initState();
-    _moodAssessments.addAll(widget._moodAssessments);
-    DatabaseProvider.db.getMoodAssessments().then((moodAssessments) {
-      setState(() {
-        _moodAssessments.addAll(moodAssessments);
-      });
-    });
-  }
-
-
-
-  @override
   Widget build(BuildContext context) {
     loadContent('homePage');
     return Scaffold(

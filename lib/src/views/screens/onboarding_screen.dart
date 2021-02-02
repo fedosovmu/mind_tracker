@@ -16,7 +16,7 @@ class OnboardingScreen extends StatelessWidget with Content {
   void _goToNextScreen(BuildContext context) {
     var nextScreen;
     if (_screenNumber >= 4) {
-      nextScreen = MoodAssessmentScreen(firstStart: true);
+      nextScreen = MoodAssessmentScreen();
     }
     else {
       nextScreen = OnboardingScreen(screenNumber: _screenNumber + 1);

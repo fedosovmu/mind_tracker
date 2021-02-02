@@ -9,11 +9,6 @@ import '../../business_logic/models/mood_assessment.dart';
 
 
 class MoodAssessmentScreen extends StatefulWidget {
-  var _showSkipButton;
-  MoodAssessmentScreen({Key key, bool firstStart = false}) : super(key: key) {
-    _showSkipButton = firstStart;
-  }
-
   @override
   _MoodAssessmentScreenState createState() => _MoodAssessmentScreenState();
 }
@@ -60,7 +55,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             _buildMoodAssessor(),
-            _buildBottomButtons(),
+            _buildBottomButton(),
           ],
         ),
       ),
@@ -224,53 +219,26 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
     );
   }
 
-  Widget _buildBottomButtons() {
-    var buttonsHeight;
-    if (widget._showSkipButton) {
-      buttonsHeight = dp(136);
-    }
-    else {
-      buttonsHeight = dp(68);
-    }
+  Widget _buildBottomButton() {
     return Container(
-      height: buttonsHeight,
+      height: dp(68),
       width: double.infinity,
       padding: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(
-            height: dp(60),
-            width: double.infinity,
-            child: FlatButton(
-              onPressed: () {_goToNextScreen(newMoodAssessment: MoodAssessment(mood: _currentMood));},
-              child: Text(
-                content['assessButtonText'],
-                style: CustomTextStyles.buttonMedium,
-              ),
-              color: CustomColors.moods[_currentMood],
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(dp(16)))
-              ),
-            ),
+      child: SizedBox(
+        height: dp(60),
+        width: double.infinity,
+        child: FlatButton(
+          onPressed: () {_goToNextScreen(newMoodAssessment: MoodAssessment(mood: _currentMood));},
+          child: Text(
+            content['assessButtonText'],
+            style: CustomTextStyles.buttonMedium,
           ),
-          (widget._showSkipButton ? _buildSkipButton() : const SizedBox.shrink())
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSkipButton() {
-    return FlatButton(
-      onPressed: () {_goToNextScreen();},
-      child: Text(
-        content['skipButtonText'],
-        style: CustomTextStyles.buttonBasic.copyWith(
-          color: Color(0xFFACA5BA)
+          color: CustomColors.moods[_currentMood],
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(dp(16)))
+          ),
         ),
       ),
-      height: dp(60),
-      minWidth: dp(150),
     );
   }
 }
