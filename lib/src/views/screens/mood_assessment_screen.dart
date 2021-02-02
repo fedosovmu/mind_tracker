@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/business_logic/models/today_mood_sssessments.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/main_screen.dart';
+import 'package:provider/provider.dart';
 import '../utils/custom_text_styles.dart';
 import '../utils/custom_colors.dart';
 import '../utils/content.dart';
@@ -223,7 +225,10 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
         height: dp(60),
         width: double.infinity,
         child: FlatButton(
-          onPressed: () {_goToNextScreen();},
+          onPressed: () {
+            Provider.of<TodayMoodAssessments>(context, listen: false).add(MoodAssessment(mood: _currentMood));
+            _goToNextScreen();
+          },
           child: Text(
             content['assessButtonText'],
             style: CustomTextStyles.buttonMedium,
