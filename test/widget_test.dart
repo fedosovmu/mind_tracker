@@ -8,13 +8,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mind_tracker/src/app.dart';
-
+import 'package:mind_tracker/src/business_logic/services/initial_app_data_loader.dart';
 import 'package:mind_tracker/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MindTrackerApp());
+    var initialAppData = await InitialAppDataLoader.loadInitialAppData();
+    await tester.pumpWidget(MindTrackerApp(initialAppData));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
