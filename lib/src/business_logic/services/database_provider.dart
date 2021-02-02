@@ -53,7 +53,7 @@ class DatabaseProvider {
     final db = await database;
 
     final List<Map<String, dynamic>> maps = await db.query('mood_assessments');
-    print(maps);
+    print(maps); // TODO: Delete this line
     return List.generate(maps.length, (i) {
         return MoodAssessment(
           id: maps[i]['id'],
