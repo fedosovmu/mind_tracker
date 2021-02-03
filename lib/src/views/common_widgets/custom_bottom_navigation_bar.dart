@@ -11,7 +11,7 @@ class CustomBottomNavigationBar extends CupertinoTabBar {
   static const _pathsToIcons = [
     'assets/icons/home.png',
     'assets/icons/analytics.png',
-    'assets/icons/settings.png'
+    'assets/icons/calendar.png'
   ];
   static const _texts = ['Главный', 'Аналитика', 'Календарь'];
   static final _textStyle = CustomTextStyles.basic.copyWith(fontSize: 14);
