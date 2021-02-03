@@ -7,7 +7,7 @@ import '../../../../utils/metrics.dart';
 
 
 class MoodAssessmentCard extends StatelessWidget with Content {
-  MoodAssessment moodAssess;
+  final MoodAssessment moodAssess;
 
   MoodAssessmentCard (this.moodAssess);
 
@@ -59,7 +59,7 @@ class MoodAssessmentCard extends StatelessWidget with Content {
                       width: dp(8),
                     ),
                     Text(
-                      content['getEventWord'](moodAssess.mood),
+                      content['getEventWord'](0),
                       style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
                     ),
                   ],
