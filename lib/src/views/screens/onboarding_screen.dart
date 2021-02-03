@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../utils/custom_text_styles.dart';
-import '../utils/custom_colors.dart';
+import '../utils/theme/custom_text_styles.dart';
+import '../utils/theme/custom_colors.dart';
 import '../utils/content.dart';
 import '../utils/metrics.dart';
 import 'mood_assessment_screen.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 import 'package:mind_tracker/src/views/utils/content.dart';
-import 'package:mind_tracker/src/views/utils/custom_colors.dart';
-import 'package:mind_tracker/src/views/utils/custom_text_styles.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import '../../../../utils/metrics.dart';
 
 

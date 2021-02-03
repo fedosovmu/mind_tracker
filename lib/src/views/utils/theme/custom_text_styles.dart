@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'metrics.dart';
+import '../metrics.dart';
 import 'custom_colors.dart';
 
 

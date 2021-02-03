@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../utils/metrics.dart';
-import '../utils/custom_text_styles.dart';
-import '../utils/custom_colors.dart';
+import '../utils/theme/custom_text_styles.dart';
+import '../utils/theme/custom_colors.dart';
 import 'signed_icon.dart';
 
 

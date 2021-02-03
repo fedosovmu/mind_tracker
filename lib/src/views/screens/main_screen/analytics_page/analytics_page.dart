@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mind_tracker/src/business_logic/models/today_mood_sssessments.dart';
+import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
 import 'package:provider/provider.dart';
 import '../../../utils/metrics.dart';
@@ -35,7 +35,7 @@ class AnalyticsPage extends StatelessWidget {
               color: Colors.red,
               child:  FlatButton(
                 onPressed: () {
-                  Provider.of<TodayMoodAssessments>(context, listen: false).removeAll();
+                  Provider.of<MoodAssessmentsProvider>(context, listen: false).removeAll();
                 },
                 child: Text('Удалить все оценки'),
               ),

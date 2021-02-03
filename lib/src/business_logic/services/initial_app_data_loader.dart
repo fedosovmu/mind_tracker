@@ -1,12 +1,12 @@
 import 'database_provider.dart';
-import '../models/today_mood_sssessments.dart';
+import '../viewmodels/mood_sssessments_provider.dart';
 import 'dart:async';
 
 
 abstract class InitialAppDataLoader {
-  static Future<TodayMoodAssessments> loadTodayMoodAssessments () async {
+  static Future<MoodAssessmentsProvider> loadMoodAssessmentsProvider () async {
     final moodAssessments = await DatabaseProvider.db.getMoodAssessments();
-    final todayMoodAssessments = TodayMoodAssessments(
+    final todayMoodAssessments = MoodAssessmentsProvider(
         moodAssessments: moodAssessments
     );
     print('INITIAL DATA LOADED'); // TODO: Delete this line
