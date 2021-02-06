@@ -2,6 +2,7 @@ import 'database_provider.dart';
 import '../viewmodels/mood_sssessments_provider.dart';
 import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 abstract class InitialAppDataLoader {
@@ -17,6 +18,7 @@ abstract class InitialAppDataLoader {
   static void initializeFirebaseConnection () async {
     final firebaseInitializeData = await Firebase.initializeApp();
     print('FIREBASE INITIALIZED'); // TODO: Delete this line
-    print(firebaseInitializeData);
+    print(firebaseInitializeData.isAutomaticDataCollectionEnabled);
+    print(Firebase.apps.first);
   }
 }
