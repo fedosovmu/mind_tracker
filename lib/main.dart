@@ -9,7 +9,7 @@ import 'src/app.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final moodAssessmentsProvider = await InitialAppDataLoader.loadMoodAssessmentsProvider();
-  await InitialAppDataLoader.loadFirebaseData();
+  await InitialAppDataLoader.initializeFirebaseConnection();
   runApp(
       ChangeNotifierProvider(
         create: (context) => moodAssessmentsProvider,

@@ -14,9 +14,9 @@ abstract class InitialAppDataLoader {
     return todayMoodAssessments;
   }
 
-  static void loadFirebaseData () async {
+  static void initializeFirebaseConnection () async {
     final firebaseInitializeData = await Firebase.initializeApp();
     print('FIREBASE INITIALIZED'); // TODO: Delete this line
-    print(firebaseInitializeData.);
+    print(firebaseInitializeData);
   }
 }
