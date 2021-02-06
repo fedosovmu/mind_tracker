@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "941261881702",
+    "project_id": "mind-tracker-13ee8",
+    "storage_bucket": "mind-tracker-13ee8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941261881702:android:0b755aac2426559ade88a7",
+        "android_client_info": {
+          "package_name": "com.example.mind_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "941261881702-lrike1rr6u4iga197lihohd30mshqvib.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqo0giKeAF6TgxEfC_7r2CoINIVZ9kFpo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "941261881702-lrike1rr6u4iga197lihohd30mshqvib.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
