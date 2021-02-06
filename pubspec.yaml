@@ -27,6 +27,7 @@ dependencies:
   sqflite:
   path:
   provider:
+  firebase_core: "0.7.0"
 
   cupertino_icons: ^1.0.0
 
