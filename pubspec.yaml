@@ -24,8 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  sqflite:
-  path:
+  intl: ^0.16.1
   provider:
   firebase_core: "^0.7.0"
   cloud_firestore: "^0.16.0"
