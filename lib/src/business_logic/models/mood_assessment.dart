@@ -8,9 +8,13 @@ class MoodAssessment {
   PartOfDay partOfDay;
   DateTime time;
 
-  MoodAssessment({this.mood}) {
-    time = DateTime.now();
-    _setPartOfDay(time);
+  MoodAssessment({this.mood, this.partOfDay, this.time}) {
+    if (partOfDay == null) {
+      if (time == null) {
+        time = DateTime.now();
+      }
+      _setPartOfDay(time);
+    }
   }
 
   void _setPartOfDay(DateTime time) {
