@@ -23,18 +23,10 @@ class MoodAssessment {
     );
   }
 
-  String getTime() {
+  String getTimeString() {
     final hours = time.hour.toString().padLeft(2, '0');
     final minutes = time.minute.toString().padLeft(2, '0');
     return '$hours:$minutes';
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'mood': mood,
-      'partOfDay': partOfDay,
-      'time': time,
-    };
   }
 
   @override

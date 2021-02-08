@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
+import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 
 
 abstract class FirebaseProvider {
@@ -11,12 +12,19 @@ abstract class FirebaseProvider {
 
   static Future<List<MoodAssessment>> getTodayMoodAssessments () async {
     final collection = await FirebaseFirestore.instance.collection('mood_assessments_for_day').get();
-    final today_mood_assessments_map = collection.docs.first.data();
-    print('FIRASTORE: $today_mood_assessments_map');
-    final mood_assessments = today_mood_assessments_map['mood_assessments'];
-    print('FIRESTORE, MOOD ASSESSMENTS: $mood_assessments');
-    final mood_assessment_map = mood_assessments[2];
-    final mood_assessment = MoodAssessment.fromMap(mood_assessment_map);
-    print('MOOD ASSESSMENT: $mood_assessment');
+    final mood_assessments_for_day_first_document = collection.docs.first.data();
+    print('FIRASTORE (mood_assessments_for_day_first_document): $mood_assessments_for_day_first_document');
+
+    final List<dynamic> mood_assessments_maps = mood_assessments_for_day_first_document['mood_assessments'];
+    print('FIRESTORE (mood_assessments_maps_list): ${mood_assessments_maps}');
+
+    final x1 =  MoodAssessment.fromMap(mood_assessments_maps[2]);
+    print('MOOD ASSESSMENT: $x1');
+
+    final today_mood_assessments = mood_assessments_maps.map((moodAssessmentMap) {
+      return MoodAssessment.fromMap(moodAssessmentMap);
+    }).toList();
+
+    return today_mood_assessments;
   }
 }

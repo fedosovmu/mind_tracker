@@ -7,9 +7,8 @@ import 'dart:async';
 abstract class InitialAppDataLoader {
   static Future<MoodAssessmentsProvider> getMoodAssessmentsProvider () async {
     await FirebaseProvider.initializeFirebaseConnection();
-    await FirebaseProvider.getTodayMoodAssessments();
+    final todayMoodAssessments = await FirebaseProvider.getTodayMoodAssessments();
 
-    final todayMoodAssessments = List<MoodAssessment>();
     return MoodAssessmentsProvider(
       todayMoodAssessments: todayMoodAssessments
     );
