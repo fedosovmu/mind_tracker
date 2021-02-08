@@ -1,4 +1,4 @@
-
+import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 
 
 mixin Content {
@@ -23,8 +23,10 @@ mixin Content {
       'screenTexts': {
         1: "Следите за своим ментальным состоянием оценивая его по шкале с семью градациями.",
         2: "Важно делать отметки несколько раз в день, устанавливайте напоминания в удобное время.",
-        3: "Отмечайте, что произошло за день. Приложение поможет вам проанализировать, как привычки  влияют на ваш внутренний баланс.",
-        4: "Чем дольше вы ведёте записи, тем более ценные данные получите. Вы убедитесь в очевидных связях между событиями и эмоциями и обнаружите неочевидные."
+        3: "Отмечайте, что произошло за день. Приложение поможет вам проанализировать, как привычки "
+            "влияют на ваш внутренний баланс.",
+        4: "Чем дольше вы ведёте записи, тем более ценные данные получите. "
+            "Вы убедитесь в очевидных связях между событиями и эмоциями и обнаружите неочевидные."
       } as dynamic,
       'pathsToImages': {
         1: "assets/images/onboarding/lamp.png",
@@ -42,8 +44,7 @@ mixin Content {
       'pathsToMoodSpheres': Map.fromIterable(
           List.generate(7, (i) => i + 1),
           key: (item) => item,
-          value: (
-              item) => 'assets/images/common/mood_spheres/$item.png'
+          value: (item) => 'assets/images/common/mood_spheres/$item.png'
       ),
       'pathToMoodSliderImage': 'assets/images/mood_assessment/mood_slider.png',
       'moodNames': moodNames,
@@ -66,6 +67,22 @@ mixin Content {
           return 'События';
         } else {
           return 'Событий';
+        }
+      } as dynamic,
+      'getPartOfDayWord': (PartOfDay partOfDay) {
+        switch (partOfDay) {
+          case PartOfDay.morning: {
+            return 'Утро';
+          } break;
+          case PartOfDay.day: {
+            return 'День';
+          } break;
+          case PartOfDay.evening: {
+            return 'Вечер';
+          } break;
+          case PartOfDay.night: {
+            return 'Ночь';
+          } break;
         }
       } as dynamic,
     },

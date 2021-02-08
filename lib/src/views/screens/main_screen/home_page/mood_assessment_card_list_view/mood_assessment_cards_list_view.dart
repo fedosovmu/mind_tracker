@@ -18,7 +18,7 @@ class MoodAssessmentCardsListView extends StatelessWidget {
 
 
     final moodSpheres = List.generate(moodAssessmentCards.length, (index) {
-      var mood = moodAssessmentCards[index].moodAssess.mood;
+      var mood = moodAssessmentCards[index].moodAssessment.mood;
       if (mood != null) {
         return Positioned(
             top: dp(dp(-5) + index * dp(136)),

@@ -7,9 +7,9 @@ import '../../../../utils/metrics.dart';
 
 
 class MoodAssessmentCard extends StatelessWidget with Content {
-  final MoodAssessment moodAssess;
+  final MoodAssessment moodAssessment;
 
-  MoodAssessmentCard (this.moodAssess);
+  MoodAssessmentCard (this.moodAssessment);
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +26,14 @@ class MoodAssessmentCard extends StatelessWidget with Content {
             Container(
               height: dp(41),
               child: Text(
-                'День  |  09:21',
+                _getPartOfDayAndTimeString(),
                 style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
               ),
             ),
             Container(
               height: dp(41),
               child: Text(
-                content['moodNames'][moodAssess.mood],
+                content['moodNames'][moodAssessment.mood],
                 style: CustomTextStyles.titleH1,
               ),
             ),
@@ -47,7 +47,7 @@ class MoodAssessmentCard extends StatelessWidget with Content {
                       height: dp(24),
                       padding: EdgeInsets.only(left: dp(8.5), top: dp(4)),
                       child: Text(
-                        '${moodAssess.mood}',
+                        '${moodAssessment.mood}',
                         style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
                       ),
                       decoration: BoxDecoration(
@@ -73,5 +73,11 @@ class MoodAssessmentCard extends StatelessWidget with Content {
         borderRadius: BorderRadius.all(Radius.circular(dp(16))),
       ),
     );
+  }
+  
+  String _getPartOfDayAndTimeString () {
+    final partOfDayWord = content['getPartOfDayWord'](moodAssessment.partOfDay);
+    final timeString = moodAssessment.time != null ? '  |  ${moodAssessment.time}' : '';
+    return partOfDayWord + timeString;
   }
 }
