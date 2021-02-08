@@ -6,7 +6,13 @@ class MoodAssessmentsForDay {
   final List<MoodAssessment> moodAssessments;
   Function onChanged;
 
-  MoodAssessmentsForDay(this.date, this.moodAssessments, this.onChanged);
+  MoodAssessmentsForDay({this.date, this.moodAssessments, this.onChanged});
+
+  static MoodAssessmentsForDay formMap(moodAssessmentsForDayMap) {
+    return MoodAssessmentsForDay(
+      date: DateTime.parse(moodAssessmentsForDayMap['date'])
+    );
+  }
 
   void add(MoodAssessment moodAssessment) {
     moodAssessments.add(moodAssessment);

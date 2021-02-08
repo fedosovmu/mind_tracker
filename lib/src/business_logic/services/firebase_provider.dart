@@ -23,6 +23,9 @@ abstract class FirebaseProvider {
       return MoodAssessment.fromMap(moodAssessmentMap);
     }).toList();
 
+    //final moodAssessmentsForDay = MoodAssessmentsForDay.formMap(mood_assessments_for_day_first_document);
+    print('FIRESTORE (moodAssessmentsForDay object) ${mood_assessments_for_day_first_document['date']}');
+
     return today_mood_assessments;
   }
 

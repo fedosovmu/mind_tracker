@@ -4,13 +4,10 @@ import '../models/mood_assessment.dart';
 
 
 class MoodAssessmentsProvider extends ChangeNotifier {
-  MoodAssessmentsForDay today;
-  List<MoodAssessmentsForDay> days;
+  final MoodAssessmentsForDay today;
   final List<MoodAssessment> todayMoodAssessments;
 
-  MoodAssessmentsProvider({List<MoodAssessment> this.todayMoodAssessments}) {
-    
-  }
+  MoodAssessmentsProvider({List<MoodAssessment> this.todayMoodAssessments, MoodAssessmentsForDay this.today});
 
   void addToday(MoodAssessment moodAssessment) {
     todayMoodAssessments.add(moodAssessment);
