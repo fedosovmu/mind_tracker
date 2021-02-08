@@ -6,7 +6,6 @@ import 'package:mind_tracker/src/views/utils/content.dart';
 import 'package:provider/provider.dart';
 import 'mood_assessment_card_list_view/mood_assessment_cards_list_view.dart';
 import '../../../../business_logic/models/mood_assessment.dart';
-import '../../../../business_logic/services/database_provider.dart';
 import '../../../utils/theme/custom_text_styles.dart';
 
 
@@ -34,7 +33,7 @@ class _HomePageState extends State<HomePage> with Content {
       ),
       body: Consumer<MoodAssessmentsProvider>(
         builder: (context, todayMoodAssessments, child) => MoodAssessmentCardsListView(
-          moodAssessments: todayMoodAssessments.moodAssessments,
+          moodAssessments: todayMoodAssessments.todayMoodAssessments,
         ),
       )
     );

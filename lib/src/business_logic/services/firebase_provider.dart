@@ -7,10 +7,13 @@ import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 abstract class FirebaseProvider {
   static void initializeFirebaseConnection () async {
     final firebaseInitializeData = await Firebase.initializeApp();
-    print('FIREBASE INITIALIZED'); // TODO: Delete this line
   }
 
-   Future<List<MoodAssessment>> getTodayMoodAssessments () async {
-
+  static Future<List<MoodAssessment>> getTodayMoodAssessments () async {
+    final collection = await FirebaseFirestore.instance.collection('mood_assessments_for_day').get();
+    final today_mood_assessments_map = collection.docs.first.data();
+    print('FIRASTORE: $today_mood_assessments_map');
+    final mood_assessments = today_mood_assessments_map['mood_assessments'];
+    print('FIRESTORE MOOD ASSESSMENTS: $mood_assessments');
   }
 }

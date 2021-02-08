@@ -7,7 +7,7 @@ import 'src/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final moodAssessmentsProvider = await InitialAppDataLoader.loadMoodAssessmentsProvider();
+  final moodAssessmentsProvider = await InitialAppDataLoader.getMoodAssessmentsProvider();
   runApp(
       ChangeNotifierProvider(
         create: (context) => moodAssessmentsProvider,
