@@ -14,6 +14,9 @@ abstract class FirebaseProvider {
     final today_mood_assessments_map = collection.docs.first.data();
     print('FIRASTORE: $today_mood_assessments_map');
     final mood_assessments = today_mood_assessments_map['mood_assessments'];
-    print('FIRESTORE MOOD ASSESSMENTS: $mood_assessments');
+    print('FIRESTORE, MOOD ASSESSMENTS: $mood_assessments');
+    final mood_assessment_map = mood_assessments[2];
+    final mood_assessment = MoodAssessment.fromMap(mood_assessment_map);
+    print('MOOD ASSESSMENT: $mood_assessment');
   }
 }

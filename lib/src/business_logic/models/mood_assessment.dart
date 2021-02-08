@@ -1,6 +1,5 @@
-
-
-enum PartOfDay {morning, day, evening, night}
+import 'package:flutter/cupertino.dart';
+import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 
 
 class MoodAssessment {
@@ -8,26 +7,20 @@ class MoodAssessment {
   PartOfDay partOfDay;
   DateTime time;
 
-  MoodAssessment({this.mood, this.partOfDay, this.time}) {
+  MoodAssessment({@required this.mood, this.partOfDay, this.time}) {
     if (partOfDay == null) {
       if (time == null) {
         time = DateTime.now();
       }
-      _setPartOfDay(time);
+      partOfDay = PartOfDayBuilder.fromDateTime(time);
     }
   }
 
-  void _setPartOfDay(DateTime time) {
-    final hours = time.hour;
-    if (hours >= 6 && hours <= 12) {
-      partOfDay = PartOfDay.morning;
-    } else if (hours > 12 && hours < 18) {
-      partOfDay = PartOfDay.day;
-    } else if (hours >= 18 && hours < 24) {
-      partOfDay = PartOfDay.evening;
-    } else {
-      partOfDay = PartOfDay.night;
-    }
+  static MoodAssessment fromMap(Map<String, dynamic> mood_assessment_map) {
+    return MoodAssessment(
+      mood: mood_assessment_map['mood'],
+      partOfDay: PartOfDayBuilder.fromShortString(mood_assessment_map['part_of_day']),
+    );
   }
 
   String getTime() {
