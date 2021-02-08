@@ -59,7 +59,6 @@ class DatabaseProvider {
     print('Get mood assessments from DB: $maps'); // TODO: Delete this line
     return List.generate(maps.length, (i) {
         return MoodAssessment(
-          id: maps[i]['id'],
           mood: maps[i]['mood']
         );
     });
