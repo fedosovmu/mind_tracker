@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:mind_tracker/src/business_logic/services/firebase_provider.dart';
 import '../models/mood_assessment.dart';
 
 
@@ -7,13 +8,9 @@ class MoodAssessmentsProvider extends ChangeNotifier {
 
   MoodAssessmentsProvider({List<MoodAssessment> this.todayMoodAssessments,});
 
-  void addToday(MoodAssessment moodAssessment) {
+  void add(MoodAssessment moodAssessment) {
     todayMoodAssessments.add(moodAssessment);
-    notifyListeners();
-  }
-
-  void removeAll() {
-    todayMoodAssessments.clear();
+    FirebaseProvider.addMoodAssessment(moodAssessment);
     notifyListeners();
   }
 }

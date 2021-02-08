@@ -12,7 +12,7 @@ abstract class FirebaseProvider {
   }
 
   static Future<List<MoodAssessment>> getTodayMoodAssessments () async {
-    final todayMoodAssessmentsQuerySnapshot = await FirebaseFirestore.instance.collection('mood_assessments')
+    final todayMoodAssessmentsQuerySnapshot = await _mood_assessments_collection
         //.where('user_id', isEqualTo: 'DocumentReference(users/test_user)')
         .where('date', isEqualTo: '2021-02-09').get();
 
@@ -23,10 +23,9 @@ abstract class FirebaseProvider {
     return todayMoodAssessments;
   }
 
-  static void AddMoodAssessment(MoodAssessment moodAssessment) {
+  static void addMoodAssessment(MoodAssessment moodAssessment) {
     _mood_assessments_collection.add(
         moodAssessment.toMap()
-    ).then((value) => print('=== NEW DOC ADDED'));
-    print('===== ${MoodAssessment(mood: 4).toMap()}');
+    ).then((value) => print('=== FIREBASE ADD ($moodAssessment)'));
   }
 }

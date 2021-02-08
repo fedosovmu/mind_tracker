@@ -226,7 +226,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
         width: double.infinity,
         child: FlatButton(
           onPressed: () {
-            Provider.of<MoodAssessmentsProvider>(context, listen: false).addToday(MoodAssessment(mood: _currentMood));
+            Provider.of<MoodAssessmentsProvider>(context, listen: false).add(MoodAssessment(mood: _currentMood));
             _goToNextScreen();
           },
           child: Text(
