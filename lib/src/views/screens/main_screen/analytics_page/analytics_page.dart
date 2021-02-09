@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import 'package:provider/provider.dart';
 import '../../../utils/metrics.dart';
 
@@ -13,13 +14,51 @@ class AnalyticsPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Container(
-            color: Colors.green,
-            width: dp(100),
-            height: dp(100),
+          _buildTabs(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  _buildGraphic(),
+                  _buildCards()
+                ],
+              )
+            ),
           )
         ],
       )
+    );
+  }
+
+  Widget _buildTabs() {
+    return Container(
+      color: Colors.green,
+      width: double.infinity,
+      height: dp(40),
+      child: Center(
+        child: Text(
+          'График        Влияние',
+          style: CustomTextStyles.basicH1Medium,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGraphic() {
+    return Container(
+      margin: EdgeInsets.only(top: dp(20)),
+      color: Colors.red,
+      width: dp(327),
+      height: dp(352),
+    );
+  }
+
+  Widget _buildCards() {
+    return Container(
+      margin: EdgeInsets.only(top: dp(18)),
+      color: Colors.yellow,
+      width: dp(327),
+      height: dp(500),
     );
   }
 }

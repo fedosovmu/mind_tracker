@@ -19,6 +19,7 @@ class CustomBottomNavigationBar extends CupertinoTabBar {
   static const _inactiveColor = CustomColors.purpleTextSecondary;
 
   CustomBottomNavigationBar () : super(
+    currentIndex: 1, // TODO: delete this line in prodaction
     border: Border(top: BorderSide(color: Color(0xFF766379))),
     backgroundColor: CustomColors.purpleSuperDark,
     activeColor: CustomColors.silverWhite,
