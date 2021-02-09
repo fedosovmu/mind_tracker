@@ -17,7 +17,27 @@ class MoodChart extends StatelessWidget {
       ),
       child: Column(
         children: [
-          _buildTabs()
+          _buildTabs(),
+          Container(
+            padding: EdgeInsets.only(top: dp(14), left: dp(16)),
+            //color: Colors.blue,
+            width: double.infinity,
+            height: dp(40),
+            child: Text(
+              'Февраль',
+              style: CustomTextStyles.basicH1Medium,
+            ),
+          ),
+          Container(
+            color: Colors.orange,
+            width: double.infinity,
+            height: dp(220),
+          ),
+          Expanded(
+            child: Container(
+              //color: Colors.green,
+            ),
+          )
         ],
       ),
     );
@@ -25,14 +45,13 @@ class MoodChart extends StatelessWidget {
 
   Widget _buildTabs() {
     return Container(
-      color: Colors.red,
+      padding: EdgeInsets.only(top: dp(16), left: dp(12)),
+      //color: Colors.red,
       width: dp(303),
-      height: dp(26),
-      child: Center(
-        child: Text(
-          'Неделя       Месяц       Период',
-          style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
-        ),
+      height: dp(26+16),
+      child: Text(
+        'Неделя       Месяц       Период',
+        style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
       ),
     );
   }
