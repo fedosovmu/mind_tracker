@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import '../../../utils/metrics.dart';
 import '../../../utils/theme/custom_text_styles.dart';
 import '../../../utils/theme/custom_colors.dart';
-import 'signed_icon.dart';
 
 
 class CustomBottomNavigationBar extends CupertinoTabBar {
