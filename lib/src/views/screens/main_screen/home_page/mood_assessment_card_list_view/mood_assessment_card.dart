@@ -59,7 +59,7 @@ class MoodAssessmentCard extends StatelessWidget with Content {
                       width: dp(8),
                     ),
                     Text(
-                      content['getEventWord'](0),
+                      content['getEventWord'](moodAssessment.mood),
                       style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
                     ),
                   ],
