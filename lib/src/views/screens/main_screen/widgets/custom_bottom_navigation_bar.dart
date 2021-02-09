@@ -13,9 +13,6 @@ class CustomBottomNavigationBar extends CupertinoTabBar {
     'assets/icons/calendar.png'
   ];
   static const _texts = ['Главный', 'Аналитика', 'Календарь'];
-  static final _textStyle = CustomTextStyles.basic.copyWith(fontSize: 14);
-  static const _activeColor = CustomColors.silverWhite;
-  static const _inactiveColor = CustomColors.purpleTextSecondary;
 
   CustomBottomNavigationBar () : super(
     currentIndex: 1, // TODO: delete this line in prodaction
@@ -26,7 +23,7 @@ class CustomBottomNavigationBar extends CupertinoTabBar {
     iconSize: 32,
     items: List.generate(3, (index) => BottomNavigationBarItem(
         activeIcon: Image.asset(_pathsToIcons[index], height: 32),
-        icon: Image.asset(_pathsToIcons[index], height: 32, color: _inactiveColor),
+        icon: Image.asset(_pathsToIcons[index], height: 32, color: CustomColors.purpleTextSecondary),
       label: _texts[index]
     ))
   );
