@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/analytics_page/mood_chart/mood_chart.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import 'package:provider/provider.dart';
 import '../../../utils/metrics.dart';
@@ -10,7 +11,7 @@ class AnalyticsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Аналитика',
+        title: 'График настроения',
       ),
       body: Column(
         children: [
@@ -19,7 +20,7 @@ class AnalyticsPage extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  _buildGraphic(),
+                  MoodChart(),
                   _buildCards()
                 ],
               )
@@ -37,19 +38,10 @@ class AnalyticsPage extends StatelessWidget {
       height: dp(40),
       child: Center(
         child: Text(
-          'График        Влияние',
+          'График                                Влияние',
           style: CustomTextStyles.basicH1Medium,
         ),
       ),
-    );
-  }
-
-  Widget _buildGraphic() {
-    return Container(
-      margin: EdgeInsets.only(top: dp(20)),
-      color: Colors.red,
-      width: dp(327),
-      height: dp(352),
     );
   }
 
