@@ -15,7 +15,7 @@ class MoodAssessmentsProvider extends ChangeNotifier {
   }
 
   void add(MoodAssessment moodAssessment) {
-    todayMoodAssessments.add(moodAssessment);
+    moodAssessments.add(moodAssessment);
     FirebaseProvider.addMoodAssessment(moodAssessment);
     notifyListeners();
   }
