@@ -8,12 +8,6 @@ import 'calendar_page/calendar_page.dart';
 
 
 class MainScreen extends StatefulWidget {
-  List<MoodAssessment> _todayMoodAssessments = [];
-
-  MainScreen({List<MoodAssessment> todayMoodAssessments}) {
-    _todayMoodAssessments.addAll(todayMoodAssessments);
-  }
-
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -30,7 +24,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget _tabBuilder (context, index) {
     switch(index) {
       case 0:
-        return HomePage(moodAssessments: widget._todayMoodAssessments);
+        return HomePage();
         break;
       case 1:
         return AnalyticsPage();

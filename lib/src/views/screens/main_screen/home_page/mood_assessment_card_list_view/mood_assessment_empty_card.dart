@@ -42,7 +42,7 @@ class MoodAssessmentEmptyCard extends StatelessWidget with Content {
               width: dp(96),
               height: dp(96),
               decoration: BoxDecoration(
-                color: CustomColors.purpleDark,
+                color: CustomColors.purpleMegaDark,
                 shape: BoxShape.circle
               ),
             )

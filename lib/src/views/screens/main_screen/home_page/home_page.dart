@@ -10,20 +10,11 @@ import '../../../utils/theme/custom_text_styles.dart';
 
 
 class HomePage extends StatefulWidget {
-  List<MoodAssessment> _moodAssessments = [];
-
-  HomePage ({List<MoodAssessment> moodAssessments}) {
-    _moodAssessments.addAll(moodAssessments);
-  }
-
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> with Content {
-  List<MoodAssessment> _moodAssessments = [];
-  var _newMoodAseesmentNumber = 7;
-
   @override
   Widget build(BuildContext context) {
     loadContent('homePage');

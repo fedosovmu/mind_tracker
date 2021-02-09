@@ -27,7 +27,7 @@ class MindTrackerApp extends StatelessWidget {
         '/onboarding': (context) => OnboardingScreen(),
         '/moodAssessment': (context) => MoodAssessmentScreen(),
         '/moodAssessment/firstStart': (context) => MoodAssessmentScreen(firstStart: true),
-        '/main': (context) => MainScreen(todayMoodAssessments: []),
+        '/main': (context) => MainScreen(),
       },
     );
   }
