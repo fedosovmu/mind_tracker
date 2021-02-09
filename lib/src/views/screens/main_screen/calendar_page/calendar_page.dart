@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import '../../../utils/metrics.dart';
 
@@ -18,11 +19,10 @@ class _CalendarPageState extends State<CalendarPage> {
         title: 'Календарь',
       ),
       body: Center(
-        child: Container(
-          width: dp(100),
-          height: dp(100),
-          color: Colors.green,
-        ),
+        child: Text(
+          'Здесь будет календарь',
+          style: CustomTextStyles.titleH1.copyWith(color: CustomColors.purpleTextSecondary),
+        )
       ),
     );
   }

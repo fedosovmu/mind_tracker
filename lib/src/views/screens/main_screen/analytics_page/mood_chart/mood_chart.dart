@@ -28,11 +28,7 @@ class MoodChart extends StatelessWidget {
               style: CustomTextStyles.basicH1Medium,
             ),
           ),
-          Container(
-            color: Colors.orange,
-            width: double.infinity,
-            height: dp(220),
-          ),
+          _buildMoodChart(),
           Expanded(
             child: Container(
               //color: Colors.green,
@@ -40,6 +36,14 @@ class MoodChart extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  Widget _buildMoodChart() {
+    return Container(
+      color: Colors.orange,
+      width: double.infinity,
+      height: dp(220),
     );
   }
 
