@@ -12,15 +12,15 @@ abstract class FirebaseProvider {
   }
 
   static Future<List<MoodAssessment>> getTodayMoodAssessments () async {
-    final todayMoodAssessmentsQuerySnapshot = await _mood_assessments_collection
+    final moodAssessmentsQuerySnapshot = await _mood_assessments_collection.get();
         //.where('user_id', isEqualTo: 'DocumentReference(users/test_user)')
-        .where('date', isEqualTo: '2021-02-09').get();
+        //.where('date', isEqualTo: '2021-02-09').get();
 
-    final List<MoodAssessment> todayMoodAssessments = todayMoodAssessmentsQuerySnapshot.docs.map((mood_assessment_doc) {
+    final List<MoodAssessment> moodAssessments = moodAssessmentsQuerySnapshot.docs.map((mood_assessment_doc) {
       return MoodAssessment.fromMap(mood_assessment_doc.data());
     }).toList();
 
-    return todayMoodAssessments;
+    return moodAssessments;
   }
 
   static void addMoodAssessment(MoodAssessment moodAssessment) {
