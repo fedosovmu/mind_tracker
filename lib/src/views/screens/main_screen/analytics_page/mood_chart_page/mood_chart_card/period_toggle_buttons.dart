@@ -4,6 +4,7 @@ import 'package:mind_tracker/src/views/screens/main_screen/analytics_page/mood_c
 
 
 class PeriodToggleButtons extends StatefulWidget {
+  int selectedIndex = 0;
   final Function onPeriodChange;
 
   PeriodToggleButtons({this.onPeriodChange});
@@ -13,7 +14,6 @@ class PeriodToggleButtons extends StatefulWidget {
 }
 
 class _PeriodToggleButtonsState extends State<PeriodToggleButtons> {
-  int _selectedIndex = 0;
   static const _periodNames = ['Неделя', 'Месяц', 'Период'];
 
   @override
@@ -26,11 +26,13 @@ class _PeriodToggleButtonsState extends State<PeriodToggleButtons> {
         children: List.generate(_periodNames.length, (index) {
           return PeriodButton(
               _periodNames[index],
-              isPressed: index == _selectedIndex,
+              isPressed: index == widget.selectedIndex,
               onPressed: () {
                 setState(() {
-                  _selectedIndex = index;
-                  print('Perion button $index was pressed');
+                  if (widget.selectedIndex != index) {
+                    widget.selectedIndex = index;
+                    widget.onPeriodChange(widget.selectedIndex);
+                  }
                 });
               }
           );

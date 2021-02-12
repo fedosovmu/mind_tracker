@@ -18,7 +18,11 @@ class MoodChartCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          PeriodToggleButtons(),
+          PeriodToggleButtons(
+            onPeriodChange: (int index) {
+              print('Period was changed to $index');
+            },
+          ),
           Container(
             padding: EdgeInsets.only(top: dp(14), left: dp(16)),
             //color: Colors.blue,
