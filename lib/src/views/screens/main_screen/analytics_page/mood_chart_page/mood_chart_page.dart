@@ -43,11 +43,5 @@ class MoodChartPage extends StatelessWidget {
         })
       ),
     );
-    return Container(
-      margin: EdgeInsets.only(top: dp(11), left: dp(16), right: dp(16)),
-      color: CustomColors.purpleSuperDark,
-      width: double.infinity,
-      height: dp(400),
-    );
   }
 }
