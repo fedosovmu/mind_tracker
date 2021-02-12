@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
-import 'package:mind_tracker/src/views/screens/main_screen/analytics_page/mood_chart_page/mood_chart/mood_chart.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/analytics_page/mood_chart_page/mood_chart_card/mood_chart_card.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
@@ -11,7 +11,7 @@ class MoodChartPage extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          MoodChart(),
+          MoodChartCard(),
           _buildCards()
         ],
       ),
@@ -34,7 +34,7 @@ class MoodChartPage extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(dp(16)))
             ),
             child: Text(
-              '6 - 13 Февраля',
+              '${DateTime.now().day - index} Февраля',
               style: CustomTextStyles.basic.copyWith(
                 color: CustomColors.purpleLight
               ),
