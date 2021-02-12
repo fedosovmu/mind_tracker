@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mind_tracker/src/views/screens/main_screen/analytics_page/mood_chart_page/mood_chart_card/period_toggle_buttons.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/analytics_page/mood_chart_page/'
+    'mood_chart_card/period_toggle_buttons.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
@@ -33,22 +34,24 @@ class MoodChartCard extends StatelessWidget {
               style: CustomTextStyles.basicH1Medium,
             ),
           ),
-          _buildMoodChart(),
+          MoodChart(),
           Expanded(
             child: Container(
-              color: Colors.green,
+              //color: Colors.green,
             ),
           )
         ],
       ),
     );
   }
+}
 
-  Widget _buildMoodChart() {
+class MoodChart extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return Container(
-      //margin: EdgeInsets.only(left: dp(0), top: dp(0), right: dp(0)),
       color: Colors.orange,
-      //width: double.infinity,
+      width: double.infinity,
       height: dp(220),
     );
   }
