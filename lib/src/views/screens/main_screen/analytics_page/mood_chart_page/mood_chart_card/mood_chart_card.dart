@@ -62,19 +62,6 @@ class PeriodToggleButtons extends StatefulWidget {
 class _PeriodToggleButtonsState extends State<PeriodToggleButtons> {
   int _selectedIndex = 0;
   static const _periodNames = ['Неделя', 'Месяц', 'Период'];
-  var _onPressCallBacks;
-
-  @override
-  void initState() {
-    super.initState();
-    _onPressCallBacks = List.generate(_periodNames.length, (index) {
-      return () {
-        setState(() {
-          _selectedIndex = index;
-        });
-      };
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
