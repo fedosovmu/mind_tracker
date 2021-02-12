@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/analytics_page/mood_chart_page/mood_chart_card/period_toggle_buttons.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
@@ -47,71 +48,4 @@ class MoodChartCard extends StatelessWidget {
       height: dp(220),
     );
   }
-}
-
-
-class PeriodToggleButtons extends StatefulWidget {
-  final Function onPeriodChange;
-
-  PeriodToggleButtons({this.onPeriodChange});
-
-  @override
-  _PeriodToggleButtonsState createState() => _PeriodToggleButtonsState();
-}
-
-class _PeriodToggleButtonsState extends State<PeriodToggleButtons> {
-  int _selectedIndex = 0;
-  static const _periodNames = ['Неделя', 'Месяц', 'Период'];
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(left: dp(12), right: dp(12), top: dp(16)),
-      height: dp(26),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: List.generate(_periodNames.length, (index) {
-          return PeriodButton(
-            _periodNames[index],
-            isPressed: index == _selectedIndex,
-            onPressed: () {
-              setState(() {
-                _selectedIndex = index;
-                print('Perion button $index was pressed');
-              });
-            }
-          );
-        }),
-      ),
-    );
-  }
-}
-
-class PeriodButton extends StatelessWidget {
-  final String title;
-  final Function onPressed;
-  final bool isPressed;
-  
-  PeriodButton(this.title, {this.onPressed, this.isPressed = false});
-  
-  @override
-  Widget build(BuildContext context) {
-    return FlatButton(
-      splashColor: Color(0x00),
-      highlightColor: Color(0x00),
-      color: isPressed ? CustomColors.purpleMegaDark : CustomColors.purpleDark,
-      minWidth: dp(93),
-      child: Text(
-        title,
-        style: CustomTextStyles.basic.copyWith(
-          color: CustomColors.purpleLight
-        ),
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(dp(8)))
-      ),
-      onPressed: onPressed
-    );
-  }
-
 }
