@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
-import 'package:mind_tracker/src/views/screens/main_screen/analytics_page/custom_tab_bar.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
-import 'package:provider/provider.dart';
-import '../../../utils/metrics.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/analytics_page/influence_page/influence_page.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/analytics_page/widgets/custom_tab_bar.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/analytics_page/mood_chart_page/mood_chart_page.dart';
 
 
 class AnalyticsPage extends StatefulWidget {
@@ -39,12 +37,8 @@ class _AnalyticsPageState extends State<AnalyticsPage> with TickerProviderStateM
             child: TabBarView(
               controller: _tabController,
                 children: [
-                  Container(
-                    color: Colors.green,
-                  ),
-                  Container(
-                    color: Colors.red,
-                  )
+                  MoodChartPage(),
+                  InfluencePage(),
                 ]
             ),
           )

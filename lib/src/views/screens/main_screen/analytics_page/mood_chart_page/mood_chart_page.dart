@@ -6,7 +6,7 @@ class MoodChartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.red,
+      color: Colors.yellow,
       width: double.infinity,
       height: double.infinity,
     );
