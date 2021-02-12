@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/analytics_page/custom_tab_bar.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +34,7 @@ class _AnalyticsPageState extends State<AnalyticsPage> with TickerProviderStateM
       ),
       body: Column(
         children: [
-          _buildTabBar(),
+          CustomTabBar(_tabController),
           Expanded(
             child: TabBarView(
               controller: _tabController,
@@ -49,33 +50,6 @@ class _AnalyticsPageState extends State<AnalyticsPage> with TickerProviderStateM
           )
         ],
       ),
-    );
-  }
-
-  Widget _buildTabBar () {
-    return Stack(
-      alignment: Alignment.bottomLeft,
-      //width: double.infinity,
-      children: [
-        Container(
-          color: CustomColors.purpleSuperDark,
-          width: double.infinity,
-          height: dp(2),
-        ),
-        TabBar(
-          isScrollable: false,
-          labelStyle: CustomTextStyles.basicH1Medium,
-          labelColor: CustomColors.purpleLight,
-          unselectedLabelStyle: CustomTextStyles.basicH1Medium,
-          unselectedLabelColor: CustomColors.purpleTextSecondary,
-          indicatorColor: CustomColors.purpleLight,
-          tabs: [
-            Tab(text: 'График',),
-            Tab(text: 'Влияние',)
-          ],
-          controller: _tabController
-        ),
-      ],
     );
   }
 }
