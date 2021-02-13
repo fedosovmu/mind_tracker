@@ -90,18 +90,25 @@ class MoodChart extends StatelessWidget {
 }
 
 class MoodChartPainter extends CustomPainter {
-  List<double> _chartLineHeights = List.generate(7, (index) => null);
+  List<double> _verticalPointPositions = List.generate(7, (index) => null);
+  List<double> _horizontalPointPositions = List.generate(7, (index) => null);
 
   @override
   void paint(Canvas canvas, Size size) {
-    _calculateChartLineHeights(size);
+    _calculatePointPositions(size);
     _drawHorizontalLines(canvas, size);
+    _drawCurve(canvas, size);
   }
 
-  void _calculateChartLineHeights(Size size) {
-    final interval = (size.height - dp(20)) / 6;
+  void _calculatePointPositions(Size size) {
+    final verticalInterval = (size.height - dp(20)) / 6;
     for (int i = 0; i < 7; i++) {
-      _chartLineHeights[i] = interval * (i) + dp(15);
+      _verticalPointPositions[i] = verticalInterval * i + dp(15);
+    }
+
+    final horizontalInterval = (size.width - dp(20)) / 6;
+    for (int i = 0; i < 7; i++) {
+      _horizontalPointPositions[i] = horizontalInterval * i + dp(10);
     }
   }
 
@@ -111,13 +118,27 @@ class MoodChartPainter extends CustomPainter {
         ..strokeWidth = dp(1);
 
     for (int i = 0; i < 7; i++) {
-      final y = _chartLineHeights[i];
+      final y = _verticalPointPositions[i];
       final p1 = Offset(0, y);
       final p2 = Offset(size.width, y);
       canvas.drawLine(p1, p2, paint);
     }
-
   }
+
+   void _drawCurve(Canvas canvas, Size size) {
+      final paint = Paint()
+          ..color = Colors.red;
+
+      final curvePoints = List.generate(7, (index) {
+        final x = _horizontalPointPositions[index];
+        final y = _verticalPointPositions[4 - (index / 2).round()];
+        return Offset(x, y);
+      });
+
+      for (var point in curvePoints) {
+        canvas.drawCircle(point, dp(3), paint);
+      }
+   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
