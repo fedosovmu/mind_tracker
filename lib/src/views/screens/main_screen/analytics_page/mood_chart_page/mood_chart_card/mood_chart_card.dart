@@ -36,11 +36,40 @@ class MoodChartCard extends StatelessWidget {
           ),
           MoodChart(),
           Expanded(
-            child: Container(
-              //color: Colors.green,
-            ),
+            child: _buildLables()
           )
         ],
+      ),
+    );
+  }
+
+  static const weekDayNames = ['Пн', 'Вт', 'Ср' , 'Чт' ,'Пт' ,'Сб' ,'Вс'];
+
+  Widget _buildLables() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: dp(14)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: List.generate(7, (index) {
+          final int day = index + DateTime.now().day - 6;
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '$day',
+                style: CustomTextStyles.basic.copyWith(
+                  color: CustomColors.purpleLight
+                ),
+              ),
+              Text(
+                '${weekDayNames[day % 7]}',
+                style: CustomTextStyles.basic.copyWith(
+                  color: CustomColors.purpleTextSecondary
+                ),
+              )
+            ],
+          );
+        })
       ),
     );
   }
