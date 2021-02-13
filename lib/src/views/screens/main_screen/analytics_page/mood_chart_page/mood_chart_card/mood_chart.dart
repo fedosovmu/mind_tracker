@@ -71,22 +71,18 @@ class MoodChartPainter extends CustomPainter {
   }
 
   void _drawTestLine(Canvas canvas, Size size) {
-    final paint = Paint()
+    final moodColorsGradientPaint = Paint()
       ..shader = ui.Gradient.linear(
-          Offset(0, 0),
           Offset(0, size.height),
-          [
-            Colors.green,
-            Colors.blue,
-            Colors.red,
-          ],
-          [0, 0.5, 1]
+          Offset(0, 0),
+          List.generate(CustomColors.moods.length, (index) => CustomColors.moods[index+1]),
+          List.generate(CustomColors.moods.length, (index) => (1 / CustomColors.moods.length * index))
       )
       ..strokeWidth = dp(3);
     final p1 = Offset(0, 0);
     final p2 = Offset(size.width, size.height);
 
-    canvas.drawLine(p1, p2, paint);
+    canvas.drawLine(p1, p2, moodColorsGradientPaint);
   }
 
   @override
