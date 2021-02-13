@@ -22,6 +22,7 @@ class MoodChartPainter extends CustomPainter {
   List<double> _verticalPointPositions = List.generate(7, (index) => null);
   List<double> _horizontalPointPositions = List.generate(7, (index) => null);
   static const _testMoodData = [2, 5.3, 4, 4.5, 4.9, 6, 5.5]; // TODO: delete this line
+  static const _testMoodData2 = [1.2, 5.3, 3, 6.5, 1, 7, 3]; // TODO: delete this line
 
   @override
   void paint(Canvas canvas, Size size) {

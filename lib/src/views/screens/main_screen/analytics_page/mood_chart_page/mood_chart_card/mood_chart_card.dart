@@ -63,7 +63,7 @@ class MoodChartCard extends StatelessWidget {
                 ),
               ),
               Text(
-                '${weekDayNames[day % 7]}',
+                '${weekDayNames[(day - 1) % 7]}',
                 style: CustomTextStyles.basic.copyWith(
                   color: CustomColors.purpleTextSecondary
                 ),
