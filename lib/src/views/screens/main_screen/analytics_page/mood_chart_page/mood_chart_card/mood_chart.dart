@@ -77,9 +77,10 @@ class MoodChartPainter extends CustomPainter {
           Offset(0, size.height),
           [
             Colors.green,
-            //Colors.blue,
-            Color(0x00FF0000),
-          ]
+            Colors.blue,
+            Colors.red,
+          ],
+          [0, 0.5, 1]
       )
       ..strokeWidth = dp(3);
     final p1 = Offset(0, 0);
