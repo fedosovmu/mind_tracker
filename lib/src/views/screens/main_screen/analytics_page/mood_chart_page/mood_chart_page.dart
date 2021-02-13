@@ -8,40 +8,34 @@ import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 class MoodChartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          MoodChartCard(),
-          _buildCards()
-        ],
-      ),
+    return ListView(
+      children: [
+        MoodChartCard(),
+        SizedBox(height: dp(20)),
+        ..._buildCards()
+      ],
     );
   }
 
-  Widget _buildCards() {
-    return Container(
-      margin: EdgeInsets.only(top: dp(18), left: dp(16), right: dp(16)),
-      child: Column(
-        children: List.generate(7, (index) {
-          return Container(
-            margin: EdgeInsets.only(bottom: dp(12)),
-            padding: EdgeInsets.only(left: dp(50)),
-            alignment: Alignment.centerLeft,
-            width: double.infinity,
-            height: dp(56),
-            decoration: BoxDecoration(
-              color: CustomColors.purpleSuperDark,
-              borderRadius: BorderRadius.all(Radius.circular(dp(16)))
+  List<Widget> _buildCards() {
+    return List.generate(7, (index) {
+        return Container(
+          margin: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(12)),
+          padding: EdgeInsets.only(left: dp(50)),
+          alignment: Alignment.centerLeft,
+          width: double.infinity,
+          height: dp(56),
+          decoration: BoxDecoration(
+            color: CustomColors.purpleSuperDark,
+            borderRadius: BorderRadius.all(Radius.circular(dp(16)))
+          ),
+          child: Text(
+            '${DateTime.now().day - index} Февраля',
+            style: CustomTextStyles.basic.copyWith(
+              color: CustomColors.purpleLight
             ),
-            child: Text(
-              '${DateTime.now().day - index} Февраля',
-              style: CustomTextStyles.basic.copyWith(
-                color: CustomColors.purpleLight
-              ),
-            ),
-          );
-        })
-      ),
-    );
+          ),
+        );
+      });
   }
 }
