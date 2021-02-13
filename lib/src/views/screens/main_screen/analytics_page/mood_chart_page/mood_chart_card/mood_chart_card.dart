@@ -4,6 +4,7 @@ import 'package:mind_tracker/src/views/screens/main_screen/analytics_page/mood_c
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
+import 'dart:ui' as ui;
 
 
 class MoodChartCard extends StatelessWidget {
@@ -98,6 +99,7 @@ class MoodChartPainter extends CustomPainter {
     _calculatePointPositions(size);
     _drawHorizontalLines(canvas, size);
     _drawCurve(canvas, size);
+    _drawTestLine(canvas, size);
   }
 
   void _calculatePointPositions(Size size) {
@@ -138,6 +140,23 @@ class MoodChartPainter extends CustomPainter {
       for (var point in curvePoints) {
         canvas.drawCircle(point, dp(3), paint);
       }
+   }
+
+   void _drawTestLine(Canvas canvas, Size size) {
+      final paint = Paint()
+        ..shader = ui.Gradient.linear(
+            Offset(0, 0),
+            Offset(0, size.height),
+            [
+              Colors.green,
+              Colors.red
+            ]
+        )
+        ..strokeWidth = dp(3);
+      final p1 = Offset(0, 0);
+      final p2 = Offset(size.width, size.height);
+
+      canvas.drawLine(p1, p2, paint);
    }
 
   @override
