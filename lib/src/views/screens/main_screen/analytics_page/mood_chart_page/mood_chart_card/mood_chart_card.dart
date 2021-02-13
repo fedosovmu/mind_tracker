@@ -90,14 +90,33 @@ class MoodChart extends StatelessWidget {
 }
 
 class MoodChartPainter extends CustomPainter {
+  List<double> _chartLineHeights = List.generate(7, (index) => null);
+
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.red;
-    const p1 = Offset(100, 100);
-    const p2 = Offset(200, 200);
+    _calculateChartLineHeights(size);
+    _drawHorizontalLines(canvas, size);
+  }
 
-    canvas.drawLine(p1, p2, paint);
+  void _calculateChartLineHeights(Size size) {
+    final interval = (size.height - dp(20)) / 6;
+    for (int i = 0; i < 7; i++) {
+      _chartLineHeights[i] = interval * (i) + dp(15);
+    }
+  }
+
+  void _drawHorizontalLines(Canvas canvas, Size size) {
+    final paint = Paint()
+        ..color = CustomColors.purpleMegaDark
+        ..strokeWidth = dp(1);
+
+    for (int i = 0; i < 7; i++) {
+      final y = _chartLineHeights[i];
+      final p1 = Offset(0, y);
+      final p2 = Offset(size.width, y);
+      canvas.drawLine(p1, p2, paint);
+    }
+
   }
 
   @override
