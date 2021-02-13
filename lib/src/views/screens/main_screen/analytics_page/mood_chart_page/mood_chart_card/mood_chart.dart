@@ -44,6 +44,13 @@ class MoodChartPainter extends CustomPainter {
     }
   }
 
+  Offset _getPointPosition(int index, double mood) {
+    final horizontalStartPosition = dp(15);
+    final horizontalInterval = dp(33);
+    final y = (7 - mood) * horizontalInterval + horizontalStartPosition;
+    return Offset(_horizontalPointPositions[index], y);
+  }
+
   void _drawHorizontalLines(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = CustomColors.purpleMegaDark
@@ -73,7 +80,13 @@ class MoodChartPainter extends CustomPainter {
       return Offset(x, y);
     });
 
-    for (var point in curvePoints) {
+    //for (var point in curvePoints) {
+    //  canvas.drawCircle(point, dp(3), moodColorsGradientPaint);
+    //}
+
+    for (var i = 0; i < 7; i++) {
+      final mood = i + 1.0;
+      final point = _getPointPosition(i, mood);
       canvas.drawCircle(point, dp(3), moodColorsGradientPaint);
     }
   }
