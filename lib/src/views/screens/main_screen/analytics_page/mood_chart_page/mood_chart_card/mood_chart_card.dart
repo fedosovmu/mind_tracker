@@ -79,9 +79,30 @@ class MoodChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.orange,
+      //color: Colors.orange,
       width: double.infinity,
       height: dp(220),
+      child: CustomPaint(
+        painter: MoodChartPainter(),
+      ),
     );
   }
+}
+
+class MoodChartPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.red;
+    const p1 = Offset(100, 100);
+    const p2 = Offset(200, 200);
+
+    canvas.drawLine(p1, p2, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
+  }
+
 }
