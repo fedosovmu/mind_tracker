@@ -21,14 +21,13 @@ class MoodChart extends StatelessWidget {
 class MoodChartPainter extends CustomPainter {
   List<double> _verticalPointPositions = List.generate(7, (index) => null);
   List<double> _horizontalPointPositions = List.generate(7, (index) => null);
-  static const _testMoodData = [1, 2.3, 4, 7, 1.9, 3, 5.5]; // TODO: delete this line
+  static const _testMoodData = [2, 5.3, 4, 4.5, 4.9, 6, 5.5]; // TODO: delete this line
 
   @override
   void paint(Canvas canvas, Size size) {
     _calculatePointPositions(size);
     _drawHorizontalLines(canvas, size);
     _drawCurve(canvas, size);
-    //_drawTestLine(canvas, size);
   }
 
   void _calculatePointPositions(Size size) {
@@ -52,7 +51,7 @@ class MoodChartPainter extends CustomPainter {
   }
 
   void _drawHorizontalLines(Canvas canvas, Size size) {
-    final paint = Paint()
+    final horizontalLinesPaint = Paint()
       ..color = CustomColors.purpleMegaDark
       ..strokeWidth = dp(1);
 
@@ -61,12 +60,13 @@ class MoodChartPainter extends CustomPainter {
       final y = _verticalPointPositions[i];
       final p1 = Offset(horizontalPadding / 2, y);
       final p2 = Offset(size.width - (horizontalPadding / 2), y);
-      canvas.drawLine(p1, p2, paint);
+      canvas.drawLine(p1, p2, horizontalLinesPaint);
     }
   }
 
   void _drawCurve(Canvas canvas, Size size) {
     final moodColorsGradientPaint = Paint()
+      ..strokeWidth = dp(3)
       ..shader = ui.Gradient.linear(
           Offset(0, size.height),
           Offset(0, 0),
@@ -84,26 +84,19 @@ class MoodChartPainter extends CustomPainter {
     //  canvas.drawCircle(point, dp(3), moodColorsGradientPaint);
     //}
 
+    List<Offset> points = [];
     for (var i = 0; i < 7; i++) {
-      final mood = i + 1.0;
+      final mood = _testMoodData[i].toDouble();
       final point = _getPointPosition(i, mood);
-      canvas.drawCircle(point, dp(3), moodColorsGradientPaint);
+      points.add(point);
+      //canvas.drawCircle(point, dp(3), moodColorsGradientPaint);
     }
-  }
 
-  void _drawTestLine(Canvas canvas, Size size) {
-    final moodColorsGradientPaint = Paint()
-      ..shader = ui.Gradient.linear(
-          Offset(0, size.height),
-          Offset(0, 0),
-          List.generate(CustomColors.moods.length, (index) => CustomColors.moods[index+1]),
-          List.generate(CustomColors.moods.length, (index) => (1 / CustomColors.moods.length * index))
-      )
-      ..strokeWidth = dp(3);
-    final p1 = Offset(0, 0);
-    final p2 = Offset(size.width, size.height);
-
-    canvas.drawLine(p1, p2, moodColorsGradientPaint);
+    for (int i = 1; i < 7; i++) {
+      final p1 = points[i - 1];
+      final p2 = points[i];
+      canvas.drawLine(p1, p2, moodColorsGradientPaint);
+    }
   }
 
   @override
