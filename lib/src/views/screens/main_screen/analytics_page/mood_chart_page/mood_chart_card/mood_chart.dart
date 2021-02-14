@@ -18,8 +18,6 @@ class MoodChart extends StatelessWidget {
             painter: MoodChartPainter(
                 averageDailyMoodForWeek: moodAssessmentsProvider.getAverageDailyMoodForWeek()
             ),
-            //painter: MoodChartPainter([null, null, 1.3, 6, null, 7, null]),
-            //painter: MoodChartPainter([null, null, null, null, null, null, null]),
           );
         }
       )
@@ -109,7 +107,14 @@ class MoodChartPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant MoodChartPainter oldDelegate) { 
+  bool shouldRepaint(covariant MoodChartPainter oldDelegate) {
+    for(var i = 0; i < averageDailyMoodForWeek.length; i++) {
+      final oldAverageDailyMood = oldDelegate.averageDailyMoodForWeek[i];
+      final averageDailyMood = averageDailyMoodForWeek[i];
+      if (oldAverageDailyMood != averageDailyMood) {
+        return true;
+      }
+    }
     return false;
   }
 }
