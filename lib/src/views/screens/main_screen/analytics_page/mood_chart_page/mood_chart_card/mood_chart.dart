@@ -8,7 +8,6 @@ class MoodChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //color: Colors.orange,
       width: double.infinity,
       height: dp(220),
       child: CustomPaint(
@@ -22,7 +21,6 @@ class MoodChartPainter extends CustomPainter {
   List<double> _verticalPointPositions = List.generate(7, (index) => null);
   List<double> _horizontalPointPositions = List.generate(7, (index) => null);
   static const _testMoodData = [2, 5.3, 4, 4.5, 4.9, 6, 5.5]; // TODO: delete this line
-  static const _testMoodData2 = [1.2, 5.3, 3, 6.5, 1, 7, 3]; // TODO: delete this line
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -66,44 +64,39 @@ class MoodChartPainter extends CustomPainter {
   }
 
   void _drawCurve(Canvas canvas, Size size) {
-    final moodColorsGradientPaint = Paint()
+    final gradientShader = ui.Gradient.linear(
+        Offset(0, size.height),
+        Offset(0, 0),
+        List.generate(CustomColors.moods.length, (index) => CustomColors.moods[index+1]),
+        List.generate(CustomColors.moods.length, (index) => (1 / CustomColors.moods.length * index))
+    );
+
+    final moodColorsGradientStrokePaint = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = dp(3)
-      ..shader = ui.Gradient.linear(
-          Offset(0, size.height),
-          Offset(0, 0),
-          List.generate(CustomColors.moods.length, (index) => CustomColors.moods[index+1]),
-          List.generate(CustomColors.moods.length, (index) => (1 / CustomColors.moods.length * index))
-      );
+      ..strokeWidth = dp(1)
+      ..shader = gradientShader;
 
-    final curvePoints = List.generate(7, (index) {
-      final x = _horizontalPointPositions[index];
-      final y = _verticalPointPositions[index];
-      return Offset(x, y);
-    });
+    final moodColorsGradientFillPaint = Paint()
+      ..style = PaintingStyle.fill
+      ..shader = gradientShader;
 
-    //for (var point in curvePoints) {
-    //  canvas.drawCircle(point, dp(3), moodColorsGradientPaint);
-    //}
-
-    List<Offset> points = [];
+    List<Offset> curvePoints = [];
     for (var i = 0; i < 7; i++) {
       final mood = _testMoodData[i].toDouble();
       final point = _getPointPosition(i, mood);
-      points.add(point);
-      canvas.drawCircle(point, dp(3), moodColorsGradientPaint);
+      curvePoints.add(point);
+      canvas.drawCircle(point, dp(3), moodColorsGradientFillPaint);
     }
 
-
     final path = Path();
-    final p0 = points[0];
+    final p0 = curvePoints[0];
     path.moveTo(p0.dx, p0.dy);
     for (int i = 1; i < 7; i++) {
-      var p = points[i];
+      var p = curvePoints[i];
       path.lineTo(p.dx, p.dy);
     }
 
-    canvas.drawPath(path, moodColorsGradientPaint);
+    canvas.drawPath(path, moodColorsGradientStrokePaint);
   }
 
   @override
