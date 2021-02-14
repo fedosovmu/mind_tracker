@@ -16,7 +16,9 @@ class MoodChart extends StatelessWidget {
         builder: (context, moodAssessmentsProvider, child) {
           print(moodAssessmentsProvider.moodAssessments);
           return CustomPaint(
-            painter: MoodChartPainter([2, 5.3, 4, 4.5, 4.9, 6, 5.5]),
+            //painter: MoodChartPainter([2, 5.3, 4, 4.5, 4.9, 6, 5.5]),
+            painter: MoodChartPainter([null, null, 1.3, 6, null, 7, null]),
+            //painter: MoodChartPainter([null, null, null, null, null, null, null]),
           );
         }
       )
@@ -86,18 +88,20 @@ class MoodChartPainter extends CustomPainter {
 
     List<Offset> curvePoints = [];
     for (var i = 0; i < 7; i++) {
-      final mood = averageMoodForPeriods[i].toDouble();
-      final point = _getPointPositionByMood(i, mood);
-      curvePoints.add(point);
-      canvas.drawCircle(point, dp(3), moodColorsGradientFillPaint);
+      if (averageMoodForPeriods[i] != null) {
+        final mood = averageMoodForPeriods[i].toDouble();
+        final p = _getPointPositionByMood(i, mood);
+        curvePoints.add(p);
+        canvas.drawCircle(p, dp(3), moodColorsGradientFillPaint);
+      }
     }
 
     final path = Path();
-    final p0 = curvePoints[0];
-    path.moveTo(p0.dx, p0.dy);
-    for (int i = 1; i < 7; i++) {
-      var p = curvePoints[i];
-      path.lineTo(p.dx, p.dy);
+    for (int i = 0; i < curvePoints.length - 1; i++) {
+      final p = curvePoints[i];
+      final p2 = curvePoints[i + 1];
+      path.moveTo(p.dx, p.dy);
+      path.lineTo(p2.dx, p2.dy);
     }
 
     canvas.drawPath(path, moodColorsGradientStrokePaint);
