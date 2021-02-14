@@ -18,7 +18,6 @@ class MoodChart extends StatelessWidget {
 }
 
 class MoodChartPainter extends CustomPainter {
-  List<double> _verticalPointPositions = List.generate(7, (index) => null);
   List<double> _horizontalPointPositions = List.generate(7, (index) => null);
   static const _testMoodData = [2, 5.3, 4, 4.5, 4.9, 6, 5.5]; // TODO: delete this line
 
@@ -30,11 +29,6 @@ class MoodChartPainter extends CustomPainter {
   }
 
   void _calculatePointPositions(Size size) {
-    final verticalInterval = (size.height - dp(20)) / 6;
-    for (int i = 0; i < 7; i++) {
-      _verticalPointPositions[i] = verticalInterval * i + dp(15);
-    }
-
     final horizontalPadding = dp(45);
     final horizontalInterval = (size.width - horizontalPadding) / 6;
     for (int i = 0; i < 7; i++) {
@@ -54,9 +48,10 @@ class MoodChartPainter extends CustomPainter {
       ..color = CustomColors.purpleMegaDark
       ..strokeWidth = dp(1);
 
+    final verticalInterval = (size.height - dp(20)) / 6;
     final horizontalPadding = dp(20);
     for (int i = 0; i < 7; i++) {
-      final y = _verticalPointPositions[i];
+      final y = verticalInterval * i + dp(15);
       final p1 = Offset(horizontalPadding / 2, y);
       final p2 = Offset(size.width - (horizontalPadding / 2), y);
       canvas.drawLine(p1, p2, horizontalLinesPaint);
