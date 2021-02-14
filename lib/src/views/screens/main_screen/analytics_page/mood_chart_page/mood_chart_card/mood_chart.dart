@@ -67,6 +67,7 @@ class MoodChartPainter extends CustomPainter {
 
   void _drawCurve(Canvas canvas, Size size) {
     final moodColorsGradientPaint = Paint()
+      ..style = PaintingStyle.stroke
       ..strokeWidth = dp(3)
       ..shader = ui.Gradient.linear(
           Offset(0, size.height),
@@ -90,14 +91,19 @@ class MoodChartPainter extends CustomPainter {
       final mood = _testMoodData[i].toDouble();
       final point = _getPointPosition(i, mood);
       points.add(point);
-      //canvas.drawCircle(point, dp(3), moodColorsGradientPaint);
+      canvas.drawCircle(point, dp(3), moodColorsGradientPaint);
     }
 
+
+    final path = Path();
+    final p0 = points[0];
+    path.moveTo(p0.dx, p0.dy);
     for (int i = 1; i < 7; i++) {
-      final p1 = points[i - 1];
-      final p2 = points[i];
-      canvas.drawLine(p1, p2, moodColorsGradientPaint);
+      var p = points[i];
+      path.lineTo(p.dx, p.dy);
     }
+
+    canvas.drawPath(path, moodColorsGradientPaint);
   }
 
   @override
