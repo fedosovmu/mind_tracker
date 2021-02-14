@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mind_tracker/src/views/screens/main_screen/analytics_page/mood_chart_page/mood_chart_card/mood_chart.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/analytics_page/mood_chart_page/'
+    'mood_chart_card/mood_chart.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/analytics_page/mood_chart_page/'
+    'mood_chart_card/mood_chart_date_labels.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/analytics_page/mood_chart_page/'
     'mood_chart_card/period_toggle_buttons.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
@@ -37,40 +40,9 @@ class MoodChartCard extends StatelessWidget {
           ),
           MoodChart(),
           Expanded(
-            child: _buildLables()
+            child: MoodChartDateLabels()
           )
         ],
-      ),
-    );
-  }
-
-  static const weekDayNames = ['Пн', 'Вт', 'Ср' , 'Чт' ,'Пт' ,'Сб' ,'Вс'];
-
-  Widget _buildLables() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: dp(14)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: List.generate(7, (index) {
-          final int day = index + DateTime.now().day - 6;
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '$day',
-                style: CustomTextStyles.basic.copyWith(
-                  color: CustomColors.purpleLight
-                ),
-              ),
-              Text(
-                '${weekDayNames[(day - 1) % 7]}',
-                style: CustomTextStyles.basic.copyWith(
-                  color: CustomColors.purpleTextSecondary
-                ),
-              )
-            ],
-          );
-        })
       ),
     );
   }
