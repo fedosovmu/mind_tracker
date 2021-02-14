@@ -54,7 +54,7 @@ mixin Content {
       'skipButtonText': 'Пропустить',
     },
 
-    'homePage': {
+    'homePage': const {
       'title': 'Ваше настроение'
     },
 
@@ -87,8 +87,12 @@ mixin Content {
       } as dynamic,
     },
 
-    'emptyMoodAssessmentCard': {
+    'emptyMoodAssessmentCard': const {
       'buttonText': 'Оценить'
-    }
+    },
+
+    'moodChartDateLabels': const {
+      'weekDayNames': ['Пн', 'Вт', 'Ср' , 'Чт' ,'Пт' ,'Сб' ,'Вс'],
+    },
   };
 }
