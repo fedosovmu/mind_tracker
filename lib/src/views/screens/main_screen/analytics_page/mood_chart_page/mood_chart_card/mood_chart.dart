@@ -78,7 +78,7 @@ class MoodChartPainter extends CustomPainter {
 
     final moodColorsGradientStrokePaint = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = dp(1)
+      ..strokeWidth = dp(3)
       ..shader = gradientShader;
 
     final moodColorsGradientFillPaint = Paint()
@@ -91,7 +91,7 @@ class MoodChartPainter extends CustomPainter {
         final mood = averageDailyMoodForWeek[i].toDouble();
         final p = _getPointPositionByMood(i, mood);
         curvePoints.add(p);
-        canvas.drawCircle(p, dp(3), moodColorsGradientFillPaint);
+        canvas.drawCircle(p, dp(4), moodColorsGradientFillPaint);
       }
     }
 
