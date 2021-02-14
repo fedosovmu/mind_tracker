@@ -42,7 +42,7 @@ class MoodChartPainter extends CustomPainter {
     }
   }
 
-  Offset _getPointPosition(int index, double mood) {
+  Offset _getPointPositionByMood(int index, double mood) {
     final horizontalStartPosition = dp(15);
     final horizontalInterval = dp(33);
     final y = (7 - mood) * horizontalInterval + horizontalStartPosition;
@@ -83,7 +83,7 @@ class MoodChartPainter extends CustomPainter {
     List<Offset> curvePoints = [];
     for (var i = 0; i < 7; i++) {
       final mood = _testMoodData[i].toDouble();
-      final point = _getPointPosition(i, mood);
+      final point = _getPointPositionByMood(i, mood);
       curvePoints.add(point);
       canvas.drawCircle(point, dp(3), moodColorsGradientFillPaint);
     }
