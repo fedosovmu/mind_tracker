@@ -14,10 +14,11 @@ class MoodChart extends StatelessWidget {
       height: dp(220),
       child: Consumer<MoodAssessmentsProvider> (
         builder: (context, moodAssessmentsProvider, child) {
-          print(moodAssessmentsProvider.moodAssessments);
           return CustomPaint(
-            //painter: MoodChartPainter([2, 5.3, 4, 4.5, 4.9, 6, 5.5]),
-            painter: MoodChartPainter([null, null, 1.3, 6, null, 7, null]),
+            painter: MoodChartPainter(
+                averageDailyMoodForWeek: moodAssessmentsProvider.getAverageDailyMoodForWeek()
+            ),
+            //painter: MoodChartPainter([null, null, 1.3, 6, null, 7, null]),
             //painter: MoodChartPainter([null, null, null, null, null, null, null]),
           );
         }
@@ -28,9 +29,9 @@ class MoodChart extends StatelessWidget {
 
 class MoodChartPainter extends CustomPainter {
   List<double> _horizontalPointPositions = List.generate(7, (index) => null);
-  final List<double> averageMoodForPeriods;
+  final List<double> averageDailyMoodForWeek;
 
-  MoodChartPainter(this.averageMoodForPeriods);
+  MoodChartPainter({this.averageDailyMoodForWeek});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -88,8 +89,8 @@ class MoodChartPainter extends CustomPainter {
 
     List<Offset> curvePoints = [];
     for (var i = 0; i < 7; i++) {
-      if (averageMoodForPeriods[i] != null) {
-        final mood = averageMoodForPeriods[i].toDouble();
+      if (averageDailyMoodForWeek[i] != null) {
+        final mood = averageDailyMoodForWeek[i].toDouble();
         final p = _getPointPositionByMood(i, mood);
         curvePoints.add(p);
         canvas.drawCircle(p, dp(3), moodColorsGradientFillPaint);
