@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_provider.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'dart:ui' as ui;
+import 'package:provider/provider.dart';
 
 
 class MoodChart extends StatelessWidget {
@@ -10,16 +12,23 @@ class MoodChart extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: dp(220),
-      child: CustomPaint(
-        painter: MoodChartPainter(),
-      ),
+      child: Consumer<MoodAssessmentsProvider> (
+        builder: (context, moodAssessmentsProvider, child) {
+          print(moodAssessmentsProvider.moodAssessments);
+          return CustomPaint(
+            painter: MoodChartPainter([2, 5.3, 4, 4.5, 4.9, 6, 5.5]),
+          );
+        }
+      )
     );
   }
 }
 
 class MoodChartPainter extends CustomPainter {
   List<double> _horizontalPointPositions = List.generate(7, (index) => null);
-  static const _testMoodData = [2, 5.3, 4, 4.5, 4.9, 6, 5.5]; // TODO: delete this line
+  final List<double> averageMoodForPeriods;
+
+  MoodChartPainter(this.averageMoodForPeriods);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -77,7 +86,7 @@ class MoodChartPainter extends CustomPainter {
 
     List<Offset> curvePoints = [];
     for (var i = 0; i < 7; i++) {
-      final mood = _testMoodData[i].toDouble();
+      final mood = averageMoodForPeriods[i].toDouble();
       final point = _getPointPositionByMood(i, mood);
       curvePoints.add(point);
       canvas.drawCircle(point, dp(3), moodColorsGradientFillPaint);
@@ -95,7 +104,7 @@ class MoodChartPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+  bool shouldRepaint(covariant MoodChartPainter oldDelegate) { 
     return false;
   }
 }

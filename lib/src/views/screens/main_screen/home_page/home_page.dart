@@ -23,8 +23,8 @@ class _HomePageState extends State<HomePage> with Content {
         title: content['title'],
       ),
       body: Consumer<MoodAssessmentsProvider>(
-        builder: (context, todayMoodAssessments, child) => MoodAssessmentCardsListView(
-          moodAssessments: todayMoodAssessments.todayMoodAssessments,
+        builder: (context, moodAssessmentsProvider, child) => MoodAssessmentCardsListView(
+          moodAssessments: moodAssessmentsProvider.todayMoodAssessments,
         ),
       )
     );
