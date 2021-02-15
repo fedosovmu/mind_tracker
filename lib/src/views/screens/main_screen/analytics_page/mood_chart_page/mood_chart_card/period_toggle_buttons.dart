@@ -30,7 +30,7 @@ class _PeriodToggleButtonsState extends State<PeriodToggleButtons> {
               onPressed: () {
                 setState(() {
                   if (widget.selectedIndex != index) {
-                    widget.selectedIndex = index;
+                    //widget.selectedIndex = index;
                     widget.onPeriodChange(widget.selectedIndex);
                   }
                 });

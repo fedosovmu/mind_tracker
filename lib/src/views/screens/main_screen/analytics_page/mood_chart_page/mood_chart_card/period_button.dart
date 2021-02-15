@@ -21,7 +21,7 @@ class PeriodButton extends StatelessWidget {
         child: Text(
           title,
           style: CustomTextStyles.basic.copyWith(
-              color: CustomColors.purpleLight
+              color: isPressed ? CustomColors.purpleLight : CustomColors.purpleTextSecondary
           ),
         ),
         shape: RoundedRectangleBorder(
