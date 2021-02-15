@@ -18,9 +18,9 @@ class MoodPeriodCard extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(dp(16)))
       ),
       child: Text(
-        '${DateTime.now().day} Февраля',
+        'Здесь будет карточка',
         style: CustomTextStyles.basic.copyWith(
-            color: CustomColors.purpleLight
+            color: CustomColors.purpleTextSecondary
         ),
       ),
     );

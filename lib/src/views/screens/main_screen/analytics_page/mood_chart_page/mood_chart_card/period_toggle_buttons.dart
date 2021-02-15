@@ -14,7 +14,7 @@ class PeriodToggleButtons extends StatefulWidget {
 }
 
 class _PeriodToggleButtonsState extends State<PeriodToggleButtons> {
-  static const _periodNames = ['Неделя', 'Месяц', 'Период'];
+  static const _periodNames = ['Неделя', 'В работе', 'В работе'];
 
   @override
   Widget build(BuildContext context) {
