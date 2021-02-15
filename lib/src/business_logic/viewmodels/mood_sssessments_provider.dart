@@ -12,7 +12,15 @@ class MoodAssessmentsProvider extends ChangeNotifier {
 
   List<MoodAssessment> get todayMoodAssessments {
     final today = DateFormat('yyyy-MM-dd').format(DateTime.now());
-    return moodAssessments.where((moodAssessment) => moodAssessment.date == today).toList();
+    final todayMoodAssessments = moodAssessments.where((moodAssessment) => moodAssessment.date == today).toList();
+    todayMoodAssessments.sort((a, b) {
+      if (a.time != null && b.time != null) {
+        return a.time.compareTo(b.time);
+      } else {
+        return a.partOfDay.index.compareTo(b.partOfDay.index);
+      }
+    });
+    return todayMoodAssessments;
   }
 
   List<double> getAverageDailyMoodForWeek () {
