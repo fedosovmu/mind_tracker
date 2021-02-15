@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 import 'package:mind_tracker/src/views/utils/content.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
@@ -26,7 +27,7 @@ class MoodAssessmentCard extends StatelessWidget with Content {
             Container(
               height: dp(41),
               child: Text(
-                _getPartOfDayAndTimeString(),
+                _getPartOfDayAndTimeString(context),
                 style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
               ),
             ),
@@ -74,10 +75,19 @@ class MoodAssessmentCard extends StatelessWidget with Content {
       ),
     );
   }
-  
-  String _getPartOfDayAndTimeString () {
+
+  String _getTimeString(BuildContext context, DateTime time) {
+    final is24HourFormat = MediaQuery.of(context).alwaysUse24HourFormat;
+    if (is24HourFormat) {
+      return DateFormat('Hm').format(time);
+    } else {
+      return DateFormat('jm').format(time);
+    }
+  }
+
+  String _getPartOfDayAndTimeString (BuildContext context) {
     final partOfDayWord = content['getPartOfDayWord'](moodAssessment.partOfDay);
-    final timeString = moodAssessment.time != null ? '  |  ${moodAssessment.time}' : '';
+    final timeString = moodAssessment.time != null ? '  |  ${_getTimeString(context, moodAssessment.time.toDate())}' : '';
     return partOfDayWord + timeString;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
@@ -8,13 +9,13 @@ class MoodAssessment {
   final int mood;
   PartOfDay partOfDay;
   String date;
-  String time;
+  Timestamp time;
 
   MoodAssessment({@required this.mood, this.partOfDay, this.date, this.time}) {
     if (partOfDay == null) {
       final now = DateTime.now();
       date = DateFormat('yyyy-MM-dd').format(now);
-      time = DateFormat('hh:mm').format(now);
+      time = Timestamp.fromDate(now);
       partOfDay = PartOfDayBuilder.fromDateTime(now);
     }
   }
@@ -32,7 +33,7 @@ class MoodAssessment {
     final mood_assessment_map = {
       'date': date,
       'mood': mood,
-      'part_of_day': partOfDay.toShortString()
+      'part_of_day': partOfDay.toShortString(),
     };
     if (time != null) {
       mood_assessment_map['time'] = time;
@@ -44,5 +45,4 @@ class MoodAssessment {
   String toString() {
     return '{date: "$date", mood: $mood, partOfDay: "$partOfDay", time: "$time"}';
   }
-
 }
