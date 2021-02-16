@@ -11,7 +11,7 @@ abstract class FirebaseProvider {
     final firebaseInitializeData = await Firebase.initializeApp();
   }
 
-  static Future<List<MoodAssessment>> getTodayMoodAssessments () async {
+  static Future<List<MoodAssessment>> getMoodAssessments () async {
     final moodAssessmentsQuerySnapshot = await _mood_assessments_collection.get();
         //.where('user_id', isEqualTo: 'DocumentReference(users/test_user)')
         //.where('date', isEqualTo: '2021-02-09').get();
