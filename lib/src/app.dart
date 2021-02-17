@@ -20,7 +20,7 @@ class MindTrackerApp extends StatelessWidget {
     );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Mind Tracker',
       theme: appTheme,
       initialRoute: '/main',
       routes: {
