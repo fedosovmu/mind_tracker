@@ -13,7 +13,7 @@ class MoodChartCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: dp(16), right: dp(16), top: dp(20)),
+      margin: EdgeInsets.only(left: dp(16), right: dp(16), top: dp(10)),
       width: dp(327),
       height: dp(326),
       decoration: BoxDecoration(

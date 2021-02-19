@@ -27,7 +27,7 @@ class _MoodChartPageState extends State<MoodChartPage> with TickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Аналитика',
+        title: 'График настроения',
       ),
       body: Column(
         children: [
