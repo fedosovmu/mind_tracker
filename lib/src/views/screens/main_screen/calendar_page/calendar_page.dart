@@ -87,7 +87,6 @@ class MonthSwitchButton extends StatelessWidget {
       child: Image.asset(!isRight ? _pathToLeftIcon : _pathToRightIcon),
     );
   }
-
 }
 
 class CalendarDayOfWeekLabels extends StatelessWidget {
