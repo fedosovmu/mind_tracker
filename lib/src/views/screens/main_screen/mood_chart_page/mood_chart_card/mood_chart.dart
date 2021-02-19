@@ -26,31 +26,16 @@ class MoodChart extends StatelessWidget {
 }
 
 class MoodChartPainter extends CustomPainter {
-  List<double> _horizontalPointPositions = List.generate(7, (index) => null);
   final List<double> averageDailyMoodForWeek;
+  final _horizontalLinesPadding = dp(10);
+  final _verticalLinesPadding = dp(20);
 
   MoodChartPainter({this.averageDailyMoodForWeek});
 
   @override
   void paint(Canvas canvas, Size size) {
-    _calculatePointPositions(size);
     _drawHorizontalLines(canvas, size);
     _drawCurve(canvas, size);
-  }
-
-  void _calculatePointPositions(Size size) {
-    final horizontalPadding = dp(45);
-    final horizontalInterval = (size.width - horizontalPadding) / 6;
-    for (int i = 0; i < 7; i++) {
-      _horizontalPointPositions[i] = horizontalInterval * i + horizontalPadding / 2;
-    }
-  }
-
-  Offset _getPointPositionByMood(int index, double mood) {
-    final horizontalStartPosition = dp(15);
-    final horizontalInterval = dp(33);
-    final y = (7 - mood) * horizontalInterval + horizontalStartPosition;
-    return Offset(_horizontalPointPositions[index], y);
   }
 
   void _drawHorizontalLines(Canvas canvas, Size size) {
@@ -58,14 +43,22 @@ class MoodChartPainter extends CustomPainter {
       ..color = CustomColors.purpleMegaDark
       ..strokeWidth = dp(1);
 
-    final verticalInterval = (size.height - dp(20)) / 6;
-    final horizontalPadding = dp(20);
+    final verticalInterval = (size.height - _verticalLinesPadding * 2) / 6;
     for (int i = 0; i < 7; i++) {
-      final y = verticalInterval * i + dp(15);
-      final p1 = Offset(horizontalPadding / 2, y);
-      final p2 = Offset(size.width - (horizontalPadding / 2), y);
+      final y = verticalInterval * i + _verticalLinesPadding;
+      final p1 = Offset(_horizontalLinesPadding, y);
+      final p2 = Offset(size.width - _horizontalLinesPadding, y);
       canvas.drawLine(p1, p2, horizontalLinesPaint);
     }
+  }
+
+  Offset _getPointPositionByMood(int index, double mood, Size size) {
+    final horizontalPointsPadding = _horizontalLinesPadding + dp(5);
+    final horizontalInterval = (size.width - horizontalPointsPadding * 2) / 6;
+    final verticalInterval = (size.height - _verticalLinesPadding * 2) / 6;
+    final x = horizontalPointsPadding + index * horizontalInterval;
+    final y = _verticalLinesPadding + (7 - mood) * verticalInterval;
+    return Offset(x, y);
   }
 
   void _drawCurve(Canvas canvas, Size size) {
@@ -89,7 +82,7 @@ class MoodChartPainter extends CustomPainter {
     for (var i = 0; i < 7; i++) {
       if (averageDailyMoodForWeek[i] != null) {
         final mood = averageDailyMoodForWeek[i].toDouble();
-        final p = _getPointPositionByMood(i, mood);
+        final p = _getPointPositionByMood(i, mood, size);
         curvePoints.add(p);
         canvas.drawCircle(p, dp(4), moodColorsGradientFillPaint);
       }

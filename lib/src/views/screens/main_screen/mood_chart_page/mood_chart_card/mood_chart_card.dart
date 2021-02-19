@@ -13,9 +13,8 @@ class MoodChartCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: dp(16), right: dp(16), top: dp(10)),
-      width: dp(327),
-      height: dp(326),
+      margin: EdgeInsets.only(left: dp(16), right: dp(16), top: dp(10), bottom: dp(30)),
+      padding: EdgeInsets.only(top: dp(5), bottom: dp(13)),
       decoration: BoxDecoration(
         color: CustomColors.purpleSuperDark,
         borderRadius: BorderRadius.all(Radius.circular(dp(16))),
@@ -32,10 +31,10 @@ class MoodChartCard extends StatelessWidget {
               style: CustomTextStyles.basicH1Medium,
             ),
           ),
-          MoodChart(),
           Expanded(
-            child: MoodChartDateLabels()
-          )
+            child: MoodChart()
+          ),
+          MoodChartDateLabels()
         ],
       ),
     );

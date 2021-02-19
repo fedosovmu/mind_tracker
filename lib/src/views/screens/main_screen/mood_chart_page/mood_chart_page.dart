@@ -32,7 +32,9 @@ class _MoodChartPageState extends State<MoodChartPage> with TickerProviderStateM
       body: Column(
         children: [
           PeriodToggleButtons(),
-          MoodChartCard(),
+          Expanded(
+              child: MoodChartCard()
+          ),
         ],
       )
     );
