@@ -16,7 +16,7 @@ class CustomBottomNavigationBar extends CupertinoTabBar {
   static const _texts = ['Главный', 'График', 'Влияние', 'Календарь'];
 
   CustomBottomNavigationBar () : super(
-    currentIndex: 1, // TODO: delete this line
+    currentIndex: 3, // TODO: delete this line
     border: Border(top: BorderSide(color: Color(0xFF766379))),
     backgroundColor: CustomColors.purpleSuperDark,
     activeColor: CustomColors.silverWhite,
