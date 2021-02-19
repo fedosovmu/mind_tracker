@@ -9,18 +9,20 @@ import '../../../utils/theme/custom_colors.dart';
 class CustomBottomNavigationBar extends CupertinoTabBar {
   static const _pathsToIcons = [
     'assets/icons/home.png',
-    'assets/icons/analytics.png',
+    'assets/icons/chart.png',
+    'assets/icons/chart.png',
     'assets/icons/calendar.png'
   ];
-  static const _texts = ['Главный', 'Аналитика', 'Календарь'];
+  static const _texts = ['Главный', 'График', 'Влияние', 'Календарь'];
 
   CustomBottomNavigationBar () : super(
+    currentIndex: 1, // TODO: delete this line
     border: Border(top: BorderSide(color: Color(0xFF766379))),
     backgroundColor: CustomColors.purpleSuperDark,
     activeColor: CustomColors.silverWhite,
     inactiveColor: CustomColors.silverWhite,
     iconSize: 32,
-    items: List.generate(3, (index) => BottomNavigationBarItem(
+    items: List.generate(_texts.length, (index) => BottomNavigationBarItem(
         activeIcon: Image.asset(_pathsToIcons[index], height: 32),
         icon: Image.asset(_pathsToIcons[index], height: 32, color: CustomColors.purpleTextSecondary),
       label: _texts[index]
