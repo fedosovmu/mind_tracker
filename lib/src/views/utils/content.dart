@@ -18,6 +18,16 @@ mixin Content {
     7: 'Восхитительно',
   };
 
+  static const weekDayNames = {
+    1: 'Пн',
+    2: 'Вт',
+    3: 'Ср',
+    4: 'Чт',
+    5: 'Пт',
+    6: 'Сб',
+    7: 'Вс'
+  };
+
   static final _widgetsData = {
     'onboardingScreen': const {
       'screenTexts': {
@@ -89,10 +99,6 @@ mixin Content {
 
     'emptyMoodAssessmentCard': const {
       'buttonText': 'Оценить'
-    },
-
-    'moodChartDateLabels': const {
-      'weekDayNames': ['Пн', 'Вт', 'Ср' , 'Чт' ,'Пт' ,'Сб' ,'Вс'],
     },
   };
 }

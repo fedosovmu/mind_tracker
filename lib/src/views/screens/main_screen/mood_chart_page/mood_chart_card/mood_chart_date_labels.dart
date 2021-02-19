@@ -5,16 +5,15 @@ import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/content.dart';
 
 
-class MoodChartDateLabels extends StatelessWidget with Content {
+class MoodChartDateLabels extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    loadContent('moodChartDateLabels');
     return Container(
       padding: EdgeInsets.symmetric(horizontal: dp(14)),
       child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: List.generate(7, (index) {
-            final day = DateTime.now().subtract(Duration(days: 6 - index));
+          children: List.generate(DateTime.daysPerWeek, (index) {
+            final day = DateTime.now().subtract(Duration(days: DateTime.daysPerWeek - (index + 1)));
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -25,7 +24,7 @@ class MoodChartDateLabels extends StatelessWidget with Content {
                   ),
                 ),
                 Text(
-                  '${content['weekDayNames'][(day.weekday - 1)]}',
+                  '${Content.weekDayNames[day.weekday]}',
                   style: CustomTextStyles.basic.copyWith(
                       color: CustomColors.purpleTextSecondary
                   ),

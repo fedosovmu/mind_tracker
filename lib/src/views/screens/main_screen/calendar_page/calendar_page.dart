@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
+import 'package:mind_tracker/src/views/utils/content.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import '../../../utils/metrics.dart';
@@ -20,6 +21,7 @@ class CalendarPage extends StatelessWidget {
 class Calendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final now = DateTime.now();
     return Container(
       margin: EdgeInsets.only(left: dp(16), right: dp(16), top: dp(8)),
       padding: EdgeInsets.symmetric(horizontal: dp(16)),
@@ -31,7 +33,10 @@ class Calendar extends StatelessWidget {
       child: Column(
         children: [
           MonthSwitcher(),
-          CalendarDayOfWeekLabels(),
+          CalendarDayOfWeekLabels(
+            year: now.year,
+            month: now.month,
+          ),
         ],
       ),
     );
@@ -41,20 +46,28 @@ class Calendar extends StatelessWidget {
 class MonthSwitcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          'Февраль',
-          style: CustomTextStyles.basicH1Medium,
-        ),
-        Row(
-          children: [
-            MonthSwitchButton(),
-            MonthSwitchButton(isRight: true)
-          ],
-        )
-      ],
+    return Container(
+      padding: EdgeInsets.only(left: dp(3)),
+      height: dp(60),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Февраль',
+            style: CustomTextStyles.basicH1Medium,
+          ),
+          SizedBox(
+            width: dp(32 + 31 + 24),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                MonthSwitchButton(),
+                MonthSwitchButton(isRight: true)
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
@@ -69,7 +82,6 @@ class MonthSwitchButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: !isRight ? Colors.red : Colors.green,
       width: dp(32),
       height: dp(32),
       child: Image.asset(!isRight ? _pathToLeftIcon : _pathToRightIcon),
@@ -79,12 +91,26 @@ class MonthSwitchButton extends StatelessWidget {
 }
 
 class CalendarDayOfWeekLabels extends StatelessWidget {
+  final int month;
+  final int year;
+
+  CalendarDayOfWeekLabels({this.year, this.month});
+
   @override
   Widget build(BuildContext context) {
+    final firstDayInMonth = DateTime(year, month, 1);
+    print('FIRST DAY: $firstDayInMonth');
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: List.generate(7, (index) {
-        return Text('ПН');
+      children: List.generate(DateTime.daysPerWeek, (index) {
+        final day = firstDayInMonth.add(Duration(days: index));
+        final weekDayWord = Content.weekDayNames[day.weekday];
+        return Text(
+            weekDayWord,
+          style: CustomTextStyles.basic.copyWith(
+            color: CustomColors.purpleTextSecondary
+          ),
+        );
       }),
     );
   }
