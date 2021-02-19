@@ -53,7 +53,7 @@ class MonthSwitcher extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Февраль',
+            'Февраль 2021',
             style: CustomTextStyles.basicH1Medium,
           ),
           SizedBox(

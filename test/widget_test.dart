@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mind_tracker/src/app.dart';
-import 'package:mind_tracker/src/business_logic/services/initial_app_data_loader.dart';
+import 'package:mind_tracker/src/business_logic/viewmodels/providers_initializer.dart';
 import 'package:mind_tracker/main.dart';
 
 void main() {

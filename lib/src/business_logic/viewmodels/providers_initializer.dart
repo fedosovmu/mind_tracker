@@ -1,10 +1,10 @@
 import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
-import 'firebase_provider.dart';
-import '../viewmodels/mood_sssessments_provider.dart';
+import '../services/firebase_provider.dart';
+import 'mood_sssessments_provider.dart';
 import 'dart:async';
 
 
-abstract class InitialAppDataLoader {
+abstract class ProvidersInitializer {
   static Future<MoodAssessmentsProvider> getMoodAssessmentsProvider () async {
     await FirebaseProvider.initializeFirebaseConnection();
     final moodAssessments = await FirebaseProvider.getMoodAssessments();
