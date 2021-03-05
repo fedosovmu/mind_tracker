@@ -11,7 +11,6 @@ class Calendar extends StatelessWidget {
     final now = DateTime.now();
     return Container(
       margin: EdgeInsets.only(left: dp(16), right: dp(16), top: dp(8)),
-      padding: EdgeInsets.symmetric(horizontal: dp(16)),
       height: dp(300),
       decoration: BoxDecoration(
           color: CustomColors.purpleSuperDark,
@@ -24,8 +23,32 @@ class Calendar extends StatelessWidget {
             year: now.year,
             month: now.month,
           ),
+          CalendarDayButtons()
         ],
       ),
     );
   }
+}
+
+class CalendarDayButtons extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        color: Colors.green,
+        width: double.infinity,
+        child: GridView.count(
+          crossAxisCount: 7,
+          children: List.generate(31, (index) {
+            return Container(
+              color: index % 2 == 0 ? Colors.red : Colors.orange,
+              width: dp(38),
+              height: dp(36),
+            );
+          }),
+        ),
+      ),
+    );
+  }
+  
 }

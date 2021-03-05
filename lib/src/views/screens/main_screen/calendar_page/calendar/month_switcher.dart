@@ -8,7 +8,7 @@ class MonthSwitcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: dp(3)),
+      padding: EdgeInsets.symmetric(horizontal: dp(16)),
       height: dp(60),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
