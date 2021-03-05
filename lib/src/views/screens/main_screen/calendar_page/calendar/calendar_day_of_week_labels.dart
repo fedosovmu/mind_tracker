@@ -9,12 +9,13 @@ class CalendarDayOfWeekLabels extends StatelessWidget {
   final int month;
   final int year;
 
-  CalendarDayOfWeekLabels({this.year, this.month});
+  CalendarDayOfWeekLabels({@required this.year, @required this.month});
 
   @override
   Widget build(BuildContext context) {
     final firstDayInMonth = DateTime(year, month, 1);
     print('FIRST DAY: $firstDayInMonth');
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: dp(16)),
       child: Row(
