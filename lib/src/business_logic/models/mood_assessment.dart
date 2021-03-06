@@ -2,19 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
-import 'package:intl/intl.dart';
+import 'package:mind_tracker/src/business_logic/services/dateParser.dart';
 
 
-class MoodAssessment {
+class MoodAssessment implements Comparable {
   final int mood;
   PartOfDay partOfDay;
-  String date;
-  Timestamp time;
+  String date; // DateTime
+  Timestamp time; // DateTime
 
   MoodAssessment({@required this.mood, this.partOfDay, this.date, this.time}) {
     if (partOfDay == null) {
       final now = DateTime.now();
-      date = DateFormat('yyyy-MM-dd').format(now);
+      date = now.toStringDate();
       time = Timestamp.fromDate(now);
       partOfDay = PartOfDayBuilder.fromDateTime(now);
     }
@@ -44,5 +44,18 @@ class MoodAssessment {
   @override
   String toString() {
     return '{date: "$date", mood: $mood, partOfDay: "$partOfDay", time: "$time"}';
+  }
+
+  @override
+  int compareTo(other) {
+    if (date != other.date) {
+      return date.compareTo(other.date);
+    } else {
+      if (time != null && other.time != null) {
+        return time.compareTo(other.time);
+      } else {
+        return partOfDay.index.compareTo(other.partOfDay.index);
+      }
+    }
   }
 }

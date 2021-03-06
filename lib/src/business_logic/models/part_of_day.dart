@@ -1,6 +1,5 @@
 enum PartOfDay {morning, day, evening, night}
 
-
 extension PartOfDayBuilder on PartOfDay {
   toShortString() {
     return this.toString().split('.').last;
