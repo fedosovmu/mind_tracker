@@ -49,6 +49,22 @@ class MoodAssessmentsProvider extends ChangeNotifier {
     return averageDailyMoodForWeek;
   }
 
+  Map<int, List<MoodAssessment>> getMoodAssessmentsForMonth (int year, int month) {
+    final firstDayInMonth = DateTime(year, month, 1);
+    final daysNumberInMonth = DateTime(year, month + 1).difference(DateTime(year, month)).inDays;
+    final moodAssessmentsForMonth = Map.fromIterable(
+      List.generate(daysNumberInMonth, (index) => index + 1),
+      key: (dayNumber) => dayNumber as int,
+      value: (dayNumber) {
+        return moodAssessments.where((moodAssessment) {
+          final date = DateFormat('yyyy-MM-dd').format(firstDayInMonth.add(Duration(days: dayNumber - 1)));
+          return moodAssessment.date == date;
+        }).toList();
+      }
+    );
+    return moodAssessmentsForMonth;
+  }
+
   void add(MoodAssessment moodAssessment) {
     moodAssessments.add(moodAssessment);
     FirebaseProvider.addMoodAssessment(moodAssessment);
