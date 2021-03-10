@@ -10,7 +10,7 @@ class CustomColors {
   static const miniDark = Color(0xFF2C2C31);
   static const silverWhite = Color(0xFFF9EFF6);
   static const white = Color(0xFFFFFFFF);
-  static const main = Color(0xFF674A7A);
+  static const main = Color(0xFF7F3FB0);
   static const moods = {
     1: Color(0xFF674A7A),
     2: Color(0xFFA43485),
