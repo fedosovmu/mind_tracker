@@ -9,7 +9,7 @@ import 'package:mind_tracker/src/business_logic/services/dateParser.dart';
 class CalendarDayButton extends StatelessWidget {
   final DateTime date;
   final Function onTap;
-  bool isSelected;
+  final bool isSelected;
 
   CalendarDayButton({@required this.date, @required this.onTap, this.isSelected = false});
 
@@ -17,7 +17,6 @@ class CalendarDayButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final today = DateTime.now().date;
     final isToday = (date == today);
-    final isDrawBorder = isToday && !isSelected;
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -32,9 +31,9 @@ class CalendarDayButton extends StatelessWidget {
             ],
           ),
           decoration: BoxDecoration(
-              color: isSelected ? CustomColors.purpleMegaDark : null,
+              color: isToday ? CustomColors.purpleMegaDark : null,
               borderRadius: BorderRadius.all(Radius.circular(dp(12))),
-              border: isDrawBorder ? Border.all(width: dp(2), color: CustomColors.main.withAlpha(0xA3)) : null
+              border: isSelected && !isToday ? Border.all(width: dp(2), color: CustomColors.main.withAlpha(0xA3)) : null
           ),
       ),
     );
