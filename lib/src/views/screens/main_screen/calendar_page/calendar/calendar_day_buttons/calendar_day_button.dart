@@ -17,6 +17,7 @@ class CalendarDayButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final today = DateTime.now().date;
     final isToday = (date == today);
+    final isDrawBorder = isToday && !isSelected;
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -32,7 +33,8 @@ class CalendarDayButton extends StatelessWidget {
           ),
           decoration: BoxDecoration(
               color: isSelected ? CustomColors.purpleMegaDark : null,
-              borderRadius: BorderRadius.all(Radius.circular(dp(8)))
+              borderRadius: BorderRadius.all(Radius.circular(dp(12))),
+              border: isDrawBorder ? Border.all(width: dp(2), color: CustomColors.main.withAlpha(0xA3)) : null
           ),
       ),
     );
