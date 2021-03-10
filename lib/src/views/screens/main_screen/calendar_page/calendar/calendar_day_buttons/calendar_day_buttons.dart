@@ -21,6 +21,7 @@ class CalendarDayButtons extends StatelessWidget {
         padding: EdgeInsets.only(top: dp(8), left: dp(8), right: dp(8)),
         width: double.infinity,
         child: GridView.count(
+          physics: NeverScrollableScrollPhysics(),
           crossAxisCount: 7,
           crossAxisSpacing: dp(8),
           mainAxisSpacing: dp(2),
