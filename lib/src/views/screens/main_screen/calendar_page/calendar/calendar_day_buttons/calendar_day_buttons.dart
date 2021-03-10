@@ -1,21 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_provider.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:provider/provider.dart';
 import 'calendar_day_button.dart';
+import 'package:mind_tracker/src/business_logic/services/dateParser.dart';
 
 
-class CalendarDayButtons extends StatelessWidget {
+class CalendarDayButtons extends StatefulWidget {
   final int month;
   final int year;
 
   CalendarDayButtons({@required this.year, @required this.month});
 
   @override
+  _CalendarDayButtonsState createState() => _CalendarDayButtonsState();
+}
+
+class _CalendarDayButtonsState extends State<CalendarDayButtons> {
+  var _selectedDate;
+
+  @override
+  void initState() {
+    super.initState();
+    final today = DateTime.now().date;
+    _selectedDate = today;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final firstDayInMonth = DateTime(year, month, 1);
-    final daysNumberInMonth = DateTime(year, month + 1).difference(DateTime(year, month)).inDays;
+    final firstDayInMonth = DateTime(widget.year, widget.month, 1);
+    final daysNumberInMonth = DateTime(widget.year, widget.month + 1).difference(DateTime(widget.year, widget.month)).inDays;
     return Expanded(
       child: Container(
         padding: EdgeInsets.only(top: dp(8), left: dp(8), right: dp(8)),
@@ -26,8 +40,16 @@ class CalendarDayButtons extends StatelessWidget {
           crossAxisSpacing: dp(8),
           mainAxisSpacing: dp(2),
           children: List.generate(daysNumberInMonth, (index) {
+            final calendarDayButtonDate = firstDayInMonth.add(Duration(days: index));
             return CalendarDayButton(
-              date: firstDayInMonth.add(Duration(days: index)),
+              date: calendarDayButtonDate,
+              onTap: () {
+                setState(() {
+                  print('PRESS CALENDAR BUTTON ${calendarDayButtonDate.toStringDate()}'); //TODO: delete this line
+                  _selectedDate = calendarDayButtonDate;
+                });
+              },
+              isSelected: calendarDayButtonDate == _selectedDate,
             );
           }),
         ),
