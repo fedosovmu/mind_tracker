@@ -1,4 +1,6 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_provider.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
@@ -16,20 +18,26 @@ class CalendarDayButtonMoodSpheres extends StatelessWidget {
     return Consumer<MoodAssessmentsProvider>(
         builder: (context, moodAssessmentProvider, child) {
           final moodAssessmentsForDay = moodAssessmentProvider.getMoodAssessmentsForDate(date);
-          List<int> moodSpheresValues = [];
+          List<MoodAssessment> moodAssessmentsToShow = [];
           const maxMoodSpheresCount = 4;
           if (moodAssessmentsForDay.length <= maxMoodSpheresCount) {
-            moodSpheresValues = moodAssessmentsForDay.map((e) => e.mood).toList();
+            moodAssessmentsToShow = moodAssessmentsForDay;
           } else {
-            for (var partOfDay in PartOfDay.values) {
-              final moodAssessmentsForPartOfDay = moodAssessmentsForDay.where(
-                      (element) => element.partOfDay == partOfDay);
-              if (moodAssessmentsForPartOfDay.isNotEmpty) {
-                moodSpheresValues.add(moodAssessmentsForPartOfDay.first.mood);
+            final moodAssessmentsForPartsOfDay = List.generate(PartOfDay.values.length, (index) {
+              return moodAssessmentsForDay.where((element) => element.partOfDay == PartOfDay.values[index]);
+            });
+            moodAssessmentsToShow = [];
+            for (var i = 0; moodAssessmentsToShow.length < 4; i++) {
+              for (var moodAssessmentsForPartOfDay in moodAssessmentsForPartsOfDay) {
+                if (moodAssessmentsForPartOfDay.length >= i + 1) {
+                  moodAssessmentsToShow.add(moodAssessmentsForPartOfDay.toList()[i]);
+                  if (moodAssessmentsToShow.length >= 4) break;
+                }
               }
             }
+            moodAssessmentsToShow.sort();
           }
-          final moodSpheresCount = moodSpheresValues.length;
+          final moodSpheresCount = moodAssessmentsToShow.length;
           if (moodSpheresCount == 0) {
             return SizedBox(height: dp(4));
           }
@@ -38,7 +46,7 @@ class CalendarDayButtonMoodSpheres extends StatelessWidget {
               width: dp(4),
               height: dp(4),
               decoration: BoxDecoration(
-                  color: CustomColors.moods[moodSpheresValues[index]],
+                  color: CustomColors.moods[moodAssessmentsToShow[index].mood],
                   shape: BoxShape.circle
               ),
             );
