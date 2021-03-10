@@ -24,7 +24,7 @@ class CalendarDayButton extends StatelessWidget {
             '${date.day}',
             style: CustomTextStyles.basicH1Medium,
           ),
-          CalendarDayButtonMoodSpheres()
+          CalendarDayButtonMoodSpheres(date)
         ],
       ),
       decoration: BoxDecoration(

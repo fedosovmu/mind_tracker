@@ -43,9 +43,9 @@ class MoodAssessmentsProvider extends ChangeNotifier {
     return averageDailyMoodForWeek;
   }
 
-  List<MoodAssessment> getMoodAssessmentsForDate (String date) {
+  List<MoodAssessment> getMoodAssessmentsForDate (DateTime date) {
     final moodAssessmentsForDate = moodAssessments.where(
-            (moodAssessment) => moodAssessment.date == date).toList();
+            (moodAssessment) => moodAssessment.date == date.toStringDate()).toList();
     moodAssessmentsForDate.sort();
     return moodAssessmentsForDate;
   }

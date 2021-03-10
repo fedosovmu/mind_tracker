@@ -8,8 +8,8 @@ import 'package:mind_tracker/src/business_logic/services/dateParser.dart';
 class MoodAssessment implements Comparable {
   final int mood;
   PartOfDay partOfDay;
-  String date; // DateTime
-  Timestamp time; // DateTime
+  String date; //TODO: convert to DateTime
+  Timestamp time; //TODO: convert to DateTime
 
   MoodAssessment({@required this.mood, this.partOfDay, this.date, this.time}) {
     if (partOfDay == null) {

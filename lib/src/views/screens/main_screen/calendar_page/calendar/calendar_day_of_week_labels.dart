@@ -14,8 +14,6 @@ class CalendarDayOfWeekLabels extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firstDayInMonth = DateTime(year, month, 1);
-    print('FIRST DAY: $firstDayInMonth');
-
     return Container(
       padding: EdgeInsets.symmetric(horizontal: dp(16)),
       child: Row(
