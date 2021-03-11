@@ -51,10 +51,22 @@ class AssessMoodButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlatButton(
       onPressed: () { print('Assess mood now button pressed'); },
-      child: Text(
-        'Настроение сейчас',
-        style: CustomTextStyles.basic
-            .copyWith(fontWeight: FontWeight.w500),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+              'assets/icons/plus_in_circle.png',
+            width: dp(20),
+          ),
+          SizedBox(
+            width: dp(10),
+          ),
+          Text(
+            'Настроение сейчас',
+            style: CustomTextStyles.basic
+                .copyWith(fontWeight: FontWeight.w500),
+          ),
+        ],
       ),
       height: dp(51),
       color: CustomColors.main,
