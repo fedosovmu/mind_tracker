@@ -86,7 +86,7 @@ class MoodAssessmentCard extends StatelessWidget with Content {
   }
 
   String _getPartOfDayAndTimeString (BuildContext context) {
-    final partOfDayWord = content['getPartOfDayWord'](moodAssessment.partOfDay);
+    final partOfDayWord = Content.partOfDayNames[moodAssessment.partOfDay];
     final timeString = moodAssessment.time != null ? '  |  ${_getTimeString(context, moodAssessment.time.toDate())}' : '';
     return partOfDayWord + timeString;
   }

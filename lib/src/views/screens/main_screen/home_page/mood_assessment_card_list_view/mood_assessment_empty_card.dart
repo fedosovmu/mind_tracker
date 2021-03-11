@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:mind_tracker/src/views/utils/content.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import '../../../../utils/metrics.dart';
 
 
-class MoodAssessmentEmptyCard extends StatelessWidget with Content {
+class MoodAssessmentEmptyCard extends StatelessWidget {
+  final PartOfDay missedPartOfDay;
+
+  MoodAssessmentEmptyCard(this.missedPartOfDay);
+
+
   @override
   Widget build(BuildContext context) {
-    loadContent('emptyMoodAssessmentCard');
     return Container(
       margin: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(12)),
       width: double.infinity,
@@ -33,7 +38,7 @@ class MoodAssessmentEmptyCard extends StatelessWidget with Content {
                   borderRadius: BorderRadius.circular(dp(12))
                 ),
                 child: Text(
-                  content['buttonText'],
+                  Content.partOfDayNames[missedPartOfDay],
                   style: CustomTextStyles.buttonMedium,
                 ),
               ),

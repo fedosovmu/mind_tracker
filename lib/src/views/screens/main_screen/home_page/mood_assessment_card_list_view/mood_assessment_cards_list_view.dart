@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
+import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'mood_assessment_card.dart';
 import 'mood_assessment_empty_card.dart';
@@ -42,7 +43,8 @@ class MoodAssessmentCardsListView extends StatelessWidget {
               Column(
                 children: [
                   ...moodAssessmentCards,
-                  MoodAssessmentEmptyCard()
+                  MoodAssessmentEmptyCard(PartOfDay.evening),
+                  SizedBox(height: dp(51+16))
                 ],
               ),
               ...moodSpheres,

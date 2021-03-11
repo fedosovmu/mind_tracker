@@ -43,6 +43,13 @@ mixin Content {
     12: 'Декабрь',
   };
 
+  static const partOfDayNames = {
+    PartOfDay.morning: 'Утро',
+    PartOfDay.day: 'День',
+    PartOfDay.evening: 'Вечер',
+    PartOfDay.night: 'Ночь',
+  };
+
   static final _widgetsData = {
     'onboardingScreen': const {
       'screenTexts': {
@@ -94,26 +101,6 @@ mixin Content {
           return 'Событий';
         }
       } as dynamic,
-      'getPartOfDayWord': (PartOfDay partOfDay) {
-        switch (partOfDay) {
-          case PartOfDay.morning: {
-            return 'Утро';
-          } break;
-          case PartOfDay.day: {
-            return 'День';
-          } break;
-          case PartOfDay.evening: {
-            return 'Вечер';
-          } break;
-          case PartOfDay.night: {
-            return 'Ночь';
-          } break;
-        }
-      } as dynamic,
-    },
-
-    'emptyMoodAssessmentCard': const {
-      'buttonText': 'Оценить'
     },
   };
 }
