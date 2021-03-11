@@ -3,7 +3,7 @@ import '../utils/theme/custom_text_styles.dart';
 import '../utils/theme/custom_colors.dart';
 import '../utils/content.dart';
 import '../utils/metrics.dart';
-import 'mood_assessment_screen.dart';
+import 'mood_assessment_screen/mood_assessment_screen.dart';
 
 
 class OnboardingScreen extends StatelessWidget with Content {
