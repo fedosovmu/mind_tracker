@@ -31,17 +31,23 @@ class MoodAssessmentCardsListView extends StatelessWidget {
       }
     });
 
-    return SingleChildScrollView(
-      child: Stack(
-          children:[
-            Column(
-              children: [
-                ...moodAssessmentCards,
-                MoodAssessmentEmptyCard()
-              ],
-            ),
-            ...moodSpheres,
-          ]
+    return NotificationListener<OverscrollIndicatorNotification>(
+      onNotification: (overScroll) {
+        overScroll.disallowGlow();
+      },
+      child: SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+        child: Stack(
+            children:[
+              Column(
+                children: [
+                  ...moodAssessmentCards,
+                  MoodAssessmentEmptyCard()
+                ],
+              ),
+              ...moodSpheres,
+            ]
+        ),
       ),
     );
   }
