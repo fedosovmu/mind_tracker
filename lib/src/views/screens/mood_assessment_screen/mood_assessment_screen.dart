@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_provider.dart';
-import 'package:mind_tracker/src/views/screens/main_screen/main_screen.dart';
 import 'package:provider/provider.dart';
 import '../../utils/theme/custom_text_styles.dart';
 import '../../utils/theme/custom_colors.dart';
@@ -44,7 +43,10 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
             height: dp(32),
             width: dp(32),
           ),
-          onPressed: () {print('Close'); },
+          onPressed: () {
+            print('Close');
+            _goToNextScreen();
+          },
         ),
       ),
       body: Container(
