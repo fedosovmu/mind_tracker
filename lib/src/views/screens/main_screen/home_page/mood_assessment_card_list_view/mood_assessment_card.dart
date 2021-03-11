@@ -16,7 +16,7 @@ class MoodAssessmentCard extends StatelessWidget with Content {
   Widget build(BuildContext context) {
     loadContent('moodAssessmentCard');
     return Container(
-      margin: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(12)),
+      margin: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
       padding: EdgeInsets.only(top: dp(16), left: dp(24), bottom: dp(14)),
       alignment: Alignment.topLeft,
       width: double.infinity,

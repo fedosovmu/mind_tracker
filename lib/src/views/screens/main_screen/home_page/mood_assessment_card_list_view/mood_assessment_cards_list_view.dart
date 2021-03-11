@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'mood_assessment_card.dart';
@@ -21,11 +21,11 @@ class MoodAssessmentCardsListView extends StatelessWidget {
       var mood = moodAssessmentCards[index].moodAssessment.mood;
       if (mood != null) {
         return Positioned(
-            top: dp(dp(-5) + index * dp(136)),
-            left: dp(160),
+            top: dp(-5) + index * dp(136+8),
+            right: dp(-20),
             child: Image.asset(
               'assets/images/common/mood_spheres/$mood.png',
-              scale: dp(2),
+              width: dp(220),
             )
         );
       }
