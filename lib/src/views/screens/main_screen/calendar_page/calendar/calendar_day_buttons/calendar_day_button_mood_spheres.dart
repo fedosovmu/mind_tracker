@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 
 class CalendarDayButtonMoodSpheres extends StatelessWidget {
+  static const _maxMoodSpheresCount = 5;
   final DateTime date;
 
   CalendarDayButtonMoodSpheres(this.date);
@@ -19,8 +20,7 @@ class CalendarDayButtonMoodSpheres extends StatelessWidget {
         builder: (context, moodAssessmentProvider, child) {
           final moodAssessmentsForDay = moodAssessmentProvider.getMoodAssessmentsForDate(date);
           List<MoodAssessment> moodAssessmentsToShow = [];
-          const maxMoodSpheresCount = 4;
-          if (moodAssessmentsForDay.length <= maxMoodSpheresCount) {
+          if (moodAssessmentsForDay.length <= _maxMoodSpheresCount) {
             moodAssessmentsToShow = moodAssessmentsForDay;
           } else {
             final moodAssessmentsForPartsOfDay = List.generate(PartOfDay.values.length, (index) {

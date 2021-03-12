@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:mind_tracker/src/business_logic/services/dateParser.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_provider.dart';
@@ -33,13 +32,10 @@ class MoodAssessmentCardsListView extends StatelessWidget {
 
           List<Widget> moodAssessmentCards = [];
           List<Widget> moodSpheres = [];
-          print('=======================');
           var cardIndex = 0;
           for (var partOfDay in PartOfDay.values) {
-            print('PART_OF_DAY: $partOfDay');
             final moodAssessmentsForPartOfDay = moodAssessmentsForDay.where(
                     (moodAssessment) => moodAssessment.partOfDay == partOfDay).toList();
-            print('${moodAssessmentsForPartOfDay}');
             if (moodAssessmentsForPartOfDay.isNotEmpty) {
               for (var moodAssessment in moodAssessmentsForPartOfDay) {
                 final card = MoodAssessmentCard(moodAssessment);
