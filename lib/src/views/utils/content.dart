@@ -86,10 +86,6 @@ mixin Content {
       'skipButtonText': 'Пропустить',
     },
 
-    'homePage': const {
-      'title': 'Ваше настроение'
-    },
-
     'moodAssessmentCard': {
       'moodNames': moodNames,
       'getEventWord': (int eventsNumber) {

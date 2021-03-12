@@ -1,56 +1,86 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
+import 'package:mind_tracker/src/business_logic/services/dateParser.dart';
+import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_provider.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/home_page/mood_assessment_card_list_view/mood_sphere.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
+import 'package:provider/provider.dart';
 import 'mood_assessment_card.dart';
 import 'mood_assessment_empty_card.dart';
 
 
 class MoodAssessmentCardsListView extends StatelessWidget {
-  final List<MoodAssessment> moodAssessments;
+  final DateTime dateForDisplayedMoodAssessments;
+  bool _isToday;
+  bool _isFuture;
+  PartOfDay _currentPartOfDay;
+  static const _partOfDaysInWhichMayBeEmptyCards = {PartOfDay.morning, PartOfDay.day, PartOfDay.evening};
 
-  MoodAssessmentCardsListView ({this.moodAssessments = const []});
+  MoodAssessmentCardsListView(this.dateForDisplayedMoodAssessments) {
+    final now = DateTime.now();
+    _currentPartOfDay = PartOfDayBuilder.fromDateTime(now);
+    final today = now.date;
+    _isToday = (dateForDisplayedMoodAssessments == today);
+    _isFuture = (dateForDisplayedMoodAssessments.isAfter(today));
+  }
 
   @override
   Widget build(BuildContext context) {
-    var moodAssessmentCards = List.generate(moodAssessments.length, (index) =>
-          MoodAssessmentCard(moodAssessments[index])
-      );
+    return Consumer<MoodAssessmentsProvider>(
+        builder: (context, moodAssessmentsProvider, child) {
+          final moodAssessmentsForDay = moodAssessmentsProvider.getMoodAssessmentsForDate(dateForDisplayedMoodAssessments);
 
+          List<Widget> moodAssessmentCards = [];
+          List<Widget> moodSpheres = [];
+          print('=======================');
+          var cardIndex = 0;
+          for (var partOfDay in PartOfDay.values) {
+            print('PART_OF_DAY: $partOfDay');
+            final moodAssessmentsForPartOfDay = moodAssessmentsForDay.where(
+                    (moodAssessment) => moodAssessment.partOfDay == partOfDay).toList();
+            print('${moodAssessmentsForPartOfDay}');
+            if (moodAssessmentsForPartOfDay.isNotEmpty) {
+              for (var moodAssessment in moodAssessmentsForPartOfDay) {
+                final card = MoodAssessmentCard(moodAssessment);
+                moodAssessmentCards.add(card);
+                final moodSphere = MoodSphere(cardIndex: cardIndex++, mood: moodAssessment.mood);
+                moodSpheres.add(moodSphere);
+              }
+            } else {
+              final isMayContainEmptyCard = _partOfDaysInWhichMayBeEmptyCards.contains(partOfDay);
+              final isTimeToShow = (!_isFuture && !_isToday) || (_isToday && partOfDay.index <= _currentPartOfDay.index);
+              if (isMayContainEmptyCard && isTimeToShow) {
+                final emptyCard = MoodAssessmentEmptyCard(partOfDay);
+                moodAssessmentCards.add(emptyCard);
+                cardIndex++;
+              }
+            }
+          }
+          // Add padding for button
+          if (_isToday) {
+            moodAssessmentCards.add(
+                SizedBox(height: dp(51+16))
+            );
+          }
 
-    final moodSpheres = List.generate(moodAssessmentCards.length, (index) {
-      var mood = moodAssessmentCards[index].moodAssessment.mood;
-      if (mood != null) {
-        return Positioned(
-            top: dp(-5) + index * dp(136+8),
-            right: dp(-20),
-            child: Image.asset(
-              'assets/images/common/mood_spheres/$mood.png',
-              width: dp(220),
-            )
-        );
-      }
-    });
-
-    return NotificationListener<OverscrollIndicatorNotification>(
-      onNotification: (overScroll) {
-        overScroll.disallowGlow();
-      },
-      child: SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
-        child: Stack(
-            children:[
-              Column(
-                children: [
-                  ...moodAssessmentCards,
-                  MoodAssessmentEmptyCard(PartOfDay.evening),
-                  SizedBox(height: dp(51+16))
-                ],
+          return NotificationListener<OverscrollIndicatorNotification>(
+            onNotification: (overScroll) {
+              overScroll.disallowGlow();
+            },
+            child: SingleChildScrollView(
+              physics: ClampingScrollPhysics(),
+              child: Stack(
+                  children:[
+                    Column(
+                      children: moodAssessmentCards,
+                    ),
+                    ...moodSpheres,
+                  ]
               ),
-              ...moodSpheres,
-            ]
-        ),
-      ),
+            ),
+          );
+        }
     );
   }
 }
