@@ -24,7 +24,7 @@ extension PartOfDayBuilder on PartOfDay {
 
   static PartOfDay fromDateTime(DateTime time) {
     final hour = time.hour;
-    if (hour >= 5 && hour < 12) {
+    if (hour >= 4 && hour < 12) {
       return PartOfDay.morning;
     } else if (hour >= 12 && hour < 18) {
       return PartOfDay.day;
