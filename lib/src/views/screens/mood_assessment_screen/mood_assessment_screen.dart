@@ -38,15 +38,17 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
 
   String _getTitle (BuildContext context) {
     if (widget.arguments != null) {
-      final today = DateTime.now().date;
+      final now = DateTime.now();
+      final today = now.date;
       final DateTime date = widget.arguments['date'];
       final PartOfDay partOfDay = widget.arguments['partOfDay'];
       final partOfDayWord = Content.partOfDayNames[partOfDay];
+
       if (date == today) {
         return 'Настроение за $partOfDayWord';
       } else {
         final monthWord = Content.monthNames[date.month];
-        return '${date.day} $monthWord $partOfDayWord';
+        return '${date.day} $monthWord $partOfDayWord'; //TODO: Сделать склонение месяцев
       }
     } else {
       return 'Как настроение?';
@@ -55,11 +57,21 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
 
   MoodAssessment _createMoodAssessment(BuildContext context){
     if (widget.arguments != null) {
-      return MoodAssessment(
-        mood: _currentMood,
-        date: widget.arguments['date'],
-        partOfDay: widget.arguments['partOfDay']
-      );
+      final now = DateTime.now();
+      final today = now.date;
+      final PartOfDay currentPartOfDay = PartOfDayBuilder.fromDateTime(now);
+      final DateTime date = widget.arguments['date'];
+      final PartOfDay partOfDay = widget.arguments['partOfDay'];
+
+      if (date == today && partOfDay == currentPartOfDay) {
+        return MoodAssessment(mood: _currentMood);
+      } else {
+        return MoodAssessment(
+            mood: _currentMood,
+            date: widget.arguments['date'],
+            partOfDay: widget.arguments['partOfDay']
+        );
+      }
     } else {
       return MoodAssessment(mood: _currentMood);
     }
