@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
+import 'package:mind_tracker/src/views/common_widgets/custom_single_child_scroll_view.dart';
 import 'package:mind_tracker/src/views/common_widgets/mood_assessment_card_list_view/mood_assessment_cards_list_view.dart';
 import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';
 import 'calendar/calendar.dart';
@@ -13,19 +14,13 @@ class CalendarPage extends StatelessWidget {
       appBar: CustomAppBar(
         title: 'Календарь',
       ),
-      body: NotificationListener<OverscrollIndicatorNotification>(
-        onNotification: (overScroll) {
-          overScroll.disallowGlow();
-        },
-        child: SingleChildScrollView(
-          physics: ClampingScrollPhysics(),
-          child: Column(
-            children: [
-              Calendar(),
-              SizedBox(height: dp(16)),
-              MoodAssessmentCardsListView(today),
-            ],
-          ),
+      body: CustomSingleChildScrollView(
+        child: Column(
+          children: [
+            Calendar(),
+            SizedBox(height: dp(16)),
+            MoodAssessmentCardsListView(today),
+          ],
         ),
       )
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_provider.dart';
+import 'package:mind_tracker/src/views/common_widgets/custom_single_child_scroll_view.dart';
 import 'package:mind_tracker/src/views/common_widgets/mood_assessment_card_list_view/mood_sphere.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:provider/provider.dart';
@@ -61,20 +62,14 @@ class MoodAssessmentCardsListView extends StatelessWidget {
             );
           }
 
-          return NotificationListener<OverscrollIndicatorNotification>(
-            onNotification: (overScroll) {
-              overScroll.disallowGlow();
-            },
-            child: SingleChildScrollView(
-              physics: ClampingScrollPhysics(),
-              child: Stack(
-                  children:[
-                    Column(
-                      children: moodAssessmentCards,
-                    ),
-                    ...moodSpheres,
-                  ]
-              ),
+          return CustomSingleChildScrollView(
+            child: Stack(
+              children: [
+                Column(
+                  children: moodAssessmentCards,
+                ),
+                ...moodSpheres,
+              ]
             ),
           );
         }
