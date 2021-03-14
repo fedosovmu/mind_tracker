@@ -10,7 +10,7 @@ class AssessMoodNowButton extends StatelessWidget {
     return FlatButton(
       onPressed: () {
         print('Press assess mood now button ');
-        Navigator.pushNamed(context, '/moodAssessment');
+        Navigator.pushNamed(context, '/moodAssessment/now');
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

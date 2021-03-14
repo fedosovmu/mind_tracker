@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_provider.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment_screen/mood_assessor/mood_assessor.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment_screen/widgets/assess_mood_colored_button.dart';
 import 'package:provider/provider.dart';
 import '../../utils/theme/custom_text_styles.dart';
 import '../../utils/theme/custom_colors.dart';
-import '../../utils/content.dart';
 import '../../utils/metrics.dart';
+import 'package:mind_tracker/src/views/utils/content.dart';
 import '../../common_widgets/custom_app_bar.dart';
 import '../../../business_logic/models/mood_assessment.dart';
+import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';
 
 
 class MoodAssessmentScreen extends StatefulWidget {
-  final firstStart;
-  MoodAssessmentScreen({Key key, bool this.firstStart = false});
+  final bool firstStart;
+  final Map arguments;
+
+  MoodAssessmentScreen({this.firstStart = false, this.arguments});
 
   @override
   _MoodAssessmentScreenState createState() => _MoodAssessmentScreenState();
@@ -28,7 +32,36 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
     if (widget.firstStart) {
       Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
     } else {
-      Navigator.pop(context); 
+      Navigator.pop(context);
+    }
+  }
+
+  String _getTitle (BuildContext context) {
+    if (widget.arguments != null) {
+      final today = DateTime.now().date;
+      final DateTime date = widget.arguments['date'];
+      final PartOfDay partOfDay = widget.arguments['partOfDay'];
+      final partOfDayWord = Content.partOfDayNames[partOfDay];
+      if (date == today) {
+        return 'Настроение за $partOfDayWord';
+      } else {
+        final monthWord = Content.monthNames[date.month];
+        return '${date.day} $monthWord $partOfDayWord';
+      }
+    } else {
+      return 'Как настроение?';
+    }
+  }
+
+  MoodAssessment _createMoodAssessment(BuildContext context){
+    if (widget.arguments != null) {
+      return MoodAssessment(
+        mood: _currentMood,
+        date: widget.arguments['date'],
+        partOfDay: widget.arguments['partOfDay']
+      );
+    } else {
+      return MoodAssessment(mood: _currentMood);
     }
   }
   
@@ -36,7 +69,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Как ваше настроение?',
+        title: _getTitle(context),
         leading: IconButton(
           icon: Image.asset(
             _pathToCloseIcon,
@@ -65,7 +98,9 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
             AssessMoodColoredButton(
               currentMood: _currentMood,
               onPressed: () {
-                Provider.of<MoodAssessmentsProvider>(context, listen: false).add(MoodAssessment(mood: _currentMood));
+                Provider.of<MoodAssessmentsProvider>(context, listen: false).add(
+                    _createMoodAssessment(context)
+                );
                 _goToHomeScreen();
               },
             )

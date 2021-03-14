@@ -23,11 +23,36 @@ class MindTrackerApp extends StatelessWidget {
       title: 'Mind Tracker',
       theme: appTheme,
       initialRoute: '/main',
-      routes: {
-        '/onboarding': (context) => OnboardingScreen(),
-        '/moodAssessment': (context) => MoodAssessmentScreen(),
-        '/moodAssessment/firstStart': (context) => MoodAssessmentScreen(firstStart: true),
-        '/main': (context) => MainScreen(),
+
+      onGenerateRoute: (settings) {
+        var screenToGo;
+
+        switch (settings.name) {
+          case '/onboarding':
+            screenToGo = OnboardingScreen();
+            break;
+          case '/main':
+            screenToGo = MainScreen();
+            break;
+          case '/moodAssessment/firstStart':
+            screenToGo = MoodAssessmentScreen(firstStart: true);
+            break;
+          case '/moodAssessment/now':
+            screenToGo = MoodAssessmentScreen();
+            break;
+          case '/moodAssessment/partOfDay':
+            final Map arguments = settings.arguments;
+            screenToGo = MoodAssessmentScreen(arguments: arguments);
+            break;
+          default:
+            screenToGo = OnboardingScreen();
+        }
+        
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) {
+            return screenToGo;
+        });
       },
     );
   }

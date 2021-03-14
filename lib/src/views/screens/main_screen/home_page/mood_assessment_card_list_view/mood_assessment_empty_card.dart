@@ -36,7 +36,8 @@ class MoodAssessmentEmptyCard extends StatelessWidget {
               child: FlatButton(
                 onPressed: () {
                   print('PRESS EMPTY CARD ${missedDate.toStringDate()}, ${missedPartOfDay.toShortString()}');
-                  Navigator.pushNamed(context, '/moodAssessment');
+                  Navigator.pushNamed(context, '/moodAssessment/partOfDay',
+                      arguments: {'date': missedDate, 'partOfDay': missedPartOfDay});
                   },
                 color: CustomColors.main,
                 shape: RoundedRectangleBorder(
