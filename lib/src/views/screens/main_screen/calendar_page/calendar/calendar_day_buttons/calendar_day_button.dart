@@ -3,7 +3,7 @@ import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'calendar_day_button_mood_spheres.dart';
-import 'package:mind_tracker/src/business_logic/services/dateParser.dart';
+import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';
 
 
 class CalendarDayButton extends StatelessWidget {

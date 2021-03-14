@@ -3,7 +3,7 @@ import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_prov
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:provider/provider.dart';
 import 'calendar_day_button.dart';
-import 'package:mind_tracker/src/business_logic/services/dateParser.dart';
+import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';
 
 
 class CalendarDayButtons extends StatefulWidget {

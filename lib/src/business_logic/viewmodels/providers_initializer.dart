@@ -7,7 +7,7 @@ import 'dart:async';
 abstract class ProvidersInitializer {
   static Future<MoodAssessmentsProvider> getMoodAssessmentsProvider () async {
     await FirebaseProvider.initializeFirebaseConnection();
-    final moodAssessments = await FirebaseProvider.getMoodAssessments();
+    final moodAssessments = await FirebaseProvider.getAllMoodAssessmentsOfUser();
 
     return MoodAssessmentsProvider(
       moodAssessments: moodAssessments

@@ -5,7 +5,7 @@ import 'package:mind_tracker/src/views/screens/main_screen/home_page/widgets/ass
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:provider/provider.dart';
 import 'mood_assessment_card_list_view/mood_assessment_cards_list_view.dart';
-import 'package:mind_tracker/src/business_logic/services/dateParser.dart';
+import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';
 
 
 class HomePage extends StatefulWidget {

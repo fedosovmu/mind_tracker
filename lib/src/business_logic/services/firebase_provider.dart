@@ -15,10 +15,9 @@ abstract class FirebaseProvider {
     print('=== USER: ${_userCredential.user.uid}');
   }
 
-  static Future<List<MoodAssessment>> getMoodAssessments () async {
+  static Future<List<MoodAssessment>> getAllMoodAssessmentsOfUser () async {
     final moodAssessmentsQuerySnapshot = await _mood_assessments_collection
         .where('user_id', isEqualTo: _userCredential.user.uid).get();
-        //.where('date', isEqualTo: '2021-02-09').get();
 
     final List<MoodAssessment> moodAssessments = moodAssessmentsQuerySnapshot.docs.map((mood_assessment_doc) {
       return MoodAssessment.fromMap(mood_assessment_doc.data());

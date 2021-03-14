@@ -2,7 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mind_tracker/src/business_logic/services/firebase_provider.dart';
 import '../models/mood_assessment.dart';
-import 'package:mind_tracker/src/business_logic/services/dateParser.dart';
+import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';
 
 
 class MoodAssessmentsProvider extends ChangeNotifier {
@@ -11,7 +11,7 @@ class MoodAssessmentsProvider extends ChangeNotifier {
   MoodAssessmentsProvider({List<MoodAssessment> this.moodAssessments,});
 
   List<MoodAssessment> get todayMoodAssessments {
-    final today = DateTime.now().toStringDate();
+    final today = DateTime.now().date;
     final todayMoodAssessments = moodAssessments.where((moodAssessment) => moodAssessment.date == today).toList();
     todayMoodAssessments.sort();
     return todayMoodAssessments;
@@ -45,7 +45,7 @@ class MoodAssessmentsProvider extends ChangeNotifier {
 
   List<MoodAssessment> getMoodAssessmentsForDate (DateTime date) {
     final moodAssessmentsForDate = moodAssessments.where(
-            (moodAssessment) => moodAssessment.date == date.toStringDate()).toList();
+            (moodAssessment) => moodAssessment.date == date.date).toList();
     moodAssessmentsForDate.sort();
     return moodAssessmentsForDate;
   }
