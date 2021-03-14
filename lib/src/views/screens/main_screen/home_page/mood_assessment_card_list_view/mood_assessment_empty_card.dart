@@ -4,12 +4,14 @@ import 'package:mind_tracker/src/views/utils/content.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import '../../../../utils/metrics.dart';
+import 'package:mind_tracker/src/business_logic/services/dateParser.dart';
 
 
 class MoodAssessmentEmptyCard extends StatelessWidget {
+  final DateTime missedDate;
   final PartOfDay missedPartOfDay;
 
-  MoodAssessmentEmptyCard(this.missedPartOfDay);
+  MoodAssessmentEmptyCard(this.missedDate, this.missedPartOfDay);
 
 
   @override
@@ -32,7 +34,10 @@ class MoodAssessmentEmptyCard extends StatelessWidget {
               width: dp(164),
               height: dp(46),
               child: FlatButton(
-                onPressed: () { print('PRESS EMPTY CARD'); Navigator.pushNamed(context, '/moodAssessment'); },
+                onPressed: () {
+                  print('PRESS EMPTY CARD ${missedDate.toStringDate()}, ${missedPartOfDay.toShortString()}');
+                  Navigator.pushNamed(context, '/moodAssessment');
+                  },
                 color: CustomColors.main,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(dp(12))

@@ -70,22 +70,6 @@ mixin Content {
       'nextButtonStartText': 'Начать',
     },
 
-    'moodAssessmentScreen': {
-      'titleText': 'Как ваше настроение?',
-      'pathToCloseIcon': 'assets/icons/close.png',
-      'pathsToMoodSpheres': Map.fromIterable(
-          List.generate(7, (i) => i + 1),
-          key: (item) => item,
-          value: (item) => 'assets/images/common/mood_spheres/$item.png'
-      ),
-      'pathToMoodSliderImage': 'assets/images/mood_assessment/mood_slider.png',
-      'moodNames': moodNames,
-      'secondaryMoodText': 'Настроение',
-      'secondaryPullText': 'Потяни',
-      'assessButtonText': 'Оценить',
-      'skipButtonText': 'Пропустить',
-    },
-
     'moodAssessmentCard': {
       'moodNames': moodNames,
       'getEventWord': (int eventsNumber) {

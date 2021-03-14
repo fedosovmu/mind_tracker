@@ -4,12 +4,12 @@ import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 
 
-class AssessMoodButton extends StatelessWidget {
+class AssessMoodNowButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
       onPressed: () {
-        print('Assess mood now button pressed');
+        print('Press assess mood now button ');
         Navigator.pushNamed(context, '/moodAssessment');
       },
       child: Row(

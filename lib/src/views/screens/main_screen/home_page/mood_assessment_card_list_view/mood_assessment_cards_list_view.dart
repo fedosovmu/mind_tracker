@@ -47,7 +47,7 @@ class MoodAssessmentCardsListView extends StatelessWidget {
               final isMayContainEmptyCard = _partOfDaysInWhichMayBeEmptyCards.contains(partOfDay);
               final isTimeToShow = (!_isFuture && !_isToday) || (_isToday && partOfDay.index <= _currentPartOfDay.index);
               if (isMayContainEmptyCard && isTimeToShow) {
-                final emptyCard = MoodAssessmentEmptyCard(partOfDay);
+                final emptyCard = MoodAssessmentEmptyCard(dateForDisplayedMoodAssessments, partOfDay);
                 moodAssessmentCards.add(emptyCard);
                 cardIndex++;
               }
