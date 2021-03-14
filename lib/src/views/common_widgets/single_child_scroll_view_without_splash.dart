@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 
-class CustomSingleChildScrollView extends StatelessWidget {
+class SingleChildScrollViewWithoutSplash extends StatelessWidget {
   final Widget child;
 
-  CustomSingleChildScrollView({@required this.child});
+  SingleChildScrollViewWithoutSplash({@required this.child});
 
   @override
   Widget build(BuildContext context) {
