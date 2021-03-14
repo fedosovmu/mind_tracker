@@ -11,12 +11,13 @@ import 'mood_assessment_empty_card.dart';
 
 class MoodAssessmentCardsListView extends StatelessWidget {
   final DateTime dateForDisplayedMoodAssessments;
+  final bool addPaddingAtBottom;
   bool _isToday;
   bool _isFuture;
   PartOfDay _currentPartOfDay;
   static const _partOfDaysInWhichMayBeEmptyCards = {PartOfDay.morning, PartOfDay.day, PartOfDay.evening};
 
-  MoodAssessmentCardsListView(this.dateForDisplayedMoodAssessments) {
+  MoodAssessmentCardsListView(this.dateForDisplayedMoodAssessments, {this.addPaddingAtBottom = false}) {
     final now = DateTime.now();
     _currentPartOfDay = PartOfDayBuilder.fromDateTime(now);
     final today = now.date;
@@ -54,7 +55,7 @@ class MoodAssessmentCardsListView extends StatelessWidget {
             }
           }
           // Add padding for button
-          if (_isToday) {
+          if (addPaddingAtBottom) {
             moodAssessmentCards.add(
                 SizedBox(height: dp(51+16))
             );

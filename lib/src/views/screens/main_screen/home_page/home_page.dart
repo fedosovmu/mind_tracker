@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
       body: Stack(
         children: [
           SizedBox.expand(
-            child: MoodAssessmentCardsListView(today),
+            child: MoodAssessmentCardsListView(today, addPaddingAtBottom: true),
           ),
           Positioned(
             left: dp(16),
