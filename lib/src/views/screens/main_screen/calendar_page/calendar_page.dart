@@ -14,7 +14,12 @@ class CalendarPage extends StatelessWidget {
       appBar: CustomAppBar(
         title: 'Календарь',
       ),
-      body: Calendar()
+      body: Column(
+        children: [
+          Calendar(),
+
+        ],
+      )
     );
   }
 }

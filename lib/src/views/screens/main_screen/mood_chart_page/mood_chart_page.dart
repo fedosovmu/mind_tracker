@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
-import 'package:mind_tracker/src/views/common_widgets/period_buttons/period_toggle_buttons.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/mood_chart_page/mood_chart_card/mood_chart_card.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/mood_chart_page/period_buttons/period_toggle_buttons.dart';
 
 
 class MoodChartPage extends StatefulWidget {
