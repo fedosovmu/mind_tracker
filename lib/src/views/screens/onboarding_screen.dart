@@ -42,71 +42,74 @@ class OnboardingScreen extends StatelessWidget with Content {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: null,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                SizedBox(
-                  height: dp(24),
-                ),
-                Image(
-                  image: AssetImage(content['pathsToImages'][_pageNumber]),
-                  height: dp(370),
-                ),
-                Container(
-                  height: dp(55),
-                  padding: EdgeInsets.only(bottom: dp(18)),
-                  alignment: Alignment.bottomCenter,
-                  child: SizedBox(
-                    width: dp(54),
-                    height: dp(9),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: List.generate(4, (index) {
-                          var circle_color = CustomColors.purpleSuperDark;
-                          if (index+1 == _pageNumber) {
-                            circle_color = CustomColors.purpleLight;
+        body: SafeArea(
+          minimum: EdgeInsets.only(bottom: dp(8)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  SizedBox(
+                    height: dp(24),
+                  ),
+                  Image(
+                    image: AssetImage(content['pathsToImages'][_pageNumber]),
+                    height: dp(370),
+                  ),
+                  Container(
+                    height: dp(55),
+                    padding: EdgeInsets.only(bottom: dp(18)),
+                    alignment: Alignment.bottomCenter,
+                    child: SizedBox(
+                      width: dp(54),
+                      height: dp(9),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: List.generate(4, (index) {
+                            var circle_color = CustomColors.purpleSuperDark;
+                            if (index+1 == _pageNumber) {
+                              circle_color = CustomColors.purpleLight;
+                            }
+                            return Container(
+                              width: dp(9),
+                              decoration: BoxDecoration(
+                                color: circle_color,
+                                shape: BoxShape.circle
+                              ),
+                            );
                           }
-                          return Container(
-                            width: dp(9),
-                            decoration: BoxDecoration(
-                              color: circle_color,
-                              shape: BoxShape.circle
-                            ),
-                          );
-                        }
-                      )
+                        )
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  alignment: Alignment.center,
+                  Container(
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.only(left: dp(16), right: dp(16)),
+                    child:  Text(
+                        content['screenTexts'][_pageNumber],
+                        style: CustomTextStyles.basicH1Medium.copyWith(color: CustomColors.silverWhite),
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                  width: double.infinity,
+                  height: dp(60),
                   padding: EdgeInsets.only(left: dp(16), right: dp(16)),
-                  child:  Text(
-                      content['screenTexts'][_pageNumber],
-                      style: CustomTextStyles.basicH1Medium.copyWith(color: CustomColors.silverWhite),
-                  ),
-                ),
-              ],
-            ),
-            Container(
-                width: double.infinity,
-                height: dp(68),
-                padding: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
-                child: FlatButton (
-                    color: CustomColors.main,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(dp(16))),
-                    ),
-                    onPressed: () { _goToNextScreen(context); },
-                    child: Text(
-                      _isThisLastPage() ? content['nextButtonStartText'] : content['nextButtonNextText'],
-                      style: CustomTextStyles.buttonMedium,
-                    )
-                )
-            )
-          ],
+                  child: FlatButton (
+                      color: CustomColors.main,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(dp(16))),
+                      ),
+                      onPressed: () { _goToNextScreen(context); },
+                      child: Text(
+                        _isThisLastPage() ? content['nextButtonStartText'] : content['nextButtonNextText'],
+                        style: CustomTextStyles.buttonMedium,
+                      )
+                  )
+              )
+            ],
+          ),
         )
     );
   }

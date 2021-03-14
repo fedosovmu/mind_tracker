@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';

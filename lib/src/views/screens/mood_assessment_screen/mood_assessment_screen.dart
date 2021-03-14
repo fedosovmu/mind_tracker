@@ -49,7 +49,8 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
           },
         ),
       ),
-      body: Container(
+      body: SafeArea(
+        minimum: EdgeInsets.only(bottom: dp(8)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -220,9 +221,9 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> with Conten
 
   Widget _buildBottomButton() {
     return Container(
-      height: dp(68),
+      height: dp(60),
       width: double.infinity,
-      padding: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
+      padding: EdgeInsets.only(left: dp(16), right: dp(16)),
       child: SizedBox(
         height: dp(60),
         width: double.infinity,
