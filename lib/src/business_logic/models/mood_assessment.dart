@@ -8,8 +8,8 @@ import 'package:mind_tracker/src/business_logic/services/date_time_and_string_ex
 class MoodAssessment implements Comparable {
   final int mood;
   PartOfDay partOfDay;
-  DateTime date; //String date; //TODO: convert to DateTime
-  DateTime time;//Timestamp time; //TODO: convert to DateTime
+  DateTime date;
+  DateTime time;
 
   MoodAssessment({@required this.mood, this.partOfDay, this.date, this.time}) {
     if (partOfDay == null) {
