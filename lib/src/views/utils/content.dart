@@ -69,18 +69,5 @@ mixin Content {
       'nextButtonNextText': 'Далее',
       'nextButtonStartText': 'Начать',
     },
-
-    'moodAssessmentCard': {
-      'moodNames': moodNames,
-      'getEventWord': (int eventsNumber) {
-        if ((eventsNumber % 10) == 1) {
-          return 'Событие';
-        } else if ((eventsNumber % 10) > 1 && (eventsNumber % 10) <= 4) {
-          return 'События';
-        } else {
-          return 'Событий';
-        }
-      } as dynamic,
-    },
   };
 }

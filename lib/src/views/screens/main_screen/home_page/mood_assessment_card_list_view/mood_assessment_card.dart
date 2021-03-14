@@ -7,14 +7,38 @@ import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import '../../../../utils/metrics.dart';
 
 
-class MoodAssessmentCard extends StatelessWidget with Content {
+class MoodAssessmentCard extends StatelessWidget {
   final MoodAssessment moodAssessment;
 
   MoodAssessmentCard (this.moodAssessment);
 
+  static String _getTimeString(BuildContext context, DateTime time) {
+    final is24HourFormat = MediaQuery.of(context).alwaysUse24HourFormat;
+    if (is24HourFormat) {
+      return DateFormat('Hm').format(time);
+    } else {
+      return DateFormat('jm').format(time);
+    }
+  }
+
+  static String _getPartOfDayAndTimeString (BuildContext context, moodAssessment) {
+    final partOfDayWord = Content.partOfDayNames[moodAssessment.partOfDay];
+    final timeString = moodAssessment.time != null ? '  |  ${_getTimeString(context, moodAssessment.time.toDate())}' : '';
+    return partOfDayWord + timeString;
+  }
+
+  static _getEventWord (int eventsNumber) {
+    if ((eventsNumber % 10) == 1) {
+      return 'Событие';
+    } else if ((eventsNumber % 10) > 1 && (eventsNumber % 10) <= 4) {
+      return 'События';
+    } else {
+      return 'Событий';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    loadContent('moodAssessmentCard');
     return Container(
       margin: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
       padding: EdgeInsets.only(top: dp(16), left: dp(24), bottom: dp(14)),
@@ -27,14 +51,14 @@ class MoodAssessmentCard extends StatelessWidget with Content {
             Container(
               height: dp(41),
               child: Text(
-                _getPartOfDayAndTimeString(context),
+                _getPartOfDayAndTimeString(context, moodAssessment),
                 style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
               ),
             ),
             Container(
               height: dp(41),
               child: Text(
-                content['moodNames'][moodAssessment.mood],
+                Content.moodNames[moodAssessment.mood],
                 style: CustomTextStyles.titleH1,
               ),
             ),
@@ -60,7 +84,7 @@ class MoodAssessmentCard extends StatelessWidget with Content {
                       width: dp(8),
                     ),
                     Text(
-                      content['getEventWord'](moodAssessment.mood),
+                      _getEventWord(moodAssessment.mood),
                       style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
                     ),
                   ],
@@ -74,20 +98,5 @@ class MoodAssessmentCard extends StatelessWidget with Content {
         borderRadius: BorderRadius.all(Radius.circular(dp(16))),
       ),
     );
-  }
-
-  String _getTimeString(BuildContext context, DateTime time) {
-    final is24HourFormat = MediaQuery.of(context).alwaysUse24HourFormat;
-    if (is24HourFormat) {
-      return DateFormat('Hm').format(time);
-    } else {
-      return DateFormat('jm').format(time);
-    }
-  }
-
-  String _getPartOfDayAndTimeString (BuildContext context) {
-    final partOfDayWord = Content.partOfDayNames[moodAssessment.partOfDay];
-    final timeString = moodAssessment.time != null ? '  |  ${_getTimeString(context, moodAssessment.time.toDate())}' : '';
-    return partOfDayWord + timeString;
   }
 }

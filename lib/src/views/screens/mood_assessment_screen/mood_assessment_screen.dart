@@ -24,7 +24,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
   static const _defaultMood = 4;
   int _currentMood = _defaultMood;
 
-  void _goToNextScreen() {
+  void _goToHomeScreen() {
     if (widget.firstStart) {
       Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
     } else {
@@ -45,7 +45,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
           ),
           onPressed: () {
             print('Press close button');
-            _goToNextScreen();
+            _goToHomeScreen();
           },
         ),
       ),
@@ -66,7 +66,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
               currentMood: _currentMood,
               onPressed: () {
                 Provider.of<MoodAssessmentsProvider>(context, listen: false).add(MoodAssessment(mood: _currentMood));
-                _goToNextScreen();
+                _goToHomeScreen();
               },
             )
           ],
