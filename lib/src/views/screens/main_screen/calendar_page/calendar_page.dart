@@ -7,9 +7,21 @@ import 'calendar/calendar.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 
 
-class CalendarPage extends StatelessWidget {
-  Widget build(BuildContext context) {
+class CalendarPage extends StatefulWidget {
+  @override
+  _CalendarPageState createState() => _CalendarPageState();
+}
+
+class _CalendarPageState extends State<CalendarPage> {
+  DateTime _selectedDate;
+
+  @override
+  initState() {
     final today = DateTime.now().date;
+    _selectedDate = today;
+  }
+
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Календарь',
@@ -17,9 +29,15 @@ class CalendarPage extends StatelessWidget {
       body: SingleChildScrollViewWithoutSplash(
         child: Column(
           children: [
-            Calendar(),
+            Calendar(
+              onSelectedDateChange: (DateTime newDate) {
+                setState(() {
+                  _selectedDate = newDate;
+                });
+              },
+            ),
             SizedBox(height: dp(16)),
-            MoodAssessmentCardsListView(today),
+            MoodAssessmentCardsListView(_selectedDate),
           ],
         ),
       )

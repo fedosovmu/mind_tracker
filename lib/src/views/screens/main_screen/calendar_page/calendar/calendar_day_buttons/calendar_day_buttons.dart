@@ -9,15 +9,16 @@ import 'package:mind_tracker/src/business_logic/services/date_time_and_string_ex
 class CalendarDayButtons extends StatefulWidget {
   final int month;
   final int year;
+  final Function onSelectedDateChanged;
 
-  CalendarDayButtons({@required this.year, @required this.month});
+  CalendarDayButtons({@required this.year, @required this.month, @required this.onSelectedDateChanged});
 
   @override
   _CalendarDayButtonsState createState() => _CalendarDayButtonsState();
 }
 
 class _CalendarDayButtonsState extends State<CalendarDayButtons> {
-  var _selectedDate;
+  DateTime _selectedDate;
 
   @override
   void initState() {
@@ -28,18 +29,19 @@ class _CalendarDayButtonsState extends State<CalendarDayButtons> {
 
   @override
   Widget build(BuildContext context) {
-    final firstDayInMonth = DateTime(widget.year, widget.month, 1);
-    final daysNumberInMonth = DateTime(widget.year, widget.month + 1).difference(DateTime(widget.year, widget.month)).inDays;
-    final emptyDayCount = firstDayInMonth.weekday - 1;
-    final calendarEmptyButtons = List.generate(emptyDayCount, (index) => SizedBox());
-    final calendarDayButtons = List.generate(daysNumberInMonth, (index) {
-      final calendarDayButtonDate = firstDayInMonth.add(Duration(days: index));
+    final DateTime firstDayInMonth = DateTime(widget.year, widget.month, 1);
+    final int daysNumberInMonth = DateTime(widget.year, widget.month + 1).difference(DateTime(widget.year, widget.month)).inDays;
+    final int emptyDayCount = firstDayInMonth.weekday - 1;
+    final List<Widget> calendarEmptyButtons = List.generate(emptyDayCount, (index) => SizedBox.shrink());
+    final List<Widget> calendarDayButtons = List.generate(daysNumberInMonth, (index) {
+      final DateTime calendarDayButtonDate = firstDayInMonth.add(Duration(days: index));
       return CalendarDayButton(
         date: calendarDayButtonDate,
-        onTap: () {
+        onPressed: () {
           setState(() {
-            print('PRESS CALENDAR BUTTON ${calendarDayButtonDate.toStringDate()}'); //TODO: delete this line
+            print('Calendar button presed ${calendarDayButtonDate.toStringDate()}');
             _selectedDate = calendarDayButtonDate;
+            widget.onSelectedDateChanged(calendarDayButtonDate);
           });
         },
         isSelected: calendarDayButtonDate == _selectedDate,

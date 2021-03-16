@@ -10,8 +10,9 @@ import 'calendar_day_buttons/calendar_day_buttons.dart';
 
 class Calendar extends StatefulWidget {
   PageController _pageController;
+  final Function onSelectedDateChange;
 
-  Calendar () {
+  Calendar ({@required this.onSelectedDateChange}) {
     final now = DateTime.now();
     _pageController = PageController();
   }
@@ -24,8 +25,8 @@ class _CalendarState extends State<Calendar> {
   static const _pageChangeAnimationDuration = Duration(milliseconds: 500);
   static const _pageChangeAnimationCurve = Curves.ease;
 
-  var _selectedYear;
-  var _selectedMonth;
+  int _selectedYear;
+  int _selectedMonth;
 
   @override
   void initState() {
@@ -39,7 +40,7 @@ class _CalendarState extends State<Calendar> {
     return DateTime(now.year, now.month - pageIndex);
   }
 
-  void _onSlideChanged(int page) {
+  void _onPageChanged(int page) {
     print('On page slide changed to $page');
     setState(() {
       final newDate = _getDateOfCalendarPage(page);
@@ -72,11 +73,20 @@ class _CalendarState extends State<Calendar> {
                 MonthSwitchButtons(
                   onLeftArrowPressed: () {
                     print('Left arrow pressed');
-                    widget._pageController.nextPage(duration: _pageChangeAnimationDuration, curve: _pageChangeAnimationCurve);
+                    widget._pageController.nextPage(
+                        duration: _pageChangeAnimationDuration,
+                        curve: _pageChangeAnimationCurve);
                   },
                   onRightArrowPressed: () {
-                    print('on right arrow pressed');
-                    widget._pageController.previousPage(duration: _pageChangeAnimationDuration, curve: _pageChangeAnimationCurve);
+                    print('Right arrow pressed');
+                    final DateTime now = DateTime.now();
+                    if (now.year == _selectedYear && now.month == _selectedMonth) {
+                      print('You cannot switch to future months');
+                    } else {
+                      widget._pageController.previousPage(
+                          duration: _pageChangeAnimationDuration,
+                          curve: _pageChangeAnimationCurve);
+                    }
                   },
                 ),
               ],
@@ -85,7 +95,7 @@ class _CalendarState extends State<Calendar> {
           CalendarDayOfWeekLabels(),
           Expanded(
             child: PageView.builder(
-              onPageChanged: _onSlideChanged,
+              onPageChanged: _onPageChanged,
               reverse: true,
               controller: widget._pageController,
               itemBuilder: (BuildContext context, int index) {
@@ -94,6 +104,7 @@ class _CalendarState extends State<Calendar> {
                 return CalendarDayButtons(
                   year: newMonthDate.year,
                   month: newMonthDate.month,
+                  onSelectedDateChanged: widget.onSelectedDateChange,
                 );
               }
             )

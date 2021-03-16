@@ -8,17 +8,17 @@ import 'package:mind_tracker/src/business_logic/services/date_time_and_string_ex
 
 class CalendarDayButton extends StatelessWidget {
   final DateTime date;
-  final Function onTap;
+  final Function onPressed;
   final bool isSelected;
 
-  CalendarDayButton({@required this.date, @required this.onTap, this.isSelected = false});
+  CalendarDayButton({@required this.date, @required this.onPressed, this.isSelected = false});
 
   @override
   Widget build(BuildContext context) {
     final today = DateTime.now().date;
     final isToday = (date == today);
     return InkWell(
-      onTap: onTap,
+      onTap: onPressed,
       child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
