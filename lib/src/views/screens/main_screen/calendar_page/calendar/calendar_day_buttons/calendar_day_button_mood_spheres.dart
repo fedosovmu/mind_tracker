@@ -25,8 +25,7 @@ class CalendarDayButtonMoodSpheres extends StatelessWidget {
             final moodAssessmentsForPartsOfDay = List.generate(PartOfDay.values.length, (index) {
               return moodAssessmentsForDay.where((element) => element.partOfDay == PartOfDay.values[index]);
             });
-            moodAssessmentsToShow = [];
-            for (var i = 0; moodAssessmentsToShow.length < 4; i++) {
+            for (var i = 0; moodAssessmentsToShow.length < _maxMoodSpheresCount; i++) {
               for (var moodAssessmentsForPartOfDay in moodAssessmentsForPartsOfDay) {
                 if (moodAssessmentsForPartOfDay.length >= i + 1) {
                   moodAssessmentsToShow.add(moodAssessmentsForPartOfDay.toList()[i]);
