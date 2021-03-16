@@ -30,29 +30,27 @@ class _CalendarDayButtonsState extends State<CalendarDayButtons> {
   Widget build(BuildContext context) {
     final firstDayInMonth = DateTime(widget.year, widget.month, 1);
     final daysNumberInMonth = DateTime(widget.year, widget.month + 1).difference(DateTime(widget.year, widget.month)).inDays;
-    return Expanded(
-      child: Container(
-        padding: EdgeInsets.only(top: dp(8), left: dp(8), right: dp(8)),
-        width: double.infinity,
-        child: GridView.count(
-          physics: NeverScrollableScrollPhysics(),
-          crossAxisCount: 7,
-          crossAxisSpacing: dp(8),
-          mainAxisSpacing: dp(2),
-          children: List.generate(daysNumberInMonth, (index) {
-            final calendarDayButtonDate = firstDayInMonth.add(Duration(days: index));
-            return CalendarDayButton(
-              date: calendarDayButtonDate,
-              onTap: () {
-                setState(() {
-                  print('PRESS CALENDAR BUTTON ${calendarDayButtonDate.toStringDate()}'); //TODO: delete this line
-                  _selectedDate = calendarDayButtonDate;
-                });
-              },
-              isSelected: calendarDayButtonDate == _selectedDate,
-            );
-          }),
-        ),
+    return Container(
+      padding: EdgeInsets.only(top: dp(8), left: dp(8), right: dp(8)),
+      width: double.infinity,
+      child: GridView.count(
+        physics: NeverScrollableScrollPhysics(),
+        crossAxisCount: 7,
+        crossAxisSpacing: dp(8),
+        mainAxisSpacing: dp(2),
+        children: List.generate(daysNumberInMonth, (index) {
+          final calendarDayButtonDate = firstDayInMonth.add(Duration(days: index));
+          return CalendarDayButton(
+            date: calendarDayButtonDate,
+            onTap: () {
+              setState(() {
+                print('PRESS CALENDAR BUTTON ${calendarDayButtonDate.toStringDate()}'); //TODO: delete this line
+                _selectedDate = calendarDayButtonDate;
+              });
+            },
+            isSelected: calendarDayButtonDate == _selectedDate,
+          );
+        }),
       ),
     );
   }

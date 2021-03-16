@@ -8,6 +8,20 @@ import 'calendar_day_buttons/calendar_day_buttons.dart';
 
 
 class Calendar extends StatelessWidget {
+  PageController _pageController;
+
+  static const _pageChangeAnimationDuration = Duration(milliseconds: 500);
+  static const _pageChangeAnimationCurve = Curves.ease;
+
+  Calendar () {
+    final now = DateTime.now();
+    _pageController = PageController();
+  }
+
+  void _onSlideChanged(int page) {
+    print('On page slide chaned tp $page');
+  }
+
   @override
   Widget build(BuildContext context) {
     final now = DateTime.now();
@@ -20,15 +34,35 @@ class Calendar extends StatelessWidget {
       ),
       child: Column(
         children: [
-          MonthSwitcher(),
-          CalendarDayOfWeekLabels(
-            year: now.year,
-            month: now.month,
+          MonthSwitcher(
+            onMonthSwitched: (DateTime selectedMonth) {
+              print('Month switched $selectedMonth');
+              final now = DateTime.now();
+              final datesDifferenceInMonths = (now.year - selectedMonth.year) * 12 + now.month - selectedMonth.month;
+              print('dates difference: ${datesDifferenceInMonths}');
+              _pageController.animateToPage(
+                  datesDifferenceInMonths,
+                  duration: _pageChangeAnimationDuration,
+                  curve: _pageChangeAnimationCurve
+              );
+            },
           ),
-          CalendarDayButtons(
-            year: now.year,
-            month: now.month,
-          )
+          CalendarDayOfWeekLabels(),
+          Expanded(
+            child: PageView.builder(
+              onPageChanged: _onSlideChanged,
+              reverse: true,
+              controller: _pageController,
+              itemBuilder: (BuildContext context, int index) {
+                print('Calendar page $index');
+                var newMonthDate = DateTime(now.year, now.month - index);
+                return CalendarDayButtons(
+                  year: newMonthDate.year,
+                  month: newMonthDate.month,
+                );
+              }
+            )
+          ),
         ],
       ),
     );

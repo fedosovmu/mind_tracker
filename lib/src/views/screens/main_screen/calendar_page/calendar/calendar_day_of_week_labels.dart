@@ -6,21 +6,17 @@ import 'package:mind_tracker/src/views/utils/content.dart';
 
 
 class CalendarDayOfWeekLabels extends StatelessWidget {
-  final int month;
-  final int year;
-
-  CalendarDayOfWeekLabels({@required this.year, @required this.month});
+  CalendarDayOfWeekLabels();
 
   @override
   Widget build(BuildContext context) {
-    final firstDayInMonth = DateTime(year, month, 1);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: dp(16)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: List.generate(DateTime.daysPerWeek, (index) {
-          final day = firstDayInMonth.add(Duration(days: index));
-          final weekDayWord = Content.weekDayNames[day.weekday];
+          final day = index + 1;
+          final weekDayWord = Content.weekDayNames[day];
           return Text(
             weekDayWord,
             style: CustomTextStyles.basic.copyWith(
