@@ -3,11 +3,11 @@ import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/single_child_scroll_view_without_splash.dart';
-import 'package:mind_tracker/src/views/common_widgets/mood_assessment_card_list_view/mood_sphere.dart';
+import 'package:mind_tracker/src/views/common_widgets/mood_assessment_card_list_view/widgets/mood_sphere.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:provider/provider.dart';
-import 'mood_assessment_card.dart';
-import 'mood_assessment_empty_card.dart';
+import 'widgets/mood_assessment_card.dart';
+import 'widgets/mood_assessment_empty_card.dart';
 
 
 class MoodAssessmentCardsListView extends StatelessWidget {
