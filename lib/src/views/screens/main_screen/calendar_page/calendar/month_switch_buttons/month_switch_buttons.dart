@@ -5,30 +5,11 @@ import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import 'month_switch_button.dart';
 
 
-class MonthSwitcher extends StatefulWidget {
-  final Function onMonthSwitched;
+class MonthSwitchButtons extends StatelessWidget {
+  final Function onLeftArrowPressed;
+  final Function onRightArrowPressed;
 
-  MonthSwitcher ({@required this.onMonthSwitched});
-
-  @override
-  _MonthSwitcherState createState() => _MonthSwitcherState();
-}
-
-class _MonthSwitcherState extends State<MonthSwitcher> {
-  DateTime _selectedMonth;
-
-  @override
-  void initState() {
-    final now = DateTime.now();
-    _selectedMonth = DateTime(now.year, now.month);
-  }
-
-  _switchMonth(int monthShift) {
-    setState(() {
-      _selectedMonth = DateTime(_selectedMonth.year, _selectedMonth.month + monthShift);
-      widget.onMonthSwitched(_selectedMonth);
-    });
-  }
+  MonthSwitchButtons ({@required this.onLeftArrowPressed, @required this.onRightArrowPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +20,7 @@ class _MonthSwitcherState extends State<MonthSwitcher> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            '${_selectedMonth.year} ${Content.monthNames[_selectedMonth.month]}',
+            '2021 Март',
             style: CustomTextStyles.basicH1Medium,
           ),
           SizedBox(
@@ -47,8 +28,8 @@ class _MonthSwitcherState extends State<MonthSwitcher> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                MonthSwitchButton(onPressed: () { _switchMonth(-1); }),
-                MonthSwitchButton(onPressed: () { _switchMonth(1); }, isRight: true)
+                MonthSwitchButton(onPressed: onLeftArrowPressed),
+                MonthSwitchButton(onPressed: onRightArrowPressed, isRight: true)
               ],
             ),
           )
