@@ -26,20 +26,32 @@ class _CalendarPageState extends State<CalendarPage> {
       appBar: CustomAppBar(
         title: 'Календарь',
       ),
-      body: SingleChildScrollViewWithoutSplash(
-        child: Column(
-          children: [
-            Calendar(
-              onSelectedDateChange: (DateTime newDate) {
-                setState(() {
-                  _selectedDate = newDate;
-                });
-              },
+      body: LayoutBuilder(
+        builder: (context, constrain) {
+          final calendarHeight = dp(8) + dp(321) + dp(16);
+          return SingleChildScrollViewWithoutSplash(
+            child: Container(
+              //color: Colors.yellow,
+              child: Column(
+                children: [
+                  Calendar(
+                    onSelectedDateChange: (DateTime newDate) {
+                      setState(() {
+                        _selectedDate = newDate;
+                      });
+                    },
+                  ),
+                  SizedBox(height: dp(16)),
+                  //MoodAssessmentCardsListView(_selectedDate),
+                  ConstrainedBox(
+                      constraints: BoxConstraints(minHeight: constrain.maxHeight - calendarHeight),
+                      child: MoodAssessmentCardsListView(_selectedDate)
+                  ),
+                ],
+              ),
             ),
-            SizedBox(height: dp(16)),
-            MoodAssessmentCardsListView(_selectedDate),
-          ],
-        ),
+          );
+        }
       )
     );
   }
