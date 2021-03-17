@@ -37,7 +37,7 @@ class _MainScreenState extends State<MainScreen> {
           color: CustomColors.purpleDark,
           child: Center(
             child: Text(
-              'Здесь будет влияние',
+              'Здесь будут события',
               style: CustomTextStyles.titleH1.copyWith(
                 color: CustomColors.purpleTextSecondary
               ),
