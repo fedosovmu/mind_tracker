@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 
 class _Metrics {
-  static var dpScale = _setDpScale();
+  static final dpScale = _setDpScale();
 
   static double _setDpScale() {
     final pixelRatio = WidgetsBinding.instance.window.devicePixelRatio;
