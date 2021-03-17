@@ -37,21 +37,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
   }
 
   String _getDateWord (DateTime date) {
-    const monthNamesInParentCase = {
-      1: 'января',
-      2: 'февраля',
-      3: 'марта',
-      4: 'апрелья',
-      5: 'мая',
-      6: 'июня',
-      7: 'июля',
-      8: 'августа',
-      9: 'сентября',
-      10: 'октября',
-      11: 'ноября',
-      12: 'декабря',
-    };
-    return '${date.day} ${monthNamesInParentCase[date.month]}';
+    return '${date.day} ${Content.monthNamesInParentCase[date.month]}';
   }
 
   String _getTitle (BuildContext context) {
