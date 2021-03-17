@@ -20,8 +20,7 @@ class MoodAssessmentsProvider extends ChangeNotifier {
   List<double> getAverageDailyMoodForWeek () {
     final now = DateTime.now();
     final weekDates = List.generate(7, (index) {
-      final weekDateTime = now.subtract(Duration(days: 6 - index));
-      return weekDateTime.toStringDate();
+      return now.date.subtract(Duration(days: 6 - index));;
     });
     final moodAssessmentsGroupedByDates = groupBy(moodAssessments,
             (moodAssessment) => moodAssessment.date);
