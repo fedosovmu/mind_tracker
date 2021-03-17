@@ -14,9 +14,10 @@ class MoodChartCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final today = DateTime.now().date;
     return Container(
-      margin: EdgeInsets.only(left: dp(16), right: dp(16), top: dp(16)),
+      margin: EdgeInsets.only(top: dp(16)),
+      width: dp(330),
       height: dp(320),
-      padding: EdgeInsets.only(top: dp(5), bottom: dp(13)),
+      padding: EdgeInsets.symmetric(vertical: dp(16)),
       decoration: BoxDecoration(
         color: CustomColors.purpleSuperDark,
         borderRadius: BorderRadius.all(Radius.circular(dp(16))),

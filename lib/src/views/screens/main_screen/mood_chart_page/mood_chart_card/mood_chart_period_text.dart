@@ -21,9 +21,8 @@ class MoodChartPeriodText extends StatelessWidget {
     }
 
     return Container(
-      padding: EdgeInsets.only(top: dp(14), left: dp(16)),
+      padding: EdgeInsets.only(left: dp(16)),
       width: double.infinity,
-      height: dp(40),
       child: Text(
         periodText,
         style: CustomTextStyles.basicH1Medium,
