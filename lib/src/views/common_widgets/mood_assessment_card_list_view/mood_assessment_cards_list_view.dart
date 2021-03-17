@@ -54,6 +54,8 @@ class MoodAssessmentCardsListView extends StatelessWidget {
               }
             }
           }
+          final emptySpace = SizedBox(height: dp(51+16));
+          moodAssessmentCards.add(emptySpace);
 
           return Stack(
             children: [

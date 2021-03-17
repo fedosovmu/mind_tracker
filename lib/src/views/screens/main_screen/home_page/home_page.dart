@@ -22,23 +22,20 @@ class _HomePageState extends State<HomePage> {
       appBar: CustomAppBar(
         title: 'Твоё настроение',
       ),
-      body: Stack(
-        children: [
-          SingleChildScrollViewWithoutSplash(
-              child: Column(
-                children: [
-                  MoodAssessmentCardsListView(today),
-                  SizedBox(height: dp(51+16)) // Add padding for button
-                ],
-              )
-          ),
-          Positioned(
-            left: dp(16),
-            right: dp(16),
-            bottom: dp(16),
-              child: AssessMoodNowButton()
-          ),
-        ]
+      body: SizedBox.expand(
+        child: Stack(
+          children: [
+            SingleChildScrollViewWithoutSplash(
+                child: MoodAssessmentCardsListView(today)
+            ),
+            Positioned(
+              left: dp(16),
+              right: dp(16),
+              bottom: dp(16),
+                child: AssessMoodNowButton()
+            ),
+          ]
+        ),
       )
     );
   }
