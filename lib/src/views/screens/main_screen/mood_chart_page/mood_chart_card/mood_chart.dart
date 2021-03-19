@@ -90,8 +90,8 @@ class MoodChartPainter extends CustomPainter {
             (moodAssessment) => moodAssessment.date == date).toList();
 
     // TODO: delete this print
-    print('MOOD CHART DATE: ${date.toStringDate()} ${moodAssessmentsForDay.map(
-            (e) => '${e.mood} ${e.partOfDay.toShortString()}')}');
+    //print('MOOD CHART DATE: ${date.toStringDate()} ${moodAssessmentsForDay.map(
+    //        (e) => '${e.mood} ${e.partOfDay.toShortString()}')}');
 
     if (moodAssessmentsForDay.isNotEmpty) {
       final moodAssessmentsForDayGroupedByPartOfDay = groupBy(moodAssessmentsForDay, (MoodAssessment moodAssessment) {

@@ -21,67 +21,109 @@ class MoodAssessor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: Container(
-          alignment: Alignment.center,
-          padding: EdgeInsets.only(bottom: dp(60)),
-          child: Container(
-            height: dp(314),
-            child: Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                Container(
-                  height: dp(210),
-                  margin: EdgeInsets.symmetric(horizontal: dp(16)),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(dp(16))),
-                    color: CustomColors.purpleSuperDark,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        alignment: Alignment.bottomCenter,
-                        child: Text(
-                          Content.moodNames[currentMood],
-                          style: CustomTextStyles.titleH1,
-                        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                color: Colors.green,
+                height: dp(314),
+                child: Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    Container(
+                      height: dp(210),
+                      margin: EdgeInsets.symmetric(horizontal: dp(16)),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(dp(16))),
+                        color: CustomColors.purpleSuperDark,
                       ),
-                      Container(
-                        alignment: Alignment.bottomCenter,
-                        height: dp(40),
-                        padding: EdgeInsets.symmetric(horizontal: dp(29)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Настроение',
-                              style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            alignment: Alignment.bottomCenter,
+                            child: Text(
+                              Content.moodNames[currentMood],
+                              style: CustomTextStyles.titleH1,
                             ),
-                            Text(
-                              'Потяни',
-                              style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
-                            )
-                          ],
-                        ),
+                          ),
+                          Container(
+                            alignment: Alignment.bottomCenter,
+                            height: dp(40),
+                            padding: EdgeInsets.symmetric(horizontal: dp(29)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Настроение',
+                                  style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
+                                ),
+                                Text(
+                                  'Потяни',
+                                  style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
+                                )
+                              ],
+                            ),
+                          ),
+                          MoodAssessorSlider(
+                              currentMood: this.currentMood,
+                              onChanged: this.onChanged
+                          )
+                        ],
                       ),
-                      MoodAssessorSlider(
-                          currentMood: this.currentMood,
-                          onChanged: this.onChanged
-                      )
-                    ],
-                  ),
+                    ),
+                    Positioned(
+                        top: 10,
+                        child: Image.asset(
+                          _pathsToMoodSpheres[currentMood],
+                          height: dp(214),
+                        )
+                    ),
+                  ],
                 ),
-                Positioned(
-                    top: 10,
-                    child: Image.asset(
-                      _pathsToMoodSpheres[currentMood],
-                      height: dp(214),
-                    )
+              ),
+              SizedBox(height: dp(16)),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: dp(16)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AddButton('События'),
+                    AddButton('Комментарии')
+                  ],
                 ),
-              ],
-            ),
+              )
+            ],
           ),
         )
     );
   }
+}
+
+class AddButton extends StatelessWidget {
+  final String title;
+
+  AddButton(this.title);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: dp(156),
+      height: dp(56),
+      decoration: BoxDecoration(
+        color: CustomColors.purpleSuperDark,
+        borderRadius: BorderRadius.all(Radius.circular(dp(16)))
+      ),
+      child: Row(
+        children: [
+          Text(
+            title,
+            style: CustomTextStyles.basic,
+          )
+        ],
+      ),
+    );
+  }
+
 }
