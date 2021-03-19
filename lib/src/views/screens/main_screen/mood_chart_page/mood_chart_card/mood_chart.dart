@@ -77,8 +77,8 @@ class MoodChartPainter extends CustomPainter {
     final double dateInterval = size.width / 7;
     final double dateCenterX = _getDateCenterX(size, dateIndex);
     final List<double> points = List.generate(pointsCount, (index) {
-      final double distanceBetweenPoints = dateInterval / (pointsCount + 1);
-      return (dateCenterX - dateInterval / 2) + distanceBetweenPoints * (index + 1);
+      final double distanceBetweenPoints = dateInterval / pointsCount;
+      return (dateCenterX - dateInterval / 2) + (distanceBetweenPoints * (0.5 + index));
     });
     return points;
   }
@@ -104,7 +104,7 @@ class MoodChartPainter extends CustomPainter {
         moodAssessmentsForPartOfDay.forEach((moodAssessment) { moodSum += moodAssessment.mood; });
         final double averageMoodForPartOfDay = moodSum / moodAssessmentsForPartOfDay.length;
         //TODO: delete this print
-        print('(${partOfDay.toShortString()}: $averageMoodForPartOfDay)');
+        //print('(${partOfDay.toShortString()}: $averageMoodForPartOfDay)');
         averageMoodForAllExistingPartOfDays.add(averageMoodForPartOfDay);
       });
 
