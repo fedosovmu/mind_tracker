@@ -20,11 +20,9 @@ class MindTrackerApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Mind Tracker',
       theme: appTheme,
-      initialRoute: '/main',
 
       onGenerateRoute: (settings) {
         var screenToGo;
-
         switch (settings.name) {
           case '/onboarding':
             screenToGo = OnboardingScreen();
@@ -43,7 +41,7 @@ class MindTrackerApp extends StatelessWidget {
             screenToGo = MoodAssessmentScreen(arguments: arguments);
             break;
           default:
-            screenToGo = OnboardingScreen();
+            screenToGo = MainScreen();
         }
         
         return MaterialPageRoute(
