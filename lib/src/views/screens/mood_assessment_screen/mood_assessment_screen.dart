@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_provider.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment_screen/mood_assessor/mood_assessor.dart';
+import 'package:mind_tracker/src/views/screens/mood_assessment_screen/widgets/add_button.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment_screen/widgets/assess_mood_colored_button.dart';
 import 'package:provider/provider.dart';
 import '../../utils/theme/custom_text_styles.dart';
@@ -102,13 +103,32 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            MoodAssessor(
-              currentMood: _currentMood,
-              onChanged: (double value) {
-                setState(() {
-                  _currentMood = value.toInt();
-                });
-              },
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  MoodAssessor(
+                    currentMood: _currentMood,
+                    onChanged: (double value) {
+                      setState(() {
+                        _currentMood = value.toInt();
+                      });
+                    },
+                  ),
+                  SizedBox(height: dp(16)),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: dp(16)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AddButton('События'),
+                        AddButton('Комментарии')
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
             AssessMoodColoredButton(
               currentMood: _currentMood,
