@@ -122,8 +122,14 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        AddButton('События'),
-                        AddButton('Комментарии')
+                        AddButton(
+                          'Событие',
+                          onPressed: () { print('Event button pressed'); },
+                        ),
+                        AddButton(
+                            'Комментарий',
+                          onPressed: () { print('Comment button pressed'); },
+                        )
                       ],
                     ),
                   )
