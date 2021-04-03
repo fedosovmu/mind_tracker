@@ -24,7 +24,7 @@ class AddButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('assets/icons/plus.png', height: dp(24)),
+          Image.asset('assets/icons/ui/plus.png', height: dp(24)),
           SizedBox(width: dp(4)),
           Text(
             title,

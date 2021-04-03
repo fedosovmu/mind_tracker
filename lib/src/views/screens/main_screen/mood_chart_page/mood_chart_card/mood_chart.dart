@@ -103,8 +103,6 @@ class MoodChartPainter extends CustomPainter {
         int moodSum = 0;
         moodAssessmentsForPartOfDay.forEach((moodAssessment) { moodSum += moodAssessment.mood; });
         final double averageMoodForPartOfDay = moodSum / moodAssessmentsForPartOfDay.length;
-        //TODO: delete this print
-        //print('(${partOfDay.toShortString()}: $averageMoodForPartOfDay)');
         averageMoodForAllExistingPartOfDays.add(averageMoodForPartOfDay);
       });
 
@@ -142,14 +140,6 @@ class MoodChartPainter extends CustomPainter {
 
     List<Offset> curvePoints = [];
     for (int dateIndex = 0; dateIndex < DateTime.daysPerWeek; dateIndex++) {
-      //TODO: delete this draw
-      // draw test points
-      //final int mood = dateIndex + 1;
-      //final double y = _getMoodY(size, mood);
-      //final double x = _getDateCenterX(size, dateIndex);
-      //final Offset p = Offset(x, y);
-      //curvePoints.add(p);
-
       final List<Offset> datePoints = _getDatePoints(size, dateIndex);
       curvePoints.addAll(datePoints);
     }

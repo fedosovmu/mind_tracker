@@ -8,10 +8,10 @@ import '../../../utils/theme/custom_colors.dart';
 
 class CustomBottomNavigationBar extends CupertinoTabBar {
   static const _pathsToIcons = [
-    'assets/icons/home.png',
-    'assets/icons/chart.png',
-    'assets/icons/chart.png',
-    'assets/icons/calendar.png'
+    'assets/icons/ui/home.png',
+    'assets/icons/ui/chart.png',
+    'assets/icons/ui/events.png',
+    'assets/icons/ui/calendar.png'
   ];
   static const _texts = ['Главный', 'График', 'События', 'Календарь'];
 

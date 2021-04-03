@@ -16,7 +16,7 @@ class AssessMoodNowButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            'assets/icons/plus_in_circle.png',
+            'assets/icons/ui/plus_in_circle.png',
             width: dp(20),
           ),
           SizedBox(

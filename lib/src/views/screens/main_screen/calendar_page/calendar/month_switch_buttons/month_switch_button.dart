@@ -3,8 +3,8 @@ import 'package:mind_tracker/src/views/utils/metrics.dart';
 
 
 class MonthSwitchButton extends StatelessWidget {
-  static const _pathToLeftIcon = 'assets/icons/arrow_left.png';
-  static const _pathToRightIcon = 'assets/icons/arrow_right.png';
+  static const _pathToLeftIcon = 'assets/icons/ui/arrow_left.png';
+  static const _pathToRightIcon = 'assets/icons/ui/arrow_right.png';
   final bool isRight;
   final Function onPressed;
 

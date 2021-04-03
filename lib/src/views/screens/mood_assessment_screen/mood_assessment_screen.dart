@@ -25,7 +25,7 @@ class MoodAssessmentScreen extends StatefulWidget {
 }
 
 class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
-  static const _pathToCloseIcon = 'assets/icons/close.png';
+  static const _pathToCloseIcon = 'assets/icons/ui/close.png';
   static const _defaultMood = 4;
   int _currentMood = _defaultMood;
 
