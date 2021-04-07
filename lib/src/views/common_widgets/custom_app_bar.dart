@@ -7,7 +7,7 @@ import '../utils/metrics.dart';
 
 class CustomAppBar extends StatelessWidget implements ObstructingPreferredSizeWidget {
   final String title;
-  final leading;
+  final Widget leading;
   static final _appBarHeight = dp(56);
   static const _appBarBackgroundColor = CustomColors.purpleDark;
   

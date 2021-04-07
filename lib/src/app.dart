@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mind_tracker/src/views/screens/select_events_screen.dart';
 import 'views/utils/theme/app_theme.dart';
 import 'views/screens/onboarding_screen.dart';
 import 'views/screens/mood_assessment_screen/mood_assessment_screen.dart';
@@ -39,6 +40,9 @@ class MindTrackerApp extends StatelessWidget {
           case '/moodAssessment/partOfDay':
             final Map arguments = settings.arguments;
             screenToGo = MoodAssessmentScreen(arguments: arguments);
+            break;
+          case '/selectEvents':
+            screenToGo = SelectEventsScreen();
             break;
           default:
             screenToGo = MainScreen();

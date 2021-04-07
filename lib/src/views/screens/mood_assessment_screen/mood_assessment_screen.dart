@@ -124,7 +124,10 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                       children: [
                         AddButton(
                           'Событие',
-                          onPressed: () { print('Event button pressed'); },
+                          onPressed: () {
+                            print('Event button pressed');
+                            Navigator.of(context).pushNamed('/selectEvents');
+                          },
                         ),
                         AddButton(
                             'Комментарий',
