@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mind_tracker/src/views/screens/select_events_screen.dart';
+import 'package:mind_tracker/src/views/screens/select_events_screen/select_events_screen.dart';
 import 'views/utils/theme/app_theme.dart';
 import 'views/screens/onboarding_screen.dart';
 import 'views/screens/mood_assessment_screen/mood_assessment_screen.dart';
