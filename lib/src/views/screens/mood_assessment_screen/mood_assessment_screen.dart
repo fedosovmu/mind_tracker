@@ -87,11 +87,8 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
       appBar: CustomAppBar(
         title: _getTitle(context),
         leading: IconButton(
-          icon: Image.asset(
-            _pathToCloseIcon,
-            height: dp(32),
-            width: dp(32),
-          ),
+          iconSize: dp(32),
+          icon: Image.asset(_pathToCloseIcon),
           onPressed: () {
             print('Press close button');
             _goToHomeScreen();
