@@ -4,27 +4,40 @@ import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 
 
-class EventIcon extends StatelessWidget {
+class EventIcon extends StatefulWidget {
   static const _pathToFoodIcon = 'assets/icons/events/food.png';
   static const _widthInDp = 64;
   static const _heightInDp = 115;
   static const aspectRatio = _widthInDp / _heightInDp;
 
   @override
+  _EventIconState createState() => _EventIconState();
+}
+
+class _EventIconState extends State<EventIcon> {
+  bool isSelected = false;
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isSelected = !isSelected;
+        });
+        print('Event selected');
+      },
       child: Column(
         children: [
           Container(
               width: dp(64),
               height: dp(64),
               decoration: BoxDecoration(
-                  color: CustomColors.purpleSuperDark,
+                  color: isSelected ?CustomColors.main : CustomColors.purpleSuperDark,
                   shape: BoxShape.circle
               ),
               child: Center(
                 child: Image.asset(
-                  _pathToFoodIcon,
+                  EventIcon._pathToFoodIcon,
                   width: dp(40),
                   height: dp(40),
                 ),
@@ -34,7 +47,7 @@ class EventIcon extends StatelessWidget {
           Text(
             'Текст в три строчки',
             style: CustomTextStyles.caption.copyWith(
-                color: CustomColors.purpleLight
+                color: isSelected ?CustomColors.silverWhite : CustomColors.purpleLight
             ),
             textAlign: TextAlign.center,
           )
