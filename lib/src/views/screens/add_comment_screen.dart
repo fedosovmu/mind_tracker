@@ -11,7 +11,7 @@ class AddCommentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Добавление комментарий',
+        title: 'Добавление комментария',
         leading: IconButton(
           iconSize: dp(32),
           icon: Image.asset(_pathToBackIcon),
@@ -20,25 +20,43 @@ class AddCommentScreen extends StatelessWidget {
           },
         ),
       ),
-      body: Stack(
-        children: [
-          Positioned(
-            left: dp(16),
-            right: dp(16),
-            bottom: 0,
-            child: SafeArea(
-              minimum: EdgeInsets.only(bottom: dp(8)),
-              child: MainButton(
-                title: 'Добавить',
-                onPressed: () {
-                  print('Add comment button pressed');
-                  Navigator.of(context).pop();
-                },
-              ),
+      body: SizedBox.expand(
+        child: Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: dp(16), right: dp(16), top: dp(16)),
+              child: TextInput(),
             ),
-          )
-        ],
+            Expanded(
+              child: Positioned(
+                left: dp(16),
+                right: dp(16),
+                bottom: 0,
+                child: SafeArea(
+                  minimum: EdgeInsets.only(bottom: dp(8)),
+                  child: MainButton(
+                    title: 'Добавить',
+                    onPressed: () {
+                      print('Add comment button pressed');
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class TextInput extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.red,
+      height: dp(120),
     );
   }
 }
