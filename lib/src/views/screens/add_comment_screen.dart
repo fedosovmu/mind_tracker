@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/main_button.dart';
+import 'package:mind_tracker/src/views/common_widgets/text_input.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
 class AddCommentScreen extends StatelessWidget {
@@ -27,36 +30,24 @@ class AddCommentScreen extends StatelessWidget {
               padding: EdgeInsets.only(left: dp(16), right: dp(16), top: dp(16)),
               child: TextInput(),
             ),
-            Expanded(
-              child: Positioned(
-                left: dp(16),
-                right: dp(16),
-                bottom: 0,
-                child: SafeArea(
-                  minimum: EdgeInsets.only(bottom: dp(8)),
-                  child: MainButton(
-                    title: 'Добавить',
-                    onPressed: () {
-                      print('Add comment button pressed');
-                      Navigator.of(context).pop();
-                    },
-                  ),
+            Positioned(
+              left: dp(16),
+              right: dp(16),
+              bottom: 0,
+              child: SafeArea(
+                minimum: EdgeInsets.only(bottom: dp(8)),
+                child: MainButton(
+                  title: 'Добавить',
+                  onPressed: () {
+                    print('Add comment button pressed');
+                    Navigator.of(context).pop();
+                  },
                 ),
               ),
             )
           ],
         ),
       ),
-    );
-  }
-}
-
-class TextInput extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      height: dp(120),
     );
   }
 }
