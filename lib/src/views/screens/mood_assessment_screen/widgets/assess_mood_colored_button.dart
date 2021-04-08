@@ -14,11 +14,11 @@ class AssessMoodColoredButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: dp(60),
+      height: dp(56),
       width: double.infinity,
       padding: EdgeInsets.only(left: dp(16), right: dp(16)),
       child: SizedBox(
-        height: dp(60),
+        height: dp(56),
         width: double.infinity,
         child: FlatButton(
           onPressed: this.onPressed,
