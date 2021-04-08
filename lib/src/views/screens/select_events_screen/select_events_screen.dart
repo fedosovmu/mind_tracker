@@ -53,7 +53,7 @@ class SelectEventsScreen extends StatelessWidget {
                   title: 'Готово',
                   onPressed: () {
                     print('Select events button pressed');
-                    Navigator.pop(context);
+                    Navigator.of(context).pop();
                   }
                 ),
               )

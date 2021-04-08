@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mind_tracker/src/views/screens/add_comment_screen.dart';
 import 'package:mind_tracker/src/views/screens/select_events_screen/select_events_screen.dart';
 import 'views/utils/theme/app_theme.dart';
 import 'views/screens/onboarding_screen.dart';
@@ -44,10 +45,14 @@ class MindTrackerApp extends StatelessWidget {
           case '/selectEvents':
             screenToGo = SelectEventsScreen();
             break;
+          case '/addComment':
+            screenToGo = AddCommentScreen();
+            break;
           default:
             screenToGo = MainScreen();
             //screenToGo = SelectEventsScreen();
             //screenToGo = OnboardingScreen();
+            //screenToGo = AddCommentScreen();
         }
         
         return MaterialPageRoute(

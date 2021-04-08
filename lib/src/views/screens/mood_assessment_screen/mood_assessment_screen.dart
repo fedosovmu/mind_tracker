@@ -127,8 +127,11 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                           },
                         ),
                         AddButton(
-                            'Комментарий',
-                          onPressed: () { print('Comment button pressed'); },
+                          'Комментарий',
+                          onPressed: () {
+                            print('Comment button pressed');
+                            Navigator.of(context).pushNamed('/addComment');
+                          },
                         )
                       ],
                     ),

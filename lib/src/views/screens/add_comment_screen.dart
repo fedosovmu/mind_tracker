@@ -1,0 +1,44 @@
+import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
+import 'package:mind_tracker/src/views/common_widgets/main_button.dart';
+import 'package:mind_tracker/src/views/utils/metrics.dart';
+
+
+class AddCommentScreen extends StatelessWidget {
+  static const _pathToBackIcon = 'assets/icons/ui/back.png';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: CustomAppBar(
+        title: 'Добавление комментарий',
+        leading: IconButton(
+          iconSize: dp(32),
+          icon: Image.asset(_pathToBackIcon),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: Stack(
+        children: [
+          Positioned(
+            left: dp(16),
+            right: dp(16),
+            bottom: 0,
+            child: SafeArea(
+              minimum: EdgeInsets.only(bottom: dp(8)),
+              child: MainButton(
+                title: 'Добавить',
+                onPressed: () {
+                  print('Add comment button pressed');
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
