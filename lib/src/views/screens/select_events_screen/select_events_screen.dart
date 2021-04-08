@@ -46,13 +46,16 @@ class SelectEventsScreen extends StatelessWidget {
           Positioned(
             left: dp(16),
             right: dp(16),
-            bottom: dp(8),
-              child: MainButton(
-                title: 'Готово',
-                onPressed: () {
-                  print('Select events button pressed');
-                  Navigator.pop(context);
-                }
+            bottom: 0,
+              child: SafeArea(
+                minimum: EdgeInsets.only(bottom: dp(8)),
+                child: MainButton(
+                  title: 'Готово',
+                  onPressed: () {
+                    print('Select events button pressed');
+                    Navigator.pop(context);
+                  }
+                ),
               )
           )
         ],
