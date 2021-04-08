@@ -3,8 +3,6 @@ import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/main_button.dart';
 import 'package:mind_tracker/src/views/common_widgets/text_input.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
 class AddCommentScreen extends StatelessWidget {
