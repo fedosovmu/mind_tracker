@@ -5,8 +5,6 @@ import 'package:mind_tracker/src/views/screens/mood_assessment_screen/mood_asses
 import 'package:mind_tracker/src/views/screens/mood_assessment_screen/widgets/add_button.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment_screen/widgets/assess_mood_colored_button.dart';
 import 'package:provider/provider.dart';
-import '../../utils/theme/custom_text_styles.dart';
-import '../../utils/theme/custom_colors.dart';
 import '../../utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/content.dart';
 import '../../common_widgets/custom_app_bar.dart';
