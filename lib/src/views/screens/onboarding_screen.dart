@@ -1,32 +1,44 @@
 import 'package:flutter/material.dart';
 import '../utils/theme/custom_text_styles.dart';
 import '../utils/theme/custom_colors.dart';
-import '../utils/content.dart';
 import '../utils/metrics.dart';
-import 'mood_assessment_screen/mood_assessment_screen.dart';
 
 
-class OnboardingScreen extends StatelessWidget with Content {
-  var _pageNumber;
-  static const _pageCount = 4;
-  OnboardingScreen ({int pageNumber = 1}) {
-    this._pageNumber = pageNumber;
-    loadContent('onboardingScreen');
-  }
+class OnboardingScreen extends StatelessWidget {
+  static const Map<int, String> _screenTexts = {
+    1: "Следите за своим ментальным состоянием оценивая его по шкале с семью градациями.",
+    2: "Важно делать отметки несколько раз в день, устанавливайте напоминания в удобное время.",
+    3: "Отмечайте, что произошло за день. Приложение поможет вам проанализировать, как привычки "
+      "влияют на ваш внутренний баланс.",
+    4: "Чем дольше вы ведёте записи, тем более ценные данные получите. "
+      "Вы убедитесь в очевидных связях между событиями и эмоциями и обнаружите неочевидные."
+  };
+  static const Map<int, String> _pathsToImages = {
+    1: "assets/images/onboarding/lamp.png",
+    2: "assets/images/onboarding/fishes.png",
+    3: "assets/images/onboarding/butterfly.png",
+    4: "assets/images/onboarding/monkey.png"
+  };
+  static const String _nextButtonNextText = 'Далее';
+  static const String _nextButtonStartText = 'Начать';
+
+  final int pageNumber;
+  static const int _pageCount = 4;
+  OnboardingScreen ({this.pageNumber = 1});
 
   bool _isThisLastPage() {
-    return _pageNumber == _pageCount;
+    return pageNumber == _pageCount;
   }
 
   void _goToNextScreen(BuildContext context) {
     var nextScreenPath;
-    if (_pageNumber >= _pageCount) {
+    if (pageNumber >= _pageCount) {
       Navigator.pushNamed(context, '/moodAssessment/firstStart');
     }
     else {
       Navigator.of(context).push(
           PageRouteBuilder(
-              pageBuilder: (context, _, __) => OnboardingScreen(pageNumber: _pageNumber+1),
+              pageBuilder: (context, _, __) => OnboardingScreen(pageNumber: pageNumber+1),
               transitionsBuilder: (___, animation, ____, child) {
                 return FadeTransition(
                   opacity: animation,
@@ -53,7 +65,7 @@ class OnboardingScreen extends StatelessWidget with Content {
                     height: dp(24),
                   ),
                   Image(
-                    image: AssetImage(content['pathsToImages'][_pageNumber]),
+                    image: AssetImage(_pathsToImages[pageNumber]),
                     height: dp(370),
                   ),
                   Container(
@@ -67,7 +79,7 @@ class OnboardingScreen extends StatelessWidget with Content {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: List.generate(4, (index) {
                             var circle_color = CustomColors.purpleSuperDark;
-                            if (index+1 == _pageNumber) {
+                            if (index+1 == pageNumber) {
                               circle_color = CustomColors.purpleLight;
                             }
                             return Container(
@@ -86,7 +98,7 @@ class OnboardingScreen extends StatelessWidget with Content {
                     alignment: Alignment.center,
                     padding: EdgeInsets.only(left: dp(16), right: dp(16)),
                     child:  Text(
-                        content['screenTexts'][_pageNumber],
+                        _screenTexts[pageNumber],
                         style: CustomTextStyles.basicH1Medium.copyWith(color: CustomColors.silverWhite),
                     ),
                   ),
@@ -103,7 +115,7 @@ class OnboardingScreen extends StatelessWidget with Content {
                       ),
                       onPressed: () { _goToNextScreen(context); },
                       child: Text(
-                        _isThisLastPage() ? content['nextButtonStartText'] : content['nextButtonNextText'],
+                        _isThisLastPage() ? _nextButtonStartText : _nextButtonNextText,
                         style: CustomTextStyles.buttonMedium,
                       )
                   )

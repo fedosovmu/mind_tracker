@@ -47,6 +47,7 @@ class MindTrackerApp extends StatelessWidget {
           default:
             screenToGo = MainScreen();
             //screenToGo = SelectEventsScreen();
+            //screenToGo = OnboardingScreen();
         }
         
         return MaterialPageRoute(
