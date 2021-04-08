@@ -11,6 +11,7 @@ class SingleChildScrollViewWithoutSplash extends StatelessWidget {
     return NotificationListener<OverscrollIndicatorNotification>(
       onNotification: (overScroll) {
         overScroll.disallowGlow();
+        return true;
       },
       child: SingleChildScrollView(
         physics: ClampingScrollPhysics(),

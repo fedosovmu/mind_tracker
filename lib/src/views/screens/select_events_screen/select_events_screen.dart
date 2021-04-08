@@ -22,13 +22,17 @@ class SelectEventsScreen extends StatelessWidget {
           },
         ),
       ),
-      body: SafeArea(
-        minimum: EdgeInsets.only(bottom: dp(8)),
-        child: Stack(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: dp(16), right: dp(16), top: dp(8)),
+      body: Stack(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(left: dp(16), right: dp(16), top: dp(8)),
+            child: NotificationListener<OverscrollIndicatorNotification>(
+              onNotification: (overScroll) {
+                overScroll.disallowGlow();
+                return true;
+              },
               child: GridView.count(
+                physics: ClampingScrollPhysics(),
                 mainAxisSpacing: dp(16),
                 crossAxisSpacing: dp(24),
                 crossAxisCount: 4,
@@ -38,20 +42,20 @@ class SelectEventsScreen extends StatelessWidget {
                 }),
               ),
             ),
-            Positioned(
-              left: dp(16),
-              right: dp(16),
-              bottom: 0,
-                child: MainButton(
-                  title: 'Готово',
-                  onPressed: () {
-                    print('Select events button pressed');
-                    Navigator.pop(context);
-                  }
-                )
-            )
-          ],
-        ),
+          ),
+          Positioned(
+            left: dp(16),
+            right: dp(16),
+            bottom: dp(8),
+              child: MainButton(
+                title: 'Готово',
+                onPressed: () {
+                  print('Select events button pressed');
+                  Navigator.pop(context);
+                }
+              )
+          )
+        ],
       ),
     );
   }

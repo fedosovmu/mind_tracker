@@ -32,7 +32,7 @@ class _EventIconState extends State<EventIcon> {
               width: dp(64),
               height: dp(64),
               decoration: BoxDecoration(
-                  color: isSelected ?CustomColors.main : CustomColors.purpleSuperDark,
+                  color: isSelected ? CustomColors.main : CustomColors.purpleSuperDark,
                   shape: BoxShape.circle
               ),
               child: Center(
@@ -43,13 +43,15 @@ class _EventIconState extends State<EventIcon> {
                 ),
               )
           ),
-          SizedBox(height: dp(8),),
-          Text(
-            'Текст в три строчки',
-            style: CustomTextStyles.caption.copyWith(
-                color: isSelected ?CustomColors.silverWhite : CustomColors.purpleLight
+          SizedBox(height: dp(8)),
+          Expanded(
+            child: Text(
+              'Текст в три строчки',
+              style: CustomTextStyles.caption.copyWith(
+                  color: isSelected ? CustomColors.silverWhite : CustomColors.purpleLight
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
           )
         ],
       ),
