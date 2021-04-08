@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/main_button.dart';
-import 'package:mind_tracker/src/views/common_widgets/text_input.dart';
+import 'package:mind_tracker/src/views/common_widgets/custom_text_input.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 
 
@@ -26,7 +26,7 @@ class AddCommentScreen extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(left: dp(16), right: dp(16), top: dp(16)),
-              child: TextInput(),
+              child: CustomTextInput(),
             ),
             Positioned(
               left: dp(16),
