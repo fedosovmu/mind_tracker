@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
+import 'package:mind_tracker/src/views/common_widgets/glow_disabler.dart';
 import 'package:mind_tracker/src/views/common_widgets/mood_assessment_card_list_view/mood_assessment_cards_list_view.dart';
-import 'package:mind_tracker/src/views/common_widgets/single_child_scroll_view_without_splash.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/home_page/widgets/assess_mood_now_button.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
-import 'package:provider/provider.dart';
 import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';
 
 
@@ -25,8 +23,11 @@ class _HomePageState extends State<HomePage> {
       body: SizedBox.expand(
         child: Stack(
           children: [
-            SingleChildScrollViewWithoutSplash(
+            GlowDisabler(
+              child: SingleChildScrollView(
+                physics: ClampingScrollPhysics(),
                 child: MoodAssessmentCardsListView(today)
+              )
             ),
             Positioned(
               left: dp(16),
