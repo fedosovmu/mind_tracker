@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_provider.dart';
+import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment_screen/mood_assessor/mood_assessor.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment_screen/widgets/add_button.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment_screen/widgets/assess_mood_colored_button.dart';
@@ -23,7 +24,6 @@ class MoodAssessmentScreen extends StatefulWidget {
 }
 
 class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
-  static const _pathToCloseIcon = 'assets/icons/ui/close.png';
   static const _defaultMood = 4;
   int _currentMood = _defaultMood;
 
@@ -84,9 +84,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
     return Scaffold(
       appBar: CustomAppBar(
         title: _getTitle(context),
-        leading: IconButton(
-          iconSize: dp(32),
-          icon: Image.asset(_pathToCloseIcon),
+        leading: CustomLeading.withCloseIcon(
           onPressed: () {
             print('Press close button');
             _goToHomeScreen();

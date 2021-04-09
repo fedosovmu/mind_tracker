@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
+import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
 import 'package:mind_tracker/src/views/common_widgets/standard_button.dart';
 import 'package:mind_tracker/src/views/screens/add_comment_screen/widgets/comment_text_input.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
@@ -13,12 +14,11 @@ class AddCommentScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Добавление комментария',
-        leading: IconButton(
-          iconSize: dp(32),
-          icon: Image.asset(_pathToBackIcon),
+        leading: CustomLeading.withBackIcon(
           onPressed: () {
+            print('Back button pressed');
             Navigator.pop(context);
-          },
+          }
         ),
       ),
       body: SizedBox.expand(

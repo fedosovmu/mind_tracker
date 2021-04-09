@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
+import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
 import 'package:mind_tracker/src/views/common_widgets/glow_disabler.dart';
 import 'package:mind_tracker/src/views/common_widgets/standard_button.dart';
 import 'package:mind_tracker/src/views/screens/select_events_screen/widgets/event_icon.dart';
@@ -14,13 +15,11 @@ class SelectEventsScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Выбор собятия',
-        leading: IconButton(
-          iconSize: dp(32),
-          icon: Image.asset(_pathToBackIcon),
+        leading: CustomLeading.withBackIcon(
           onPressed: () {
             print('Back button pressed');
             Navigator.of(context).pop();
-          },
+          }
         ),
       ),
       body: Stack(
