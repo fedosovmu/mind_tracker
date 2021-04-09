@@ -4,11 +4,11 @@ import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
-class MainButton extends StatelessWidget {
+class StandardButton extends StatelessWidget {
   final String title;
   final Function onPressed;
 
-  MainButton({@required this.title, @required this.onPressed});
+  StandardButton({@required this.title, @required this.onPressed});
 
 
   @override

@@ -4,7 +4,7 @@ import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
-class CustomTextInput extends StatelessWidget {
+class CommentTextInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
