@@ -82,6 +82,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: CustomAppBar(
         title: _getTitle(context),
         leading: CustomLeading.withCloseIcon(
