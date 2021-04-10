@@ -4,6 +4,7 @@ import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
 import 'package:mind_tracker/src/views/common_widgets/standard_button.dart';
 import 'package:mind_tracker/src/views/screens/add_comment_screen/widgets/comment_text_input.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
+import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 
 
 class AddCommentScreen extends StatelessWidget {
@@ -14,7 +15,8 @@ class AddCommentScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Добавление комментария',
-        leading: CustomLeading.withBackIcon(
+        leading: CustomLeading(
+          pathToIcon: CustomIconPaths.back,
           onPressed: () {
             print('Back button pressed');
             Navigator.pop(context);

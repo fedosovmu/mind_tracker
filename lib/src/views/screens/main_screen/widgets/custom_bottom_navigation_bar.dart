@@ -1,17 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../../../utils/metrics.dart';
-import '../../../utils/theme/custom_text_styles.dart';
+import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import '../../../utils/theme/custom_colors.dart';
 
 
 class CustomBottomNavigationBar extends CupertinoTabBar {
   static const _pathsToIcons = [
-    'assets/icons/ui/home.png',
-    'assets/icons/ui/chart.png',
-    'assets/icons/ui/events.png',
-    'assets/icons/ui/calendar.png'
+    CustomIconPaths.home,
+    CustomIconPaths.chart,
+    CustomIconPaths.events,
+    CustomIconPaths.calendar
   ];
   static const _texts = ['Главный', 'График', 'События', 'Календарь'];
 

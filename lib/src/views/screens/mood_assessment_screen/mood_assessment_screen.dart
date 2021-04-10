@@ -5,6 +5,7 @@ import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment_screen/mood_assessor/mood_assessor.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment_screen/widgets/add_button.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment_screen/widgets/assess_mood_colored_button.dart';
+import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:provider/provider.dart';
 import '../../utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/content.dart';
@@ -85,7 +86,8 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
       resizeToAvoidBottomPadding: false,
       appBar: CustomAppBar(
         title: _getTitle(context),
-        leading: CustomLeading.withCloseIcon(
+        leading: CustomLeading(
+          pathToIcon: CustomIconPaths.close,
           onPressed: () {
             print('Press close button');
             _goToHomeScreen();

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 
 
 class EventIcon extends StatefulWidget {
-  static const _pathToFoodIcon = 'assets/icons/events/food.png';
   static const _widthInDp = 64;
   static const _heightInDp = 115;
   static const aspectRatio = _widthInDp / _heightInDp;
@@ -37,7 +37,7 @@ class _EventIconState extends State<EventIcon> {
               ),
               child: Center(
                 child: Image.asset(
-                  EventIcon._pathToFoodIcon,
+                  CustomIconPaths.eventIcons['music'],
                   width: dp(40),
                   height: dp(40),
                 ),
