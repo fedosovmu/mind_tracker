@@ -76,20 +76,26 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
       final PartOfDay partOfDay = widget.arguments['partOfDay'];
 
       if (date == today && partOfDay == currentPartOfDay) {
-        return MoodAssessment(mood: _currentMood);
+        return MoodAssessment(
+          mood: _currentMood,
+          events: _selectedEventNames,
+          comment: _comment
+        );
       } else {
         return MoodAssessment(
-            mood: _currentMood,
-            date: widget.arguments['date'],
-            partOfDay: widget.arguments['partOfDay']
+          mood: _currentMood,
+          date: widget.arguments['date'],
+          partOfDay: widget.arguments['partOfDay'],
+          events: _selectedEventNames,
+          comment: _comment
         );
       }
     } else {
-      return MoodAssessment(mood: _currentMood);
+      return MoodAssessment(mood: _currentMood, events: _selectedEventNames, comment: _comment);
     }
   }
 
-  void AddEditCommentButtonCallback () async {
+  void _addEditCommentButtonCallback () async {
     print('Comment button pressed');
     var comment;
     if (_comment == null) {
@@ -105,7 +111,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
     }
   }
 
-  void SelectEventsButtonCallback () async {
+  void _selectEventsButtonCallback () async {
     print('Event button pressed');
     final selectedEventNames = await Navigator.of(context)
         .pushNamed('/selectEvents', arguments: _selectedEventNames);
@@ -157,11 +163,11 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                       children: [
                         AddButton(
                           _selectedEventNames.isEmpty ? 'Событие' : '(Изменить)',
-                          onPressed: SelectEventsButtonCallback,
+                          onPressed: _selectEventsButtonCallback,
                         ),
                         AddButton(
                           _comment.isEmpty ? 'Комментарий' : '(Изменить)',
-                          onPressed: AddEditCommentButtonCallback,
+                          onPressed: _addEditCommentButtonCallback,
                         )
                       ],
                     ),

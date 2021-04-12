@@ -10,13 +10,25 @@ class MoodAssessment implements Comparable {
   PartOfDay partOfDay;
   DateTime date;
   DateTime time;
+  List<String> events;
+  String comment;
 
-  MoodAssessment({@required this.mood, this.partOfDay, this.date, this.time}) {
+  MoodAssessment({@required this.mood, this.partOfDay, this.date, this.time, this.events, this.comment}) {
     if (partOfDay == null) {
       final now = DateTime.now();
       date = now.date;
       time = now;
       partOfDay = PartOfDayBuilder.fromDateTime(now);
+    }
+    if (events != null) {
+      if (events.isEmpty) {
+        events = null;
+      }
+    }
+    if (comment != null) {
+      if (comment == '') {
+        comment = null;
+      }
     }
   }
 
@@ -26,6 +38,8 @@ class MoodAssessment implements Comparable {
       mood: moodAssessmentMap['mood'],
       partOfDay: PartOfDayBuilder.fromShortString(moodAssessmentMap['part_of_day']),
       time: moodAssessmentMap.containsKey('time') ? moodAssessmentMap['time'].toDate() : null,
+      events: moodAssessmentMap.containsKey('events') ? moodAssessmentMap['events'].cast<String>()  : null,
+      comment: moodAssessmentMap.containsKey('comment') ? moodAssessmentMap['comment'] : null
     );
   }
 
@@ -36,7 +50,13 @@ class MoodAssessment implements Comparable {
       'part_of_day': partOfDay.toShortString(),
     };
     if (time != null) {
-      moodAssessmentMap['time'] =Timestamp.fromDate(time);
+      moodAssessmentMap['time'] = Timestamp.fromDate(time);
+    }
+    if (events != null) {
+      moodAssessmentMap['events'] = events;
+    }
+    if (comment != null) {
+      moodAssessmentMap['comment'] = comment;
     }
     return moodAssessmentMap;
   }
