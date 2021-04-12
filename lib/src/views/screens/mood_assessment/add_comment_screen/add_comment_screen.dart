@@ -41,7 +41,10 @@ class AddCommentScreen extends StatelessWidget {
                   title: 'Добавить',
                   onPressed: () {
                     print('Add comment button pressed');
-                    final comment = commentTextInput.controller.text;
+                    String comment = commentTextInput.controller.text;
+                    if (comment == '') {
+                      comment = null;
+                    }
                     Navigator.of(context).pop(comment);
                   },
                 ),
