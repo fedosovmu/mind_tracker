@@ -96,9 +96,14 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
     } else {
       comment = await Navigator.of(context).pushNamed('/comment/edit', arguments: _comment);
     }
-    setState(() {
-      _comment = comment;
-    });
+    if (comment != null) {
+      if (comment == '') {
+        comment = null;
+      }
+      setState(() {
+        _comment = comment;
+      });
+    }
   }
   
   @override
@@ -141,9 +146,11 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                       children: [
                         AddButton(
                           'Событие',
-                          onPressed: () {
+                          onPressed: () async {
                             print('Event button pressed');
-                            Navigator.of(context).pushNamed('/selectEvents');
+                            final selectedEventNames = await Navigator.of(context)
+                                .pushNamed('/selectEvents', arguments: _selectedEventNames);
+                            print('=== SELECTED EVENTS $selectedEventNames');
                           },
                         ),
                         AddButton(
