@@ -8,11 +8,13 @@ import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 
 
 class CommentScreen extends StatelessWidget {
+  String _oldComment;
   String _comment;
 
   CommentScreen._();
   CommentScreen.add();
   CommentScreen.edit(oldComment) {
+    _oldComment = oldComment;
     _comment = oldComment;
   }
 
@@ -26,7 +28,7 @@ class CommentScreen extends StatelessWidget {
           pathToIcon: CustomIconPaths.back,
           onPressed: () {
             print('Back button pressed');
-            Navigator.pop(context);
+            Navigator.pop(context, _oldComment);
           }
         ),
       ),
