@@ -87,6 +87,19 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
       return MoodAssessment(mood: _currentMood);
     }
   }
+
+  void AddEditCommentButtonCallback () async {
+    print('Comment button pressed');
+    var comment;
+    if (_comment == null) {
+      comment = await Navigator.of(context).pushNamed('/comment/add');
+    } else {
+      comment = await Navigator.of(context).pushNamed('/comment/edit', arguments: _comment);
+    }
+    setState(() {
+      _comment = comment;
+    });
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -135,18 +148,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                         ),
                         AddButton(
                           _comment != null ? '(Изменить)' : 'Комментарий',
-                          onPressed: () async {
-                            print('Comment button pressed');
-                            var comment;
-                            if (_comment == null) {
-                              comment = await Navigator.of(context).pushNamed('/comment/add');
-                            } else {
-                              comment = await Navigator.of(context).pushNamed('/comment/edit', arguments: _comment);
-                            }
-                            setState(() {
-                              _comment = comment;
-                            });
-                          },
+                          onPressed: AddEditCommentButtonCallback,
                         )
                       ],
                     ),
