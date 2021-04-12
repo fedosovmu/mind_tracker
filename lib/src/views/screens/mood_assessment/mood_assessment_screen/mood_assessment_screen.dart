@@ -96,6 +96,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
     } else {
       comment = await Navigator.of(context).pushNamed('/comment/edit', arguments: _comment);
     }
+    print('=== COMMENT $comment');
     if (comment != null) {
       if (comment == '') {
         comment = null;

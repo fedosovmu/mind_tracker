@@ -12,11 +12,19 @@ class EventIcon extends StatefulWidget {
   static const aspectRatio = _widthInDp / _heightInDp;
 
   final Event event;
-
   EventIcon(this.event);
 
+  _EventIconState _state;
+
+  bool get isSelected {
+    return _state.isSelected;
+  }
+
   @override
-  _EventIconState createState() => _EventIconState();
+  _EventIconState createState() {
+    _state = _EventIconState();
+    return _state;
+  }
 }
 
 class _EventIconState extends State<EventIcon> {

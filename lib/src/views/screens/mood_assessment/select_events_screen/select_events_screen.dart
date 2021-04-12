@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 
 
 class SelectEventsScreen extends StatelessWidget {
-  static const _pathToBackIcon = 'assets/icons/ui/back.png';
+  List<Widget> _eventIcons;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class SelectEventsScreen extends StatelessWidget {
             child: GlowDisabler(
               child: Consumer<EventsProvider>(
                 builder: (context, eventsProvider, child) {
-                  final List<Widget> eventIcons = eventsProvider.events.map(
+                  _eventIcons = eventsProvider.events.map(
                           (event) => EventIcon(event)).toList();
                   return GridView.count(
                     physics: ClampingScrollPhysics(),
@@ -41,7 +41,7 @@ class SelectEventsScreen extends StatelessWidget {
                     crossAxisSpacing: dp(24),
                     crossAxisCount: 4,
                     childAspectRatio: EventIcon.aspectRatio,
-                    children: eventIcons
+                    children: _eventIcons
                   );
                 }
               ),
@@ -57,7 +57,14 @@ class SelectEventsScreen extends StatelessWidget {
                   title: 'Готово',
                   onPressed: () {
                     print('Select events button pressed');
-                    Navigator.of(context).pop();
+                    final List<String> selectedEventNames = [];
+                    for (EventIcon eventIcon in _eventIcons) {
+                      if (eventIcon.isSelected) {
+                        final eventName = eventIcon.event.name;
+                        selectedEventNames.add(eventName);
+                      }
+                    }
+                    Navigator.of(context).pop(selectedEventNames);
                   }
                 ),
               )
