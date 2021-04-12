@@ -20,30 +20,30 @@ class MoodAssessment implements Comparable {
     }
   }
 
-  static MoodAssessment fromMap(Map<String, dynamic> mood_assessment_map) {
+  static MoodAssessment fromMap(Map<String, dynamic> moodAssessmentMap) {
     return MoodAssessment(
-      date: mood_assessment_map['date'].toString().toDateTime(),
-      mood: mood_assessment_map['mood'],
-      partOfDay: PartOfDayBuilder.fromShortString(mood_assessment_map['part_of_day']),
-      time: mood_assessment_map.containsKey('time') ? mood_assessment_map['time'].toDate() : null,
+      date: moodAssessmentMap['date'].toString().toDateTime(),
+      mood: moodAssessmentMap['mood'],
+      partOfDay: PartOfDayBuilder.fromShortString(moodAssessmentMap['part_of_day']),
+      time: moodAssessmentMap.containsKey('time') ? moodAssessmentMap['time'].toDate() : null,
     );
   }
 
   Map<String, dynamic> toMap () {
-    final mood_assessment_map = {
+    final moodAssessmentMap = {
       'date': date.toStringDate(),
       'mood': mood,
       'part_of_day': partOfDay.toShortString(),
     };
     if (time != null) {
-      mood_assessment_map['time'] =Timestamp.fromDate(time);
+      moodAssessmentMap['time'] =Timestamp.fromDate(time);
     }
-    return mood_assessment_map;
+    return moodAssessmentMap;
   }
 
   @override
   String toString() {
-    return '{date: "${date.toStringDate()}", mood: $mood, partOfDay: "$partOfDay", time: "$time"}';
+    return toMap().toString();
   }
 
   @override
