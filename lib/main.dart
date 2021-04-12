@@ -13,8 +13,6 @@ void main() async {
   final moodAssessmentsProvider = await MoodAssessmentsProvider.loadDataAndCreateProvider();
   final eventsProvider = await EventsProvider.loadDataAndCreateProvider();
 
-  print('=== EVENTS === ${eventsProvider.events}');
-
   runApp(
       MultiProvider(
         providers: [
