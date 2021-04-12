@@ -12,13 +12,10 @@ class EventIcon extends StatefulWidget {
   static const aspectRatio = _widthInDp / _heightInDp;
 
   final Event event;
-  EventIcon(this.event);
+  bool isSelected;
+  EventIcon(this.event, {this.isSelected = false});
 
   _EventIconState _state;
-
-  bool get isSelected {
-    return _state.isSelected;
-  }
 
   @override
   _EventIconState createState() {
@@ -28,14 +25,12 @@ class EventIcon extends StatefulWidget {
 }
 
 class _EventIconState extends State<EventIcon> {
-  bool isSelected = false;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         setState(() {
-          isSelected = !isSelected;
+          widget.isSelected = !widget.isSelected;
         });
         print('Event selected');
       },
@@ -45,7 +40,7 @@ class _EventIconState extends State<EventIcon> {
               width: dp(64),
               height: dp(64),
               decoration: BoxDecoration(
-                  color: isSelected ? CustomColors.main : CustomColors.purpleSuperDark,
+                  color: widget.isSelected ? CustomColors.main : CustomColors.purpleSuperDark,
                   shape: BoxShape.circle
               ),
               child: Center(
@@ -61,7 +56,7 @@ class _EventIconState extends State<EventIcon> {
             child: Text(
               widget.event.title,
               style: CustomTextStyles.caption.copyWith(
-                  color: isSelected ? CustomColors.silverWhite : CustomColors.purpleLight
+                  color: widget.isSelected ? CustomColors.silverWhite : CustomColors.purpleLight
               ),
               textAlign: TextAlign.center,
             ),

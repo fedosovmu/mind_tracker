@@ -4,7 +4,8 @@ import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_prov
 import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/mood_assessor/mood_assessor.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/add_button.dart';
-import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/assess_mood_colored_button.dart';
+import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/'
+    'assess_mood_colored_button.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
@@ -29,10 +30,10 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
   int _currentMood = _defaultMood;
   String _comment;
   List<String> _selectedEventNames;
-
   @override
   void initState() {
     super.initState();
+    _comment = '';
     _selectedEventNames = [];
   }
   
@@ -98,15 +99,24 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
     }
     print('=== COMMENT $comment');
     if (comment != null) {
-      if (comment == '') {
-        comment = null;
-      }
       setState(() {
         _comment = comment;
       });
     }
   }
-  
+
+  void SelectEventsButtonCallback () async {
+    print('Event button pressed');
+    final selectedEventNames = await Navigator.of(context)
+        .pushNamed('/selectEvents', arguments: _selectedEventNames);
+    print('=== SELECTED EVENTS $selectedEventNames');
+    if (selectedEventNames != null) {
+      setState(() {
+        _selectedEventNames = selectedEventNames;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -146,16 +156,11 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         AddButton(
-                          'Событие',
-                          onPressed: () async {
-                            print('Event button pressed');
-                            final selectedEventNames = await Navigator.of(context)
-                                .pushNamed('/selectEvents', arguments: _selectedEventNames);
-                            print('=== SELECTED EVENTS $selectedEventNames');
-                          },
+                          _selectedEventNames.isEmpty ? 'Событие' : '(Изменить)',
+                          onPressed: SelectEventsButtonCallback,
                         ),
                         AddButton(
-                          _comment != null ? '(Изменить)' : 'Комментарий',
+                          _comment.isEmpty ? 'Комментарий' : '(Изменить)',
                           onPressed: AddEditCommentButtonCallback,
                         )
                       ],

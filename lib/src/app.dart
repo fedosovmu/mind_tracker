@@ -43,7 +43,7 @@ class MindTrackerApp extends StatelessWidget {
             screenToGo = MoodAssessmentScreen(arguments: arguments);
             break;
           case '/selectEvents':
-            screenToGo = SelectEventsScreen();
+            screenToGo = SelectEventsScreen(settings.arguments);
             break;
           case '/comment/add':
             screenToGo = CommentScreen.add();

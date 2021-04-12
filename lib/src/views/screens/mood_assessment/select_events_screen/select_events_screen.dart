@@ -11,7 +11,10 @@ import 'package:provider/provider.dart';
 
 
 class SelectEventsScreen extends StatelessWidget {
+  final List<String> _oldSelectedEventNames;
   List<Widget> _eventIcons;
+
+  SelectEventsScreen(this._oldSelectedEventNames);
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +36,10 @@ class SelectEventsScreen extends StatelessWidget {
             child: GlowDisabler(
               child: Consumer<EventsProvider>(
                 builder: (context, eventsProvider, child) {
-                  _eventIcons = eventsProvider.events.map(
-                          (event) => EventIcon(event)).toList();
+                  _eventIcons = eventsProvider.events.map((event) {
+                    final bool isSelected = _oldSelectedEventNames.contains(event.name);
+                    return EventIcon(event, isSelected: isSelected);
+                  }).toList();
                   return GridView.count(
                     physics: ClampingScrollPhysics(),
                     mainAxisSpacing: dp(16),
