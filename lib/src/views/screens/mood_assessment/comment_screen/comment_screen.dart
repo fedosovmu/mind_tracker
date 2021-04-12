@@ -2,17 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
 import 'package:mind_tracker/src/views/common_widgets/standard_button.dart';
-import 'package:mind_tracker/src/views/screens/mood_assessment/add_comment_screen/widgets/comment_text_input.dart';
+import 'package:mind_tracker/src/views/screens/mood_assessment/comment_screen/widgets/comment_text_input.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 
 
-class AddCommentScreen extends StatelessWidget {
-  static const _pathToBackIcon = 'assets/icons/ui/back.png';
+class CommentScreen extends StatelessWidget {
+  String _comment;
+
+  CommentScreen._();
+  CommentScreen.add();
+  CommentScreen.edit(oldComment) {
+    _comment = oldComment;
+  }
 
   @override
   Widget build(BuildContext context) {
-    final commentTextInput = CommentTextInput();
+    final commentTextInput = CommentTextInput(_comment);
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Добавление комментария',

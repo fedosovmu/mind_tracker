@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
-import 'package:mind_tracker/src/views/screens/mood_assessment/add_comment_screen/add_comment_screen.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/mood_assessor/mood_assessor.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/add_button.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/assess_mood_colored_button.dart';
@@ -138,7 +137,12 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                           _comment != null ? '(Изменить)' : 'Комментарий',
                           onPressed: () async {
                             print('Comment button pressed');
-                            final comment = await Navigator.of(context).pushNamed('/addComment');
+                            var comment;
+                            if (_comment == null) {
+                              comment = await Navigator.of(context).pushNamed('/comment/add');
+                            } else {
+                              comment = await Navigator.of(context).pushNamed('/comment/edit', arguments: _comment);
+                            }
                             setState(() {
                               _comment = comment;
                             });

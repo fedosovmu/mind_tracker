@@ -5,7 +5,11 @@ import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
 class CommentTextInput extends StatelessWidget {
-  final controller = TextEditingController();
+  TextEditingController controller;
+
+  CommentTextInput (String text) {
+    controller = TextEditingController(text: text);
+  }
 
   @override
   Widget build(BuildContext context) {
