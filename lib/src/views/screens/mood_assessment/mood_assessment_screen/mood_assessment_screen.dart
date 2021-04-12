@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
+import 'package:mind_tracker/src/views/screens/mood_assessment/add_comment_screen/add_comment_screen.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/mood_assessor/mood_assessor.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/add_button.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/assess_mood_colored_button.dart';
@@ -27,7 +28,15 @@ class MoodAssessmentScreen extends StatefulWidget {
 class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
   static const _defaultMood = 4;
   int _currentMood = _defaultMood;
+  String _comment;
+  List<String> _selectedEventNames;
 
+  @override
+  void initState() {
+    super.initState();
+    _selectedEventNames = [];
+  }
+  
   void _goToHomeScreen() {
     if (widget.firstStart) {
       Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
@@ -126,10 +135,13 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                           },
                         ),
                         AddButton(
-                          'Комментарий',
-                          onPressed: () {
+                          _comment != null ? '(Изменить)' : 'Комментарий',
+                          onPressed: () async {
                             print('Comment button pressed');
-                            Navigator.of(context).pushNamed('/addComment');
+                            final comment = await Navigator.of(context).pushNamed('/addComment');
+                            setState(() {
+                              _comment = comment;
+                            });
                           },
                         )
                       ],

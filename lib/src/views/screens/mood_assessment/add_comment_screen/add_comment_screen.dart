@@ -12,6 +12,7 @@ class AddCommentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final commentTextInput = CommentTextInput();
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Добавление комментария',
@@ -28,7 +29,7 @@ class AddCommentScreen extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(left: dp(16), right: dp(16), top: dp(16)),
-              child: CommentTextInput(),
+              child: commentTextInput,
             ),
             Positioned(
               left: dp(16),
@@ -40,7 +41,8 @@ class AddCommentScreen extends StatelessWidget {
                   title: 'Добавить',
                   onPressed: () {
                     print('Add comment button pressed');
-                    Navigator.of(context).pop();
+                    final comment = commentTextInput.controller.text;
+                    Navigator.of(context).pop(comment);
                   },
                 ),
               ),
