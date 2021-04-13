@@ -46,8 +46,8 @@ class _EventIconState extends State<EventIcon> {
               child: Center(
                 child: Image.asset(
                   CustomIconPaths.eventIcons[widget.event.icon],
-                  width: dp(40),
-                  height: dp(40),
+                  width: dp(24),
+                  height: dp(24),
                 ),
               )
           ),

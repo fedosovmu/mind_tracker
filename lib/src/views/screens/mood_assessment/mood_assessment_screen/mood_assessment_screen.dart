@@ -123,7 +123,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      //resizeToAvoidBottomPadding: false, //TODO: Проверить что все работает на IOS
       appBar: CustomAppBar(
         title: _getTitle(context),
         leading: CustomLeading(

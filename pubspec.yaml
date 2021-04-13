@@ -27,7 +27,7 @@ dependencies:
   intl: ^0.16.1
   collection: ^1.14.13
   provider:
-  firebase_core: "^0.7.0"
+  firebase_core:
   firebase_auth: "^0.20.0+1"
   cloud_firestore: "^0.16.0"
 
