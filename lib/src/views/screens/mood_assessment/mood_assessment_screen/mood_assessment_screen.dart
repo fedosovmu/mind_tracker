@@ -95,14 +95,9 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
     }
   }
 
-  void _addEditCommentButtonCallback () async {
+  void _commentButtonCallback () async {
     print('Comment button pressed');
-    var comment;
-    if (_comment == null) {
-      comment = await Navigator.of(context).pushNamed('/comment/add');
-    } else {
-      comment = await Navigator.of(context).pushNamed('/comment/edit', arguments: _comment);
-    }
+    final comment = await Navigator.of(context).pushNamed('/comment', arguments: _comment);
     print('=== COMMENT $comment');
     if (comment != null) {
       setState(() {
@@ -167,7 +162,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                         ),
                         AddButton(
                           _comment.isEmpty ? 'Комментарий' : '(Изменить)',
-                          onPressed: _addEditCommentButtonCallback,
+                          onPressed: _commentButtonCallback,
                         )
                       ],
                     ),

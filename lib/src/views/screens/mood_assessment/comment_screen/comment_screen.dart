@@ -10,9 +10,7 @@ import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 class CommentScreen extends StatelessWidget {
   String _comment;
 
-  CommentScreen._();
-  CommentScreen.add();
-  CommentScreen.edit(oldComment) {
+  CommentScreen(oldComment) {
     _comment = oldComment;
   }
 

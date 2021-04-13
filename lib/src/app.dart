@@ -45,11 +45,8 @@ class MindTrackerApp extends StatelessWidget {
           case '/selectEvents':
             screenToGo = SelectEventsScreen(settings.arguments);
             break;
-          case '/comment/add':
-            screenToGo = CommentScreen.add();
-            break;
-          case '/comment/edit':
-            screenToGo = CommentScreen.edit(settings.arguments);
+          case '/comment':
+            screenToGo = CommentScreen(settings.arguments);
             break;
           default:
             screenToGo = MainScreen();
