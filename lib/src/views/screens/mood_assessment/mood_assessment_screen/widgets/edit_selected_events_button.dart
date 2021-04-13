@@ -34,7 +34,7 @@ class EditSelectedEventsButton extends StatelessWidget {
               child: Text(
                 '+${eventsCount > 99 ? 99 : eventsCount}',
                 style: CustomTextStyles.caption.copyWith(
-                  color: CustomColors.purpleSilverWhite
+                  color: CustomColors.purpleWhite
                 ),
               ),
             ),
@@ -43,7 +43,7 @@ class EditSelectedEventsButton extends StatelessWidget {
           Text(
             'События',
             style: CustomTextStyles.caption.copyWith(
-              color: CustomColors.purpleSilverWhite
+              color: CustomColors.purpleWhite
             ),
           ),
         ],

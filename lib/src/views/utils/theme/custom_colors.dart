@@ -19,7 +19,7 @@ class CustomColors {
   static const purpleMegaDark = Color(0xFF191327);
   static const purpleSuperDark = Color(0xFF261E35);
   static const purpleDark = Color(0xFF322A42);
-  static const purpleTextSecondary = Color(0xFF876D8F);
+  static const purpleMedium = Color(0xFF876D8F);
   static const purpleLight = Color(0xFFD3B2CA);
-  static const purpleSilverWhite = Color(0xFFF9EFF6);
+  static const purpleWhite = Color(0xFFF9EFF6);
 }

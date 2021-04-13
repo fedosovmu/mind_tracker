@@ -39,7 +39,7 @@ class _MainScreenState extends State<MainScreen> {
             child: Text(
               'Здесь будут события',
               style: CustomTextStyles.titleH1.copyWith(
-                color: CustomColors.purpleTextSecondary
+                color: CustomColors.purpleMedium
               ),
             ),
           ),

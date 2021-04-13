@@ -19,7 +19,7 @@ class PeriodButton extends StatelessWidget {
           child: Text(
             title,
             style: CustomTextStyles.basic.copyWith(
-                color: isPressed ? CustomColors.purpleSilverWhite : CustomColors.purpleLight
+                color: isPressed ? CustomColors.purpleWhite : CustomColors.purpleLight
             ),
           ),
         ),

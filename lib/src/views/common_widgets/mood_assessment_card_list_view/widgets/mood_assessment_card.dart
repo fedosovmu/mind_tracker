@@ -46,7 +46,7 @@ class MoodAssessmentCard extends StatelessWidget {
           child: Center(
             child: Image.asset(
               CustomIconPaths.comment,
-              color: CustomColors.purpleTextSecondary,
+              color: CustomColors.purpleMedium,
               width: dp(16),
               height: dp(16),
             ),
@@ -82,7 +82,7 @@ class MoodAssessmentCard extends StatelessWidget {
           padding: EdgeInsets.only(left: dp(leftPaddingInDp), top: dp(topPaddingInDp)),
           child: Text(
             eventsNumberText,
-            style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleTextSecondary),
+            style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleMedium),
           ),
           decoration: BoxDecoration(
             color: CustomColors.purpleDark,
@@ -94,7 +94,7 @@ class MoodAssessmentCard extends StatelessWidget {
         ),
         Text(
           eventsText,
-          style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleTextSecondary),
+          style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleMedium),
         ),
       ];
     } else {
@@ -121,7 +121,7 @@ class MoodAssessmentCard extends StatelessWidget {
                 child: Text(
                   _getPartOfDayAndTimeString(context, moodAssessment),
                   style: CustomTextStyles.basic.copyWith(
-                      color: CustomColors.purpleTextSecondary
+                      color: CustomColors.purpleMedium
                   ),
                 ),
               ),
@@ -146,7 +146,7 @@ class MoodAssessmentCard extends StatelessWidget {
           ),
           Image.asset(
             CustomIconPaths.arrowRight,
-            color: CustomColors.purpleTextSecondary,
+            color: CustomColors.purpleMedium,
             width: dp(32),
             height: dp(32),
           )

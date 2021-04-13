@@ -20,7 +20,7 @@ class CalendarDayOfWeekLabels extends StatelessWidget {
           return Text(
             weekDayWord,
             style: CustomTextStyles.basic.copyWith(
-                color: CustomColors.purpleTextSecondary
+                color: CustomColors.purpleMedium
             ),
           );
         }),

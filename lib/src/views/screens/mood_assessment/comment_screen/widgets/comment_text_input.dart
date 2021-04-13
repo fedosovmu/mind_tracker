@@ -22,7 +22,7 @@ class CommentTextInput extends StatelessWidget {
       decoration: InputDecoration(
         hintText: 'Твой комментарий',
         hintStyle: CustomTextStyles.basicH1Regular.copyWith(
-            color: CustomColors.purpleTextSecondary
+            color: CustomColors.purpleMedium
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(dp(12))),

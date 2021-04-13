@@ -24,7 +24,7 @@ class MoodChartDateLabels extends StatelessWidget {
               Text(
                 '${Content.weekDayNames[day.weekday]}',
                 style: CustomTextStyles.basic.copyWith(
-                    color: CustomColors.purpleTextSecondary
+                    color: CustomColors.purpleMedium
                 ),
               )
             ],

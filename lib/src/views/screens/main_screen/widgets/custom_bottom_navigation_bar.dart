@@ -18,12 +18,12 @@ class CustomBottomNavigationBar extends CupertinoTabBar {
     currentIndex: 0, //TODO delete this line in prodaction
     border: Border(top: BorderSide(color: Color(0xFF766379))),
     backgroundColor: CustomColors.purpleSuperDark,
-    activeColor: CustomColors.purpleSilverWhite,
-    inactiveColor: CustomColors.purpleSilverWhite,
+    activeColor: CustomColors.purpleWhite,
+    inactiveColor: CustomColors.purpleLight,
     iconSize: 32,
     items: List.generate(_texts.length, (index) => BottomNavigationBarItem(
         activeIcon: Image.asset(_pathsToIcons[index], height: 24),
-        icon: Image.asset(_pathsToIcons[index], height: 24, color: CustomColors.purpleTextSecondary),
+        icon: Image.asset(_pathsToIcons[index], height: 24, color: CustomColors.purpleMedium),
       label: _texts[index]
     ))
   );

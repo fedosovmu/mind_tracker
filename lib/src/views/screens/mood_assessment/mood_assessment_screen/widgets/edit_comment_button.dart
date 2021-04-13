@@ -41,7 +41,7 @@ class EditCommentButton extends StatelessWidget {
           Text(
             'Комментарий',
             style: CustomTextStyles.caption.copyWith(
-                color: CustomColors.purpleSilverWhite
+                color: CustomColors.purpleWhite
             ),
           ),
         ],
