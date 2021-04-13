@@ -33,7 +33,7 @@ class AssessMoodNowButton extends StatelessWidget {
       height: dp(48),
       color: CustomColors.main,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(dp(12)))
+        borderRadius: BorderRadius.all(Radius.elliptical(16, 16)),
       ),
     );
   }

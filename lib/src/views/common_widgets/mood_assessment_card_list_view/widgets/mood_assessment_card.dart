@@ -46,7 +46,7 @@ class MoodAssessmentCard extends StatelessWidget {
           child: Center(
             child: Image.asset(
               CustomIconPaths.comment,
-              color: CustomColors.purpleLight,
+              color: CustomColors.purpleTextSecondary,
               width: dp(16),
               height: dp(16),
             ),
@@ -82,7 +82,7 @@ class MoodAssessmentCard extends StatelessWidget {
           padding: EdgeInsets.only(left: dp(leftPaddingInDp), top: dp(topPaddingInDp)),
           child: Text(
             eventsNumberText,
-            style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
+            style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleTextSecondary),
           ),
           decoration: BoxDecoration(
             color: CustomColors.purpleDark,
@@ -94,7 +94,7 @@ class MoodAssessmentCard extends StatelessWidget {
         ),
         Text(
           eventsText,
-          style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
+          style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleTextSecondary),
         ),
       ];
     } else {
@@ -120,7 +120,9 @@ class MoodAssessmentCard extends StatelessWidget {
                 height: dp(41),
                 child: Text(
                   _getPartOfDayAndTimeString(context, moodAssessment),
-                  style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
+                  style: CustomTextStyles.basic.copyWith(
+                      color: CustomColors.purpleTextSecondary
+                  ),
                 ),
               ),
               Container(
@@ -152,7 +154,7 @@ class MoodAssessmentCard extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: CustomColors.purpleSuperDark,
-        borderRadius: BorderRadius.all(Radius.circular(dp(16))),
+        borderRadius: BorderRadius.all(Radius.elliptical(16, 16)),
       ),
     );
   }
