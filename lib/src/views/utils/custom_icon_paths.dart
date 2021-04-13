@@ -16,6 +16,7 @@ class CustomIconPaths {
   static const plus = '$_pathToUiIcons/plus.png';
   static const plusInCircle = '$_pathToUiIcons/plus_in_circle.png';
 
+  static const edit = '$_pathToUiIcons/edit.png';
 
   static const _pathToEventIcons = 'assets/icons/events';
   static const _eventNames = ['alarm', 'alcohol', 'angry', 'bed', 'bell', 'bicycle',
