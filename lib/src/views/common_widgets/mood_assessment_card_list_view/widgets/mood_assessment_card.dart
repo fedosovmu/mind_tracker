@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 import 'package:mind_tracker/src/views/utils/content.dart';
+import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
@@ -27,12 +28,77 @@ class MoodAssessmentCard extends StatelessWidget {
   }
 
   static _getEventWord (int eventsNumber) {
-    if ((eventsNumber % 10) == 1) {
+    if ((eventsNumber % 10) == 1 && (eventsNumber < 10 || eventsNumber > 20)) {
       return 'Событие';
     } else if ((eventsNumber % 10) > 1 && (eventsNumber % 10) <= 4) {
       return 'События';
     } else {
       return 'Событий';
+    }
+  }
+
+  List<Widget> _buildCommentIcon () {
+    if (moodAssessment.comment != null) {
+      return [
+        Container(
+          width: dp(24),
+          height: dp(24),
+          child: Center(
+            child: Image.asset(
+              CustomIconPaths.comment,
+              color: CustomColors.purpleLight,
+              width: dp(16),
+              height: dp(16),
+            ),
+          ),
+          decoration: BoxDecoration(
+            color: CustomColors.purpleDark,
+            shape: BoxShape.circle,
+          ),
+        ),
+        SizedBox(width: dp(8))
+      ];
+    } else {
+      return [];
+    }
+  }
+
+  List<Widget> _buildEventIconAndText() {
+    if (moodAssessment.events != null) {
+      final int eventsCount = moodAssessment.events.length;
+      var leftPaddingInDp = 8.5;
+      var topPaddingInDp = 4;
+      var eventsNumberText = '${eventsCount}';
+      var eventsText = _getEventWord(eventsCount);
+      if (eventsCount > 9) {
+        leftPaddingInDp = 5;
+        topPaddingInDp = 3;
+        eventsNumberText = '∞';
+      }
+      return [
+        Container(
+          width: dp(24),
+          height: dp(24),
+          padding: EdgeInsets.only(left: dp(leftPaddingInDp), top: dp(topPaddingInDp)),
+          child: Text(
+            eventsNumberText,
+            style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
+          ),
+          decoration: BoxDecoration(
+            color: CustomColors.purpleDark,
+            shape: BoxShape.circle,
+          ),
+        ),
+        SizedBox(
+          width: dp(8),
+        ),
+        Text(
+          eventsText,
+          style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
+        ),
+      ];
+    } else {
+      return [];
     }
   }
 
@@ -63,29 +129,10 @@ class MoodAssessmentCard extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                //color: Colors.blue,
                 child: Row(
                   children: [
-                    Container(
-                      width: dp(24),
-                      height: dp(24),
-                      padding: EdgeInsets.only(left: dp(8.5), top: dp(4)),
-                      child: Text(
-                        '${moodAssessment.mood}',
-                        style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
-                      ),
-                      decoration: BoxDecoration(
-                        color: CustomColors.purpleDark,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    SizedBox(
-                      width: dp(8),
-                    ),
-                    Text(
-                      _getEventWord(moodAssessment.mood),
-                      style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
-                    ),
+                    ..._buildCommentIcon(),
+                    ..._buildEventIconAndText()
                   ],
                 ),
               ),
