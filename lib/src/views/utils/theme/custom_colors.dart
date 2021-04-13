@@ -8,7 +8,6 @@ class CustomColors {
   static const black = Color(0xFF000000);
   static const dark = Color(0xFF1A1C20);
   static const miniDark = Color(0xFF2C2C31);
-  static const silverWhite = Color(0xFFF9EFF6);
   static const white = Color(0xFFFFFFFF);
   static const main = Color(0xFF7F3FB0);
   static const moods = {
@@ -25,4 +24,5 @@ class CustomColors {
   static const purpleDark = Color(0xFF322A42);
   static const purpleTextSecondary = Color(0xFF876D8F);
   static const purpleLight = Color(0xFFD3B2CA);
+  static const purpleSilverWhite = Color(0xFFF9EFF6);
 }

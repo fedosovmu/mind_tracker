@@ -56,7 +56,7 @@ class _EventIconState extends State<EventIcon> {
             child: Text(
               widget.event.title,
               style: CustomTextStyles.caption.copyWith(
-                  color: widget.isSelected ? CustomColors.silverWhite : CustomColors.purpleLight
+                  color: widget.isSelected ? CustomColors.purpleSilverWhite : CustomColors.purpleLight
               ),
               textAlign: TextAlign.center,
             ),

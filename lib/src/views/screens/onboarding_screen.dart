@@ -99,7 +99,7 @@ class OnboardingScreen extends StatelessWidget {
                     padding: EdgeInsets.only(left: dp(16), right: dp(16)),
                     child:  Text(
                         _screenTexts[pageNumber],
-                        style: CustomTextStyles.basicH1Medium.copyWith(color: CustomColors.silverWhite),
+                        style: CustomTextStyles.basicH1Medium.copyWith(color: CustomColors.purpleSilverWhite),
                     ),
                   ),
                 ],
