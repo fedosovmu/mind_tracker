@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
-class SelectEventsButton extends StatelessWidget {
-  final int eventsCount;
+class EditCommentButton extends StatelessWidget {
   final Function onPressed;
 
-  SelectEventsButton({@required this.eventsCount, @required this.onPressed});
+  EditCommentButton({@required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -27,23 +27,21 @@ class SelectEventsButton extends StatelessWidget {
             width: dp(32),
             height: dp(32),
             decoration: BoxDecoration(
-              color: CustomColors.purpleDark,
-              shape: BoxShape.circle
+                color: CustomColors.purpleDark,
+                shape: BoxShape.circle
             ),
             child: Center(
-              child: Text(
-                '+${eventsCount > 99 ? 99 : eventsCount}',
-                style: CustomTextStyles.caption.copyWith(
-                  color: CustomColors.purpleSilverWhite
-                ),
+              child: Image.asset(
+                CustomIconPaths.edit,
+                width: dp(14)
               ),
             ),
           ),
           SizedBox(width: dp(8)),
           Text(
-            'События',
+            'Комментарий',
             style: CustomTextStyles.caption.copyWith(
-              color: CustomColors.purpleSilverWhite
+                color: CustomColors.purpleSilverWhite
             ),
           ),
         ],
