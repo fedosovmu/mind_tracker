@@ -17,7 +17,7 @@ class MoodAssessmentEmptyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(12)),
+      margin: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
       width: double.infinity,
       height: dp(136),
       decoration: BoxDecoration(
