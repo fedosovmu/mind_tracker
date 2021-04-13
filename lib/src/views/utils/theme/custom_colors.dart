@@ -5,9 +5,6 @@ class CustomColors {
 
   CustomColors._();
 
-  static const black = Color(0xFF000000);
-  static const dark = Color(0xFF1A1C20);
-  static const miniDark = Color(0xFF2C2C31);
   static const white = Color(0xFFFFFFFF);
   static const main = Color(0xFF7F3FB0);
   static const moods = {
