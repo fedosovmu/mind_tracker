@@ -15,6 +15,8 @@ class CustomIconPaths {
 
   static const plus = '$_pathToUiIcons/plus.png';
   static const plusInCircle = '$_pathToUiIcons/plus_in_circle.png';
+  static const arrowLeft = '$_pathToUiIcons/arrow_left.png';
+  static const arrowRight = '$_pathToUiIcons/arrow_right.png';
 
   static const edit = '$_pathToUiIcons/edit.png';
   static const comment = '$_pathToUiIcons/comment.png';

@@ -110,34 +110,45 @@ class MoodAssessmentCard extends StatelessWidget {
       alignment: Alignment.topLeft,
       width: double.infinity,
       height: dp(136),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: dp(41),
-              child: Text(
-                _getPartOfDayAndTimeString(context, moodAssessment),
-                style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
-              ),
-            ),
-            Container(
-              height: dp(41),
-              child: Text(
-                Content.moodNames[moodAssessment.mood],
-                style: CustomTextStyles.titleH1,
-              ),
-            ),
-            Expanded(
-              child: Container(
-                child: Row(
-                  children: [
-                    ..._buildCommentIcon(),
-                    ..._buildEventIconAndText()
-                  ],
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: dp(41),
+                child: Text(
+                  _getPartOfDayAndTimeString(context, moodAssessment),
+                  style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleLight),
                 ),
               ),
-            )
-          ]
+              Container(
+                height: dp(41),
+                child: Text(
+                  Content.moodNames[moodAssessment.mood],
+                  style: CustomTextStyles.titleH1,
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  child: Row(
+                    children: [
+                      ..._buildCommentIcon(),
+                      ..._buildEventIconAndText()
+                    ],
+                  ),
+                ),
+              )
+            ]
+          ),
+          Image.asset(
+            CustomIconPaths.arrowRight,
+            color: CustomColors.purpleTextSecondary,
+            width: dp(32),
+            height: dp(32),
+          )
+        ],
       ),
       decoration: BoxDecoration(
         color: CustomColors.purpleSuperDark,

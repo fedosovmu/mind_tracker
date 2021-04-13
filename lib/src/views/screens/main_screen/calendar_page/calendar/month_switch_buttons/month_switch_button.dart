@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 
 
 class MonthSwitchButton extends StatelessWidget {
-  static const _pathToLeftIcon = 'assets/icons/ui/arrow_left.png';
-  static const _pathToRightIcon = 'assets/icons/ui/arrow_right.png';
   final bool isRight;
   final Function onPressed;
 
@@ -17,7 +16,7 @@ class MonthSwitchButton extends StatelessWidget {
       child: Container(
         width: dp(32),
         height: dp(32),
-        child: Image.asset(!isRight ? _pathToLeftIcon : _pathToRightIcon),
+        child: Image.asset(!isRight ? CustomIconPaths.arrowLeft : CustomIconPaths.arrowRight),
       ),
     );
   }
