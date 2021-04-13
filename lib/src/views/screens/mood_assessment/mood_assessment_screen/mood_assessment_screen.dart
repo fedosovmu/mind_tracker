@@ -6,6 +6,7 @@ import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_s
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/add_button.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/'
     'assess_mood_colored_button.dart';
+import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/select_events_button.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
@@ -156,9 +157,11 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        AddButton(
-                          _selectedEventNames.isEmpty ? 'Событие' : '(Изменить)',
-                          onPressed: _selectEventsButtonCallback,
+                        _selectedEventNames.isEmpty ? AddButton(
+                          'Событие', onPressed: _selectEventsButtonCallback,
+                        ) : SelectEventsButton(
+                            eventsCount: _selectedEventNames.length,
+                            onPressed: _selectEventsButtonCallback
                         ),
                         AddButton(
                           _comment.isEmpty ? 'Комментарий' : '(Изменить)',
