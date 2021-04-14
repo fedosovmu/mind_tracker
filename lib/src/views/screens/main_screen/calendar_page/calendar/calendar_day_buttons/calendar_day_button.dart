@@ -33,8 +33,8 @@ class CalendarDayButton extends StatelessWidget {
           ),
           decoration: BoxDecoration(
               color: isToday ? CustomColors.purpleMegaDark : null,
-              borderRadius: CustomBorderRadius(dp(16)),
-              border: isSelected && !isToday ? Border.all(width: dp(2), color: CustomColors.main.withAlpha(0xA3)) : null
+              borderRadius: CustomBorderRadius(dp(12)),
+              border: isSelected ? Border.all(width: dp(2), color: CustomColors.main.withAlpha(0xA3)) : null
           ),
       ),
     );
