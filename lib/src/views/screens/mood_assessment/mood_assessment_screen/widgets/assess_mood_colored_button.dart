@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_border_radius.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
@@ -28,7 +29,7 @@ class AssessMoodColoredButton extends StatelessWidget {
           ),
           color: CustomColors.moods[currentMood],
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(dp(16)))
+              borderRadius: CustomBorderRadius(dp(16))
           ),
         ),
       ),

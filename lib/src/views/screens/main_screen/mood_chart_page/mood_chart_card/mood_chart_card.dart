@@ -5,6 +5,7 @@ import 'package:mind_tracker/src/views/screens/main_screen/mood_chart_page/'
     'mood_chart_card/mood_chart_date_labels.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/mood_chart_page/mood_chart_card/mood_chart_period_text.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_border_radius.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';
 
@@ -20,7 +21,7 @@ class MoodChartCard extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: dp(16)),
       decoration: BoxDecoration(
         color: CustomColors.purpleSuperDark,
-        borderRadius: BorderRadius.all(Radius.circular(dp(16))),
+        borderRadius: CustomBorderRadius(dp(16))
       ),
       child: Column(
         children: [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:mind_tracker/src/views/utils/content.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_border_radius.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
@@ -22,7 +23,7 @@ class MoodAssessmentEmptyCard extends StatelessWidget {
       height: dp(136),
       decoration: BoxDecoration(
         color: CustomColors.purpleSuperDark,
-        borderRadius: BorderRadius.all(Radius.circular(dp(16))),
+        borderRadius: CustomBorderRadius(dp(16))
       ),
       child: Container(
         padding: EdgeInsets.only(left: dp(16), right: dp(32)),
@@ -41,7 +42,7 @@ class MoodAssessmentEmptyCard extends StatelessWidget {
                   },
                 color: CustomColors.main,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(dp(12))
+                  borderRadius: CustomBorderRadius(dp(16))
                 ),
                 child: Text(
                   Content.partOfDayNames[missedPartOfDay],
