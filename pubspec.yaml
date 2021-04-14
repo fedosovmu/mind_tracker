@@ -24,12 +24,12 @@ dependencies:
   flutter:
     sdk: flutter
 
-  intl: ^0.16.1
+  intl: ^0.17.0
   collection: ^1.14.13
-  provider:
-  firebase_core:
-  firebase_auth:
-  cloud_firestore:
+  provider: "5.0.0"
+  firebase_core: "1.0.3"
+  firebase_auth: "1.1.0"
+  cloud_firestore: "1.0.4"
 
 dev_dependencies:
   flutter_test:

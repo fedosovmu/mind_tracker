@@ -9,17 +9,17 @@ import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 abstract class FirebaseProvider {
   static final _eventsCollection = FirebaseFirestore.instance.collection('events');
   static final _moodAssessmentsCollection = FirebaseFirestore.instance.collection('mood_assessments');
-  static FirebaseUser _firebaseUser;
+  static UserCredential _userCredential;
 
   static Future<void> initializeFirebaseConnection () async {
     final firebaseInitializeData = await Firebase.initializeApp();
-    _firebaseUser = await FirebaseAuth.instance.signInAnonymously();
-    print('=== USER: ${_firebaseUser.uid}');
+    _userCredential = await FirebaseAuth.instance.signInAnonymously();
+    print('=== USER: ${_userCredential.user.uid}');
   }
 
   static Future<List<MoodAssessment>> getAllMoodAssessmentsOfAuthorizedUser () async {
     final moodAssessmentsQuerySnapshot = await _moodAssessmentsCollection
-        .where('user_id', isEqualTo: _firebaseUser.uid).get();
+        .where('user_id', isEqualTo: _userCredential.user.uid).get();
 
     final List<MoodAssessment> moodAssessments = moodAssessmentsQuerySnapshot.docs.map((mood_assessment_doc) {
       return MoodAssessment.fromMap(mood_assessment_doc.data());
@@ -30,7 +30,7 @@ abstract class FirebaseProvider {
 
   static void addMoodAssessment(MoodAssessment moodAssessment) {
     var moodAssessmentMap = moodAssessment.toMap();
-    moodAssessmentMap['user_id'] = _firebaseUser.uid;
+    moodAssessmentMap['user_id'] = _userCredential.user.uid;
     _moodAssessmentsCollection.add(
         moodAssessmentMap
     ).then((value) => print('=== FIREBASE ADD ($moodAssessment)'));
