@@ -40,7 +40,7 @@ class CommentScreen extends StatelessWidget {
               right: dp(16),
               bottom: 0,
               child: SafeArea(
-                minimum: EdgeInsets.only(bottom: dp(8)),
+                minimum: EdgeInsets.only(bottom: dp(16)),
                 child: StandardButton(
                   title: 'Добавить',
                   onPressed: () {

@@ -135,7 +135,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
         ),
       ),
       body: SafeArea(
-        minimum: EdgeInsets.only(bottom: dp(8)),
+        minimum: EdgeInsets.only(bottom: dp(16)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
