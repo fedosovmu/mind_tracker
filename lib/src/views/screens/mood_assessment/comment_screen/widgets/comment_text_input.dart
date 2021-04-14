@@ -21,6 +21,8 @@ class CommentTextInput extends StatelessWidget {
       autofocus: true,
       decoration: InputDecoration(
         hintText: 'Твой комментарий',
+        filled: true,
+        fillColor: CustomColors.purpleSuperDark.withOpacity(0.32),
         hintStyle: CustomTextStyles.basicH1Regular.copyWith(
             color: CustomColors.purpleMedium
         ),

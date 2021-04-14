@@ -7,7 +7,7 @@ class CustomColors {
 
   static const white = Color(0xFFFFFFFF);
   static const main = Color(0xFF7F3FB0);
-  static const moods = {
+  static const moods = const {
     1: Color(0xFF674A7A),
     2: Color(0xFFA43485),
     3: Color(0xFFEC4B68),
