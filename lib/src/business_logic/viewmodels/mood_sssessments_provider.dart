@@ -1,18 +1,21 @@
 import 'package:flutter/widgets.dart';
 import 'package:mind_tracker/src/business_logic/services/cloud_firestore_provider.dart';
+import 'package:mind_tracker/src/business_logic/services/firebase_auth_provider.dart';
 import '../models/mood_assessment.dart';
 import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';
 
 
 class MoodAssessmentsProvider extends ChangeNotifier {
-  final List<MoodAssessment> moodAssessments;
+  List<MoodAssessment> moodAssessments;
 
-  MoodAssessmentsProvider(this.moodAssessments);
+  MoodAssessmentsProvider() {
+    initializeListeners();
+  }
 
-  static Future<MoodAssessmentsProvider> loadDataAndCreateProvider() async {
-    final moodAssessments = await CloudFirestoreProvider.getAllMoodAssessmentsOfAuthorizedUser();
-    return MoodAssessmentsProvider(moodAssessments);
-    //return MoodAssessmentsProvider([]);
+  void initializeListeners() {
+    FirebaseAuthProvider.authStateChanges.listen((event) async {
+      moodAssessments = await CloudFirestoreProvider.getAllMoodAssessmentsOfAuthorizedUser();
+    });
   }
 
   List<MoodAssessment> getMoodAssessmentsForDate (DateTime date) {

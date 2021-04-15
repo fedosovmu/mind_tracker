@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mind_tracker/src/business_logic/services/firebase_auth_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
 import 'package:mind_tracker/src/views/common_widgets/standard_button.dart';
@@ -41,8 +43,10 @@ class LoginScreen extends StatelessWidget {
               ),
               TextButton(
                 child: Text('Выйти'),
-                onPressed: () {
+                onPressed: () async {
                   print('Exit button pressed');
+                  await FirebaseAuth.instance.signOut();
+                  print('Exiting finished');
                 }
               )
             ],
@@ -83,6 +87,7 @@ class LoginScreen extends StatelessWidget {
                     print('Log in button pressed');
                     final isValid = _formKey.currentState.validate();
                     print('Validation $isValid');
+                    FirebaseAuthProvider.signInWithEmailAndPassword();
                   }
               )
             ],

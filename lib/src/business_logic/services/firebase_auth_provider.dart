@@ -4,31 +4,29 @@ import 'package:firebase_auth/firebase_auth.dart';
 class FirebaseAuthProvider {
   FirebaseAuthProvider._();
 
-  static UserCredential _userCredential;
   static String uid;
-  static var authStateChanges;
+  static Stream<String> authStateChanges;
 
   static void initializeListeners() {
     authStateChanges = FirebaseAuth.instance.authStateChanges().map((user) {
-      print('====== Auth State Changed ======');
-      print('=== USER: $user');
+      print('=== Auth State Changed: ${user != null ? user.uid : null}');
       if (user != null) {
         uid = user.uid;
       } else {
         uid = null;
       }
+      return uid;
     });
   }
 
   static Future<String> signInAnonymously() async {
-    _userCredential = await FirebaseAuth.instance.signInAnonymously();
-    print('====== Sign In Anonymously ======');
-    print('=== Anonymous user: ${_userCredential.user.uid}');
+    final userCredential = await FirebaseAuth.instance.signInAnonymously();
+    print('=== Sign In Anonymously: ${userCredential.user.uid}');
   }
 
   static Future<String> signInWithEmailAndPassword() async {
     try {
-      _userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      final userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: "mocoronco@gmail.com",
           password: "77777778"
       );

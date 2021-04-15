@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/services/firebase_auth_provider.dart';
@@ -13,8 +14,9 @@ void main() async {
 
   await Firebase.initializeApp();
   FirebaseAuthProvider.initializeListeners();
-  final moodAssessmentsProvider = await MoodAssessmentsProvider.loadDataAndCreateProvider();
-  final eventsProvider = await EventsProvider.loadDataAndCreateProvider();
+  final moodAssessmentsProvider = MoodAssessmentsProvider();
+  final events = await CloudFirestoreProvider.getEvents();
+  final eventsProvider = EventsProvider(events);
 
   runApp(
       MultiProvider(

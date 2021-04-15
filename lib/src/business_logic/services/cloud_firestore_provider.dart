@@ -7,6 +7,7 @@ import 'package:mind_tracker/src/business_logic/services/firebase_auth_provider.
 
 class CloudFirestoreProvider {
   CloudFirestoreProvider._();
+
   static final _eventsCollection = FirebaseFirestore.instance.collection('events');
   static final _moodAssessmentsCollection = FirebaseFirestore.instance.collection('mood_assessments');
 
@@ -36,7 +37,6 @@ class CloudFirestoreProvider {
       ).then((value) => print('=== FIREBASE ADD ($moodAssessment)'));
     }
   }
-
 
   static Future<List<Event>> getEvents () async {
     final eventQuerySnapshot = await _eventsCollection.get();
