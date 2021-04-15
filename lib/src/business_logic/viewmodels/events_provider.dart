@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:mind_tracker/src/business_logic/models/event.dart';
-import 'package:mind_tracker/src/business_logic/services/firebase_provider.dart';
+import 'package:mind_tracker/src/business_logic/services/firestore_provider.dart';
 
 
 class EventsProvider extends ChangeNotifier {
@@ -9,7 +9,8 @@ class EventsProvider extends ChangeNotifier {
   EventsProvider(this.events);
 
   static Future<EventsProvider> loadDataAndCreateProvider() async {
-    final events = await FirebaseProvider.getEvents();
+    final events = await FirestoreProvider.getEvents();
     return EventsProvider(events);
+    //return EventsProvider([]);
   }
 }

@@ -4,17 +4,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mind_tracker/src/business_logic/models/event.dart';
 import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
+import 'package:mind_tracker/src/business_logic/services/firebase_auth_provider.dart';
 
 
-abstract class FirebaseProvider {
+abstract class FirestoreProvider {
   static final _eventsCollection = FirebaseFirestore.instance.collection('events');
   static final _moodAssessmentsCollection = FirebaseFirestore.instance.collection('mood_assessments');
   static UserCredential _userCredential;
 
   static Future<void> initializeFirebaseConnection () async {
     final firebaseInitializeData = await Firebase.initializeApp();
-    _userCredential = await FirebaseAuth.instance.signInAnonymously();
-    print('=== USER: ${_userCredential.user.uid}');
+    _userCredential = await FirebaseAuthProvider.signInAnonymously();
   }
 
   static Future<List<MoodAssessment>> getAllMoodAssessmentsOfAuthorizedUser () async {
