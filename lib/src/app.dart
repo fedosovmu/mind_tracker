@@ -55,19 +55,22 @@ class MindTrackerApp extends StatelessWidget {
             screenToGo = LoginScreen();
             break;
           default:
-            screenToGo = MainScreen();
+            screenToGo = Consumer<AuthProvider>(
+              builder: (context, authProvider, child) {
+                if (authProvider.isAuthorized) {
+                  return MainScreen();
+                } else {
+                  return LoginScreen();
+                }
+            });
         }
 
         return MaterialPageRoute(
           settings: settings,
           builder: (context) {
-            return Consumer<AuthProvider>(builder: (context, authProvider, child) {
-              if (!authProvider.isAuthorized) {
-                return LoginScreen();
-              }
-              return screenToGo;
-            });
-        });
+            return screenToGo;
+          }
+        );
       },
     );
   }

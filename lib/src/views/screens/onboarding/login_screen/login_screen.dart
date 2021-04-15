@@ -42,8 +42,10 @@ class LoginScreen extends StatelessWidget {
                     child: Text('Выйти'),
                     onPressed: () {
                       print('Exit button pressed');
-                      authProvider.signOut();
-                      Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+                      if (authProvider.isAuthorized) {
+                        authProvider.signOut();
+                        Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+                      }
                     }
                 )
               ],
@@ -85,10 +87,12 @@ class LoginScreen extends StatelessWidget {
                       print('Log in button pressed');
                       final isValid = _formKey.currentState.validate();
                       print('Validation $isValid');
-                      Provider.of<AuthProvider>(context, listen: false).signInWithEmailAndPassword(
-                          email: 'mocoronco@gmail.com',
-                          password: '77777778'
-                      );
+                      if (!authProvider.isAuthorized) {
+                        Provider.of<AuthProvider>(context, listen: false).signInWithEmailAndPassword(
+                            email: 'mocoronco@gmail.com',
+                            password: '77777778'
+                        );
+                      }
                     }
                 )
               ],
