@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:mind_tracker/src/business_logic/services/firestore_provider.dart';
+import 'package:mind_tracker/src/business_logic/services/cloud_firestore_provider.dart';
 import '../models/mood_assessment.dart';
 import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';
 
@@ -10,7 +10,7 @@ class MoodAssessmentsProvider extends ChangeNotifier {
   MoodAssessmentsProvider(this.moodAssessments);
 
   static Future<MoodAssessmentsProvider> loadDataAndCreateProvider() async {
-    final moodAssessments = await FirestoreProvider.getAllMoodAssessmentsOfAuthorizedUser();
+    final moodAssessments = await CloudFirestoreProvider.getAllMoodAssessmentsOfAuthorizedUser();
     return MoodAssessmentsProvider(moodAssessments);
     //return MoodAssessmentsProvider([]);
   }
@@ -35,7 +35,7 @@ class MoodAssessmentsProvider extends ChangeNotifier {
 
   void add(MoodAssessment moodAssessment) {
     moodAssessments.add(moodAssessment);
-    FirestoreProvider.addMoodAssessment(moodAssessment);
+    CloudFirestoreProvider.addMoodAssessment(moodAssessment);
     notifyListeners();
   }
 }
