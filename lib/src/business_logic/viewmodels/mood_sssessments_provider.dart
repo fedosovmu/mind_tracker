@@ -6,7 +6,7 @@ import 'package:mind_tracker/src/business_logic/services/date_time_and_string_ex
 
 
 class MoodAssessmentsProvider extends ChangeNotifier {
-  List<MoodAssessment> moodAssessments;
+  List<MoodAssessment> _moodAssessments;
 
   MoodAssessmentsProvider() {
     initializeListeners();
@@ -14,19 +14,20 @@ class MoodAssessmentsProvider extends ChangeNotifier {
 
   void initializeListeners() {
     FirebaseAuthProvider.authStateChanges.listen((event) async {
-      moodAssessments = await CloudFirestoreProvider.getAllMoodAssessmentsOfAuthorizedUser();
+      _moodAssessments = await CloudFirestoreProvider.getAllMoodAssessmentsOfAuthorizedUser();
+      notifyListeners();
     });
   }
 
   List<MoodAssessment> getMoodAssessmentsForDate (DateTime date) {
-    final List<MoodAssessment> moodAssessmentsForDate = moodAssessments.where(
+    final List<MoodAssessment> moodAssessmentsForDate = _moodAssessments.where(
             (moodAssessment) => moodAssessment.date == date.date).toList();
     moodAssessmentsForDate.sort();
     return moodAssessmentsForDate;
   }
 
   List<MoodAssessment> getMoodAssessmentForPeriod ({@required DateTime startDate, @required DateTime endDate}) {
-    final List<MoodAssessment> weekMoodAssessments = moodAssessments.where((moodAssessment) {
+    final List<MoodAssessment> weekMoodAssessments = _moodAssessments.where((moodAssessment) {
       final DateTime date = moodAssessment.date;
       final bool isAfterOrAtTheSameTime = date.isAfter(startDate) || date == startDate;
       final bool isBeforeOrAtTheSameTime = date.isBefore(endDate) || date == endDate;
@@ -37,7 +38,7 @@ class MoodAssessmentsProvider extends ChangeNotifier {
   }
 
   void add(MoodAssessment moodAssessment) {
-    moodAssessments.add(moodAssessment);
+    _moodAssessments.add(moodAssessment);
     CloudFirestoreProvider.addMoodAssessment(moodAssessment);
     notifyListeners();
   }
