@@ -7,8 +7,9 @@ class LoginInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autofocus: true,
       style: CustomTextStyles.basicH1Regular,
-      keyboardType: TextInputType.visiblePassword,
+      keyboardType: TextInputType.emailAddress,
       decoration: CustomInputDecoration(hintText: 'Почта'),
       validator: (String input) {
         if (input.isEmpty) {

@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> {
           pathToIcon: CustomIconPaths.settings,
           onPressed: () {
             print('Settings button pressed');
+            Navigator.of(context).pushNamed('/login');
           },
         ),
       ),

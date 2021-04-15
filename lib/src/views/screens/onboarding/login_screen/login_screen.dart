@@ -22,6 +22,7 @@ class LoginScreen extends StatelessWidget {
           pathToIcon: CustomIconPaths.back,
           onPressed: () {
             print('Back button pressed');
+            Navigator.pop(context);
           },
         ),
       ),
