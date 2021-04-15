@@ -8,31 +8,38 @@ import '../utils/metrics.dart';
 class CustomAppBar extends StatelessWidget implements ObstructingPreferredSizeWidget {
   final String title;
   final Widget leading;
+  final Widget rightLeading;
   static final _appBarHeight = dp(56);
   static const _appBarBackgroundColor = CustomColors.purpleDark;
   
-  CustomAppBar ({this.title, this.leading});
+  CustomAppBar ({this.title, this.leading, this.rightLeading});
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       bottom: false,
-      child: Container(
+      child: Material(
         color: _appBarBackgroundColor,
-        height: _appBarHeight,
-        width: double.infinity,
-        child: Row(
-          children: [
-            _buildLeading(),
-            Container(
-              alignment: Alignment.centerLeft,
-              color: _appBarBackgroundColor,
-              child: Text(
-                title,
-                style: CustomTextStyles.titleH1,
+        child: Container(
+          height: _appBarHeight,
+          width: double.infinity,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _buildLeading(),
+                  Text(
+                    title,
+                    style: CustomTextStyles.titleH1,
+                  )
+                ],
               ),
-            )
-          ],
+              if(rightLeading != null) _buildRightLeading()
+            ],
+          ),
         ),
       ),
     );
@@ -40,18 +47,22 @@ class CustomAppBar extends StatelessWidget implements ObstructingPreferredSizeWi
 
   Widget _buildLeading() {
     if (leading != null) {
-      return Material(
-        color: _appBarBackgroundColor,
-        child: Container(
-          width: dp(_appBarHeight),
-          height: dp(_appBarHeight),
-          alignment: Alignment.center,
-          child: leading,
-        ),
+      return Container(
+        width: _appBarHeight,
+        height: _appBarHeight,
+        alignment: Alignment.center,
+        child: leading,
       );
     } else {
       return SizedBox(width: dp(16));
     }
+  }
+
+  Widget _buildRightLeading() {
+    return Container(
+      margin: EdgeInsets.only(right: dp(20)),
+      child: rightLeading,
+    );
   }
 
   @override

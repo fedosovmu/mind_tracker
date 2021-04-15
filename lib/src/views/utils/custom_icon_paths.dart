@@ -20,6 +20,7 @@ class CustomIconPaths {
 
   static const edit = '$_pathToUiIcons/edit.png';
   static const comment = '$_pathToUiIcons/comment.png';
+  static const settings = '$_pathToUiIcons/settings.png';
 
   static const _pathToEventIcons = 'assets/icons/events';
   static const _eventNames = ['alarm', 'alcohol', 'angry', 'bed', 'bell', 'bicycle',
