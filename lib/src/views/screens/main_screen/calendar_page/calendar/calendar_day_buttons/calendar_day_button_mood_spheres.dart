@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
-import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_provider.dart';
+import 'package:mind_tracker/src/business_logic/viewmodels/mood_assessments_provider.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:provider/provider.dart';

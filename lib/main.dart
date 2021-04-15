@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/services/firebase_auth_provider.dart';
 import 'package:mind_tracker/src/business_logic/services/cloud_firestore_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/events_provider.dart';
-import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_provider.dart';
+import 'package:mind_tracker/src/business_logic/viewmodels/mood_assessments_provider.dart';
 import 'package:provider/provider.dart';
 import 'src/app.dart';
 

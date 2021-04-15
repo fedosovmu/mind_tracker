@@ -13,9 +13,13 @@ class MoodAssessmentsProvider extends ChangeNotifier {
   }
 
   void initializeListeners() {
-    FirebaseAuthProvider.authStateChanges.listen((event) async {
-      _moodAssessments = await CloudFirestoreProvider.getAllMoodAssessmentsOfAuthorizedUser();
+    FirebaseAuthProvider.authStateChanges.listen((uid) async {
+      _moodAssessments = [];
       notifyListeners();
+      if (uid != null) {
+        _moodAssessments = await CloudFirestoreProvider.getAllMoodAssessmentsOfAuthorizedUser();
+        notifyListeners();
+      }
     });
   }
 
@@ -38,8 +42,11 @@ class MoodAssessmentsProvider extends ChangeNotifier {
   }
 
   void add(MoodAssessment moodAssessment) {
-    _moodAssessments.add(moodAssessment);
-    CloudFirestoreProvider.addMoodAssessment(moodAssessment);
-    notifyListeners();
+    final uid = FirebaseAuthProvider.uid;
+    if (uid != null) {
+      _moodAssessments.add(moodAssessment);
+      CloudFirestoreProvider.addMoodAssessment(moodAssessment);
+      notifyListeners();
+    }
   }
 }

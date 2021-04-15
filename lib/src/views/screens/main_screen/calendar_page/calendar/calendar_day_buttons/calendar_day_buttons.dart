@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mind_tracker/src/business_logic/viewmodels/mood_sssessments_provider.dart';
+import 'package:mind_tracker/src/business_logic/viewmodels/mood_assessments_provider.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:provider/provider.dart';
 import 'calendar_day_button.dart';
