@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/views/utils/metrics.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_border_radius.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
+
+
+class CustomInputDecoration extends InputDecoration {
+  CustomInputDecoration ({@required String hintText}) :
+        super(
+          hintText: hintText,
+          filled: true,
+          fillColor: CustomColors.purpleSuperDark.withOpacity(0.32),
+          hintStyle: CustomTextStyles.basicH1Regular.copyWith(
+              color: CustomColors.purpleLight.withOpacity(0.64)
+          ),
+          enabledBorder: _CustomInputBorder(CustomColors.purpleLight.withOpacity(0.4)),
+          focusedBorder: _CustomInputBorder(CustomColors.main),
+          errorBorder: _CustomInputBorder(CustomColors.moods[3]),
+          focusedErrorBorder: _CustomInputBorder(CustomColors.moods[3]),
+          errorStyle: CustomTextStyles.caption.copyWith(
+              color: CustomColors.moods[3]
+          ),
+          focusColor: Colors.green,
+          hoverColor: Colors.yellow
+      );
+}
+
+class _CustomInputBorder extends OutlineInputBorder {
+  _CustomInputBorder (Color borderColor) : super(
+      borderRadius: CustomBorderRadius(dp(12)),
+      borderSide: BorderSide(
+          width: dp(1),
+          color: borderColor
+      )
+  );
+}

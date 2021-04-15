@@ -21,6 +21,7 @@ class StandardButton extends StatelessWidget {
           style: CustomTextStyles.buttonMedium,
         ),
         height: dp(56),
+        minWidth: double.infinity,
         color: CustomColors.main,
         shape: RoundedRectangleBorder(
           borderRadius: CustomBorderRadius(dp(16))
