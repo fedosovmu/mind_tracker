@@ -8,10 +8,50 @@ import 'package:mind_tracker/src/views/screens/onboarding/login_screen/widgets/l
 import 'package:mind_tracker/src/views/screens/onboarding/login_screen/widgets/password_input.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
 class LoginScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  //TODO: delete this function in prodaction
+  Widget _buildTestInformation() {
+    return Container(
+      //color: Colors.green,
+      //height: dp(56),
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Тестовая информация',
+            style: CustomTextStyles.titleH1.copyWith(
+              color: CustomColors.purpleMedium
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'User id: 123',
+                style: CustomTextStyles.basicH1Regular.copyWith(
+                    color: CustomColors.purpleMedium
+                ),
+              ),
+              TextButton(
+                child: Text('Выйти'),
+                onPressed: () {
+                  print('Exit button pressed');
+                }
+              )
+            ],
+          ),
+          SizedBox(height: dp(32))
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +72,7 @@ class LoginScreen extends StatelessWidget {
           key: _formKey,
           child: Column(
             children: [
+              _buildTestInformation(),
               LoginInput(),
               SizedBox(height: dp(16)),
               PasswordInput(),
