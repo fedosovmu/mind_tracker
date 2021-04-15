@@ -4,13 +4,10 @@ import 'package:flutter/widgets.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
 import 'package:mind_tracker/src/views/common_widgets/standard_button.dart';
-import 'package:mind_tracker/src/views/screens/login_screen/widgets/login_input.dart';
-import 'package:mind_tracker/src/views/screens/login_screen/widgets/password_input.dart';
+import 'package:mind_tracker/src/views/screens/onboarding/login_screen/widgets/login_input.dart';
+import 'package:mind_tracker/src/views/screens/onboarding/login_screen/widgets/password_input.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_border_radius.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
 class LoginScreen extends StatelessWidget {
