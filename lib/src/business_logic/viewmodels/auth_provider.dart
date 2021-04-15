@@ -1,0 +1,27 @@
+import 'package:flutter/widgets.dart';
+import 'package:mind_tracker/src/business_logic/services/firebase_auth_provider.dart';
+
+
+class AuthProvider extends ChangeNotifier {
+  String get uid => FirebaseAuthProvider.uid;
+  bool get isAuthorized => uid != null;
+
+  AuthProvider() {
+    initializeListeners();
+  }
+
+  void initializeListeners() {
+    FirebaseAuthProvider.authStateChanges.listen((uid) {
+      notifyListeners();
+      print('AUTH PROVIDER EVENT');
+    });
+  }
+
+  void signInWithEmailAndPassword ({@required String email, @required String password}) {
+    FirebaseAuthProvider.signInWithEmailAndPassword(email: email, password: password);
+  }
+
+  void signOut() {
+    FirebaseAuthProvider.signOut();
+  }
+}

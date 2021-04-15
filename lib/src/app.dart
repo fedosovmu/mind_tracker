@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mind_tracker/src/business_logic/viewmodels/auth_provider.dart';
 import 'package:mind_tracker/src/views/screens/onboarding/login_screen/login_screen.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/comment_screen/comment_screen.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/select_events_screen/select_events_screen.dart';
+import 'package:provider/provider.dart';
 import 'views/utils/theme/app_theme.dart';
 import 'views/screens/onboarding/onboarding_screen.dart';
 import 'views/screens/mood_assessment/mood_assessment_screen/mood_assessment_screen.dart';
@@ -54,14 +56,17 @@ class MindTrackerApp extends StatelessWidget {
             break;
           default:
             screenToGo = MainScreen();
-            //screenToGo = OnboardingScreen();
-            //screenToGo = LoginScreen();
         }
-        
+
         return MaterialPageRoute(
           settings: settings,
           builder: (context) {
-            return screenToGo;
+            return Consumer<AuthProvider>(builder: (context, authProvider, child) {
+              if (!authProvider.isAuthorized) {
+                return LoginScreen();
+              }
+              return screenToGo;
+            });
         });
       },
     );
