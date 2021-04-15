@@ -10,6 +10,15 @@ class PasswordInput extends StatelessWidget {
       style: CustomTextStyles.basicH1Regular,
       obscureText: true,
       decoration: CustomInputDecoration(hintText: 'Пароль'),
+      validator: (String input) {
+        if (input.isEmpty) {
+          return 'Введите пароль';
+        }
+        if (input.length < 8) {
+          return 'Пароль должен быть не меньше 8 символов';
+        }
+        return null;
+      },
     );
   }
 }
