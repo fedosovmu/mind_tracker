@@ -21,8 +21,6 @@ class CustomInputDecoration extends InputDecoration {
           errorStyle: CustomTextStyles.caption.copyWith(
               color: CustomColors.moods[3]
           ),
-          focusColor: Colors.green,
-          hoverColor: Colors.yellow
       );
 }
 
