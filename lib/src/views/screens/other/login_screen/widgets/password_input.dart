@@ -4,9 +4,14 @@ import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
 class PasswordInput extends StatelessWidget {
+  final TextEditingController controller;
+
+  PasswordInput(this.controller);
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       style: CustomTextStyles.basicH1Regular,
       obscureText: true,
       decoration: CustomInputDecoration(hintText: 'Пароль'),

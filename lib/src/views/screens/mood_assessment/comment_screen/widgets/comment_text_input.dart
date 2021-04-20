@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/glow_disabler.dart';
-import 'package:mind_tracker/src/views/utils/metrics.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_input_decoration.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 

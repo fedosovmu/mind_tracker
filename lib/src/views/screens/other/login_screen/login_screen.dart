@@ -13,6 +13,8 @@ import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final loginTextEditingController = TextEditingController();
+  final passwordTextEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +36,10 @@ class LoginScreen extends StatelessWidget {
             key: _formKey,
             child: Column(
               children: [
-                LoginInput(),
+                SizedBox(height: dp(32)),
+                LoginInput(loginTextEditingController),
                 SizedBox(height: dp(16)),
-                PasswordInput(),
+                PasswordInput(passwordTextEditingController),
                 SizedBox(height: dp(32)),
                 StandardButton(
                     title: 'Войти',
@@ -46,8 +49,8 @@ class LoginScreen extends StatelessWidget {
                       print('Validation $isValid');
                       if (!authProvider.isAuthorized) {
                         var authErrorCode = await Provider.of<AuthProvider>(context, listen: false).signInWithEmailAndPassword(
-                            email: 'mocoronco@gmail.com',
-                            password: '77777778'
+                            email: loginTextEditingController.text,
+                            password: passwordTextEditingController.text
                         );
                         if (authErrorCode == null) {
                           Navigator.of(context).pushNamedAndRemoveUntil('/main', (route) => false);
