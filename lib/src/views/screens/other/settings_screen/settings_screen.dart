@@ -20,9 +20,14 @@ class SettingsScreen extends StatelessWidget {
           },
         ),
       ),
-      body: Container(
+      body: Padding(
         padding: EdgeInsets.symmetric(horizontal: dp(16)),
-        child: LoginOutPanel(),
+        child: Column(
+          children: [
+            SizedBox(height: dp(16)),
+            LoginOutPanel(),
+          ],
+        ),
       ),
     );
   }

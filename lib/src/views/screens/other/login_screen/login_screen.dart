@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
             },
           ) : null,
         ),
-        body: Container(
+        body: Padding(
           padding: EdgeInsets.symmetric(horizontal: dp(16)),
           child: Form(
             key: _formKey,
