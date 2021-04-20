@@ -4,6 +4,7 @@ import 'package:mind_tracker/src/business_logic/viewmodels/auth_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
 import 'package:mind_tracker/src/views/common_widgets/standard_button.dart';
+import 'package:mind_tracker/src/views/screens/other/login_screen/widgets/custom_text_button.dart';
 import 'package:mind_tracker/src/views/screens/other/login_screen/widgets/login_input.dart';
 import 'package:mind_tracker/src/views/screens/other/login_screen/widgets/password_input.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
@@ -56,6 +57,14 @@ class LoginScreen extends StatelessWidget {
                           Navigator.of(context).pushNamedAndRemoveUntil('/main', (route) => false);
                         }
                       }
+                    }
+                ),
+                SizedBox(height: dp(16)),
+                CustomTextButton(
+                    title: 'Регистрация',
+                    onPressed: () {
+                      print('Register button pressed');
+                      Navigator.of(context).pushNamed('/register');
                     }
                 )
               ],

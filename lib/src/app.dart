@@ -4,6 +4,7 @@ import 'package:mind_tracker/src/business_logic/viewmodels/auth_provider.dart';
 import 'package:mind_tracker/src/views/screens/other/login_screen/login_screen.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/comment_screen/comment_screen.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/select_events_screen/select_events_screen.dart';
+import 'package:mind_tracker/src/views/screens/other/register_screen/register_screen.dart';
 import 'package:mind_tracker/src/views/screens/other/settings_screen/settings_screen.dart';
 import 'package:provider/provider.dart';
 import 'views/utils/theme/app_theme.dart';
@@ -52,11 +53,14 @@ class MindTrackerApp extends StatelessWidget {
           case '/comment':
             screenToGo = CommentScreen(settings.arguments);
             break;
+          case '/settings':
+            screenToGo = SettingsScreen();
+            break;
           case '/login':
             screenToGo = LoginScreen();
             break;
-          case '/settings':
-            screenToGo = SettingsScreen();
+          case '/register' :
+            screenToGo = RegisterScreen();
             break;
           default:
             screenToGo = Consumer<AuthProvider>(
