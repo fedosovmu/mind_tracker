@@ -17,8 +17,8 @@ class AuthProvider extends ChangeNotifier {
     });
   }
 
-  void signInWithEmailAndPassword ({@required String email, @required String password}) {
-    FirebaseAuthProvider.signInWithEmailAndPassword(email: email, password: password);
+  Future<String> signInWithEmailAndPassword ({@required String email, @required String password}) async {
+    return FirebaseAuthProvider.signInWithEmailAndPassword(email: email, password: password);
   }
 
   void signOut() {

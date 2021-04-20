@@ -37,8 +37,9 @@ class FirebaseAuthProvider {
       } else if (e.code == 'wrong-password') {
         print('[ERROR] Wrong password provided for that user.');
       }
-      return null;
+      return e.code;
     }
+    return null;
   }
 
   static Future<void> signOut() {
