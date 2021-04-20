@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:941261881702:android:0b755aac2426559ade88a7",
         "android_client_info": {
-          "package_name": "com.example.mind_tracker"
+          "package_name": "com.fedosov.mind_tracker"
         }
       },
       "oauth_client": [

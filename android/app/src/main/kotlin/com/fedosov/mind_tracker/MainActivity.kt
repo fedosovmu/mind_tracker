@@ -1,4 +1,4 @@
-package com.example.mind_tracker
+package com.fedosov.mind_tracker
 
 import io.flutter.embedding.android.FlutterActivity
 
