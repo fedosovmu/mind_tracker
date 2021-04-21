@@ -17,7 +17,7 @@ class LoginOutPanel extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Выход из аккаунта',
+                  'Аккаунт',
                   style: CustomTextStyles.titleH1.copyWith(
                       color: CustomColors.purpleMedium
                   ),
@@ -26,8 +26,8 @@ class LoginOutPanel extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                        'User id: ${authProvider.uid}',
-                        style: CustomTextStyles.caption.copyWith(
+                        '${authProvider.email}',
+                        style: CustomTextStyles.basic.copyWith(
                             color: CustomColors.purpleLight
                         )
                     ),

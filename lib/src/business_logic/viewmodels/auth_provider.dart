@@ -5,6 +5,7 @@ import 'package:mind_tracker/src/business_logic/services/firebase_auth_provider.
 class AuthProvider extends ChangeNotifier {
   String get uid => FirebaseAuthProvider.uid;
   bool get isAuthorized => uid != null;
+  String get email => FirebaseAuthProvider.email;
 
   AuthProvider() {
     initializeListeners();

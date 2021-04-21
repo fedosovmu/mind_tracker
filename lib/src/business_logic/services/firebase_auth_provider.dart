@@ -5,12 +5,15 @@ import 'package:flutter/foundation.dart';
 class FirebaseAuthProvider {
   FirebaseAuthProvider._();
 
+  static User _user;
   static String uid;
   static Stream<String> authStateChanges;
+  static String get email => _user.email;
 
   static void initializeListeners() {
     authStateChanges = FirebaseAuth.instance.authStateChanges().map((user) {
       print('=== Auth State Changed: ${user != null ? user.uid : null}');
+      _user = user;
       if (user != null) {
         uid = user.uid;
       } else {
