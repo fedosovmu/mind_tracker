@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
+import 'package:mind_tracker/src/views/common_widgets/login_input.dart';
+import 'package:mind_tracker/src/views/common_widgets/password_input.dart';
+import 'package:mind_tracker/src/views/common_widgets/standard_button.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 
 
 class RegisterScreen extends StatelessWidget {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final loginTextEditingController = TextEditingController();
+  final passwordTextEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,11 +28,25 @@ class RegisterScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: dp(16)),
-        child: Container(
-          width: dp(100),
-          color: Colors.red,
-          height: dp(100),
-        ),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              SizedBox(height: dp(32)),
+              LoginInput(loginTextEditingController),
+              SizedBox(height: dp(16)),
+              PasswordInput(passwordTextEditingController),
+              SizedBox(height: dp(32)),
+              StandardButton(
+                  title: 'Зарегистрироваться',
+                  onPressed: () async {
+                    print('Register button pressed');
+                    bool isValid = _formKey.currentState.validate();
+                  }
+              )
+            ],
+          ),
+        )
       ),
     );
   }
