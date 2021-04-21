@@ -20,11 +20,6 @@ class FirebaseAuthProvider {
     }).asBroadcastStream();
   }
 
-  static Future<String> signInAnonymously() async {
-    final userCredential = await FirebaseAuth.instance.signInAnonymously();
-    print('Sign In Anonymously: ${userCredential.user.uid}');
-  }
-
   static Future<String> signInWithEmailAndPassword({@required String email, @required String password}) async {
     try {
       final userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
