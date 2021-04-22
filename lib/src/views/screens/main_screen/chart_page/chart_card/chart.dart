@@ -8,7 +8,6 @@ import 'dart:ui' as ui;
 import 'package:provider/provider.dart';
 import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';
 import 'package:flutter/foundation.dart';
-import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 
 
 class Chart extends StatelessWidget {
@@ -16,8 +15,6 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DateTime today = DateTime.now().date;
-    final DateTime weekAgo = today.subtract(Duration(days: 7));
     return Center(
       child: Container(
         height: _height,
@@ -25,11 +22,8 @@ class Chart extends StatelessWidget {
         child: Consumer<MoodAssessmentsProvider> (
           builder: (context, moodAssessmentsProvider, child) {
             return CustomPaint(
-              painter: MoodChartPainter(
-                  moodAssessmentsForWeek: moodAssessmentsProvider.getMoodAssessmentForPeriod(
-                      startDate: weekAgo,
-                      endDate: today
-                  )
+              painter: _MoodChartPainter(
+                  normalizedPoints: [_NormalizedPoint(1, 0), _NormalizedPoint(6, 0.5), _NormalizedPoint(4, 1)]
               ),
             );
           }
@@ -39,19 +33,16 @@ class Chart extends StatelessWidget {
   }
 }
 
-class MoodChartPainter extends CustomPainter {
-  final List<MoodAssessment> moodAssessmentsForWeek;
 
-  MoodChartPainter({@required this.moodAssessmentsForWeek});
+class _MoodChartPainter extends CustomPainter {
+  final List<_NormalizedPoint> normalizedPoints;
+
+  _MoodChartPainter({@required this.normalizedPoints});
 
   @override
   void paint(Canvas canvas, Size size) {
     _drawHorizontalLines(canvas, size);
     _drawMoodChart(canvas, size);
-  }
-
-  double _getMoodY(Size size, mood) {
-    return (size.height / 6) * (7 - mood);
   }
 
   void _drawHorizontalLines (Canvas canvas, Size size) {
@@ -60,65 +51,18 @@ class MoodChartPainter extends CustomPainter {
       ..strokeWidth = dp(1);
 
     final verticalInterval = (size.height) / 6;
-    for (int mood = 1; mood <= 7; mood++) {
-      final y = _getMoodY(size, mood);
+    for (int i = 0; i < 7; i++) {
+      final y = verticalInterval * i;
       final p1 = Offset(0, y);
       final p2 = Offset(size.width, y);
       canvas.drawLine(p1, p2, horizontalLinesPaint);
     }
   }
 
-  double _getDateCenterX(Size size, int dateIndex) {
-    final double dateInterval = size.width / 7;
-    return dateInterval * (dateIndex + 0.5);
-  }
-
-  List<double> _getDateXPoints(Size size, int dateIndex, int pointsCount) {
-    final double dateInterval = size.width / 7;
-    final double dateCenterX = _getDateCenterX(size, dateIndex);
-    final List<double> points = List.generate(pointsCount, (index) {
-      final double distanceBetweenPoints = dateInterval / pointsCount;
-      return (dateCenterX - dateInterval / 2) + (distanceBetweenPoints * (0.5 + index));
-    });
-    return points;
-  }
-
-  List<Offset> _getDatePoints(Size size, int dateIndex) {
-    final DateTime today = DateTime.now().date;
-    final DateTime date = today.subtract(Duration(days: (DateTime.daysPerWeek - 1) - (dateIndex)));
-    final List<MoodAssessment> moodAssessmentsForDay = moodAssessmentsForWeek.where(
-            (moodAssessment) => moodAssessment.date == date).toList();
-
-    // TODO: delete this print
-    //print('MOOD CHART DATE: ${date.toStringDate()} ${moodAssessmentsForDay.map(
-    //        (e) => '${e.mood} ${e.partOfDay.toShortString()}')}');
-
-    if (moodAssessmentsForDay.isNotEmpty) {
-      final moodAssessmentsForDayGroupedByPartOfDay = groupBy(moodAssessmentsForDay, (MoodAssessment moodAssessment) {
-        return moodAssessment.partOfDay;
-      });
-
-      final List<double> averageMoodForAllExistingPartOfDays = [];
-      moodAssessmentsForDayGroupedByPartOfDay.forEach((partOfDay, moodAssessmentsForPartOfDay) {
-        int moodSum = 0;
-        moodAssessmentsForPartOfDay.forEach((moodAssessment) { moodSum += moodAssessment.mood; });
-        final double averageMoodForPartOfDay = moodSum / moodAssessmentsForPartOfDay.length;
-        averageMoodForAllExistingPartOfDays.add(averageMoodForPartOfDay);
-      });
-
-      final List<Offset> points = [];
-      final List<double> xPoints = _getDateXPoints(size, dateIndex, averageMoodForAllExistingPartOfDays.length);
-      for (int i = 0; i < averageMoodForAllExistingPartOfDays.length; i++) {
-        final double x = xPoints[i];
-        final averageMoodForPartOfDay = averageMoodForAllExistingPartOfDays[i];
-        final double y = _getMoodY(size, averageMoodForPartOfDay);
-        final Offset p = Offset(x, y);
-        points.add(p);
-      }
-      return points;
-    } else {
-      return const [];
-    }
+  Offset _getChartPoint(Size size, _NormalizedPoint normalizedPoint) {
+    final x = size.width * normalizedPoint.normalizedPosition;
+    final y = (size.height / 6) * (7 - normalizedPoint.mood);
+    return Offset(x, y);
   }
 
   void _drawMoodChart (Canvas canvas, Size size) {
@@ -139,9 +83,9 @@ class MoodChartPainter extends CustomPainter {
       ..shader = gradientShader;
 
     List<Offset> curvePoints = [];
-    for (int dateIndex = 0; dateIndex < DateTime.daysPerWeek; dateIndex++) {
-      final List<Offset> datePoints = _getDatePoints(size, dateIndex);
-      curvePoints.addAll(datePoints);
+    for (int i = 0; i < normalizedPoints.length; i++) {
+      final chartPoint = _getChartPoint(size, normalizedPoints[i]);
+      curvePoints.add(chartPoint);
     }
 
     final path = Path();
@@ -160,7 +104,49 @@ class MoodChartPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant MoodChartPainter old) {
-    return !listEquals(old.moodAssessmentsForWeek, moodAssessmentsForWeek);
+  bool shouldRepaint(covariant _MoodChartPainter old) {
+    return !listEquals(old.normalizedPoints, normalizedPoints);
   }
+}
+
+
+
+
+class ChartPointPositionsCalculator {
+  final MoodAssessmentsProvider moodAssessmentsProvider;
+
+  ChartPointPositionsCalculator(this.moodAssessmentsProvider);
+
+  List<double> getAverageMoodForDay(List<MoodAssessment> moodAssessmentsForDay, int averageValuesCount) {
+    return [moodAssessmentsForDay[0].mood as double]; //TODO: implement this function
+  }
+
+
+  List<_NormalizedPoint> getChartPointsForWeek() {
+    final today = DateTime.now().date;
+    final moodAssessmentsForWeek = moodAssessmentsProvider.getMoodAssessmentForPeriod(
+        startDate: today.subtract(Duration(days: DateTime.daysPerWeek)),
+        endDate: today
+    );
+    //const double intervalSize = 1 / DateTime.daysPerWeek;
+    final List<_NormalizedPoint> points = [];
+    for (var i = 0; i < DateTime.daysPerWeek; i++) {
+      final date = today.subtract(Duration(days: DateTime.daysPerWeek - 1 - i));
+      final moodAssessmentsForDay = moodAssessmentsForWeek.where(
+              (moodAssessment) => moodAssessment.date == date);
+      final averageMoodForDay = getAverageMoodForDay(moodAssessmentsForDay, 4);
+    }
+  }
+
+  List<_NormalizedPoint> getChartPointsForMonth() {
+
+  }
+}
+
+
+class _NormalizedPoint {
+  final double mood;
+  final double normalizedPosition;
+
+  _NormalizedPoint(this.mood, this.normalizedPosition);
 }
