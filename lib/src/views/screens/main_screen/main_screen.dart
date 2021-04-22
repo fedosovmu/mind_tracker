@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mind_tracker/src/views/screens/main_screen/mood_chart_page/mood_chart_page.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/chart_page/chart_page.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/widgets/custom_bottom_navigation_bar.dart';
-import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import 'home_page/home_page.dart';
-import 'package:mind_tracker/src/views/screens/main_screen/mood_chart_page/mood_chart_page.dart';
 import 'calendar_page/calendar_page.dart';
 
 
@@ -30,7 +28,7 @@ class _MainScreenState extends State<MainScreen> {
         return HomePage();
         break;
       case 1:
-        return MoodChartPage();
+        return ChartPage();
         break;
       case 2:
         return Container(

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
-import 'package:mind_tracker/src/views/screens/main_screen/mood_chart_page/mood_chart_card/mood_chart_card.dart';
-import 'package:mind_tracker/src/views/screens/main_screen/mood_chart_page/period_buttons/period_toggle_buttons.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/chart_page/mood_chart_card/mood_chart_card.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/chart_page/period_buttons/period_toggle_buttons.dart';
 
 
-class MoodChartPage extends StatefulWidget {
+class ChartPage extends StatefulWidget {
 
   @override
-  _MoodChartPageState createState() => _MoodChartPageState();
+  _ChartPageState createState() => _ChartPageState();
 }
 
-class _MoodChartPageState extends State<MoodChartPage> with TickerProviderStateMixin {
+class _ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
   var _tabController;
 
   @override
@@ -27,7 +27,7 @@ class _MoodChartPageState extends State<MoodChartPage> with TickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'График настроения',
+        title: 'График',
       ),
       body: Column(
         children: [
