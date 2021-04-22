@@ -4,11 +4,11 @@ import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
-class MoodChartPeriodText extends StatelessWidget {
+class ChartPeriodText extends StatelessWidget {
   final DateTime startDate;
   final DateTime endDate;
 
-  MoodChartPeriodText({@required this.startDate, @required this.endDate});
+  ChartPeriodText({@required this.startDate, @required this.endDate});
 
   @override
   Widget build(BuildContext context) {

@@ -11,7 +11,7 @@ import 'package:flutter/foundation.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 
 
-class MoodChart extends StatelessWidget {
+class Chart extends StatelessWidget {
   static final double _height = dp(200);
 
   @override

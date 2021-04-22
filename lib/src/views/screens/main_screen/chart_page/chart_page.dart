@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
-import 'package:mind_tracker/src/views/screens/main_screen/chart_page/mood_chart_card/mood_chart_card.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/chart_page/chart_card/chart_card.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/chart_page/period_buttons/period_toggle_buttons.dart';
 
 
@@ -32,7 +32,7 @@ class _ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
       body: Column(
         children: [
           PeriodToggleButtons(),
-          MoodChartCard(),
+          ChartCard(),
         ],
       )
     );

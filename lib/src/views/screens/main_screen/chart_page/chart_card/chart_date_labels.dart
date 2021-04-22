@@ -5,7 +5,7 @@ import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/content.dart';
 
 
-class MoodChartDateLabels extends StatelessWidget {
+class ChartDateLabels extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
