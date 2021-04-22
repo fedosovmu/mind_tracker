@@ -8,26 +8,30 @@ import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 class PeriodButton extends StatelessWidget {
   final String title;
   final bool isPressed;
+  final Function onPressed;
 
-  PeriodButton({this.title, this.isPressed = false});
+  PeriodButton({@required this.title, this.isPressed = false, @required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: dp(93),
-        height: dp(50),
-        child: Center(
-          child: Text(
-            title,
-            style: CustomTextStyles.basic.copyWith(
-                color: isPressed ? CustomColors.purpleWhite : CustomColors.purpleLight
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+          width: dp(76),
+          height: dp(32),
+          child: Center(
+            child: Text(
+              title,
+              style: CustomTextStyles.caption.copyWith(
+                  color: CustomColors.purpleLight
+              ),
             ),
           ),
-        ),
-        decoration: BoxDecoration(
-          color: isPressed ? CustomColors.purpleMegaDark : CustomColors.purpleDark,
-          borderRadius: CustomBorderRadius(dp(16))
-        ),
+          decoration: BoxDecoration(
+            color: isPressed ? CustomColors.main : CustomColors.purpleSuperDark,
+            borderRadius: CustomBorderRadius(dp(12))
+          ),
+      ),
     );
   }
 }
