@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/business_logic/viewmodels/auth_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
 import 'package:mind_tracker/src/views/common_widgets/login_input.dart';
@@ -6,6 +7,7 @@ import 'package:mind_tracker/src/views/common_widgets/password_input.dart';
 import 'package:mind_tracker/src/views/common_widgets/standard_button.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
+import 'package:provider/provider.dart';
 
 
 class RegisterScreen extends StatelessWidget {
@@ -42,6 +44,15 @@ class RegisterScreen extends StatelessWidget {
                   onPressed: () async {
                     print('Register button pressed');
                     bool isValid = _formKey.currentState.validate();
+                    if (isValid) {
+                      var errorCode = await Provider.of<AuthProvider>(context, listen: false).createUserWithEmailAndPassword(
+                          email: loginTextEditingController.text,
+                          password: passwordTextEditingController.text,
+                      );
+                      if (errorCode == null) {
+                        Navigator.of(context).pushNamedAndRemoveUntil('/main', (route) => false);
+                      }
+                    }
                   }
               )
             ],

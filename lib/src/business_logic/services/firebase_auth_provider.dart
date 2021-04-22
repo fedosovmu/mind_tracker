@@ -30,11 +30,20 @@ class FirebaseAuthProvider {
           password: password
       );
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('[ERROR] No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('[ERROR] Wrong password provided for that user.');
-      }
+      print('[ERROR] ${e.code}');
+      return e.code;
+    }
+    return null;
+  }
+
+  static Future<String> createUserWithEmailAndPassword ({@required String email, @required String password}) async {
+    try {
+      final userCredential = FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email,
+          password: password
+      );
+    } on FirebaseAuthException catch (e) {
+      print('[ERROR] ${e.code}');
       return e.code;
     }
     return null;
