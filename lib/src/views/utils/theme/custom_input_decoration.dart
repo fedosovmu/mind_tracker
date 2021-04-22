@@ -14,7 +14,7 @@ class CustomInputDecoration extends InputDecoration {
           hintStyle: CustomTextStyles.basicH1Regular.copyWith(
               color: CustomColors.purpleLight.withOpacity(0.64)
           ),
-          enabledBorder: _CustomInputBorder(CustomColors.purpleLight.withOpacity(0.4)),
+          enabledBorder: _CustomInputBorder(CustomColors.purpleMegaDark.withOpacity(0.4)),
           focusedBorder: _CustomInputBorder(CustomColors.main),
           errorBorder: _CustomInputBorder(CustomColors.moods[3]),
           focusedErrorBorder: _CustomInputBorder(CustomColors.moods[3]),
@@ -26,7 +26,7 @@ class CustomInputDecoration extends InputDecoration {
 
 class _CustomInputBorder extends OutlineInputBorder {
   _CustomInputBorder (Color borderColor) : super(
-      borderRadius: CustomBorderRadius(dp(12)),
+      borderRadius: CustomBorderRadius(dp(16)),
       borderSide: BorderSide(
           width: dp(1),
           color: borderColor
