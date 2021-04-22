@@ -16,7 +16,7 @@ class ChartCard extends StatelessWidget {
       margin: EdgeInsets.only(top: dp(16)),
       width: dp(330),
       height: dp(320),
-      padding: EdgeInsets.symmetric(vertical: dp(16)),
+      padding: EdgeInsets.all(dp(16)),
       decoration: BoxDecoration(
         color: CustomColors.purpleSuperDark,
         borderRadius: CustomBorderRadius(dp(16))
