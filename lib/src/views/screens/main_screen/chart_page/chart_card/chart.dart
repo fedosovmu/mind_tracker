@@ -15,29 +15,36 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        height: _height,
-        width: double.infinity,
-        child: Consumer<MoodAssessmentsProvider> (
-          builder: (context, moodAssessmentsProvider, child) {
-            return CustomPaint(
-              painter: _MoodChartPainter(
-                  normalizedPoints: [_NormalizedPoint(1, 0), _NormalizedPoint(6, 0.5), _NormalizedPoint(4, 1)]
-              ),
-            );
-          }
-        )
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: dp(16)),
+      child: Center(
+        child: Container(
+          height: _height,
+          width: double.infinity,
+          child: Consumer<MoodAssessmentsProvider> (
+            builder: (context, moodAssessmentsProvider, child) {
+              return CustomPaint(
+                painter: _ChartPainter(
+                    normalizedPoints: List.generate(28, (index) {
+                      final int mood = (index / 4 + 0.5).round() % 4 + 2;
+                      final pos = 1 / 27 * index;
+                      return _NormalizedPoint(mood * 1.0, pos);
+                    })
+                ),
+              );
+            }
+          )
+        ),
       ),
     );
   }
 }
 
 
-class _MoodChartPainter extends CustomPainter {
+class _ChartPainter extends CustomPainter {
   final List<_NormalizedPoint> normalizedPoints;
 
-  _MoodChartPainter({@required this.normalizedPoints});
+  _ChartPainter({@required this.normalizedPoints});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -104,7 +111,7 @@ class _MoodChartPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant _MoodChartPainter old) {
+  bool shouldRepaint(covariant _ChartPainter old) {
     return !listEquals(old.normalizedPoints, normalizedPoints);
   }
 }
