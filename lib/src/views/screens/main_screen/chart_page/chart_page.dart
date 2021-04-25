@@ -12,7 +12,9 @@ class ChartPage extends StatefulWidget {
 }
 
 class _ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
-  static const List<int> periods = [7, 14, 28, 40];
+  static const int _oneWeek = DateTime.daysPerWeek;
+  static const int _twoWeek = DateTime.daysPerWeek * 2;
+  static const List<int> periods = [_oneWeek, _twoWeek, 28, 40];
   int _selectedIndex = 0;
 
   @override

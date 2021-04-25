@@ -17,7 +17,7 @@ class ChartDateLabels extends StatelessWidget {
     if ((period + 1) % 7 == 0) {
       const int stepsCount = 6;
       final int step = (period + 1) ~/ stepsCount;
-      return List.generate(stepsCount + 1, (i) => startDate.add(Duration(days: step * (i))));
+      return List.generate(7, (i) => startDate.add(Duration(days: i)));
     }
     return [
       startDate,
@@ -34,9 +34,6 @@ class ChartDateLabels extends StatelessWidget {
           children: _getDates().map((date) {
             return ChartDateLabel(date: date);
           }).toList()
-          //List.generate(DateTime.daysPerWeek, (index) {
-          //  final day = DateTime.now().subtract(Duration(days: DateTime.daysPerWeek - (index + 1)));
-          //  return ChartDateLabel(day: day.day, weekday: day.weekday);
       ),
     );
   }
