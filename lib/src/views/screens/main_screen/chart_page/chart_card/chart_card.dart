@@ -36,7 +36,10 @@ class ChartCard extends StatelessWidget {
               endDate: endDate,
             )
           ),
-          ChartDateLabels()
+          ChartDateLabels(
+            startDate: startDate,
+            endDate: endDate,
+          )
         ],
       ),
     );

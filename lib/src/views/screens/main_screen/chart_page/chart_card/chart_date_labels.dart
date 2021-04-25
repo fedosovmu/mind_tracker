@@ -6,27 +6,47 @@ import 'package:mind_tracker/src/views/utils/content.dart';
 
 
 class ChartDateLabels extends StatelessWidget {
+  final DateTime startDate;
+  final DateTime endDate;
+
+  ChartDateLabels({@required this.startDate, @required this.endDate});
+
+  List<DateTime> _getDates() {
+    final int period = endDate.difference(startDate).inDays;
+    print('=== $startDate $endDate $period');
+    if (period % 7 == 0) {
+      const periodsCount = 7;
+      final step = (period / periodsCount).round();
+      return List.generate(periodsCount, (i) => startDate.add(Duration(days: step * i)));
+    }
+    return [
+      startDate,
+      endDate
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: dp(16)),
       child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: List.generate(DateTime.daysPerWeek, (index) {
-            final day = DateTime.now().subtract(Duration(days: DateTime.daysPerWeek - (index + 1)));
-            return ChartDateLable(day: day.day, weekday: day.weekday);
-          })
+          children: _getDates().map((date) {
+            return ChartDateLabel(date: date);
+          }).toList()
+          //List.generate(DateTime.daysPerWeek, (index) {
+          //  final day = DateTime.now().subtract(Duration(days: DateTime.daysPerWeek - (index + 1)));
+          //  return ChartDateLabel(day: day.day, weekday: day.weekday);
       ),
     );
   }
 }
 
 
-class ChartDateLable extends StatelessWidget {
-  final int day;
-  final int weekday;
+class ChartDateLabel extends StatelessWidget {
+  final DateTime date;
 
-  ChartDateLable({@required this.day, @required this.weekday});
+  ChartDateLabel({@required this.date});
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +54,13 @@ class ChartDateLable extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          '${day}',
+          '${date.day}',
           style: CustomTextStyles.basic.copyWith(
               color: CustomColors.purpleLight
           ),
         ),
         Text(
-          '${Content.weekDayNames[weekday]}',
+          '${Content.weekDayNames[date.weekday]}',
           style: CustomTextStyles.basic.copyWith(
               color: CustomColors.purpleMedium
           ),
