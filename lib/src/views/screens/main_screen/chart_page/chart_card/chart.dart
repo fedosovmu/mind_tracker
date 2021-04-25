@@ -26,7 +26,7 @@ class Chart extends StatelessWidget {
               final chartPointPositionsCalculator = ChartPointPositionsCalculator(moodAssessmentsProvider);
               return CustomPaint(
                 painter: _ChartPainter(
-                    normalizedPoints: chartPointPositionsCalculator.getChartPointsForWeek()
+                    normalizedPoints: chartPointPositionsCalculator.getChartPointsForPeriod(28)
                 ),
               );
             }
@@ -154,14 +154,14 @@ class ChartPointPositionsCalculator {
   }
 
 
-  List<_NormalizedPoint> getChartPointsForWeek() {
+  List<_NormalizedPoint> getChartPointsForPeriod(int daysCount) {
     final today = DateTime.now().date;
     final List<_NormalizedPoint> pointsForWeek = [];
-    final daysCount = DateTime.daysPerWeek;
     for (var i = 0; i < daysCount; i++) {
       final date = today.subtract(Duration(days: daysCount - 1 - i));
       final moodAssessmentsForDay = moodAssessmentsProvider.getMoodAssessmentsForDate(date).toList();
-      final averageMoodsForDay = _getAverageMoods(moodAssessmentsForDay, i == (daysCount - 1) ? 1 : 4);
+      final int pointsCountPerDay = (28 / daysCount).round();
+      final averageMoodsForDay = _getAverageMoods(moodAssessmentsForDay, i == (daysCount - 1) ? 1 : pointsCountPerDay);
       for (var j = 0; j < averageMoodsForDay.length; j++) {
         final mood = averageMoodsForDay[j];
         final double intervalSize = 1 / (daysCount - 1);
@@ -171,10 +171,6 @@ class ChartPointPositionsCalculator {
       }
     }
     return pointsForWeek;
-  }
-
-  List<_NormalizedPoint> getChartPointsForMonth() {
-    //TODO: implement this function
   }
 }
 
