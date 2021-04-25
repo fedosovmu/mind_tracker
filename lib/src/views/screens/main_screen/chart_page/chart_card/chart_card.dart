@@ -31,7 +31,10 @@ class ChartCard extends StatelessWidget {
             endDate: endDate,
           ),
           Expanded(
-            child: Chart()
+            child: Chart(
+              startDate: startDate,
+              endDate: endDate,
+            )
           ),
           ChartDateLabels()
         ],

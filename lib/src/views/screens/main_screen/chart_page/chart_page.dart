@@ -12,6 +12,9 @@ class ChartPage extends StatefulWidget {
 }
 
 class _ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
+  static const List<int> periods = [7, 14, 28, 40];
+  int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     final today = DateTime.now().date;
@@ -21,9 +24,15 @@ class _ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
       ),
       body: Column(
         children: [
-          PeriodToggleButtons(),
+          PeriodToggleButtons(
+            onSelectedToggleButtonChanged: (index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+          ),
           ChartCard(
-            startDate: today.subtract(Duration(days: 7)),
+            startDate: today.subtract(Duration(days: periods[_selectedIndex])),
             endDate: today,
           ),
         ],

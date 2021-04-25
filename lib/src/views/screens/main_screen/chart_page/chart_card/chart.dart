@@ -12,6 +12,10 @@ import 'package:flutter/foundation.dart';
 
 class Chart extends StatelessWidget {
   static final double _height = dp(200);
+  final DateTime startDate;
+  final DateTime endDate;
+
+  Chart({@required this.startDate, @required this.endDate});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +30,7 @@ class Chart extends StatelessWidget {
               final chartPointPositionsCalculator = _ChartPointPositionsCalculator(moodAssessmentsProvider);
               return CustomPaint(
                 painter: _ChartPainter(
-                    normalizedPoints: chartPointPositionsCalculator.getChartPointsForPeriod(7)
+                    normalizedPoints: chartPointPositionsCalculator.getChartPointsForPeriod(startDate, endDate)
                 ),
               );
             }
@@ -154,11 +158,12 @@ class _ChartPointPositionsCalculator {
   }
 
 
-  List<_NormalizedPoint> getChartPointsForPeriod(int daysCount) {
-    final today = DateTime.now().date;
+  List<_NormalizedPoint> getChartPointsForPeriod(DateTime startDate, DateTime endDate) {
+    //final today = DateTime.now().date;
+    final int daysCount = endDate.difference(startDate).inDays;
     final List<_NormalizedPoint> pointsForWeek = [];
     for (var i = 0; i < daysCount; i++) {
-      final date = today.subtract(Duration(days: daysCount - 1 - i));
+      final date = endDate.subtract(Duration(days: daysCount - 1 - i));
       final moodAssessmentsForDay = moodAssessmentsProvider.getMoodAssessmentsForDate(date).toList();
       final int pointsCountPerDay = (28 / daysCount).round();
       final averageMoodsForDay = _getAverageMoods(moodAssessmentsForDay, i == (daysCount - 1) ? 1 : pointsCountPerDay);
