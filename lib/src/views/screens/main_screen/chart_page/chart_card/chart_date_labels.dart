@@ -11,7 +11,7 @@ class ChartDateLabels extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: dp(16)),
       child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(DateTime.daysPerWeek, (index) {
             final day = DateTime.now().subtract(Duration(days: DateTime.daysPerWeek - (index + 1)));
             return ChartDateLable(day: day.day, weekday: day.weekday);

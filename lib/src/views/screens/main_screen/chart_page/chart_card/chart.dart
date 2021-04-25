@@ -16,20 +16,17 @@ class Chart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: dp(16)),
+      padding: EdgeInsets.symmetric(horizontal: dp(16+8)),
       child: Center(
         child: Container(
           height: _height,
           width: double.infinity,
           child: Consumer<MoodAssessmentsProvider> (
             builder: (context, moodAssessmentsProvider, child) {
+              final chartPointPositionsCalculator = ChartPointPositionsCalculator(moodAssessmentsProvider);
               return CustomPaint(
                 painter: _ChartPainter(
-                    normalizedPoints: List.generate(28, (index) {
-                      final int mood = (index / 4 + 0.5).round() % 4 + 2;
-                      final pos = 1 / 27 * index;
-                      return _NormalizedPoint(mood * 1.0, pos);
-                    })
+                    normalizedPoints: chartPointPositionsCalculator.getChartPointsForWeek()
                 ),
               );
             }
@@ -124,25 +121,52 @@ class ChartPointPositionsCalculator {
 
   ChartPointPositionsCalculator(this.moodAssessmentsProvider);
 
-  List<double> getAverageMoodForDay(List<MoodAssessment> moodAssessmentsForDay, int averageValuesCount) {
-    return [moodAssessmentsForDay[0].mood as double]; //TODO: implement this function
+  double _getAverageMood(List<MoodAssessment> moodAssessmentsForDay) {
+    double moodSum = 0;
+    for (var i = 0; i < moodAssessmentsForDay.length; i++) {
+      moodSum += moodAssessmentsForDay[i].mood;
+    }
+    return moodSum / moodAssessmentsForDay.length;
+  }
+  
+  List<double> _getAverageMoods(List<MoodAssessment> moodAssessmentsForDay, int averageValuesCount) {
+    if (moodAssessmentsForDay.length <= averageValuesCount) {
+      return moodAssessmentsForDay.map((moodAssessment) => moodAssessment.mood.toDouble()).toList();
+    } else if (averageValuesCount == 1) {
+      return [_getAverageMood(moodAssessmentsForDay)];
+    } else {
+      final List<double> averageMoodsForDay = [];
+      for (var i = 0; i < moodAssessmentsForDay.length; i++) {
+        if (i < averageValuesCount) {
+          final double mood = moodAssessmentsForDay[i].mood.toDouble();
+          averageMoodsForDay.add(mood);
+        } else {
+          break;
+        }
+      }
+      return averageMoodsForDay;
+    }
   }
 
 
   List<_NormalizedPoint> getChartPointsForWeek() {
     final today = DateTime.now().date;
-    final moodAssessmentsForWeek = moodAssessmentsProvider.getMoodAssessmentForPeriod(
-        startDate: today.subtract(Duration(days: DateTime.daysPerWeek)),
-        endDate: today
-    );
-    //const double intervalSize = 1 / DateTime.daysPerWeek;
-    final List<_NormalizedPoint> points = [];
+    final List<_NormalizedPoint> pointsForWeek = [];
     for (var i = 0; i < DateTime.daysPerWeek; i++) {
       final date = today.subtract(Duration(days: DateTime.daysPerWeek - 1 - i));
-      final moodAssessmentsForDay = moodAssessmentsForWeek.where(
-              (moodAssessment) => moodAssessment.date == date);
-      final averageMoodForDay = getAverageMoodForDay(moodAssessmentsForDay, 4);
+      print('=== $date');
+      final moodAssessmentsForDay = moodAssessmentsProvider.getMoodAssessmentsForDate(date).toList();
+      final averageMoodsForDay = _getAverageMoods(moodAssessmentsForDay, i == (DateTime.daysPerWeek - 1) ? 1 : 4);
+      for (var j = 0; j < averageMoodsForDay.length; j++) {
+        final mood = averageMoodsForDay[j];
+        const double intervalSize = 1 / (DateTime.daysPerWeek - 1);
+        final position = intervalSize * i + intervalSize * (j / averageMoodsForDay.length);
+        final point = _NormalizedPoint(mood, position);
+        pointsForWeek.add(point);
+      }
     }
+    print('=== $pointsForWeek');
+    return pointsForWeek;
   }
 
   List<_NormalizedPoint> getChartPointsForMonth() {
