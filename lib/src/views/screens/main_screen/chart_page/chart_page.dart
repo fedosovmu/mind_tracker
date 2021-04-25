@@ -32,7 +32,7 @@ class _ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
             },
           ),
           ChartCard(
-            startDate: today.subtract(Duration(days: periods[_selectedIndex])),
+            startDate: today.subtract(Duration(days: periods[_selectedIndex] - 1)),
             endDate: today,
           ),
         ],

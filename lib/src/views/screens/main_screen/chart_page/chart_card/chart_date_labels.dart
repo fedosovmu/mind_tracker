@@ -14,10 +14,10 @@ class ChartDateLabels extends StatelessWidget {
   List<DateTime> _getDates() {
     final int period = endDate.difference(startDate).inDays;
     print('=== $startDate $endDate $period');
-    if (period % 7 == 0) {
-      const periodsCount = 7;
-      final step = (period / periodsCount).round();
-      return List.generate(periodsCount, (i) => startDate.add(Duration(days: step * (i + 1))));
+    if ((period + 1) % 7 == 0) {
+      const int stepsCount = 6;
+      final int step = (period + 1) ~/ stepsCount;
+      return List.generate(stepsCount + 1, (i) => startDate.add(Duration(days: step * (i))));
     }
     return [
       startDate,
