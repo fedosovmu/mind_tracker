@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_assessments_provider.dart';
@@ -6,7 +5,6 @@ import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'dart:ui' as ui;
 import 'package:provider/provider.dart';
-import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';
 import 'package:flutter/foundation.dart';
 
 
