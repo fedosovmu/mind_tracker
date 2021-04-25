@@ -23,10 +23,10 @@ class Chart extends StatelessWidget {
           width: double.infinity,
           child: Consumer<MoodAssessmentsProvider> (
             builder: (context, moodAssessmentsProvider, child) {
-              final chartPointPositionsCalculator = ChartPointPositionsCalculator(moodAssessmentsProvider);
+              final chartPointPositionsCalculator = _ChartPointPositionsCalculator(moodAssessmentsProvider);
               return CustomPaint(
                 painter: _ChartPainter(
-                    normalizedPoints: chartPointPositionsCalculator.getChartPointsForPeriod(28)
+                    normalizedPoints: chartPointPositionsCalculator.getChartPointsForPeriod(7)
                 ),
               );
             }
@@ -117,10 +117,10 @@ class _ChartPainter extends CustomPainter {
 
 
 
-class ChartPointPositionsCalculator {
+class _ChartPointPositionsCalculator {
   final MoodAssessmentsProvider moodAssessmentsProvider;
 
-  ChartPointPositionsCalculator(this.moodAssessmentsProvider);
+  _ChartPointPositionsCalculator(this.moodAssessmentsProvider);
 
   double _getAverageMood(List<MoodAssessment> moodAssessmentsForDay) {
     double moodSum = 0;
