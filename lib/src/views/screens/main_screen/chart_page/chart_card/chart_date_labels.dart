@@ -17,7 +17,7 @@ class ChartDateLabels extends StatelessWidget {
     if (period % 7 == 0) {
       const periodsCount = 7;
       final step = (period / periodsCount).round();
-      return List.generate(periodsCount, (i) => startDate.add(Duration(days: step * i)));
+      return List.generate(periodsCount, (i) => startDate.add(Duration(days: step * (i + 1))));
     }
     return [
       startDate,
