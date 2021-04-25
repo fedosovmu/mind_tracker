@@ -83,7 +83,7 @@ class _ChartPainter extends CustomPainter {
 
     final Paint moodColorsGradientStrokePaint = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = dp(2)
+      ..strokeWidth = dp(1)
       ..shader = gradientShader;
 
     List<Offset> curvePoints = [];
@@ -98,10 +98,11 @@ class _ChartPainter extends CustomPainter {
       final p2 = curvePoints[i + 1];
       path.moveTo(p.dx, p.dy);
       path.lineTo(p2.dx, p2.dy);
+      final circleSize = dp(2);
       if (i == 0) {
-        canvas.drawCircle(p, dp(3), moodColorsGradientFillPaint);
+        canvas.drawCircle(p, circleSize, moodColorsGradientFillPaint);
       }
-      canvas.drawCircle(p2, dp(3), moodColorsGradientFillPaint);
+      canvas.drawCircle(p2, circleSize, moodColorsGradientFillPaint);
     }
 
     canvas.drawPath(path, moodColorsGradientStrokePaint);
@@ -129,22 +130,26 @@ class ChartPointPositionsCalculator {
     return moodSum / moodAssessmentsForDay.length;
   }
   
-  List<double> _getAverageMoods(List<MoodAssessment> moodAssessmentsForDay, int averageValuesCount) {
-    if (moodAssessmentsForDay.length <= averageValuesCount) {
-      return moodAssessmentsForDay.map((moodAssessment) => moodAssessment.mood.toDouble()).toList();
+  List<double> _getAverageMoods(List<MoodAssessment> moodAssessments, int averageValuesCount) {
+    if (moodAssessments.length <= averageValuesCount) {
+      return moodAssessments.map((moodAssessment) => moodAssessment.mood.toDouble()).toList();
     } else if (averageValuesCount == 1) {
-      return [_getAverageMood(moodAssessmentsForDay)];
+      return [_getAverageMood(moodAssessments)];
     } else {
-      final List<double> averageMoodsForDay = [];
-      for (var i = 0; i < moodAssessmentsForDay.length; i++) {
-        if (i < averageValuesCount) {
-          final double mood = moodAssessmentsForDay[i].mood.toDouble();
-          averageMoodsForDay.add(mood);
-        } else {
-          break;
+      List<double> averageMoods = [];
+      final moodAssessmentsPerPoint = moodAssessments.length / averageValuesCount;
+      List<MoodAssessment> moodAssessmentsForPeriod = [];
+      var groupNumber = 1;
+      for (var i = 1; i <= moodAssessments.length; i++) {
+        if (i > moodAssessmentsPerPoint * groupNumber) {
+          groupNumber++;
+          averageMoods.add(_getAverageMood(moodAssessmentsForPeriod));
+          moodAssessmentsForPeriod = [];
         }
+        moodAssessmentsForPeriod.add(moodAssessments[i - 1]);
       }
-      return averageMoodsForDay;
+      averageMoods.add(_getAverageMood(moodAssessmentsForPeriod));
+      return averageMoods;
     }
   }
 
@@ -152,25 +157,24 @@ class ChartPointPositionsCalculator {
   List<_NormalizedPoint> getChartPointsForWeek() {
     final today = DateTime.now().date;
     final List<_NormalizedPoint> pointsForWeek = [];
-    for (var i = 0; i < DateTime.daysPerWeek; i++) {
-      final date = today.subtract(Duration(days: DateTime.daysPerWeek - 1 - i));
-      print('=== $date');
+    final daysCount = DateTime.daysPerWeek;
+    for (var i = 0; i < daysCount; i++) {
+      final date = today.subtract(Duration(days: daysCount - 1 - i));
       final moodAssessmentsForDay = moodAssessmentsProvider.getMoodAssessmentsForDate(date).toList();
-      final averageMoodsForDay = _getAverageMoods(moodAssessmentsForDay, i == (DateTime.daysPerWeek - 1) ? 1 : 4);
+      final averageMoodsForDay = _getAverageMoods(moodAssessmentsForDay, i == (daysCount - 1) ? 1 : 4);
       for (var j = 0; j < averageMoodsForDay.length; j++) {
         final mood = averageMoodsForDay[j];
-        const double intervalSize = 1 / (DateTime.daysPerWeek - 1);
+        final double intervalSize = 1 / (daysCount - 1);
         final position = intervalSize * i + intervalSize * (j / averageMoodsForDay.length);
         final point = _NormalizedPoint(mood, position);
         pointsForWeek.add(point);
       }
     }
-    print('=== $pointsForWeek');
     return pointsForWeek;
   }
 
   List<_NormalizedPoint> getChartPointsForMonth() {
-
+    //TODO: implement this function
   }
 }
 
