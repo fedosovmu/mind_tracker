@@ -11,20 +11,30 @@ class ChartDateLabels extends StatelessWidget {
 
   ChartDateLabels({@required this.startDate, @required this.endDate});
 
+  Widget _getPositionedLabel({@required double normalizedPosition, @required DateTime date}) {
+    const int startPosition  = 0;
+    const int endPosition = 280;
+    const int normalizationFactor = endPosition - startPosition;
+    return Positioned(
+        bottom: 0,
+        left: dp(normalizedPosition * normalizationFactor),
+        child: ChartDateLabel(date: date)
+    );
+  }
+
   List<Widget> _getDateLabels() {
-    final List<Widget> dateLabels = [];
     const labelsCount = 7;
     final daysCount = endDate.difference(startDate).inDays;
-    final step = (daysCount + 1) ~/ 7;
-    dateLabels.add(Spacer(flex: 4));
+    final dateStep = (daysCount + 1) ~/ (labelsCount - 1);
+    final chartStep = (1 / daysCount) * dateStep;
+    final List<Widget> dateLabels = [];
     for (int i = 0; i < labelsCount; i++) {
-      final date = endDate.subtract(Duration(days: (labelsCount - 1 - i) * step));
-      final dateLabel = ChartDateLabel(date: date);
+      final date = endDate.subtract(Duration(days: i * dateStep));
+      final dateLabel = _getPositionedLabel(
+        date: date,
+        normalizedPosition: 1.0 - i * chartStep
+      );
       dateLabels.add(dateLabel);
-      if (i < labelsCount - 1) {
-        final space = Spacer(flex: 5);
-        dateLabels.add(space);
-      }
     }
     return dateLabels;
   }
@@ -33,10 +43,13 @@ class ChartDateLabels extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: dp(16)),
-      child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+      child: Container(
+        width: double.infinity,
+        height: dp(30),
+        child: Stack(
           children: _getDateLabels()
-      ),
+        ),
+      )
     );
   }
 }
@@ -67,5 +80,4 @@ class ChartDateLabel extends StatelessWidget {
       ],
     );
   }
-
 }

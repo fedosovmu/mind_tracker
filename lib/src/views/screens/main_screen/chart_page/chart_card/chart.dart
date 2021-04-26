@@ -18,7 +18,7 @@ class Chart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: dp(16+8)),
+      padding: EdgeInsets.symmetric(horizontal: dp(16+10)),
       child: Center(
         child: Container(
           height: _height,
