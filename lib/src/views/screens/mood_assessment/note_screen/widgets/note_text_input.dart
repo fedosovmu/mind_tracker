@@ -4,10 +4,10 @@ import 'package:mind_tracker/src/views/utils/theme/custom_input_decoration.dart'
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
-class CommentTextInput extends StatelessWidget {
+class NoteTextInput extends StatelessWidget {
   TextEditingController controller;
 
-  CommentTextInput (String text) {
+  NoteTextInput (String text) {
     controller = TextEditingController(text: text);
   }
 

@@ -6,10 +6,10 @@ import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
-class EditCommentButton extends StatelessWidget {
+class EditNoteButton extends StatelessWidget {
   final Function onPressed;
 
-  EditCommentButton({@required this.onPressed});
+  EditNoteButton({@required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

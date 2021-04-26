@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/auth_provider.dart';
 import 'package:mind_tracker/src/views/screens/other/login_screen/login_screen.dart';
-import 'package:mind_tracker/src/views/screens/mood_assessment/comment_screen/comment_screen.dart';
+import 'package:mind_tracker/src/views/screens/mood_assessment/note_screen/note_screen.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/select_events_screen/select_events_screen.dart';
 import 'package:mind_tracker/src/views/screens/other/register_screen/register_screen.dart';
 import 'package:mind_tracker/src/views/screens/other/settings_screen/settings_screen.dart';
@@ -50,8 +50,8 @@ class MindTrackerApp extends StatelessWidget {
           case '/selectEvents':
             screenToGo = SelectEventsScreen(settings.arguments);
             break;
-          case '/comment':
-            screenToGo = CommentScreen(settings.arguments);
+          case '/note':
+            screenToGo = NoteScreen(settings.arguments);
             break;
           case '/settings':
             screenToGo = SettingsScreen();

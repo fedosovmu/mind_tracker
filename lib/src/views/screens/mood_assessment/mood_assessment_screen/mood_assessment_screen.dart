@@ -6,7 +6,7 @@ import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_s
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/add_button.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/'
     'assess_mood_colored_button.dart';
-import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/edit_comment_button.dart';
+import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/edit_note_button.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/edit_selected_events_button.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:provider/provider.dart';
@@ -30,12 +30,12 @@ class MoodAssessmentScreen extends StatefulWidget {
 class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
   static const _defaultMood = 4;
   int _currentMood = _defaultMood;
-  String _comment;
+  String _note;
   List<String> _selectedEventNames;
   @override
   void initState() {
     super.initState();
-    _comment = '';
+    _note = '';
     _selectedEventNames = [];
   }
   
@@ -81,7 +81,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
         return MoodAssessment(
           mood: _currentMood,
           events: _selectedEventNames,
-          comment: _comment
+          note: _note
         );
       } else {
         return MoodAssessment(
@@ -89,21 +89,21 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
           date: widget.arguments['date'],
           partOfDay: widget.arguments['partOfDay'],
           events: _selectedEventNames,
-          comment: _comment
+          note: _note
         );
       }
     } else {
-      return MoodAssessment(mood: _currentMood, events: _selectedEventNames, comment: _comment);
+      return MoodAssessment(mood: _currentMood, events: _selectedEventNames, note: _note);
     }
   }
 
-  void _commentButtonCallback () async {
-    print('Comment button pressed');
-    final comment = await Navigator.of(context).pushNamed('/comment', arguments: _comment);
-    print('=== COMMENT $comment');
-    if (comment != null) {
+  void _noteButtonCallback () async {
+    print('Note button pressed');
+    final note = await Navigator.of(context).pushNamed('/note', arguments: _note);
+    print('=== NOTE $note');
+    if (note != null) {
       setState(() {
-        _comment = comment;
+        _note = note;
       });
     }
   }
@@ -164,11 +164,11 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                             eventsCount: _selectedEventNames.length,
                             onPressed: _selectEventsButtonCallback
                         ),
-                        _comment.isEmpty ? AddButton(
+                        _note.isEmpty ? AddButton(
                           'Комментарий',
-                          onPressed: _commentButtonCallback,
-                        ) : EditCommentButton(
-                            onPressed: _commentButtonCallback
+                          onPressed: _noteButtonCallback,
+                        ) : EditNoteButton(
+                            onPressed: _noteButtonCallback
                         )
                       ],
                     ),

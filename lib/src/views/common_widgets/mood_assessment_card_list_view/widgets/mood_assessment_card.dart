@@ -38,7 +38,7 @@ class MoodAssessmentCard extends StatelessWidget {
   }
 
   List<Widget> _buildCommentIcon () {
-    if (moodAssessment.comment != null) {
+    if (moodAssessment.note != null) {
       return [
         Container(
           width: dp(24),
