@@ -4,7 +4,7 @@ import 'package:mind_tracker/src/business_logic/viewmodels/auth_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/standard_button.dart';
 import 'package:mind_tracker/src/views/screens/other/login_screen/widgets/custom_text_button.dart';
-import 'package:mind_tracker/src/views/common_widgets/login_input.dart';
+import 'package:mind_tracker/src/views/common_widgets/email_input.dart';
 import 'package:mind_tracker/src/views/common_widgets/password_input.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:provider/provider.dart';
@@ -12,8 +12,8 @@ import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final loginTextEditingController = TextEditingController();
-  final passwordTextEditingController = TextEditingController();
+  final _emailTextEditingController = TextEditingController();
+  final _passwordTextEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +28,9 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: dp(32)),
-              LoginInput(loginTextEditingController),
+              EmailInput(_emailTextEditingController),
               SizedBox(height: dp(16)),
-              PasswordInput(passwordTextEditingController),
+              PasswordInput(_passwordTextEditingController),
               SizedBox(height: dp(32)),
               StandardButton(
                   title: 'Войти',
@@ -39,8 +39,8 @@ class LoginScreen extends StatelessWidget {
                     final isValid = _formKey.currentState.validate();
                     if (isValid) {
                       var authErrorCode = await Provider.of<AuthProvider>(context, listen: false).signInWithEmailAndPassword(
-                          email: loginTextEditingController.text,
-                          password: passwordTextEditingController.text
+                          email: _emailTextEditingController.text,
+                          password: _passwordTextEditingController.text
                       );
                       if (authErrorCode == null) {
                         Navigator.of(context).pushNamedAndRemoveUntil('/main', (route) => false);

@@ -3,10 +3,10 @@ import 'package:mind_tracker/src/views/utils/theme/custom_input_decoration.dart'
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
-class LoginInput extends StatelessWidget {
+class EmailInput extends StatelessWidget {
   final TextEditingController controller;
 
-  LoginInput(this.controller);
+  EmailInput(this.controller);
 
   @override
   Widget build(BuildContext context) {
