@@ -11,18 +11,22 @@ class ChartDateLabels extends StatelessWidget {
 
   ChartDateLabels({@required this.startDate, @required this.endDate});
 
-  List<DateTime> _getDates() {
-    final int period = endDate.difference(startDate).inDays;
-    print('=== $startDate $endDate $period');
-    if ((period + 1) % 7 == 0) {
-      const int stepsCount = 6;
-      final int step = (period + 1) ~/ stepsCount;
-      return List.generate(7, (i) => startDate.add(Duration(days: i)));
+  List<Widget> _getDateLabels() {
+    final List<Widget> dateLabels = [];
+    const labelsCount = 7;
+    final daysCount = endDate.difference(startDate).inDays;
+    final step = (daysCount + 1) ~/ 7;
+    dateLabels.add(Spacer(flex: 4));
+    for (int i = 0; i < labelsCount; i++) {
+      final date = endDate.subtract(Duration(days: (labelsCount - 1 - i) * step));
+      final dateLabel = ChartDateLabel(date: date);
+      dateLabels.add(dateLabel);
+      if (i < labelsCount - 1) {
+        final space = Spacer(flex: 5);
+        dateLabels.add(space);
+      }
     }
-    return [
-      startDate,
-      endDate
-    ];
+    return dateLabels;
   }
 
   @override
@@ -30,10 +34,8 @@ class ChartDateLabels extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: dp(16)),
       child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: _getDates().map((date) {
-            return ChartDateLabel(date: date);
-          }).toList()
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: _getDateLabels()
       ),
     );
   }
@@ -58,7 +60,7 @@ class ChartDateLabel extends StatelessWidget {
         ),
         Text(
           '${Content.weekDayNames[date.weekday]}',
-          style: CustomTextStyles.basic.copyWith(
+          style: CustomTextStyles.caption.copyWith(
               color: CustomColors.purpleMedium
           ),
         )
