@@ -86,7 +86,7 @@ class _ChartPainter extends CustomPainter {
 
     final Paint moodColorsGradientStrokePaint = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = dp(1)
+      ..strokeWidth = dp(2)
       ..shader = gradientShader;
 
     List<Offset> curvePoints = [];
@@ -101,7 +101,7 @@ class _ChartPainter extends CustomPainter {
       final p2 = curvePoints[i + 1];
       path.moveTo(p.dx, p.dy);
       path.lineTo(p2.dx, p2.dy);
-      final circleSize = dp(2);
+      final circleSize = dp(1);
       if (i == 0) {
         canvas.drawCircle(p, circleSize, moodColorsGradientFillPaint);
       }
@@ -158,13 +158,12 @@ class _ChartPointPositionsCalculator {
 
 
   List<_NormalizedPoint> getChartPointsForPeriod(DateTime startDate, DateTime endDate) {
-    //final today = DateTime.now().date;
     final int daysCount = endDate.difference(startDate).inDays;
     final List<_NormalizedPoint> pointsForPeriod = [];
     for (var i = 0; i <= daysCount; i++) {
       final date = endDate.subtract(Duration(days: daysCount - i));
       final moodAssessmentsForDay = moodAssessmentsProvider.getMoodAssessmentsForDate(date).toList();
-      final int pointsCountPerDay = (28 / daysCount).round();
+      final int pointsCountPerDay = 60 ~/ daysCount;
       final averageMoodsForDay = _getAverageMoods(moodAssessmentsForDay, i == daysCount ? 1 : pointsCountPerDay);
       for (var j = 0; j < averageMoodsForDay.length; j++) {
         final mood = averageMoodsForDay[j];

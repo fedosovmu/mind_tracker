@@ -23,8 +23,8 @@ class ChartDateLabels extends StatelessWidget {
   }
 
   List<Widget> _getDateLabels() {
-    const labelsCount = 7;
     final daysCount = endDate.difference(startDate).inDays;
+    final labelsCount = daysCount <= 7 ? daysCount + 1 : 8;
     final dateStep = (daysCount + 1) ~/ (labelsCount - 1);
     final chartStep = (1 / daysCount) * dateStep;
     final List<Widget> dateLabels = [];
