@@ -19,7 +19,7 @@ class CustomBottomNavigationBar extends CupertinoTabBar {
     border: Border(top: BorderSide(color: Color(0xFF766379))),
     backgroundColor: CustomColors.purpleSuperDark,
     activeColor: CustomColors.purpleWhite,
-    inactiveColor: CustomColors.purpleLight,
+    inactiveColor: CustomColors.purpleMedium,
     iconSize: 32,
     items: List.generate(_texts.length, (index) => BottomNavigationBarItem(
         activeIcon: Image.asset(_pathsToIcons[index], height: 24),
