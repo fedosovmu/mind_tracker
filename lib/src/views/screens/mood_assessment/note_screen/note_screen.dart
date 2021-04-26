@@ -19,7 +19,7 @@ class NoteScreen extends StatelessWidget {
     final noteTextInput = NoteTextInput(_note);
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Добавление комментария',
+        title: 'Заметка',
         leading: CustomLeading(
           pathToIcon: CustomIconPaths.back,
           onPressed: () {

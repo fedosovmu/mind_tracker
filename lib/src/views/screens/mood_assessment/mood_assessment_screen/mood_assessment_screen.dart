@@ -165,7 +165,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                             onPressed: _selectEventsButtonCallback
                         ),
                         _note.isEmpty ? AddButton(
-                          'Комментарий',
+                          'Заметкав',
                           onPressed: _noteButtonCallback,
                         ) : EditNoteButton(
                             onPressed: _noteButtonCallback

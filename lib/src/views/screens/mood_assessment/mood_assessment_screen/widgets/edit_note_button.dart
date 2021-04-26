@@ -40,7 +40,7 @@ class EditNoteButton extends StatelessWidget {
           ),
           SizedBox(width: dp(8)),
           Text(
-            'Комментарий',
+            'Заметка',
             style: CustomTextStyles.caption.copyWith(
                 color: CustomColors.purpleWhite
             ),
