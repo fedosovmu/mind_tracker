@@ -41,6 +41,7 @@ class Chart extends StatelessWidget {
 
 
 class _ChartPainter extends CustomPainter {
+  static const int _moodsCount = 7;
   final List<_NormalizedPoint> normalizedPoints;
 
   _ChartPainter({@required this.normalizedPoints});
@@ -56,8 +57,8 @@ class _ChartPainter extends CustomPainter {
       ..color = CustomColors.purpleMegaDark
       ..strokeWidth = dp(1);
 
-    final verticalInterval = (size.height) / 6;
-    for (int i = 0; i < 7; i++) {
+    final verticalInterval = (size.height) / (_moodsCount - 1);
+    for (int i = 0; i < _moodsCount; i++) {
       final y = verticalInterval * i;
       final p1 = Offset(0, y);
       final p2 = Offset(size.width, y);
@@ -67,7 +68,7 @@ class _ChartPainter extends CustomPainter {
 
   Offset _getChartPoint(Size size, _NormalizedPoint normalizedPoint) {
     final x = size.width * normalizedPoint.normalizedPosition;
-    final y = (size.height / 6) * (7 - normalizedPoint.mood);
+    final y = (size.height / (_moodsCount - 1)) * (_moodsCount - normalizedPoint.mood);
     return Offset(x, y);
   }
 
@@ -159,21 +160,21 @@ class _ChartPointPositionsCalculator {
   List<_NormalizedPoint> getChartPointsForPeriod(DateTime startDate, DateTime endDate) {
     //final today = DateTime.now().date;
     final int daysCount = endDate.difference(startDate).inDays;
-    final List<_NormalizedPoint> pointsForWeek = [];
-    for (var i = 0; i < daysCount; i++) {
-      final date = endDate.subtract(Duration(days: daysCount - 1 - i));
+    final List<_NormalizedPoint> pointsForPeriod = [];
+    for (var i = 0; i <= daysCount; i++) {
+      final date = endDate.subtract(Duration(days: daysCount - i));
       final moodAssessmentsForDay = moodAssessmentsProvider.getMoodAssessmentsForDate(date).toList();
       final int pointsCountPerDay = (28 / daysCount).round();
-      final averageMoodsForDay = _getAverageMoods(moodAssessmentsForDay, i == (daysCount - 1) ? 1 : pointsCountPerDay);
+      final averageMoodsForDay = _getAverageMoods(moodAssessmentsForDay, i == daysCount ? 1 : pointsCountPerDay);
       for (var j = 0; j < averageMoodsForDay.length; j++) {
         final mood = averageMoodsForDay[j];
-        final double intervalSize = 1 / (daysCount - 1);
+        final double intervalSize = 1 / daysCount;
         final position = intervalSize * i + intervalSize * (j / averageMoodsForDay.length);
         final point = _NormalizedPoint(mood, position);
-        pointsForWeek.add(point);
+        pointsForPeriod.add(point);
       }
     }
-    return pointsForWeek;
+    return pointsForPeriod;
   }
 }
 
