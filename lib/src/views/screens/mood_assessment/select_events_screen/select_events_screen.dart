@@ -4,6 +4,7 @@ import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
 import 'package:mind_tracker/src/views/common_widgets/glow_disabler.dart';
 import 'package:mind_tracker/src/views/common_widgets/standard_button.dart';
+import 'package:mind_tracker/src/views/screens/mood_assessment/select_events_screen/widgets/add_user_event_button.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/select_events_screen/widgets/event_icon.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
@@ -46,7 +47,7 @@ class SelectEventsScreen extends StatelessWidget {
                     crossAxisSpacing: dp(24),
                     crossAxisCount: 4,
                     childAspectRatio: EventIcon.aspectRatio,
-                    children: _eventIcons
+                    children: [..._eventIcons, AddUserEventButton()]
                   );
                 }
               ),
