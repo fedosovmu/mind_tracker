@@ -32,6 +32,10 @@ class AddUserEventButton extends StatelessWidget {
                 ),
               ),
             ),
+            decoration: BoxDecoration(
+              color: CustomColors.purpleSuperDark.withOpacity(0.32),
+              shape: BoxShape.circle
+            ),
           ),
           SizedBox(height: dp(8)),
           Expanded(
