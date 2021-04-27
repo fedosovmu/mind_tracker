@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/auth_provider.dart';
-import 'package:mind_tracker/src/views/screens/mood_assessment/create_user_event_title_screen.dart';
+import 'package:mind_tracker/src/views/screens/mood_assessment/create_user_event/create_user_event_select_icon_screen.dart';
+import 'package:mind_tracker/src/views/screens/mood_assessment/create_user_event/create_user_event_title_screen.dart';
 import 'package:mind_tracker/src/views/screens/other/login_screen/login_screen.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/note_screen/note_screen.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/select_events_screen/select_events_screen.dart';
@@ -53,6 +54,9 @@ class MindTrackerApp extends StatelessWidget {
             break;
           case '/createUserEventTitle':
             screenToGo = CreateUserEventTitleScreen();
+            break;
+          case '/createUserEventSelectIcon':
+            screenToGo = CreateUserEventSelectIconScreen();
             break;
           case '/note':
             screenToGo = NoteScreen(settings.arguments);

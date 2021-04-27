@@ -55,7 +55,7 @@ class CreateUserEventTitleScreen extends StatelessWidget {
             child: StandardButton(
               title: 'Далее',
               onPressed: () {
-
+                Navigator.of(context).pushNamed('/createUserEventSelectIcon');
               },
             )
           )
