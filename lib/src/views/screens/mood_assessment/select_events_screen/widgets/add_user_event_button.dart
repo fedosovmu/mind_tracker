@@ -13,6 +13,7 @@ class AddUserEventButton extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         print('Add user event button pressed');
+        Navigator.of(context).pushNamed('/createUserEventTitle');
       },
       child: Column(
         children: [
