@@ -14,18 +14,34 @@ class StandardButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return TextButton(
         onPressed: onPressed,
         child: Text(
           title,
           style: CustomTextStyles.buttonMedium,
         ),
-        height: dp(56),
-        minWidth: double.infinity,
-        color: CustomColors.main,
-        shape: RoundedRectangleBorder(
-          borderRadius: CustomBorderRadius(dp(16))
-        ),
+        style: StandardButtonStyle()
     );
   }
+}
+
+
+class StandardButtonStyle extends ButtonStyle{
+  StandardButtonStyle () : super(
+    animationDuration: Duration(seconds: 3),
+    overlayColor: MaterialStateProperty.all(Colors.transparent),
+    minimumSize: MaterialStateProperty.resolveWith((states) => Size(double.infinity, dp(56))),
+    backgroundColor: MaterialStateProperty.resolveWith((states) {
+      if (states.contains(MaterialState.hovered)) {
+        //return Colors.blue;
+      }
+      if (states.contains(MaterialState.pressed)) {
+        return Color.lerp(CustomColors.main, CustomColors.white, 0.3);
+      }
+      return CustomColors.main;
+    }),
+    shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(borderRadius: CustomBorderRadius(dp(16)))
+    )
+  );
 }
