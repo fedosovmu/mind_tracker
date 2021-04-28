@@ -1,20 +1,23 @@
 import 'dart:math';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/business_logic/viewmodels/events_provider.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
+import 'package:provider/provider.dart';
 
 
 class AddUserEventButton extends StatelessWidget {
+  final Function onPressed;
+
+  AddUserEventButton({@required this.onPressed});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        print('Add user event button pressed');
-        Navigator.of(context).pushNamed('/createUserEventTitle');
-      },
+      onTap: onPressed,
       child: Column(
         children: [
           Container(

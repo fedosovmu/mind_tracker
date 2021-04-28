@@ -28,4 +28,8 @@ class EventsProvider extends ChangeNotifier {
       }
     });
   }
+
+  void addUserEvent(Event userEvent) {
+    _userEvents.add(userEvent);
+  }
 }

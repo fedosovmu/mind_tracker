@@ -48,7 +48,16 @@ class SelectEventsScreen extends StatelessWidget {
                     crossAxisSpacing: dp(24),
                     crossAxisCount: 4,
                     childAspectRatio: EventIcon.aspectRatio,
-                    children: [..._eventIcons, AddUserEventButton()]
+                    children: [
+                      ..._eventIcons,
+                      AddUserEventButton(
+                        onPressed: () async {
+                          print('Add user event button pressed');
+                          final userEvent = await Navigator.of(context).pushNamed('/createUserEventTitle');
+                          print('New user event $userEvent');
+                        },
+                      )
+                    ]
                   );
                 }
               ),
