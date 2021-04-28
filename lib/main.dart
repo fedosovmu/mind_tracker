@@ -15,8 +15,7 @@ void main() async {
   await Firebase.initializeApp();
   FirebaseAuthProvider.initializeListeners();
   final moodAssessmentsProvider = MoodAssessmentsProvider();
-  final events = await CloudFirestoreProvider.getEvents();
-  final eventsProvider = EventsProvider(events);
+  final eventsProvider = EventsProvider();
   final authProvider = AuthProvider();
 
   runApp(

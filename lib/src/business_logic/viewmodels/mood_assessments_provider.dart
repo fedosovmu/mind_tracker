@@ -9,10 +9,10 @@ class MoodAssessmentsProvider extends ChangeNotifier {
   List<MoodAssessment> _moodAssessments;
 
   MoodAssessmentsProvider() {
-    initializeListeners();
+    _initializeListeners();
   }
 
-  void initializeListeners() {
+  void _initializeListeners() {
     FirebaseAuthProvider.authStateChanges.listen((uid) async {
       _moodAssessments = [];
       notifyListeners();

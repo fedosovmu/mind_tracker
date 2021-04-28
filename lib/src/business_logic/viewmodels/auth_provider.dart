@@ -7,10 +7,10 @@ class AuthProvider extends ChangeNotifier {
   String get email => isAuthorized ? FirebaseAuthProvider.email : null;
 
   AuthProvider() {
-    initializeListeners();
+    _initializeListeners();
   }
 
-  void initializeListeners() {
+  void _initializeListeners() {
     FirebaseAuthProvider.authStateChanges.listen((uid) {
       notifyListeners();
     });

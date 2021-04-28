@@ -39,13 +39,17 @@ class CloudFirestoreProvider {
     }
   }
 
-  static Future<List<Event>> getEvents () async {
-    final eventQuerySnapshot = await _eventsCollection.get();
-    print('=== USER EVENTS LOADED');
-    print('=== ${eventQuerySnapshot.docs.first.data()}');
-    final List<Event> events = eventQuerySnapshot.docs.map((eventDoc) {
-      return Event.fromMap(eventDoc.data()) ;
-    }).toList();
-    return events;
+  static Future<List<Event>> getUserEventsOfAuthorizedUser () async {
+    final uid = FirebaseAuthProvider.uid;
+    if (uid != null) {
+      final eventQuerySnapshot = await _eventsCollection.where('user_id', isEqualTo: uid).get();
+      print('=== USER EVENTS LOADED (${eventQuerySnapshot.docs.length})');
+      final List<Event> events = eventQuerySnapshot.docs.map((eventDoc) {
+        return Event.fromMap(eventDoc.data()) ;
+      }).toList();
+      return events;
+    } else {
+      return [];
+    }
   }
 }

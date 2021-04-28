@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:mind_tracker/src/business_logic/models/event.dart';
+import 'package:mind_tracker/src/business_logic/services/cloud_firestore_provider.dart';
+import 'package:mind_tracker/src/business_logic/services/firebase_auth_provider.dart';
 
 
 class EventsProvider extends ChangeNotifier {
@@ -9,8 +11,20 @@ class EventsProvider extends ChangeNotifier {
     Event(icon: 'food', title: 'Хорошая еда')
   ];
 
-  final List<Event> _userEvents;
+  List<Event> _userEvents;
   List<Event> get events => [..._defaultEvents, ..._userEvents];
 
-  EventsProvider(this._userEvents);
+  EventsProvider() {
+    _initializeListeners();
+  }
+
+  void _initializeListeners() {
+    FirebaseAuthProvider.authStateChanges.listen((uid) async {
+      _userEvents = [];
+      if (uid != null) {
+        _userEvents = await CloudFirestoreProvider.getUserEventsOfAuthorizedUser();
+        notifyListeners();
+      }
+    });
+  }
 }
