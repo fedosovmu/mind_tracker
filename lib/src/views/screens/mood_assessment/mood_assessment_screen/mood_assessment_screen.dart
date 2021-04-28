@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/business_logic/models/event.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_assessments_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
@@ -31,12 +32,12 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
   static const _defaultMood = 4;
   int _currentMood = _defaultMood;
   String _note;
-  List<String> _selectedEventNames;
+  List<Event> _selectedEvents;
   @override
   void initState() {
     super.initState();
     _note = '';
-    _selectedEventNames = [];
+    _selectedEvents = [];
   }
   
   void _goToHomeScreen() {
@@ -80,7 +81,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
       if (date == today && partOfDay == currentPartOfDay) {
         return MoodAssessment(
           mood: _currentMood,
-          events: _selectedEventNames,
+          events: _selectedEvents,
           note: _note
         );
       } else {
@@ -88,12 +89,16 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
           mood: _currentMood,
           date: widget.arguments['date'],
           partOfDay: widget.arguments['partOfDay'],
-          events: _selectedEventNames,
+          events: _selectedEvents,
           note: _note
         );
       }
     } else {
-      return MoodAssessment(mood: _currentMood, events: _selectedEventNames, note: _note);
+      print('=== Start Create Mood Assessment:');
+      final moodAssessment = MoodAssessment(mood: _currentMood, events: _selectedEvents, note: _note);
+      print('=== Mood assessment:');
+      print('$moodAssessment');
+      return moodAssessment;
     }
   }
 
@@ -110,12 +115,12 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
 
   void _selectEventsButtonCallback () async {
     print('Event button pressed');
-    final selectedEventNames = await Navigator.of(context)
-        .pushNamed('/selectEvents', arguments: _selectedEventNames);
-    print('=== SELECTED EVENTS $selectedEventNames');
-    if (selectedEventNames != null) {
+    final selectedEvents = await Navigator.of(context)
+        .pushNamed('/selectEvents', arguments: _selectedEvents);
+    print('=== SELECTED EVENTS $selectedEvents');
+    if (selectedEvents != null) {
       setState(() {
-        _selectedEventNames = selectedEventNames;
+        _selectedEvents = selectedEvents;
       });
     }
   }
@@ -158,10 +163,10 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _selectedEventNames.isEmpty ? AddButton(
+                        _selectedEvents.isEmpty ? AddButton(
                           'Событие', onPressed: _selectEventsButtonCallback,
                         ) : EditSelectedEventsButton(
-                            eventsCount: _selectedEventNames.length,
+                            eventsCount: _selectedEvents.length,
                             onPressed: _selectEventsButtonCallback
                         ),
                         _note.isEmpty ? AddButton(

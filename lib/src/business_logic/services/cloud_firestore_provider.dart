@@ -21,6 +21,8 @@ class CloudFirestoreProvider {
         return MoodAssessment.fromMap(mood_assessment_doc.data());
       }).toList();
 
+      print('=== Get mood assessments');
+      print(moodAssessments);
       return moodAssessments;
     } else {
       return [];
@@ -30,7 +32,10 @@ class CloudFirestoreProvider {
   static void addMoodAssessment(MoodAssessment moodAssessment) {
     final uid = FirebaseAuthProvider.uid;
     if (uid != null) {
+      print('=== Start create mood assessment map');
       var moodAssessmentMap = moodAssessment.toMap();
+      print('=== Mood assessment map');
+      print('$moodAssessmentMap');
       moodAssessmentMap['user_id'] = uid;
       _moodAssessmentsCollection.add(
           moodAssessmentMap

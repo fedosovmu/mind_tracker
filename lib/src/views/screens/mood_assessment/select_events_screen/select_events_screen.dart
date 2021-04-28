@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/business_logic/models/event.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/events_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
@@ -12,10 +13,10 @@ import 'package:provider/provider.dart';
 
 
 class SelectEventsScreen extends StatelessWidget {
-  final List<String> _oldSelectedEventNames;
+  final List<Event> _oldSelectedEvents;
   List<Widget> _eventIcons;
 
-  SelectEventsScreen(this._oldSelectedEventNames);
+  SelectEventsScreen(this._oldSelectedEvents);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class SelectEventsScreen extends StatelessWidget {
               child: Consumer<EventsProvider>(
                 builder: (context, eventsProvider, child) {
                   _eventIcons = eventsProvider.events.map((event) {
-                    final bool isSelected = _oldSelectedEventNames.contains(event.name);
+                    final bool isSelected = _oldSelectedEvents.contains(event);
                     return EventIcon(event, isSelected: isSelected);
                   }).toList();
                   return GridView.count(
@@ -63,14 +64,14 @@ class SelectEventsScreen extends StatelessWidget {
                   title: 'Готово',
                   onPressed: () {
                     print('Select events button pressed');
-                    final List<String> selectedEventNames = [];
+                    final List<Event> selectedEvents = [];
                     for (EventIcon eventIcon in _eventIcons) {
                       if (eventIcon.isSelected) {
-                        final eventName = eventIcon.event.name;
-                        selectedEventNames.add(eventName);
+                        final event = eventIcon.event;
+                        selectedEvents.add(event);
                       }
                     }
-                    Navigator.of(context).pop(selectedEventNames);
+                    Navigator.of(context).pop(selectedEvents);
                   }
                 ),
               )
