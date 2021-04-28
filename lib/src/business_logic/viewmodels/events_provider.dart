@@ -30,6 +30,10 @@ class EventsProvider extends ChangeNotifier {
   }
 
   void addUserEvent(Event userEvent) {
-    _userEvents.add(userEvent);
+    final uid = FirebaseAuthProvider.uid;
+    if (uid != null) {
+      _userEvents.add(userEvent);
+      notifyListeners();
+    }
   }
 }

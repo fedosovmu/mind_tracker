@@ -53,8 +53,9 @@ class SelectEventsScreen extends StatelessWidget {
                       AddUserEventButton(
                         onPressed: () async {
                           print('Add user event button pressed');
-                          final userEvent = await Navigator.of(context).pushNamed('/createUserEventTitle');
-                          print('New user event $userEvent');
+                          final newUserEvent = await Navigator.of(context).pushNamed('/createUserEventTitle');
+                          print('New user event $newUserEvent');
+                          Provider.of<EventsProvider>(context, listen: false).addUserEvent(newUserEvent);
                         },
                       )
                     ]

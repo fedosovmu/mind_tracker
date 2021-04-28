@@ -78,10 +78,7 @@ class _CreateUserEventSelectIconScreenState extends State<CreateUserEventSelectI
             child: StandardButton(
               title: 'Создать',
               onPressed: () {
-                var count = 0;
-                Navigator.popUntil(context, (route) {
-                  return count++ == 2;
-                });
+                Navigator.of(context).pop(_selectedIcon);
               },
             ),
           )
