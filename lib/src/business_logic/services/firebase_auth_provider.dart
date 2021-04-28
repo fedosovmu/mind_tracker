@@ -7,11 +7,11 @@ class FirebaseAuthProvider {
 
   static User _user;
   static String uid;
-  static Stream<String> authStateChanges;
+  static Stream<String> authStateChanges = _getAuthStateChanges();
   static String get email => _user.email;
 
-  static void initializeListeners() {
-    authStateChanges = FirebaseAuth.instance.authStateChanges().map((user) {
+  static Stream<String> _getAuthStateChanges() {
+    return FirebaseAuth.instance.authStateChanges().map((user) {
       print('=== Auth State Changed: ${user != null ? user.uid : null}');
       _user = user;
       if (user != null) {

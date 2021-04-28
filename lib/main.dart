@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/services/firebase_auth_provider.dart';
-import 'package:mind_tracker/src/business_logic/services/cloud_firestore_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/auth_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/events_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_assessments_provider.dart';
@@ -13,7 +12,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
-  FirebaseAuthProvider.initializeListeners();
   final moodAssessmentsProvider = MoodAssessmentsProvider();
   final eventsProvider = EventsProvider();
   final authProvider = AuthProvider();
