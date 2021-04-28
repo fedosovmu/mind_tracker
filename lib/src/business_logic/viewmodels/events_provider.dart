@@ -8,7 +8,8 @@ class EventsProvider extends ChangeNotifier {
   final _defaultEvents = [
     Event(icon: 'alcohol', title: 'Алкоголь'),
     Event(icon: 'bed', title: 'Хороший сон'),
-    Event(icon: 'food', title: 'Хорошая еда')
+    Event(icon: 'food', title: 'Хорошая еда'),
+    Event(icon: 'stress', title: 'Стресс')
   ];
 
   List<Event> _userEvents;
