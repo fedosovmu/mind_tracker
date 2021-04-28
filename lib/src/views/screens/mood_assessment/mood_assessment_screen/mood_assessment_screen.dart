@@ -94,11 +94,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
         );
       }
     } else {
-      print('=== Start Create Mood Assessment:');
-      final moodAssessment = MoodAssessment(mood: _currentMood, events: _selectedEvents, note: _note);
-      print('=== Mood assessment:');
-      print('$moodAssessment');
-      return moodAssessment;
+      return MoodAssessment(mood: _currentMood, events: _selectedEvents, note: _note);
     }
   }
 
@@ -117,7 +113,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
     print('Event button pressed');
     final selectedEvents = await Navigator.of(context)
         .pushNamed('/selectEvents', arguments: _selectedEvents);
-    print('=== SELECTED EVENTS $selectedEvents');
+    print('Selected events $selectedEvents');
     if (selectedEvents != null) {
       setState(() {
         _selectedEvents = selectedEvents;

@@ -21,8 +21,6 @@ class CloudFirestoreProvider {
         return MoodAssessment.fromMap(mood_assessment_doc.data());
       }).toList();
 
-      print('=== Get mood assessments');
-      print(moodAssessments);
       return moodAssessments;
     } else {
       return [];
@@ -32,9 +30,7 @@ class CloudFirestoreProvider {
   static void addMoodAssessment(MoodAssessment moodAssessment) {
     final uid = FirebaseAuthProvider.uid;
     if (uid != null) {
-      print('=== Start create mood assessment map');
       var moodAssessmentMap = moodAssessment.toMap();
-      print('=== Mood assessment map');
       print('$moodAssessmentMap');
       moodAssessmentMap['user_id'] = uid;
       _moodAssessmentsCollection.add(
@@ -45,7 +41,7 @@ class CloudFirestoreProvider {
 
   static Future<List<Event>> getEvents () async {
     final eventQuerySnapshot = await _eventsCollection.get();
-    print('=== EVENTS LOADED');
+    print('=== USER EVENTS LOADED');
     print('=== ${eventQuerySnapshot.docs.first.data()}');
     final List<Event> events = eventQuerySnapshot.docs.map((eventDoc) {
       return Event.fromMap(eventDoc.data()) ;
