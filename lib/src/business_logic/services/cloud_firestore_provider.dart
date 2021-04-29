@@ -16,6 +16,7 @@ class CloudFirestoreProvider {
     if (uid != null) {
       final moodAssessmentsQuerySnapshot = await _moodAssessmentsCollection
           .where('uid', isEqualTo: uid).get();
+      print('=== MOOD ASSESSMENTS LOADED (${moodAssessmentsQuerySnapshot.docs.length})');
 
       final List<MoodAssessment> moodAssessments = moodAssessmentsQuerySnapshot.docs.map((mood_assessment_doc) {
         return MoodAssessment.fromMap(mood_assessment_doc.data());
