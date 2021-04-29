@@ -33,6 +33,7 @@ class EventsProvider extends ChangeNotifier {
     final uid = FirebaseAuthProvider.uid;
     if (uid != null) {
       _userEvents.add(userEvent);
+      CloudFirestoreProvider.addUserEvent(userEvent);
       notifyListeners();
     }
   }

@@ -8,7 +8,7 @@ import 'package:mind_tracker/src/business_logic/services/firebase_auth_provider.
 class CloudFirestoreProvider {
   CloudFirestoreProvider._();
 
-  static final _eventsCollection = FirebaseFirestore.instance.collection('events');
+  static final _userEventsCollection = FirebaseFirestore.instance.collection('user_events');
   static final _moodAssessmentsCollection = FirebaseFirestore.instance.collection('mood_assessments');
 
   static Future<List<MoodAssessment>> getAllMoodAssessmentsOfAuthorizedUser () async {
@@ -42,7 +42,7 @@ class CloudFirestoreProvider {
   static Future<List<Event>> getUserEventsOfAuthorizedUser () async {
     final uid = FirebaseAuthProvider.uid;
     if (uid != null) {
-      final eventQuerySnapshot = await _eventsCollection.where('uid', isEqualTo: uid).get();
+      final eventQuerySnapshot = await _userEventsCollection.where('uid', isEqualTo: uid).get();
       print('=== USER EVENTS LOADED (${eventQuerySnapshot.docs.length})');
       final List<Event> events = eventQuerySnapshot.docs.map((eventDoc) {
         return Event.fromMap(eventDoc.data()) ;
@@ -50,6 +50,16 @@ class CloudFirestoreProvider {
       return events;
     } else {
       return [];
+    }
+  }
+
+  static void addUserEvent (Event userEvent) {
+    final uid = FirebaseAuthProvider.uid;
+    if (uid != null) {
+      final userEventMap = userEvent.toMap();
+      _userEventsCollection.add(
+          userEventMap
+      ).then((value) => print('=== FIRABASE ADD $userEventMap'));
     }
   }
 }
