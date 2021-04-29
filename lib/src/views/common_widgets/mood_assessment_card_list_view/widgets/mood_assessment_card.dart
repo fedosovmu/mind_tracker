@@ -37,7 +37,7 @@ class MoodAssessmentCard extends StatelessWidget {
     }
   }
 
-  List<Widget> _buildCommentIcon () {
+  List<Widget> _buildNoteIcon () {
     if (moodAssessment.note != null) {
       return [
         Container(
@@ -45,7 +45,7 @@ class MoodAssessmentCard extends StatelessWidget {
           height: dp(24),
           child: Center(
             child: Image.asset(
-              CustomIconPaths.comment,
+              CustomIconPaths.note,
               color: CustomColors.purpleMedium,
               width: dp(16),
               height: dp(16),
@@ -136,7 +136,7 @@ class MoodAssessmentCard extends StatelessWidget {
                 child: Container(
                   child: Row(
                     children: [
-                      ..._buildCommentIcon(),
+                      ..._buildNoteIcon(),
                       ..._buildEventIconAndText()
                     ],
                   ),

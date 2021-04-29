@@ -45,8 +45,8 @@ class NoteScreen extends StatelessWidget {
                   title: 'Добавить',
                   onPressed: () {
                     print('Add note button pressed');
-                    String comment = noteTextInput.controller.text;
-                    Navigator.of(context).pop(comment);
+                    String note = noteTextInput.controller.text;
+                    Navigator.of(context).pop(note);
                   },
                 ),
               ),

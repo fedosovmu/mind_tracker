@@ -19,7 +19,7 @@ class CustomIconPaths {
   static const arrowRight = '$_pathToUiIcons/arrow_right.png';
 
   static const edit = '$_pathToUiIcons/edit.png';
-  static const comment = '$_pathToUiIcons/comment.png';
+  static const note = '$_pathToUiIcons/note.png';
   static const settings = '$_pathToUiIcons/settings.png';
 
   static const _pathToEventIcons = 'assets/icons/events';

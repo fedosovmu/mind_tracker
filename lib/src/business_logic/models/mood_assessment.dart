@@ -41,7 +41,7 @@ class MoodAssessment implements Comparable {
       time: moodAssessmentMap.containsKey('time') ? moodAssessmentMap['time'].toDate() : null,
       events: moodAssessmentMap.containsKey('events') ? List<Event>.from(moodAssessmentMap['events']
               .map((e) => Event.fromMap(e))) : null,
-      note: moodAssessmentMap.containsKey('comment') ? moodAssessmentMap['comment'] : null
+      note: moodAssessmentMap.containsKey('note') ? moodAssessmentMap['note'] : null
     );
   }
 
@@ -58,7 +58,7 @@ class MoodAssessment implements Comparable {
       moodAssessmentMap['events'] = List<dynamic>.from(events.map((e) => e.toMap()));
     }
     if (note != null) {
-      moodAssessmentMap['comment'] = note;
+      moodAssessmentMap['note'] = note;
     }
     return moodAssessmentMap;
   }
