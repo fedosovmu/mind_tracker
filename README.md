@@ -1,6 +1,6 @@
 # mind_tracker
 
-A new Flutter application.
+Mood tracker app
 
 ## Getting Started
 
