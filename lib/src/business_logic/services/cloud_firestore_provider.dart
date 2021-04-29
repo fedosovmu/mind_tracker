@@ -56,7 +56,8 @@ class CloudFirestoreProvider {
   static void addUserEvent (Event userEvent) {
     final uid = FirebaseAuthProvider.uid;
     if (uid != null) {
-      final userEventMap = userEvent.toMap();
+      var userEventMap = userEvent.toMap();
+      userEventMap['uid'] = uid;
       _userEventsCollection.add(
           userEventMap
       ).then((value) => print('=== FIRABASE ADD $userEventMap'));
