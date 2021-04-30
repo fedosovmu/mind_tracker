@@ -41,3 +41,4 @@ app.*.map.json
 android/app/release/app-release.aab
 android/app/release/app-release.apk
 android/app/release/output-metadata.json
+android/local.properties
