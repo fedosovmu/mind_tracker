@@ -42,8 +42,8 @@ class LoginOutPanel extends StatelessWidget {
                           print('Exit button pressed');
                           if (authProvider.isAuthorized) {
                             authProvider.signOut();
-                            Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
                           }
+                          Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
                         }
                     )
                   ],
