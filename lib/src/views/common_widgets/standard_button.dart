@@ -20,23 +20,20 @@ class StandardButton extends StatelessWidget {
           title,
           style: CustomTextStyles.buttonMedium,
         ),
-        style: StandardButtonStyle()
+        style: _StandardButtonStyle()
     );
   }
 }
 
 
-class StandardButtonStyle extends ButtonStyle{
-  StandardButtonStyle () : super(
-    animationDuration: Duration(seconds: 3),
+class _StandardButtonStyle extends ButtonStyle{
+  _StandardButtonStyle () : super(
     overlayColor: MaterialStateProperty.all(Colors.transparent),
     minimumSize: MaterialStateProperty.resolveWith((states) => Size(double.infinity, dp(56))),
     backgroundColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.hovered)) {
-        //return Colors.blue;
-      }
       if (states.contains(MaterialState.pressed)) {
-        return Color.lerp(CustomColors.main, CustomColors.white, 0.3);
+        final pressedButtonColor = Color.lerp(CustomColors.main, CustomColors.white, 0.3);
+        return pressedButtonColor;
       }
       return CustomColors.main;
     }),
