@@ -5,22 +5,58 @@ import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
-class StandardButton extends StatelessWidget {
+class StandardButton extends StatefulWidget {
   final String title;
   final Function onPressed;
+  final bool isDisabled;
 
-  StandardButton({@required this.title, @required this.onPressed});
+  StandardButton({@required this.title, @required this.onPressed, this.isDisabled = false});
 
+  @override
+  _StandardButtonState createState() => _StandardButtonState();
+}
+
+class _StandardButtonState extends State<StandardButton> {
+  bool _isPressed = false;
+
+  void _setIsPressed (bool value) {
+    setState(() {
+      _isPressed = value;
+    });
+  }
+
+  Color _getBackgroundColor() {
+    if (widget.isDisabled) {
+      return Color(0xFF504761);
+    }
+    if (_isPressed) {
+      return Color.lerp(CustomColors.main, CustomColors.white, 0.3);
+    }
+    return CustomColors.main;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-        onPressed: onPressed,
-        child: Text(
-          title,
-          style: CustomTextStyles.buttonMedium,
+    return GestureDetector(
+      onTap: widget.onPressed,
+      onTapDown: (_) => _setIsPressed(true),
+      onTapCancel: () => _setIsPressed(false),
+      onTapUp: (_) => _setIsPressed(false),
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 100),
+        height: dp(56),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: _getBackgroundColor(),
+          borderRadius: CustomBorderRadius(dp(16))
         ),
-        style: _StandardButtonStyle()
+        child: Center(
+          child: Text(
+            widget.title,
+            style: CustomTextStyles.buttonMedium,
+          ),
+        ),
+      ),
     );
   }
 }
@@ -31,12 +67,15 @@ class _StandardButtonStyle extends ButtonStyle{
     overlayColor: MaterialStateProperty.all(Colors.transparent),
     minimumSize: MaterialStateProperty.resolveWith((states) => Size(double.infinity, dp(56))),
     backgroundColor: MaterialStateProperty.resolveWith((states) {
+      if (states.contains(MaterialState.disabled)) {
+        return Color(0xFF504761);
+      }
       if (states.contains(MaterialState.pressed)) {
-        final pressedButtonColor = Color.lerp(CustomColors.main, CustomColors.white, 0.3);
-        return pressedButtonColor;
+        return Color.lerp(CustomColors.main, CustomColors.white, 0.3);
       }
       return CustomColors.main;
     }),
+    foregroundColor: MaterialStateProperty.all(Colors.red),
     shape: MaterialStateProperty.all(
         RoundedRectangleBorder(borderRadius: CustomBorderRadius(dp(16)))
     )
