@@ -11,10 +11,10 @@ import 'calendar_day_buttons/calendar_day_buttons.dart';
 
 class Calendar extends StatefulWidget {
   PageController _pageController;
-  final Function onSelectedDateChange;
+  DateTime selectedDate;
+  final Function onSelectedDateChanged;
 
-  Calendar ({@required this.onSelectedDateChange}) {
-    final now = DateTime.now();
+  Calendar ({@required this.selectedDate, @required this.onSelectedDateChanged}) {
     _pageController = PageController();
   }
 
@@ -105,7 +105,8 @@ class _CalendarState extends State<Calendar> {
                 return CalendarDayButtons(
                   year: newMonthDate.year,
                   month: newMonthDate.month,
-                  onSelectedDateChanged: widget.onSelectedDateChange,
+                  selectedDate: widget.selectedDate,
+                  onSelectedDateChanged: widget.onSelectedDateChanged,
                 );
               }
             )

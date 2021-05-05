@@ -32,7 +32,8 @@ class _CalendarPageState extends State<CalendarPage> {
           child: Column(
             children: [
               Calendar(
-                onSelectedDateChange: (DateTime newDate) {
+                selectedDate: _selectedDate,
+                onSelectedDateChanged: (DateTime newDate) {
                   setState(() {
                     _selectedDate = newDate;
                   });

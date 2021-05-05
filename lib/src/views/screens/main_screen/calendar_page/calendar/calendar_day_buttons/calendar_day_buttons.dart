@@ -10,23 +10,15 @@ class CalendarDayButtons extends StatefulWidget {
   final int month;
   final int year;
   final Function onSelectedDateChanged;
+  DateTime selectedDate;
 
-  CalendarDayButtons({@required this.year, @required this.month, @required this.onSelectedDateChanged});
+  CalendarDayButtons({@required this.year, @required this.month, @required this.selectedDate, @required this.onSelectedDateChanged});
 
   @override
   _CalendarDayButtonsState createState() => _CalendarDayButtonsState();
 }
 
 class _CalendarDayButtonsState extends State<CalendarDayButtons> {
-  DateTime _selectedDate;
-
-  @override
-  void initState() {
-    super.initState();
-    final today = DateTime.now().date;
-    _selectedDate = today;
-  }
-
   @override
   Widget build(BuildContext context) {
     final DateTime firstDayInMonth = DateTime(widget.year, widget.month, 1);
@@ -40,11 +32,11 @@ class _CalendarDayButtonsState extends State<CalendarDayButtons> {
         onPressed: () {
           setState(() {
             print('Calendar button presed ${calendarDayButtonDate.toStringDate()}');
-            _selectedDate = calendarDayButtonDate;
+            widget.selectedDate = calendarDayButtonDate;
             widget.onSelectedDateChanged(calendarDayButtonDate);
           });
         },
-        isSelected: calendarDayButtonDate == _selectedDate,
+        isSelected: calendarDayButtonDate == widget.selectedDate,
       );
     });
 
