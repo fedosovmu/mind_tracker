@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mind_tracker/src/business_logic/models/event.dart';
 import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 import 'package:mind_tracker/src/views/utils/content.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
+
 
 class MoodAssessmentCard extends StatelessWidget {
   final MoodAssessment moodAssessment;
@@ -27,76 +29,45 @@ class MoodAssessmentCard extends StatelessWidget {
     return partOfDayWord + timeString;
   }
 
-  static _getEventWord (int eventsNumber) {
-    if ((eventsNumber % 10) == 1 && (eventsNumber < 10 || eventsNumber > 20)) {
-      return 'Событие';
-    } else if ((eventsNumber % 10) > 1 && (eventsNumber % 10) <= 4) {
-      return 'События';
-    } else {
-      return 'Событий';
-    }
+  Widget _buildNoteAndEventIconsString() {
+    return Row (
+      children: [
+        ..._buildEventIcons(),
+        ..._buildNoteIcon(),
+      ]
+    );
   }
 
   List<Widget> _buildNoteIcon () {
     if (moodAssessment.note != null) {
       return [
-        Container(
-          width: dp(24),
-          height: dp(24),
-          child: Center(
-            child: Image.asset(
-              CustomIconPaths.note,
-              color: CustomColors.purpleMedium,
-              width: dp(16),
-              height: dp(16),
-            ),
-          ),
-          decoration: BoxDecoration(
-            color: CustomColors.purpleDark,
-            shape: BoxShape.circle,
-          ),
-        ),
-        SizedBox(width: dp(8))
+        NoteIconInCircle()
       ];
     } else {
       return [];
     }
   }
 
-  List<Widget> _buildEventIconAndText() {
+
+  List<Widget> _buildEventIcons() {
     if (moodAssessment.events != null) {
+      const maxDisplayedEvents = 3;
       final int eventsCount = moodAssessment.events.length;
-      var leftPaddingInDp = 8.5;
-      var topPaddingInDp = 4;
-      var eventsNumberText = '${eventsCount}';
-      var eventsText = _getEventWord(eventsCount);
-      if (eventsCount > 9) {
-        leftPaddingInDp = 5;
-        topPaddingInDp = 3;
-        eventsNumberText = '∞';
+      final int displayedEventsCount = maxDisplayedEvents + 1 >= eventsCount ? eventsCount : maxDisplayedEvents;
+      final int invisibleEventsCount = maxDisplayedEvents + 1 >= eventsCount ? 0 : eventsCount - maxDisplayedEvents;
+
+      final List<Widget> eventIcons = [];
+      for (var i = 0; i < displayedEventsCount; i++) {
+        eventIcons.add(EventIconInCircle(moodAssessment.events[i]));
+        eventIcons.add(SizedBox(width: dp(8)));
       }
-      return [
-        Container(
-          width: dp(24),
-          height: dp(24),
-          padding: EdgeInsets.only(left: dp(leftPaddingInDp), top: dp(topPaddingInDp)),
-          child: Text(
-            eventsNumberText,
-            style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleMedium),
-          ),
-          decoration: BoxDecoration(
-            color: CustomColors.purpleDark,
-            shape: BoxShape.circle,
-          ),
-        ),
-        SizedBox(
-          width: dp(8),
-        ),
-        Text(
-          eventsText,
-          style: CustomTextStyles.basic.copyWith(color: CustomColors.purpleMedium),
-        ),
-      ];
+
+      if (invisibleEventsCount > 0) {
+        eventIcons.add(NumberWithPlusInCircle(invisibleEventsCount));
+        eventIcons.add(SizedBox(width: dp(8)));
+      }
+
+      return eventIcons;
     } else {
       return [];
     }
@@ -134,12 +105,7 @@ class MoodAssessmentCard extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                  child: Row(
-                    children: [
-                      ..._buildNoteIcon(),
-                      ..._buildEventIconAndText()
-                    ],
-                  ),
+                  child: _buildNoteAndEventIconsString(),
                 ),
               )
             ]
@@ -155,6 +121,83 @@ class MoodAssessmentCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: CustomColors.purpleSuperDark,
         borderRadius: BorderRadius.all(Radius.elliptical(16, 16)),
+      ),
+    );
+  }
+}
+
+
+class NumberWithPlusInCircle extends StatelessWidget {
+  final int number;
+
+  NumberWithPlusInCircle(this.number);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: dp(24),
+      height: dp(24),
+      child: Center(
+        child: Text(
+          '+$number',
+          style: CustomTextStyles.caption.copyWith(
+            color: CustomColors.purpleMedium
+          )
+        )
+      ),
+      decoration: BoxDecoration(
+        color: CustomColors.purpleDark,
+        shape: BoxShape.circle,
+      ),
+    );
+  }
+}
+
+
+class EventIconInCircle extends StatelessWidget {
+  final Event event;
+  
+  EventIconInCircle(this.event);
+  
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: dp(24),
+      height: dp(24),
+      child: Center(
+        child: Image.asset(
+          CustomIconPaths.eventIcons[event.icon],
+          color: CustomColors.purpleLight,
+          width: dp(16),
+          height: dp(16),
+        ),
+      ),
+      decoration: BoxDecoration(
+        color: CustomColors.purpleDark,
+        shape: BoxShape.circle,
+      ),
+    );
+  }
+}
+
+
+class NoteIconInCircle extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: dp(24),
+      height: dp(24),
+      child: Center(
+        child: Image.asset(
+          CustomIconPaths.note,
+          color: CustomColors.purpleLight,
+          width: dp(16),
+          height: dp(16),
+        ),
+      ),
+      decoration: BoxDecoration(
+        color: CustomColors.purpleDark,
+        shape: BoxShape.circle,
       ),
     );
   }
