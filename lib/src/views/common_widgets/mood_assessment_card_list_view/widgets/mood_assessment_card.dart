@@ -51,7 +51,7 @@ class MoodAssessmentCard extends StatelessWidget {
 
   List<Widget> _buildEventIcons() {
     if (moodAssessment.events != null) {
-      const maxDisplayedEvents = 3;
+      final maxDisplayedEvents = moodAssessment.note != null ? 3 : 4;
       final int eventsCount = moodAssessment.events.length;
       final int displayedEventsCount = maxDisplayedEvents + 1 >= eventsCount ? eventsCount : maxDisplayedEvents;
       final int invisibleEventsCount = maxDisplayedEvents + 1 >= eventsCount ? 0 : eventsCount - maxDisplayedEvents;
