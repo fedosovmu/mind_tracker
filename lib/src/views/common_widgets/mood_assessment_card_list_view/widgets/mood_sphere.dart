@@ -13,9 +13,11 @@ class MoodSphere extends StatelessWidget {
     return Positioned(
         top: dp(-5) + cardIndex * dp(136+8),
         right: dp(-20),
-        child: Image.asset(
-          'assets/images/common/mood_spheres/$mood.png',
-          width: dp(220),
+        child: IgnorePointer(
+          child: Image.asset(
+            'assets/images/common/mood_spheres/$mood.png',
+            width: dp(220),
+          ),
         )
     );
   }

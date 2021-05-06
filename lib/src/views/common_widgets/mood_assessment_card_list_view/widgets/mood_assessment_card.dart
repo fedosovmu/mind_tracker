@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mind_tracker/src/business_logic/models/event.dart';
 import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
+import 'package:mind_tracker/src/views/common_widgets/mood_assessment_card_list_view/widgets/pressable_card.dart';
 import 'package:mind_tracker/src/views/utils/content.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
@@ -87,52 +88,57 @@ class MoodAssessmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
-      padding: EdgeInsets.only(top: dp(16), left: dp(24), bottom: dp(16)),
-      alignment: Alignment.topLeft,
-      width: double.infinity,
-      height: dp(136),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: dp(41),
-                child: Text(
-                  _getPartOfDayAndTimeString(context, moodAssessment),
-                  style: CustomTextStyles.basic.copyWith(
-                      color: CustomColors.purpleMedium
+    return PressableCard(
+      onPressed: () {
+        print('PRESS CARD $moodAssessment');
+      },
+      child: Container(
+        margin: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
+        padding: EdgeInsets.only(top: dp(16), left: dp(24), bottom: dp(16)),
+        alignment: Alignment.topLeft,
+        width: double.infinity,
+        height: dp(136),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: dp(41),
+                  child: Text(
+                    _getPartOfDayAndTimeString(context, moodAssessment),
+                    style: CustomTextStyles.basic.copyWith(
+                        color: CustomColors.purpleMedium
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                height: dp(41),
-                child: Text(
-                  Content.moodNames[moodAssessment.mood],
-                  style: CustomTextStyles.titleH1,
+                Container(
+                  height: dp(41),
+                  child: Text(
+                    Content.moodNames[moodAssessment.mood],
+                    style: CustomTextStyles.titleH1,
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Container(
-                  child: _buildNoteAndEventIconsString(),
-                ),
-              )
-            ]
-          ),
-          Image.asset(
-            CustomIconPaths.arrowRight,
-            color: CustomColors.purpleMedium,
-            width: dp(32),
-            height: dp(32),
-          )
-        ],
-      ),
-      decoration: BoxDecoration(
-        color: CustomColors.purpleSuperDark,
-        borderRadius: BorderRadius.all(Radius.elliptical(16, 16)),
+                Expanded(
+                  child: Container(
+                    child: _buildNoteAndEventIconsString(),
+                  ),
+                )
+              ]
+            ),
+            Image.asset(
+              CustomIconPaths.arrowRight,
+              color: CustomColors.purpleMedium,
+              width: dp(32),
+              height: dp(32),
+            )
+          ],
+        ),
+        decoration: BoxDecoration(
+          color: CustomColors.purpleSuperDark,
+          borderRadius: BorderRadius.all(Radius.elliptical(16, 16)),
+        ),
       ),
     );
   }
