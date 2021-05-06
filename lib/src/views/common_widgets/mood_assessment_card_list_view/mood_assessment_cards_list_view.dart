@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_assessments_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/mood_assessment_card_list_view/widgets/mood_sphere.dart';
+import 'package:mind_tracker/src/views/common_widgets/mood_assessment_card_list_view/widgets/pressable_card.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:provider/provider.dart';
 import 'widgets/mood_assessment_card.dart';
 import 'widgets/mood_assessment_empty_card.dart';
 
 
-class MoodAssessmentCardsListView extends StatelessWidget {
+class MoodAssessmentCardsListView extends StatefulWidget {
   final DateTime dateForDisplayedMoodAssessments;
   bool _isToday;
   bool _isFuture;
@@ -25,10 +27,48 @@ class MoodAssessmentCardsListView extends StatelessWidget {
   }
 
   @override
+  _MoodAssessmentCardsListViewState createState() => _MoodAssessmentCardsListViewState();
+}
+
+class _MoodAssessmentCardsListViewState extends State<MoodAssessmentCardsListView> with TickerProviderStateMixin {
+  
+  Widget _createMoodAssessmentCardWithPressAnimation(MoodAssessment moodAssessment, AnimationController animationController) {
+    return PressableCard(
+      animationController: animationController,
+      onPressed: () {
+        print('PRESS CARD $moodAssessment');
+      },
+      child: MoodAssessmentCard(moodAssessment)
+    );
+  }
+  
+  Widget _createMoodAssessmentEmptyCardWithPressAnimation(DateTime missedDate, PartOfDay missedPartOfDay) {
+    final animation = _createAnimationController();
+    return PressableCard(
+      animationController: animation,
+      onPressed: () {
+        print('PRESS EMPTY CARD ${missedDate.toStringDate()}, ${missedPartOfDay.toShortString()}');
+        Navigator.pushNamed(context, '/moodAssessment/partOfDay',
+            arguments: {'date': missedDate, 'partOfDay': missedPartOfDay});
+      },
+      child: MoodAssessmentEmptyCard(missedDate, missedPartOfDay),
+    );
+  }
+
+  AnimationController _createAnimationController() {
+    final animation = AnimationController(
+        vsync: this,
+        duration: Duration(milliseconds: 100)
+    );
+    animation.value = 0;
+    return animation;
+  }
+  
+  @override
   Widget build(BuildContext context) {
     return Consumer<MoodAssessmentsProvider>(
         builder: (context, moodAssessmentsProvider, child) {
-          final moodAssessmentsForDay = moodAssessmentsProvider.getMoodAssessmentsForDate(dateForDisplayedMoodAssessments);
+          final moodAssessmentsForDay = moodAssessmentsProvider.getMoodAssessmentsForDate(widget.dateForDisplayedMoodAssessments);
 
           List<Widget> moodAssessmentCards = [];
           List<Widget> moodSpheres = [];
@@ -38,16 +78,17 @@ class MoodAssessmentCardsListView extends StatelessWidget {
                     (moodAssessment) => moodAssessment.partOfDay == partOfDay).toList();
             if (moodAssessmentsForPartOfDay.isNotEmpty) {
               for (var moodAssessment in moodAssessmentsForPartOfDay) {
-                final card = MoodAssessmentCard(moodAssessment);
+                final animation = _createAnimationController();
+                final card = _createMoodAssessmentCardWithPressAnimation(moodAssessment, animation);
                 moodAssessmentCards.add(card);
-                final moodSphere = MoodSphere(cardIndex: cardIndex++, mood: moodAssessment.mood);
+                final moodSphere = MoodSphere(cardIndex: cardIndex++, mood: moodAssessment.mood, animationController: animation);
                 moodSpheres.add(moodSphere);
               }
             } else {
-              final isMayContainEmptyCard = _partOfDaysInWhichMayBeEmptyCards.contains(partOfDay);
-              final isTimeToShow = (!_isFuture && !_isToday) || (_isToday && partOfDay.index < _currentPartOfDay.index);
+              final isMayContainEmptyCard = MoodAssessmentCardsListView._partOfDaysInWhichMayBeEmptyCards.contains(partOfDay);
+              final isTimeToShow = (!widget._isFuture && !widget._isToday) || (widget._isToday && partOfDay.index < widget._currentPartOfDay.index);
               if (isMayContainEmptyCard && isTimeToShow) {
-                final emptyCard = MoodAssessmentEmptyCard(dateForDisplayedMoodAssessments, partOfDay);
+                final emptyCard = _createMoodAssessmentEmptyCardWithPressAnimation(widget.dateForDisplayedMoodAssessments, partOfDay);
                 moodAssessmentCards.add(emptyCard);
                 cardIndex++;
               }

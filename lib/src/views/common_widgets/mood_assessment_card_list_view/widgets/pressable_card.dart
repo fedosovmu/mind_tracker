@@ -4,32 +4,22 @@ import 'package:flutter/material.dart';
 class PressableCard extends StatefulWidget {
   final Function onPressed;
   final Widget child;
+  final AnimationController animationController;
 
-  PressableCard({this.onPressed, this.child});
+  PressableCard({this.onPressed, this.child, this.animationController});
 
   @override
   _PressableCardState createState() => _PressableCardState();
 }
 
-class _PressableCardState extends State<PressableCard> with SingleTickerProviderStateMixin {
-  AnimationController _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    _animation = AnimationController(
-      duration: Duration(milliseconds: 100),
-      vsync: this,
-    );
-    _animation.value = 0;
-  }
+class _PressableCardState extends State<PressableCard> {
 
   void _startAnimation() {
-    _animation.forward(from: 0);
+    widget.animationController.forward();
   }
 
   void _stopAnimation() {
-    _animation.reverse(from: 1);
+    widget.animationController.reverse();
   }
 
   @override
@@ -40,11 +30,12 @@ class _PressableCardState extends State<PressableCard> with SingleTickerProvider
       onTapCancel: () => _stopAnimation(),
       onTap: widget.onPressed,
       child: AnimatedBuilder(
-          animation: _animation,
+          animation: widget.animationController,
           builder: (context, builder) {
-            final animationValue = Curves.easeInOut.transform(_animation.value);
+            final animationValue = Curves.easeInOut.transform(widget.animationController.value);
+            final scale = 1 - 0.03 * animationValue;
             return Transform.scale(
-              scale: 1 - 0.03 * animationValue,
+              scale: scale,
               child: widget.child
             );
           }
