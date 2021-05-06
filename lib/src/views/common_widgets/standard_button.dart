@@ -8,9 +8,9 @@ import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 class StandardButton extends StatefulWidget {
   final String title;
   final Function onPressed;
-  final bool isDisabled;
+  final bool enabled;
 
-  StandardButton({@required this.title, @required this.onPressed, this.isDisabled = false});
+  StandardButton({@required this.title, @required this.onPressed, this.enabled = true});
 
   @override
   _StandardButtonState createState() => _StandardButtonState();
@@ -26,7 +26,7 @@ class _StandardButtonState extends State<StandardButton> {
   }
 
   Color _getBackgroundColor() {
-    if (widget.isDisabled) {
+    if (!widget.enabled) {
       return Color(0xFF504761);
     }
     if (_isPressed) {
@@ -38,7 +38,7 @@ class _StandardButtonState extends State<StandardButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.onPressed,
+      onTap: widget.enabled ? widget.onPressed : null,
       onTapDown: (_) => _setIsPressed(true),
       onTapCancel: () => _setIsPressed(false),
       onTapUp: (_) => _setIsPressed(false),
@@ -53,7 +53,9 @@ class _StandardButtonState extends State<StandardButton> {
         child: Center(
           child: Text(
             widget.title,
-            style: CustomTextStyles.buttonMedium,
+            style: CustomTextStyles.buttonMedium.copyWith(
+              color: widget.enabled ? CustomColors.white : CustomColors.purpleDark
+            ),
           ),
         ),
       ),
