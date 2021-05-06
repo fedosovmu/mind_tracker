@@ -25,6 +25,7 @@ class AddUserEventButton extends StatelessWidget {
               strokeWidth: dp(1),
               color: CustomColors.purpleWhite.withOpacity(0.32),
               dashPattern: [8, 4],
+              padding: EdgeInsets.zero,
               child: Center(
                 child: Image.asset(
                   CustomIconPaths.plus,
