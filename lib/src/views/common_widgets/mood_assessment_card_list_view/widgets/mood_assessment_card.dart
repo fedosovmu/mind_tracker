@@ -30,12 +30,24 @@ class MoodAssessmentCard extends StatelessWidget {
   }
 
   Widget _buildNoteAndEventIconsString() {
-    return Row (
-      children: [
-        ..._buildEventIcons(),
-        ..._buildNoteIcon(),
-      ]
-    );
+    if (moodAssessment.events != null || moodAssessment.note != null) {
+      return Row (
+          children: [
+            ..._buildEventIcons(),
+            ..._buildNoteIcon(),
+          ]
+      );
+    } else {
+      return Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          'Нет событий',
+          style: CustomTextStyles.basic.copyWith(
+            color: CustomColors.purpleMedium
+          ),
+        ),
+      );
+    }
   }
 
   List<Widget> _buildNoteIcon () {
@@ -77,7 +89,7 @@ class MoodAssessmentCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: dp(16), right: dp(16), bottom: dp(8)),
-      padding: EdgeInsets.only(top: dp(16), left: dp(24), bottom: dp(14)),
+      padding: EdgeInsets.only(top: dp(16), left: dp(24), bottom: dp(16)),
       alignment: Alignment.topLeft,
       width: double.infinity,
       height: dp(136),
