@@ -4,7 +4,7 @@ import 'package:mind_tracker/src/views/utils/metrics.dart';
 
 
 class PeriodToggleButtons extends StatefulWidget {
-  static const _periodNames = ['Неделя', '2 Недели', 'Месяц', 'Период'];
+  static const _periodNames = ['Неделя', '2 Недели', 'Месяц', '2 Месяца'];
   final Function onSelectedToggleButtonChanged;
 
   PeriodToggleButtons({this.onSelectedToggleButtonChanged});
