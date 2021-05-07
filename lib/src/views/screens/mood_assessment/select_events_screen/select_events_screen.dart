@@ -1,4 +1,4 @@
-import 'package:collection/equality.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/event.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/events_provider.dart';

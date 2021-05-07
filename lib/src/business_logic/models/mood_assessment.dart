@@ -80,4 +80,14 @@ class MoodAssessment implements Comparable {
       }
     }
   }
+
+  @override
+  bool operator ==(Object other) {
+    return other is MoodAssessment
+        && mood == other.mood
+        && note == other.note
+        && ListEquality().equals(events, other.events)
+        && partOfDay == other.partOfDay
+        && time == other.time;
+  }
 }

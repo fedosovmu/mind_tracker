@@ -32,6 +32,8 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
   int _currentMood;
   String _note;
   List<Event> _selectedEvents;
+  bool _enableAssessMoodButton;
+
   @override
   void initState() {
     super.initState();
@@ -40,10 +42,12 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
       _currentMood = moodAssessment.mood;
       _note = moodAssessment.note ?? '';
       _selectedEvents = moodAssessment.events ?? [];
+      _enableAssessMoodButton = false;
     } else {
       _currentMood = _defaultMood;
       _note = '';
       _selectedEvents = [];
+      _enableAssessMoodButton = true;
     }
   }
   
@@ -117,8 +121,17 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
         );
         break;
       case 'update':
-        print('UPDATED');
+        print('UPDATE');
+        //final updatedMoodAssessment = _createMoodAssessment(context);
         break;
+    }
+  }
+
+  void _updateAssessMoodButtonEnableState() {
+    if (widget.arguments['startMode'] == 'update') {
+      final updatedMoodAssessment = _createMoodAssessment(context);
+      final MoodAssessment oldMoodAssessment =  widget.arguments['moodAssessment'];
+      _enableAssessMoodButton = updatedMoodAssessment != oldMoodAssessment;
     }
   }
 
@@ -134,6 +147,15 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
             events: _selectedEvents,
             note: _note
         );
+      case 'update':
+        final MoodAssessment oldMoodAssessment =  widget.arguments['moodAssessment'];
+        return MoodAssessment(
+            mood: _currentMood,
+            date: oldMoodAssessment.date,
+            partOfDay: oldMoodAssessment.partOfDay,
+            events: _selectedEvents,
+            note: _note,
+        );
     }
   }
 
@@ -144,6 +166,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
     if (note != null) {
       setState(() {
         _note = note;
+        _updateAssessMoodButtonEnableState();
       });
     }
   }
@@ -156,6 +179,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
     if (selectedEvents != null) {
       setState(() {
         _selectedEvents = selectedEvents;
+        _updateAssessMoodButtonEnableState();
       });
     }
   }
@@ -189,6 +213,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                     onChanged: (double value) {
                       setState(() {
                         _currentMood = value.toInt();
+                        _updateAssessMoodButtonEnableState();
                       });
                     },
                   ),
@@ -220,6 +245,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
               padding: EdgeInsets.symmetric(horizontal: dp(16)),
               child: StandardButton(
                 title: widget.arguments['startMode'] == 'update' ? 'Изменить' : 'Оценить',
+                enabled: _enableAssessMoodButton,
                 backgroundColor: CustomColors.moods[_currentMood],
                 onPressed: () {
                   _assessMood();
