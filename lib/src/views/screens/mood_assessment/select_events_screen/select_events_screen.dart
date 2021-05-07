@@ -12,11 +12,17 @@ import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:provider/provider.dart';
 
 
-class SelectEventsScreen extends StatelessWidget {
+class SelectEventsScreen extends StatefulWidget {
   final List<Event> _oldSelectedEvents;
-  List<Widget> _eventIcons;
 
   SelectEventsScreen(this._oldSelectedEvents);
+
+  @override
+  _SelectEventsScreenState createState() => _SelectEventsScreenState();
+}
+
+class _SelectEventsScreenState extends State<SelectEventsScreen> {
+  List<Widget> _eventIcons;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +45,7 @@ class SelectEventsScreen extends StatelessWidget {
               child: Consumer<EventsProvider>(
                 builder: (context, eventsProvider, child) {
                   _eventIcons = eventsProvider.events.map((event) {
-                    final bool isSelected = _oldSelectedEvents.contains(event);
+                    final bool isSelected = widget._oldSelectedEvents.contains(event);
                     return EventIcon(event, isSelected: isSelected);
                   }).toList();
                   return GridView.count(
