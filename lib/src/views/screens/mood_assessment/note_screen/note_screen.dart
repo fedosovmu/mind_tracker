@@ -18,13 +18,16 @@ class NoteScreen extends StatefulWidget {
 
 class _NoteScreenState extends State<NoteScreen> {
   TextEditingController _controller;
+  bool _enableButton = true;
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController(text: widget.oldNote);
     _controller.addListener(() {
-      setState(() {});
+      setState(() {
+        _enableButton = widget.oldNote == '' ? true : (_controller.text != widget.oldNote);
+      });
     });
   }
 
@@ -56,7 +59,7 @@ class _NoteScreenState extends State<NoteScreen> {
                 minimum: EdgeInsets.only(bottom: dp(16)),
                 child: StandardButton(
                   title: widget.oldNote == '' ? 'Добавить' : 'Сохранить',
-                  enabled: widget.oldNote == '' ?  true : (_controller.text != widget.oldNote),
+                  enabled: _enableButton,
                   onPressed: () {
                     print('Add note button pressed');
                     String note = _controller.text;
