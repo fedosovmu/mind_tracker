@@ -26,7 +26,7 @@ class _NoteScreenState extends State<NoteScreen> {
     _controller = TextEditingController(text: widget.oldNote);
     _controller.addListener(() {
       setState(() {
-        _enableButton = widget.oldNote == '' ? true : (_controller.text != widget.oldNote);
+        _enableButton = widget.oldNote == '' ? _controller.text != '' : (_controller.text != widget.oldNote);
       });
     });
   }
