@@ -12,7 +12,7 @@ class FirebaseAuthProvider {
 
   static Stream<String> _getAuthStateChanges() {
     return FirebaseAuth.instance.authStateChanges().map((user) {
-      print('=== Auth State Changed: ${user != null ? user.uid : null}');
+      print('[FIRABASE-AUTH] Auth State Changed: ${user != null ? user.uid : null}');
       _user = user;
       if (user != null) {
         uid = user.uid;
@@ -30,7 +30,7 @@ class FirebaseAuthProvider {
           password: password
       );
     } on FirebaseAuthException catch (e) {
-      print('[ERROR] ${e.code}');
+      print('[FIRABASE-AUTH] Error ${e.code}');
       return e.code;
     }
     return null;
@@ -43,13 +43,14 @@ class FirebaseAuthProvider {
           password: password
       );
     } on FirebaseAuthException catch (e) {
-      print('[ERROR] ${e.code}');
+      print('[FIRABASE-AUTH] Error ${e.code}');
       return e.code;
     }
     return null;
   }
 
   static Future<void> signOut() {
+    print('[FIRABASE-AUTH] Sign out');
     FirebaseAuth.instance.signOut();
   }
 }

@@ -48,7 +48,7 @@ class MoodAssessmentsProvider extends ChangeNotifier {
       notifyListeners();
       final docId = await CloudFirestoreProvider.addMoodAssessment(moodAssessment);
       moodAssessment.docId = docId;
-      print('=== Mood assessment id updated $moodAssessment');
+      print('[MOOD ASSESSMENT PROVIDER] Mood assessment id updated $moodAssessment');
       notifyListeners();
     }
   }
