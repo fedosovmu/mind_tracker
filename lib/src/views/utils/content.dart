@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 
 
@@ -61,4 +63,24 @@ class Content {
     PartOfDay.evening: 'Вечер',
     PartOfDay.night: 'Ночь',
   };
+
+  static const partOfDayNamesInInstrumentalCase = {
+    PartOfDay.morning: 'утром',
+    PartOfDay.day: 'днем',
+    PartOfDay.evening: 'вечером',
+    PartOfDay.night: 'ночью',
+  };
+
+  static String getTimeString(BuildContext context, DateTime time) {
+    final is24HourFormat = MediaQuery.of(context).alwaysUse24HourFormat;
+    if (is24HourFormat) {
+      return DateFormat('Hm').format(time);
+    } else {
+      return DateFormat('jm').format(time);
+    }
+  }
+
+  static String getDateString (DateTime date) {
+    return '${date.day} ${Content.monthNamesInParentCase[date.month]}';
+  }
 }

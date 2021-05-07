@@ -29,22 +29,26 @@ class MoodAssessmentScreen extends StatefulWidget {
 
 class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
   static const _defaultMood = 4;
-  int _currentMood = _defaultMood;
+  int _currentMood;
   String _note;
   List<Event> _selectedEvents;
   @override
   void initState() {
     super.initState();
-    _note = '';
-    _selectedEvents = [];
+    if (widget.arguments['startMode'] == 'update') {
+      final MoodAssessment moodAssessment = widget.arguments['moodAssessment'];
+      _currentMood = moodAssessment.mood;
+      _note = moodAssessment.note ?? '';
+      _selectedEvents = moodAssessment.events ?? [];
+    } else {
+      _currentMood = _defaultMood;
+      _note = '';
+      _selectedEvents = [];
+    }
   }
   
   void _goToHomeScreen() {
     Navigator.pop(context);
-  }
-
-  String _getDateWord (DateTime date) {
-    return '${date.day} ${Content.monthNamesInParentCase[date.month]}';
   }
 
   String _getTitle (BuildContext context) {
@@ -54,15 +58,53 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
       case 'partOfDay':
         final DateTime date = widget.arguments['date'];
         final PartOfDay partOfDay = widget.arguments['partOfDay'];
-        final partOfDayWord = Content.partOfDayNames[partOfDay];
+        final partOfDayWord = Content.partOfDayNames[partOfDay].toLowerCase();
+        final partOfDayWordInInstrumentalCase = Content.partOfDayNamesInInstrumentalCase[partOfDay];
+        final dateString = Content.getDateString(date);
 
         final isToday = DateTime.now().date == date;
+        final yesterday = DateTime.now().date.subtract(Duration(days: 1));
+        final isYesterday = yesterday == date;
+
         if (isToday) {
           return 'Настроение за $partOfDayWord';
         }
-        return '${_getDateWord(date)}, $partOfDayWord';
+        if (isYesterday) {
+          return 'Вчера $partOfDayWordInInstrumentalCase';
+        }
+        return '$dateString $partOfDayWordInInstrumentalCase';
       case 'update':
-        return 'Переоценка';
+        final MoodAssessment moodAssessment = widget.arguments['moodAssessment'];
+        final partOfDay = moodAssessment.partOfDay;
+
+        final isToday = DateTime.now().date == moodAssessment.date;
+        final yesterday = DateTime.now().date.subtract(Duration(days: 1));
+        final isYesterday = yesterday == moodAssessment.date;
+        final isHasTime = moodAssessment.time != null;
+
+        final partOfDayWord = Content.partOfDayNames[moodAssessment.partOfDay].toLowerCase();
+        final partOfDayWordInInstrumentalCase = Content.partOfDayNamesInInstrumentalCase[partOfDay];
+        final dateString = Content.getDateString(moodAssessment.date);
+        final timeString = isHasTime ? Content.getTimeString(context, moodAssessment.time) : null;
+
+        if (isToday && isHasTime) {
+          return 'Сегодня $partOfDayWordInInstrumentalCase в $timeString';
+        } 
+        if (isToday && !isHasTime) {
+          return 'Настроение за $partOfDayWord';
+        }
+        if (isYesterday && isHasTime) {
+          return 'Вчера $partOfDayWordInInstrumentalCase в $timeString';
+        }
+        if (isYesterday && !isHasTime) {
+          return 'Вчера $partOfDayWordInInstrumentalCase';
+        }
+        if (!isToday && isHasTime) {
+          return '$dateString $partOfDayWordInInstrumentalCase в $timeString';
+        }
+        if (!isToday && !isHasTime) {
+          return '$dateString $partOfDayWordInInstrumentalCase';
+        }
     }
   }
 
@@ -177,7 +219,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: dp(16)),
               child: StandardButton(
-                title: 'Оценить',
+                title: widget.arguments['startMode'] == 'update' ? 'Изменить' : 'Оценить',
                 backgroundColor: CustomColors.moods[_currentMood],
                 onPressed: () {
                   _assessMood();
