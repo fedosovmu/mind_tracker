@@ -31,7 +31,7 @@ class MoodAssessmentEmptyCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Оценить за ${Content.partOfDayNames[missedPartOfDay]}',
+            'Оценить за ${Content.partOfDayNames[missedPartOfDay].toLowerCase()}',
             style: CustomTextStyles.buttonMedium,
           ),
           SizedBox(
