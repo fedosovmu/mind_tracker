@@ -41,11 +41,24 @@ class MoodAssessmentsProvider extends ChangeNotifier {
     return weekMoodAssessments;
   }
 
-  void add(MoodAssessment moodAssessment) {
+  void add(MoodAssessment moodAssessment) async {
     final uid = FirebaseAuthProvider.uid;
     if (uid != null) {
       _moodAssessments.add(moodAssessment);
-      CloudFirestoreProvider.addMoodAssessment(moodAssessment);
+      notifyListeners();
+      final docId = await CloudFirestoreProvider.addMoodAssessment(moodAssessment);
+      moodAssessment.docId = docId;
+      print('=== Mood assessment id updated $moodAssessment');
+      notifyListeners();
+    }
+  }
+
+  void update(MoodAssessment updatedMoodAssessment) {
+    final uid = FirebaseAuthProvider.uid;
+    if (uid != null) {
+      _moodAssessments.removeWhere((moodAssessment) => moodAssessment.docId == updatedMoodAssessment.docId);
+      _moodAssessments.add(updatedMoodAssessment);
+      CloudFirestoreProvider.updateMoodAssessment(updatedMoodAssessment, updatedMoodAssessment.docId);
       notifyListeners();
     }
   }

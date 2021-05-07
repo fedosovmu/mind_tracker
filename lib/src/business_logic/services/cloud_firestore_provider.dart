@@ -16,10 +16,10 @@ class CloudFirestoreProvider {
     if (uid != null) {
       final moodAssessmentsQuerySnapshot = await _moodAssessmentsCollection
           .where('uid', isEqualTo: uid).get();
-      print('=== MOOD ASSESSMENTS LOADED (${moodAssessmentsQuerySnapshot.docs.length})');
+      print('[FIREBASE] Mood assessments loaded (${moodAssessmentsQuerySnapshot.docs.length})');
 
-      final List<MoodAssessment> moodAssessments = moodAssessmentsQuerySnapshot.docs.map((mood_assessment_doc) {
-        return MoodAssessment.fromMap(mood_assessment_doc.data());
+      final List<MoodAssessment> moodAssessments = moodAssessmentsQuerySnapshot.docs.map((moodAssessmentDoc) {
+        return MoodAssessment.fromMap(moodAssessmentDoc.data(), moodAssessmentDoc.id);
       }).toList();
 
       return moodAssessments;
@@ -28,15 +28,24 @@ class CloudFirestoreProvider {
     }
   }
 
-  static void addMoodAssessment(MoodAssessment moodAssessment) {
+  static Future<String> addMoodAssessment(MoodAssessment moodAssessment) async {
     final uid = FirebaseAuthProvider.uid;
     if (uid != null) {
+      print('[FIREBASE] Add mood assessment $moodAssessment');
       var moodAssessmentMap = moodAssessment.toMap();
-      print('$moodAssessmentMap');
       moodAssessmentMap['uid'] = uid;
-      _moodAssessmentsCollection.add(
-          moodAssessmentMap
-      ).then((value) => print('=== FIREBASE ADD ($moodAssessment)'));
+      final documentRef = await _moodAssessmentsCollection.add(moodAssessmentMap);
+      return documentRef.id;
+    } else {
+      return null;
+    }
+  }
+
+  static void updateMoodAssessment(MoodAssessment updatedMoodAssessment, String docId) {
+    final uid = FirebaseAuthProvider.uid;
+    if (uid != null) {
+      print('[FIRABASE] Update mood assessment $updatedMoodAssessment');
+      _moodAssessmentsCollection.doc(docId).update(updatedMoodAssessment.toMap());
     }
   }
 
@@ -44,7 +53,7 @@ class CloudFirestoreProvider {
     final uid = FirebaseAuthProvider.uid;
     if (uid != null) {
       final eventQuerySnapshot = await _userEventsCollection.where('uid', isEqualTo: uid).get();
-      print('=== USER EVENTS LOADED (${eventQuerySnapshot.docs.length})');
+      print('[FIREBASE] User events loaded (${eventQuerySnapshot.docs.length})');
       final List<Event> events = eventQuerySnapshot.docs.map((eventDoc) {
         return Event.fromMap(eventDoc.data()) ;
       }).toList();
@@ -57,11 +66,12 @@ class CloudFirestoreProvider {
   static void addUserEvent (Event userEvent) {
     final uid = FirebaseAuthProvider.uid;
     if (uid != null) {
+      print('[FIREBASE] Add user event $userEvent');
       var userEventMap = userEvent.toMap();
       userEventMap['uid'] = uid;
       _userEventsCollection.add(
           userEventMap
-      ).then((value) => print('=== FIRABASE ADD $userEventMap'));
+      );
     }
   }
 }

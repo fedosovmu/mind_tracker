@@ -121,8 +121,8 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
         );
         break;
       case 'update':
-        print('UPDATE');
-        //final updatedMoodAssessment = _createMoodAssessment(context);
+        final updatedMoodAssessment = _createMoodAssessment(context);
+        Provider.of<MoodAssessmentsProvider>(context, listen: false).update(updatedMoodAssessment);
         break;
     }
   }
@@ -150,6 +150,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
       case 'update':
         final MoodAssessment oldMoodAssessment =  widget.arguments['moodAssessment'];
         return MoodAssessment(
+            docId: oldMoodAssessment.docId,
             mood: _currentMood,
             date: oldMoodAssessment.date,
             partOfDay: oldMoodAssessment.partOfDay,

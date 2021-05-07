@@ -37,8 +37,12 @@ class _MoodAssessmentCardsListViewState extends State<MoodAssessmentCardsListVie
       animationController: animationController,
       onPressed: () {
         print('PRESS CARD $moodAssessment');
-        Navigator.pushNamed(context, '/moodAssessment',
-            arguments: {'startMode': 'update', 'moodAssessment': moodAssessment});
+        if (moodAssessment.isSavedToCloudFirestore()) {
+          Navigator.pushNamed(context, '/moodAssessment',
+              arguments: {'startMode': 'update', 'moodAssessment': moodAssessment});
+        } else {
+          print('[ERROR] Mood assessment not saved to cloud firestore');
+        }
       },
       child: MoodAssessmentCard(moodAssessment)
     );

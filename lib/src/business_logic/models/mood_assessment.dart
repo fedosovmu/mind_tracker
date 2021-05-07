@@ -7,6 +7,7 @@ import 'package:mind_tracker/src/business_logic/services/date_time_and_string_ex
 
 
 class MoodAssessment implements Comparable {
+  String docId;
   final int mood;
   PartOfDay partOfDay;
   DateTime date;
@@ -14,7 +15,7 @@ class MoodAssessment implements Comparable {
   List<Event> events;
   String note;
 
-  MoodAssessment({@required this.mood, this.partOfDay, this.date, this.time, this.events, this.note}) {
+  MoodAssessment({@required this.mood, this.partOfDay, this.date, this.time, this.events, this.note, this.docId}) {
     if (partOfDay == null) {
       final now = DateTime.now();
       date = now.date;
@@ -33,8 +34,13 @@ class MoodAssessment implements Comparable {
     }
   }
 
-  static MoodAssessment fromMap(Map<String, dynamic> moodAssessmentMap) {
+  bool isSavedToCloudFirestore() {
+    return docId != null;
+  }
+
+  static MoodAssessment fromMap(Map<String, dynamic> moodAssessmentMap, String docId) {
     return MoodAssessment(
+      docId: docId,
       date: moodAssessmentMap['date'].toString().toDateTime(),
       mood: moodAssessmentMap['mood'],
       partOfDay: PartOfDayBuilder.fromShortString(moodAssessmentMap['part_of_day']),
@@ -65,7 +71,9 @@ class MoodAssessment implements Comparable {
 
   @override
   String toString() {
-    return toMap().toString();
+    final moodAssessmentMap = toMap();
+    moodAssessmentMap['docId'] = docId;
+    return moodAssessmentMap.toString();
   }
 
   @override
@@ -84,9 +92,11 @@ class MoodAssessment implements Comparable {
   @override
   bool operator ==(Object other) {
     return other is MoodAssessment
+        && docId == other.docId
         && mood == other.mood
         && note == other.note
         && ListEquality().equals(events, other.events)
+        && date == other.date
         && partOfDay == other.partOfDay
         && time == other.time;
   }
