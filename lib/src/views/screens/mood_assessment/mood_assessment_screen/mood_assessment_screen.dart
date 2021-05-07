@@ -19,10 +19,9 @@ import 'package:mind_tracker/src/business_logic/services/date_time_and_string_ex
 
 
 class MoodAssessmentScreen extends StatefulWidget {
-  final bool firstStart;
   final Map arguments;
 
-  MoodAssessmentScreen({this.firstStart = false, this.arguments});
+  MoodAssessmentScreen({this.arguments});
 
   @override
   _MoodAssessmentScreenState createState() => _MoodAssessmentScreenState();
@@ -41,11 +40,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
   }
   
   void _goToHomeScreen() {
-    if (widget.firstStart) {
-      Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
-    } else {
-      Navigator.pop(context);
-    }
+    Navigator.pop(context);
   }
 
   String _getDateWord (DateTime date) {
@@ -53,55 +48,54 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
   }
 
   String _getTitle (BuildContext context) {
-    if (widget.arguments != null) {
-      final now = DateTime.now();
-      final today = now.date;
-      final DateTime date = widget.arguments['date'];
-      final PartOfDay partOfDay = widget.arguments['partOfDay'];
-      final partOfDayWord = Content.partOfDayNames[partOfDay];
+    switch (widget.arguments['startMode']) {
+      case 'now':
+        return 'Как настроение?';
+      case 'partOfDay':
+        final now = DateTime.now();
+        final today = now.date;
+        final DateTime date = widget.arguments['date'];
+        final PartOfDay partOfDay = widget.arguments['partOfDay'];
+        final partOfDayWord = Content.partOfDayNames[partOfDay];
 
-      if (date == today) {
-        return 'Настроение за $partOfDayWord';
-      } else {
-        return '${_getDateWord(date)}, $partOfDayWord';
-      }
-    } else {
-      return 'Как настроение?';
+        if (date == today) {
+          return 'Настроение за $partOfDayWord';
+        } else {
+          return '${_getDateWord(date)}, $partOfDayWord';
+        }
+    }
+  }
+
+  void _assessMood() {
+    switch (widget.arguments['startMode']) {
+      case 'now':
+      case 'partOfDay':
+        Provider.of<MoodAssessmentsProvider>(context, listen: false).add(
+            _createMoodAssessment(context)
+        );
+        break;
     }
   }
 
   MoodAssessment _createMoodAssessment(BuildContext context){
-    if (widget.arguments != null) {
-      final now = DateTime.now();
-      final today = now.date;
-      final PartOfDay currentPartOfDay = PartOfDayBuilder.fromDateTime(now);
-      final DateTime date = widget.arguments['date'];
-      final PartOfDay partOfDay = widget.arguments['partOfDay'];
-
-      if (date == today && partOfDay == currentPartOfDay) {
+    switch (widget.arguments['startMode']) {
+      case 'now':
+        return MoodAssessment(mood: _currentMood, events: _selectedEvents, note: _note);
+      case 'partOfDay':
         return MoodAssessment(
-          mood: _currentMood,
-          events: _selectedEvents,
-          note: _note
+            mood: _currentMood,
+            date: widget.arguments['date'],
+            partOfDay: widget.arguments['partOfDay'],
+            events: _selectedEvents,
+            note: _note
         );
-      } else {
-        return MoodAssessment(
-          mood: _currentMood,
-          date: widget.arguments['date'],
-          partOfDay: widget.arguments['partOfDay'],
-          events: _selectedEvents,
-          note: _note
-        );
-      }
-    } else {
-      return MoodAssessment(mood: _currentMood, events: _selectedEvents, note: _note);
     }
   }
 
   void _noteButtonCallback () async {
     print('Note button pressed');
     final note = await Navigator.of(context).pushNamed('/note', arguments: _note);
-    print('=== NOTE $note');
+    print('ADD NOTE $note');
     if (note != null) {
       setState(() {
         _note = note;
@@ -110,10 +104,10 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
   }
 
   void _selectEventsButtonCallback () async {
-    print('Event button pressed');
+    print('Events button pressed');
     final selectedEvents = await Navigator.of(context)
         .pushNamed('/selectEvents', arguments: _selectedEvents);
-    print('Selected events $selectedEvents');
+    print('SELECT EVENTS $selectedEvents');
     if (selectedEvents != null) {
       setState(() {
         _selectedEvents = selectedEvents;
@@ -180,9 +174,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
             AssessMoodColoredButton(
               currentMood: _currentMood,
               onPressed: () {
-                Provider.of<MoodAssessmentsProvider>(context, listen: false).add(
-                    _createMoodAssessment(context)
-                );
+                _assessMood();
                 _goToHomeScreen();
               },
             )

@@ -48,8 +48,8 @@ class _MoodAssessmentCardsListViewState extends State<MoodAssessmentCardsListVie
       animationController: animation,
       onPressed: () {
         print('PRESS EMPTY CARD ${missedDate.toStringDate()}, ${missedPartOfDay.toShortString()}');
-        Navigator.pushNamed(context, '/moodAssessment/partOfDay',
-            arguments: {'date': missedDate, 'partOfDay': missedPartOfDay});
+        Navigator.pushNamed(context, '/moodAssessment',
+            arguments: {'startMode': 'partOfDay', 'date': missedDate, 'partOfDay': missedPartOfDay});
       },
       child: MoodAssessmentEmptyCard(missedDate, missedPartOfDay),
     );

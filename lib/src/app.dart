@@ -39,13 +39,7 @@ class MindTrackerApp extends StatelessWidget {
           case '/main':
             screenToGo = MainScreen();
             break;
-          case '/moodAssessment/firstStart':
-            screenToGo = MoodAssessmentScreen(firstStart: true);
-            break;
-          case '/moodAssessment/now':
-            screenToGo = MoodAssessmentScreen();
-            break;
-          case '/moodAssessment/partOfDay':
+          case '/moodAssessment':
             final Map arguments = settings.arguments;
             screenToGo = MoodAssessmentScreen(arguments: arguments);
             break;
