@@ -5,11 +5,9 @@ import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
 class NoteTextInput extends StatelessWidget {
-  TextEditingController controller;
+  final TextEditingController controller;
 
-  NoteTextInput (String text) {
-    controller = TextEditingController(text: text);
-  }
+  NoteTextInput (this.controller);
 
   @override
   Widget build(BuildContext context) {

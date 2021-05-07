@@ -7,16 +7,29 @@ import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 
 
-class NoteScreen extends StatelessWidget {
-  String _note;
+class NoteScreen extends StatefulWidget {
+  final String oldNote;
 
-  NoteScreen(oldNote) {
-    _note = oldNote;
+  NoteScreen(this.oldNote);
+
+  @override
+  _NoteScreenState createState() => _NoteScreenState();
+}
+
+class _NoteScreenState extends State<NoteScreen> {
+  TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.oldNote);
+    _controller.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final noteTextInput = NoteTextInput(_note);
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Заметка',
@@ -33,7 +46,7 @@ class NoteScreen extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(left: dp(16), right: dp(16), top: dp(16)),
-              child: noteTextInput,
+              child: NoteTextInput(_controller),
             ),
             Positioned(
               left: dp(16),
@@ -42,10 +55,11 @@ class NoteScreen extends StatelessWidget {
               child: SafeArea(
                 minimum: EdgeInsets.only(bottom: dp(16)),
                 child: StandardButton(
-                  title: 'Добавить',
+                  title: widget.oldNote == '' ? 'Добавить' : 'Сохранить',
+                  enabled: widget.oldNote == '' ?  true : (_controller.text != widget.oldNote),
                   onPressed: () {
                     print('Add note button pressed');
-                    String note = noteTextInput.controller.text;
+                    String note = _controller.text;
                     Navigator.of(context).pop(note);
                   },
                 ),
