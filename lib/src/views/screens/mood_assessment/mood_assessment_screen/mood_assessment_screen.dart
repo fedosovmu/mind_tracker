@@ -3,13 +3,13 @@ import 'package:mind_tracker/src/business_logic/models/event.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_assessments_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
+import 'package:mind_tracker/src/views/common_widgets/standard_button.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/mood_assessor/mood_assessor.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/add_button.dart';
-import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/'
-    'assess_mood_colored_button.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/edit_note_button.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/edit_selected_events_button.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:provider/provider.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/content.dart';
@@ -52,17 +52,17 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
       case 'now':
         return 'Как настроение?';
       case 'partOfDay':
-        final now = DateTime.now();
-        final today = now.date;
         final DateTime date = widget.arguments['date'];
         final PartOfDay partOfDay = widget.arguments['partOfDay'];
         final partOfDayWord = Content.partOfDayNames[partOfDay];
 
-        if (date == today) {
+        final isToday = DateTime.now().date == date;
+        if (isToday) {
           return 'Настроение за $partOfDayWord';
-        } else {
-          return '${_getDateWord(date)}, $partOfDayWord';
         }
+        return '${_getDateWord(date)}, $partOfDayWord';
+      case 'update':
+        return 'Переоценка';
     }
   }
 
@@ -73,6 +73,9 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
         Provider.of<MoodAssessmentsProvider>(context, listen: false).add(
             _createMoodAssessment(context)
         );
+        break;
+      case 'update':
+        print('UPDATED');
         break;
     }
   }
@@ -171,13 +174,17 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
                 ],
               ),
             ),
-            AssessMoodColoredButton(
-              currentMood: _currentMood,
-              onPressed: () {
-                _assessMood();
-                _goToHomeScreen();
-              },
-            )
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: dp(16)),
+              child: StandardButton(
+                title: 'Оценить',
+                backgroundColor: CustomColors.moods[_currentMood],
+                onPressed: () {
+                  _assessMood();
+                  _goToHomeScreen();
+                },
+              ),
+            ),
           ],
         ),
       ),

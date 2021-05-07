@@ -37,6 +37,8 @@ class _MoodAssessmentCardsListViewState extends State<MoodAssessmentCardsListVie
       animationController: animationController,
       onPressed: () {
         print('PRESS CARD $moodAssessment');
+        Navigator.pushNamed(context, '/moodAssessment',
+            arguments: {'startMode': 'update', 'moodAssessment': moodAssessment});
       },
       child: MoodAssessmentCard(moodAssessment)
     );

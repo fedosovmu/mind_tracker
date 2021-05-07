@@ -9,8 +9,9 @@ class StandardButton extends StatefulWidget {
   final String title;
   final Function onPressed;
   final bool enabled;
+  final Color backgroundColor;
 
-  StandardButton({@required this.title, @required this.onPressed, this.enabled = true});
+  StandardButton({@required this.title, @required this.onPressed, this.enabled = true, this.backgroundColor = CustomColors.main});
 
   @override
   _StandardButtonState createState() => _StandardButtonState();
@@ -30,9 +31,9 @@ class _StandardButtonState extends State<StandardButton> {
       return Color(0xFF504761);
     }
     if (_isPressed) {
-      return Color.lerp(CustomColors.main, CustomColors.white, 0.3);
+      return Color.lerp(widget.backgroundColor, CustomColors.white, 0.3);
     }
-    return CustomColors.main;
+    return widget.backgroundColor;
   }
 
   @override
@@ -61,25 +62,4 @@ class _StandardButtonState extends State<StandardButton> {
       ),
     );
   }
-}
-
-
-class _StandardButtonStyle extends ButtonStyle{
-  _StandardButtonStyle () : super(
-    overlayColor: MaterialStateProperty.all(Colors.transparent),
-    minimumSize: MaterialStateProperty.resolveWith((states) => Size(double.infinity, dp(56))),
-    backgroundColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.disabled)) {
-        return Color(0xFF504761);
-      }
-      if (states.contains(MaterialState.pressed)) {
-        return Color.lerp(CustomColors.main, CustomColors.white, 0.3);
-      }
-      return CustomColors.main;
-    }),
-    foregroundColor: MaterialStateProperty.all(Colors.red),
-    shape: MaterialStateProperty.all(
-        RoundedRectangleBorder(borderRadius: CustomBorderRadius(dp(16)))
-    )
-  );
 }
