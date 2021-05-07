@@ -13,7 +13,8 @@ class EventIcon extends StatefulWidget {
 
   final Event event;
   bool isSelected;
-  EventIcon(this.event, {this.isSelected = false});
+  final Function onChanged;
+  EventIcon(this.event, {this.isSelected = false, this.onChanged});
 
   _EventIconState _state;
 
@@ -31,6 +32,9 @@ class _EventIconState extends State<EventIcon> {
       onTap: () {
         setState(() {
           widget.isSelected = !widget.isSelected;
+          if (widget.onChanged != null) {
+            widget.onChanged();
+          }
         });
         print('Event selected');
       },

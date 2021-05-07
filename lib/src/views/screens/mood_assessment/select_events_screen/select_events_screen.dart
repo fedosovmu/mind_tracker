@@ -1,3 +1,4 @@
+import 'package:collection/equality.dart';
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/event.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/events_provider.dart';
@@ -13,16 +14,47 @@ import 'package:provider/provider.dart';
 
 
 class SelectEventsScreen extends StatefulWidget {
-  final List<Event> _oldSelectedEvents;
+  final List<Event> oldSelectedEvents;
 
-  SelectEventsScreen(this._oldSelectedEvents);
+  SelectEventsScreen(this.oldSelectedEvents);
 
   @override
   _SelectEventsScreenState createState() => _SelectEventsScreenState();
 }
 
 class _SelectEventsScreenState extends State<SelectEventsScreen> {
-  List<Widget> _eventIcons;
+  List<Event> _selectedEvents;
+  List<EventIcon> _eventIcons;
+  bool _enableButton;
+
+  List<EventIcon> _convertEventsToEventIcons(List<Event> events) {
+    return events.map((event) => EventIcon(
+                    event,
+                    onChanged: () {
+                      setState(() {
+                        _updateSelectedEvents();
+                        _enableButton = _isButtonEnable();
+                      });
+                    },
+                    isSelected: _selectedEvents.contains(event))).toList();
+  }
+
+  void _updateSelectedEvents() {
+    _selectedEvents = _eventIcons.where(
+            (eventIcon) => eventIcon.isSelected).map(
+            (eventIcon) => eventIcon.event).toList();
+  }
+
+  bool _isButtonEnable() {
+    return !ListEquality().equals(widget.oldSelectedEvents, _selectedEvents);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedEvents = widget.oldSelectedEvents;
+    _enableButton = _isButtonEnable();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +76,7 @@ class _SelectEventsScreenState extends State<SelectEventsScreen> {
             child: GlowDisabler(
               child: Consumer<EventsProvider>(
                 builder: (context, eventsProvider, child) {
-                  _eventIcons = eventsProvider.events.map((event) {
-                    final bool isSelected = widget._oldSelectedEvents.contains(event);
-                    return EventIcon(event, isSelected: isSelected);
-                  }).toList();
+                  _eventIcons = _convertEventsToEventIcons(eventsProvider.events);
                   return GridView.count(
                     physics: ClampingScrollPhysics(),
                     mainAxisSpacing: dp(16),
@@ -79,17 +108,11 @@ class _SelectEventsScreenState extends State<SelectEventsScreen> {
               child: SafeArea(
                 minimum: EdgeInsets.only(bottom: dp(16)),
                 child: StandardButton(
-                  title: 'Готово',
+                  title: widget.oldSelectedEvents.isEmpty ? 'Готово' : 'Сохранить',
+                  enabled: _enableButton,
                   onPressed: () {
                     print('Select events button pressed');
-                    final List<Event> selectedEvents = [];
-                    for (EventIcon eventIcon in _eventIcons) {
-                      if (eventIcon.isSelected) {
-                        final event = eventIcon.event;
-                        selectedEvents.add(event);
-                      }
-                    }
-                    Navigator.of(context).pop(selectedEvents);
+                    Navigator.of(context).pop(_selectedEvents);
                   }
                 ),
               )

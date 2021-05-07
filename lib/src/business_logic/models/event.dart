@@ -25,4 +25,9 @@ class Event {
   String toString() {
     return toMap().toString();
   }
+
+  @override
+  bool operator ==(Object other) {
+    return other is Event && other.icon == icon && other.title == title;
+  }
 }
