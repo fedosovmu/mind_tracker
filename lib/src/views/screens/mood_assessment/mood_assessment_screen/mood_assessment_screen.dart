@@ -153,6 +153,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
             mood: _currentMood,
             date: oldMoodAssessment.date,
             partOfDay: oldMoodAssessment.partOfDay,
+            time: oldMoodAssessment.time,
             events: _selectedEvents,
             note: _note,
         );
