@@ -11,6 +11,7 @@ class EventTitleInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      textCapitalization: TextCapitalization.sentences,
       decoration: CustomInputDecoration(
           hintText: 'Введите название события'
       ),
