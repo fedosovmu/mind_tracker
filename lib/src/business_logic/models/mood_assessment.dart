@@ -51,7 +51,7 @@ class MoodAssessment implements Comparable {
     );
   }
 
-  Map<String, dynamic> toMap () {
+  Map<String, dynamic> _toMap () {
     final moodAssessmentMap = {
       'date': date.toStringDate(),
       'mood': mood,
@@ -69,8 +69,14 @@ class MoodAssessment implements Comparable {
     return moodAssessmentMap;
   }
 
+  Map<String, dynamic> toMapForCreate(String uid) {
+    final moodAssessmentMap = _toMap();
+    moodAssessmentMap['uid'] = uid;
+    return moodAssessmentMap;
+  }
+
   Map<String, dynamic> toMapForUpdate() {
-    final moodAssessmentMap = toMap();
+    final moodAssessmentMap = _toMap();
     if (moodAssessmentMap['events'] == null) {
       moodAssessmentMap['events'] = FieldValue.delete();
     }
@@ -82,7 +88,7 @@ class MoodAssessment implements Comparable {
 
   @override
   String toString() {
-    final moodAssessmentMap = toMap();
+    final moodAssessmentMap = _toMap();
     moodAssessmentMap['docId'] = docId;
     return moodAssessmentMap.toString();
   }

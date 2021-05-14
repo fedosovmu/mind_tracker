@@ -32,8 +32,7 @@ class CloudFirestoreProvider {
     final uid = FirebaseAuthProvider.uid;
     if (uid != null) {
       print('[FIREBASE] Add mood assessment $moodAssessment');
-      var moodAssessmentMap = moodAssessment.toMap();
-      moodAssessmentMap['uid'] = uid;
+      var moodAssessmentMap = moodAssessment.toMapForCreate(uid);
       final documentRef = await _moodAssessmentsCollection.add(moodAssessmentMap);
       return documentRef.id;
     } else {
