@@ -50,6 +50,11 @@ class _CalendarState extends State<Calendar> {
     });
   }
 
+  bool _isSelectedCurrentMonth() {
+    final DateTime now = DateTime.now();
+    return (now.year == _selectedYear) && (now.month == _selectedMonth);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -80,8 +85,7 @@ class _CalendarState extends State<Calendar> {
                   },
                   onRightArrowPressed: () {
                     print('Right arrow pressed');
-                    final DateTime now = DateTime.now();
-                    if (now.year == _selectedYear && now.month == _selectedMonth) {
+                    if (_isSelectedCurrentMonth()) {
                       print('You cannot switch to future months');
                     } else {
                       widget._pageController.previousPage(
@@ -89,6 +93,7 @@ class _CalendarState extends State<Calendar> {
                           curve: _pageChangeAnimationCurve);
                     }
                   },
+                  enableRightArrow: !_isSelectedCurrentMonth(),
                 ),
               ],
             ),

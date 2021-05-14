@@ -6,8 +6,9 @@ import 'month_switch_button.dart';
 class MonthSwitchButtons extends StatelessWidget {
   final Function onLeftArrowPressed;
   final Function onRightArrowPressed;
+  final bool enableRightArrow;
 
-  MonthSwitchButtons ({@required this.onLeftArrowPressed, @required this.onRightArrowPressed});
+  MonthSwitchButtons ({@required this.onLeftArrowPressed, @required this.onRightArrowPressed, @required this.enableRightArrow});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class MonthSwitchButtons extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           MonthSwitchButton(onPressed: onLeftArrowPressed),
-          MonthSwitchButton(onPressed: onRightArrowPressed, isRight: true)
+          MonthSwitchButton(onPressed: onRightArrowPressed, isRight: true, enabled: enableRightArrow)
         ],
       ),
     );

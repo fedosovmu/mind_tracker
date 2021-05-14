@@ -10,23 +10,26 @@ import 'package:mind_tracker/src/business_logic/services/date_time_and_string_ex
 class CalendarDayButton extends StatelessWidget {
   final DateTime date;
   final Function onPressed;
-  final bool isSelected;
+  final bool selected;
 
-  CalendarDayButton({@required this.date, @required this.onPressed, this.isSelected = false});
+  CalendarDayButton({@required this.date, @required this.onPressed, this.selected = false});
 
   @override
   Widget build(BuildContext context) {
     final today = DateTime.now().date;
     final isToday = (date == today);
+    final isFuture = date.isAfter(today);
     return InkWell(
-      onTap: onPressed,
+      onTap: isFuture ? null : onPressed,
       child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 '${date.day}',
-                style: CustomTextStyles.basicH1Medium,
+                style: CustomTextStyles.basicH1Medium.copyWith(
+                  color: isFuture ? CustomColors.purpleMedium : CustomColors.white
+                ),
               ),
               CalendarDayButtonMoodSpheres(date)
             ],
@@ -34,7 +37,7 @@ class CalendarDayButton extends StatelessWidget {
           decoration: BoxDecoration(
               color: isToday ? CustomColors.purpleMegaDark : null,
               borderRadius: CustomBorderRadius(dp(12)),
-              border: isSelected ? Border.all(width: dp(2), color: CustomColors.main.withAlpha(0xA3)) : null
+              border: selected ? Border.all(width: dp(2), color: CustomColors.main.withAlpha(0xA3)) : null
           ),
       ),
     );

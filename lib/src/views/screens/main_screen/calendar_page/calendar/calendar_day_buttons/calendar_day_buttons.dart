@@ -36,7 +36,7 @@ class _CalendarDayButtonsState extends State<CalendarDayButtons> {
             widget.onSelectedDateChanged(calendarDayButtonDate);
           });
         },
-        isSelected: calendarDayButtonDate == widget.selectedDate,
+        selected: calendarDayButtonDate == widget.selectedDate,
       );
     });
 
