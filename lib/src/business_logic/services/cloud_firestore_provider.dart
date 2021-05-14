@@ -44,8 +44,8 @@ class CloudFirestoreProvider {
   static void updateMoodAssessment(MoodAssessment updatedMoodAssessment, String docId) {
     final uid = FirebaseAuthProvider.uid;
     if (uid != null) {
-      print('[FIRABASE] Update mood assessment $updatedMoodAssessment');
-      _moodAssessmentsCollection.doc(docId).update(updatedMoodAssessment.toMap());
+      print('[FIREBASE] Update mood assessment $updatedMoodAssessment');
+      _moodAssessmentsCollection.doc(docId).update(updatedMoodAssessment.toMapForUpdate());
     }
   }
 

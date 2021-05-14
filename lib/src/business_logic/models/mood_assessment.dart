@@ -69,6 +69,17 @@ class MoodAssessment implements Comparable {
     return moodAssessmentMap;
   }
 
+  Map<String, dynamic> toMapForUpdate() {
+    final moodAssessmentMap = toMap();
+    if (moodAssessmentMap['events'] == null) {
+      moodAssessmentMap['events'] = FieldValue.delete();
+    }
+    if (moodAssessmentMap['note'] == null) {
+      moodAssessmentMap['note'] = FieldValue.delete();
+    }
+    return moodAssessmentMap;
+  }
+
   @override
   String toString() {
     final moodAssessmentMap = toMap();
