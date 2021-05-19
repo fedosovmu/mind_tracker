@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:mind_tracker/src/business_logic/models/event.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/events_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
@@ -77,25 +78,30 @@ class _SelectEventsScreenState extends State<SelectEventsScreen> {
               child: Consumer<EventsProvider>(
                 builder: (context, eventsProvider, child) {
                   _eventIcons = _convertEventsToEventIcons(eventsProvider.events);
-                  return GridView.count(
+                  return CustomScrollView(
                     physics: ClampingScrollPhysics(),
-                    mainAxisSpacing: dp(16),
-                    crossAxisSpacing: dp(24),
-                    crossAxisCount: 4,
-                    childAspectRatio: EventIcon.aspectRatio,
-                    children: [
-                      ..._eventIcons,
-                      AddUserEventButton(
-                        onPressed: () async {
-                          print('Add user event button pressed');
-                          final newUserEvent = await Navigator.of(context).pushNamed('/createUserEventTitle');
-                          print('New user event $newUserEvent');
-                          if (newUserEvent != null) {
-                            Provider.of<EventsProvider>(context, listen: false).addUserEvent(newUserEvent);
-                          }
-                        },
-                      )
-                    ]
+                    slivers: [
+                      SliverGrid.count(
+                        mainAxisSpacing: dp(16),
+                        crossAxisSpacing: dp(24),
+                        crossAxisCount: 4,
+                        childAspectRatio: EventIcon.aspectRatio,
+                        children: [
+                          ..._eventIcons,
+                          AddUserEventButton(
+                            onPressed: () async {
+                              print('Add user event button pressed');
+                              final newUserEvent = await Navigator.of(context).pushNamed('/createUserEventTitle');
+                              print('New user event $newUserEvent');
+                              if (newUserEvent != null) {
+                                Provider.of<EventsProvider>(context, listen: false).addUserEvent(newUserEvent);
+                              }
+                            },
+                          )
+                        ]
+                      ),
+                      SliverPadding(padding: EdgeInsets.only(bottom: dp(56+16)))
+                    ],
                   );
                 }
               ),

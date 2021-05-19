@@ -47,24 +47,30 @@ class _CreateUserEventSelectIconScreenState extends State<CreateUserEventSelectI
                 SizedBox(height: dp(24)),
                 Expanded(
                   child: GlowDisabler(
-                    child: GridView.count(
-                      crossAxisCount: 4,
-                      mainAxisSpacing: dp(16),
-                      crossAxisSpacing: dp(24),
-                      childAspectRatio: 1,
-                      children: List.generate(CustomIconPaths.eventIcons.length, (i) {
-                        final iconName = CustomIconPaths.eventIcons.keys.toList()[i];
-                        return EventIconWithoutText(
-                          iconName: iconName,
-                          isSelected: _selectedIcon == iconName,
-                          onPressed: () {
-                            print('select icon');
-                            setState(() {
-                              _selectedIcon = iconName;
-                            });
-                          },
-                        );
-                      }),
+                    child: CustomScrollView(
+                      physics: ClampingScrollPhysics(),
+                      slivers: [
+                        SliverGrid.count(
+                          crossAxisCount: 4,
+                          mainAxisSpacing: dp(16),
+                          crossAxisSpacing: dp(24),
+                          childAspectRatio: 1,
+                          children: List.generate(CustomIconPaths.eventIcons.length, (i) {
+                            final iconName = CustomIconPaths.eventIcons.keys.toList()[i];
+                            return EventIconWithoutText(
+                              iconName: iconName,
+                              isSelected: _selectedIcon == iconName,
+                              onPressed: () {
+                                print('select icon');
+                                setState(() {
+                                  _selectedIcon = iconName;
+                                });
+                              },
+                            );
+                          }),
+                        ),
+                        SliverPadding(padding: EdgeInsets.only(bottom: dp(56+16)))
+                      ],
                     ),
                   )
                 ),
