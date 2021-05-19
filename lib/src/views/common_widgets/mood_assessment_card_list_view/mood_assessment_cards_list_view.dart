@@ -48,16 +48,12 @@ class _MoodAssessmentCardsListViewState extends State<MoodAssessmentCardsListVie
     );
   }
   
-  Widget _createMoodAssessmentEmptyCardWithPressAnimation(DateTime missedDate, PartOfDay missedPartOfDay) {
+  Widget _createMoodAssessmentEmptyCardWithPressAnimation({@required Function onPressed, @required Widget child}) {
     final animation = _createAnimationController();
     return PressableCard(
       animationController: animation,
-      onPressed: () {
-        print('PRESS EMPTY CARD ${missedDate.toStringDate()}, ${missedPartOfDay.toShortString()}');
-        Navigator.pushNamed(context, '/moodAssessment',
-            arguments: {'startMode': 'partOfDay', 'date': missedDate, 'partOfDay': missedPartOfDay});
-      },
-      child: MoodAssessmentEmptyCard(missedDate, missedPartOfDay),
+      onPressed: onPressed,
+      child: child,
     );
   }
 
@@ -92,10 +88,27 @@ class _MoodAssessmentCardsListViewState extends State<MoodAssessmentCardsListVie
               }
             } else {
               final isMayContainEmptyCard = MoodAssessmentCardsListView._partOfDaysInWhichMayBeEmptyCards.contains(partOfDay);
-              final isTimeToShow = (!widget._isFuture && !widget._isToday) || (widget._isToday && partOfDay.index < widget._currentPartOfDay.index);
+              final isTimeToShow = (!widget._isFuture && !widget._isToday) || (widget._isToday && partOfDay.index <= widget._currentPartOfDay.index);
               if (isMayContainEmptyCard && isTimeToShow) {
-                final emptyCard = _createMoodAssessmentEmptyCardWithPressAnimation(widget.dateForDisplayedMoodAssessments, partOfDay);
-                moodAssessmentCards.add(emptyCard);
+                final missedDate = widget.dateForDisplayedMoodAssessments;
+                final missedPartOfDay = partOfDay;
+                final isTodayAndCurrentPartOfDay = widget._isToday && partOfDay.index == widget._currentPartOfDay.index;
+                final onPressed = () {
+                  print('PRESS EMPTY CARD ${missedDate.toStringDate()}, ${missedPartOfDay.toShortString()}');
+                  if (isTodayAndCurrentPartOfDay) {
+                    Navigator.pushNamed(context, '/moodAssessment',
+                        arguments: {'startMode': 'now'});
+                  } else {
+                    Navigator.pushNamed(context, '/moodAssessment',
+                        arguments: {'startMode': 'partOfDay', 'date': missedDate, 'partOfDay': missedPartOfDay});
+                  }
+                };
+                final emptyCard = MoodAssessmentEmptyCard(missedDate, missedPartOfDay);
+                final pressableEmptyCard = _createMoodAssessmentEmptyCardWithPressAnimation(
+                  onPressed: onPressed,
+                  child: emptyCard
+                );
+                moodAssessmentCards.add(pressableEmptyCard);
                 cardIndex++;
               }
             }
