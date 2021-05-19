@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mind_tracker/src/business_logic/services/firebase_auth_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/auth_provider.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/create_user_event/create_user_event_select_icon_screen.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/create_user_event/create_user_event_title_screen.dart';
@@ -16,6 +17,17 @@ import 'views/screens/main_screen/main_screen.dart';
 
 
 class MindTrackerApp extends StatelessWidget {
+  _addAuthStateListener(Widget screen) {
+    return Builder(builder: (BuildContext context) {
+      FirebaseAuthProvider.authStateChanges.listen((uid) {
+        if (uid != null) {
+          Navigator.of(context).pushNamedAndRemoveUntil('/main', (route) => false);
+        }
+      });
+      return screen;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -31,7 +43,7 @@ class MindTrackerApp extends StatelessWidget {
       theme: appTheme,
 
       onGenerateRoute: (settings) {
-        var screenToGo;
+        Widget screenToGo;
         switch (settings.name) {
           case '/onboarding':
             screenToGo = OnboardingScreen();
@@ -59,10 +71,10 @@ class MindTrackerApp extends StatelessWidget {
             screenToGo = SettingsScreen();
             break;
           case '/login':
-            screenToGo = LoginScreen();
+            screenToGo = _addAuthStateListener(LoginScreen());
             break;
           case '/register' :
-            screenToGo = RegisterScreen();
+            screenToGo = _addAuthStateListener(RegisterScreen());
             break;
           default:
             screenToGo = Consumer<AuthProvider>(
@@ -74,7 +86,6 @@ class MindTrackerApp extends StatelessWidget {
                 }
             });
         }
-
         return MaterialPageRoute(
           settings: settings,
           builder: (context) {

@@ -38,12 +38,12 @@ class LoginScreen extends StatelessWidget {
                     print('Log in button pressed');
                     final isValid = _formKey.currentState.validate();
                     if (isValid) {
-                      var authErrorCode = await Provider.of<AuthProvider>(context, listen: false).signInWithEmailAndPassword(
+                      final errorCode = await Provider.of<AuthProvider>(context, listen: false).signInWithEmailAndPassword(
                           email: _emailTextEditingController.text,
                           password: _passwordTextEditingController.text
                       );
-                      if (authErrorCode == null) {
-                        Navigator.of(context).pushNamedAndRemoveUntil('/main', (route) => false);
+                      if (errorCode != null) {
+                        print('Error $errorCode');
                       }
                     }
                   }

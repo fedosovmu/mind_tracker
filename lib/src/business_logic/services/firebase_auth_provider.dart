@@ -30,7 +30,7 @@ class FirebaseAuthProvider {
           password: password
       );
     } on FirebaseAuthException catch (e) {
-      print('[FIRABASE-AUTH] Error ${e.code}');
+      print('[FIRABASE-AUTH] Sign in error ${e.code}');
       return e.code;
     }
     return null;
@@ -43,7 +43,7 @@ class FirebaseAuthProvider {
           password: password
       );
     } on FirebaseAuthException catch (e) {
-      print('[FIRABASE-AUTH] Error ${e.code}');
+      print('[FIRABASE-AUTH] Create user error ${e.code}');
       return e.code;
     }
     return null;

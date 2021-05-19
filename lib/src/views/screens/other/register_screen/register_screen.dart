@@ -45,12 +45,12 @@ class RegisterScreen extends StatelessWidget {
                     print('Register button pressed');
                     bool isValid = _formKey.currentState.validate();
                     if (isValid) {
-                      var errorCode = await Provider.of<AuthProvider>(context, listen: false).createUserWithEmailAndPassword(
+                      final errorCode = await Provider.of<AuthProvider>(context, listen: false).createUserWithEmailAndPassword(
                           email: _emailTextEditingController.text,
                           password: _passwordTextEditingController.text,
                       );
-                      if (errorCode == null) {
-                        Navigator.of(context).pushNamedAndRemoveUntil('/main', (route) => false);
+                      if (errorCode != null) {
+                        print('Error $errorCode');
                       }
                     }
                   }
