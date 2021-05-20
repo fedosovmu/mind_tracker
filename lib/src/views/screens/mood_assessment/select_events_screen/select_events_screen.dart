@@ -61,7 +61,7 @@ class _SelectEventsScreenState extends State<SelectEventsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Выбор собятия',
+        title: 'Выбор события',
         leading: CustomLeading(
           pathToIcon: CustomIconPaths.back,
           onPressed: () {
