@@ -37,20 +37,27 @@ class MoodAssessmentEmptyCard extends StatelessWidget {
           SizedBox(
             height: dp(95),
             width: dp(95),
-            child: DottedBorder(
-                borderType: BorderType.Circle,
-                strokeWidth: dp(1),
-                dashPattern: [8, 4],
-                padding: EdgeInsets.zero,
-                color: CustomColors.purpleLight.withOpacity(0.32),
-                child: Center(
-                  child: Image.asset(
-                    CustomIconPaths.largePlus,
-                    color: CustomColors.purpleLight,
-                    height: dp(32),
-                    width: dp(32),
-                  ),
-                )
+            child: Container(
+              child: DottedBorder(
+                  borderType: BorderType.Circle,
+                  strokeWidth: dp(1),
+                  dashPattern: [8, 4],
+                  padding: EdgeInsets.zero,
+                  color: CustomColors.purpleLight.withOpacity(0.32),
+                  child: Center(
+                    child: Image.asset(
+                      CustomIconPaths.largePlus,
+                      color: CustomColors.purpleLight,
+                      height: dp(32),
+                      width: dp(32),
+                    ),
+                  )
+              ),
+              decoration: BoxDecoration(
+                //color: Colors.red,
+                color: CustomColors.purpleSuperDark.withOpacity(0.32),
+                shape: BoxShape.circle
+              ),
             ),
           )
         ],
