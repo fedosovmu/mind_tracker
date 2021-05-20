@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/views/utils/custom_image_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 
 
@@ -29,7 +30,7 @@ class _MoodSphereState extends State<MoodSphere> {
                 child: Transform.scale(
                   scale: scale,
                   child: Image.asset(
-                    'assets/images/common/mood_spheres/${widget.mood}.png',
+                    CustomImagePaths.pathsToMoodSphereImages[widget.mood],
                     width: dp(220),
                   ),
                 ),
