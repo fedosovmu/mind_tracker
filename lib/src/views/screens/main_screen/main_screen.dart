@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/chart_page/chart_page.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/empty_screen.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/widgets/custom_bottom_navigation_bar.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import 'home_page/home_page.dart';
 import 'calendar_page/calendar_page.dart';
 

@@ -12,21 +12,13 @@ class EventsProvider extends ChangeNotifier {
     Event(icon: 'stress', title: 'Стресс')
   ];
 
-  List<Event> _userEvents;
+  List<Event> _userEvents = [];
   List<Event> get events => [..._defaultEvents, ..._userEvents];
 
-  EventsProvider() {
-    _initializeListeners();
-  }
-
-  void _initializeListeners() {
-    FirebaseAuthProvider.authStateChanges.listen((uid) async {
-      _userEvents = [];
-      if (uid != null) {
-        _userEvents = await CloudFirestoreProvider.getUserEventsOfAuthorizedUser();
-        notifyListeners();
-      }
-    });
+  Future<void> loadData() async {
+    _userEvents = await CloudFirestoreProvider.getUserEventsOfAuthorizedUser();
+    notifyListeners();
+    return;
   }
 
   void addUserEvent(Event userEvent) {

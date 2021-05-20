@@ -4,6 +4,7 @@ import 'package:mind_tracker/src/business_logic/services/firebase_auth_provider.
 import 'package:mind_tracker/src/business_logic/viewmodels/auth_provider.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/create_user_event/create_user_event_select_icon_screen.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/create_user_event/create_user_event_title_screen.dart';
+import 'package:mind_tracker/src/views/screens/other/loading_screen.dart';
 import 'package:mind_tracker/src/views/screens/other/login_screen/login_screen.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/note_screen/note_screen.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/select_events_screen/select_events_screen.dart';
@@ -21,7 +22,7 @@ class MindTrackerApp extends StatelessWidget {
     return Builder(builder: (BuildContext context) {
       FirebaseAuthProvider.authStateChanges.listen((uid) {
         if (uid != null) {
-          Navigator.of(context).pushNamedAndRemoveUntil('/main', (route) => false);
+          Navigator.of(context).pushNamedAndRemoveUntil('/loading', (route) => false);
         }
       });
       return screen;
@@ -76,11 +77,14 @@ class MindTrackerApp extends StatelessWidget {
           case '/register' :
             screenToGo = _addAuthStateListener(RegisterScreen());
             break;
+          case '/loading':
+            screenToGo = LoadingScreen();
+            break;
           default:
             screenToGo = Consumer<AuthProvider>(
               builder: (context, authProvider, child) {
                 if (authProvider.isAuthorized) {
-                  return MainScreen();
+                  return LoadingScreen();
                 } else {
                   return LoginScreen();
                 }

@@ -6,21 +6,12 @@ import 'package:mind_tracker/src/business_logic/services/date_time_and_string_ex
 
 
 class MoodAssessmentsProvider extends ChangeNotifier {
-  List<MoodAssessment> _moodAssessments;
+  List<MoodAssessment> _moodAssessments = [];
 
-  MoodAssessmentsProvider() {
-    _initializeListeners();
-  }
-
-  void _initializeListeners() {
-    FirebaseAuthProvider.authStateChanges.listen((uid) async {
-      _moodAssessments = [];
-      notifyListeners();
-      if (uid != null) {
-        _moodAssessments = await CloudFirestoreProvider.getAllMoodAssessmentsOfAuthorizedUser();
-        notifyListeners();
-      }
-    });
+  Future<void> loadData() async {
+    _moodAssessments = await CloudFirestoreProvider.getAllMoodAssessmentsOfAuthorizedUser();
+    notifyListeners();
+    return;
   }
 
   List<MoodAssessment> getMoodAssessmentsForDate (DateTime date) {
