@@ -193,7 +193,7 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
       appBar: CustomAppBar(
         title: _getTitle(context),
         leading: CustomLeading(
-          pathToIcon: CustomIconPaths.close,
+          pathToIcon: CustomIconPaths.back,
           onPressed: () {
             print('Press close button');
             _goToHomeScreen();
