@@ -8,6 +8,7 @@ import 'package:mind_tracker/src/views/screens/other/loading_screen.dart';
 import 'package:mind_tracker/src/views/screens/other/login_screen/login_screen.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/note_screen/note_screen.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/select_events_screen/select_events_screen.dart';
+import 'package:mind_tracker/src/views/screens/other/notification_screen.dart';
 import 'package:mind_tracker/src/views/screens/other/register_screen/register_screen.dart';
 import 'package:mind_tracker/src/views/screens/other/settings_screen/settings_screen.dart';
 import 'package:provider/provider.dart';
@@ -79,6 +80,9 @@ class MindTrackerApp extends StatelessWidget {
             break;
           case '/loading':
             screenToGo = LoadingScreen();
+            break;
+          case '/notification':
+            screenToGo = NotificationScreen();
             break;
           default:
             screenToGo = Consumer<AuthProvider>(
