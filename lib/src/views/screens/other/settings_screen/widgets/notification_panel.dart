@@ -12,7 +12,7 @@ class NotificationPanel extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Уведомления',
+              'Напоминания',
               style: CustomTextStyles.titleH1.copyWith(
                   color: CustomColors.purpleMedium
               ),
@@ -21,7 +21,7 @@ class NotificationPanel extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Нет уведомлений',
+                  'Нет напоминаний',
                   style: CustomTextStyles.basic.copyWith(
                       color: CustomColors.purpleLight
                   ),

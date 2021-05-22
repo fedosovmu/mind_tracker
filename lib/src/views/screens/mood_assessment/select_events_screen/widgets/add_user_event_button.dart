@@ -40,12 +40,12 @@ class AddUserEventButton extends StatelessWidget {
               shape: BoxShape.circle
             ),
           ),
-          SizedBox(height: dp(8)),
+          SizedBox(height: dp(8+1)),
           Expanded(
             child: Text(
               'Добавить событие',
               style: CustomTextStyles.caption.copyWith(
-                color: CustomColors.purpleLight
+                color: CustomColors.purpleLight,
               ),
               textAlign: TextAlign.center,
             )
