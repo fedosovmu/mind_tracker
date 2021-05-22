@@ -55,6 +55,15 @@ class NotificationScreen extends StatelessWidget {
                 SizedBox(width: dp(8)),
                 NotificationTimeBox(),
               ],
+            ),
+            SizedBox(height: dp(16)),
+            Container(
+              height: dp(200),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: CustomColors.purpleSuperDark,
+                borderRadius: CustomBorderRadius(dp(16))
+              ),
             )
           ],
         ),
@@ -72,22 +81,22 @@ class NotificationTimeBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: dp(70+8),
       height: dp(86+8),
+      width: dp(70+8),
       child: Stack(
         children: [
           Align(
             alignment: Alignment.bottomLeft,
             child: Container(
-              width: dp(70),
               height: dp(86),
+              width: dp(70),
               decoration: BoxDecoration(
                 color: selected ? CustomColors.main : CustomColors.purpleSuperDark,
                 border: Border.all(
                   color: selected ? CustomColors.main : CustomColors.purpleMegaDark,
                   width: dp(1)
                 ),
-                borderRadius: CustomBorderRadius(dp(16))
+                borderRadius: CustomBorderRadius(dp(16)),                 
               ),
             ),
           ),
@@ -110,8 +119,8 @@ class CrossInRedCircle extends StatelessWidget {
         print('Press red cross');
       },
       child: Container(
-        width: dp(24),
         height: dp(24),
+        width: dp(24),
         decoration: BoxDecoration(
             color: CustomColors.red,
             shape: BoxShape.circle
