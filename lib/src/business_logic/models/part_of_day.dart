@@ -5,8 +5,8 @@ extension PartOfDayBuilder on PartOfDay {
     return this.toString().split('.').last;
   }
 
-  static PartOfDay fromShortString(part_of_day_short_string) {
-    switch(part_of_day_short_string) {
+  static PartOfDay fromShortString(partOfDayShortString) {
+    switch(partOfDayShortString) {
       case 'night': {
         return PartOfDay.night;
       } break;
