@@ -16,7 +16,6 @@ class MoodAssessmentCardsListView extends StatefulWidget {
   bool _isToday;
   bool _isFuture;
   PartOfDay _currentPartOfDay;
-  static const _partOfDaysInWhichMayBeEmptyCards = {PartOfDay.morning, PartOfDay.day, PartOfDay.evening};
 
   MoodAssessmentCardsListView(this.dateForDisplayedMoodAssessments) {
     final now = DateTime.now();
@@ -31,7 +30,7 @@ class MoodAssessmentCardsListView extends StatefulWidget {
 }
 
 class _MoodAssessmentCardsListViewState extends State<MoodAssessmentCardsListView> with TickerProviderStateMixin {
-  
+
   Widget _createMoodAssessmentCardWithPressAnimation(MoodAssessment moodAssessment, AnimationController animationController) {
     return PressableCard(
       animationController: animationController,
@@ -87,9 +86,11 @@ class _MoodAssessmentCardsListViewState extends State<MoodAssessmentCardsListVie
                 moodSpheres.add(moodSphere);
               }
             } else {
-              final isMayContainEmptyCard = MoodAssessmentCardsListView._partOfDaysInWhichMayBeEmptyCards.contains(partOfDay);
+              const partOfDaysInWhichMayBeEmptyCards = {PartOfDay.morning, PartOfDay.day, PartOfDay.evening};
+              final isMayContainEmptyCard = partOfDaysInWhichMayBeEmptyCards.contains(partOfDay);
               final isTimeToShow = (!widget._isFuture && !widget._isToday) || (widget._isToday && partOfDay.index <= widget._currentPartOfDay.index);
-              if (isMayContainEmptyCard && isTimeToShow) {
+              final isTodayAndNight = widget._isToday && partOfDay == PartOfDay.night && widget._currentPartOfDay == PartOfDay.night;
+              if ((isMayContainEmptyCard && isTimeToShow) || isTodayAndNight) {
                 final missedDate = widget.dateForDisplayedMoodAssessments;
                 final missedPartOfDay = partOfDay;
                 final isTodayAndCurrentPartOfDay = widget._isToday && partOfDay.index == widget._currentPartOfDay.index;
