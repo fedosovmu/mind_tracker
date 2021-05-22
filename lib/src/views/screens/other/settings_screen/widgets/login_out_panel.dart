@@ -48,7 +48,6 @@ class LoginOutPanel extends StatelessWidget {
                     )
                   ],
                 ),
-                SizedBox(height: dp(32))
               ],
             ),
           );

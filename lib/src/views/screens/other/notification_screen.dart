@@ -3,6 +3,8 @@ import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
 class NotificationScreen extends StatelessWidget {
@@ -10,7 +12,7 @@ class NotificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Уведомления',
+        title: 'Напоминания',
         leading: CustomLeading(
           pathToIcon: CustomIconPaths.back,
           onPressed: () {
@@ -18,14 +20,36 @@ class NotificationScreen extends StatelessWidget {
           },
         ),
       ),
-      body: Center(
-        child: Container(
-          width: dp(100),
-          height: dp(100),
-          color: Colors.red,
+      body: Padding(
+        padding: EdgeInsets.all(dp(16)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          //mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: Text(
+                'Выберите время для\n'
+                    'напоминания',
+                style: CustomTextStyles.titleH1.copyWith(
+                  color: CustomColors.purpleWhite
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            SizedBox(height: dp(16)),
+            Center(
+              child: Text(
+                'В это время тебе будут приходить уведомления,\n'
+                    'с напоминанием оценить настроение',
+                style: CustomTextStyles.basic.copyWith(
+                  color: CustomColors.purpleMedium
+                ),
+                textAlign: TextAlign.center,
+              ),
+            )
+          ],
         ),
-      ),
+      )
     );
   }
-
 }

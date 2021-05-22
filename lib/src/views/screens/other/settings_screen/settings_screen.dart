@@ -29,6 +29,7 @@ class SettingsScreen extends StatelessWidget {
           children: [
             SizedBox(height: dp(16)),
             LoginOutPanel(),
+            SizedBox(height: dp(16)),
             NotificationPanel()
           ],
         ),
