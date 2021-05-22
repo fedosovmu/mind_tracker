@@ -5,14 +5,17 @@ class CustomColors {
 
   CustomColors._();
 
+  static const red = Color(0xFFEC4B68);
+  static const blue = Color(0xFF6C8AF3);
+
   static const white = Color(0xFFFFFFFF);
   static const main = Color(0xFF7F3FB0);
   static const moods = const {
     1: Color(0xFF674A7A),
     2: Color(0xFFA43485),
-    3: Color(0xFFEC4B68),
+    3: red,
     4: Color(0xFFFF709B),
-    5: Color(0xFF6C8AF3),
+    5: blue,
     6: Color(0xFF02C1B6),
     7: Color(0xFF30BA00),
   };

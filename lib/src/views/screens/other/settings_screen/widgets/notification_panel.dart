@@ -28,9 +28,9 @@ class NotificationPanel extends StatelessWidget {
                 ),
                 TextButton(
                     child: Text(
-                      'Настроить',
+                      'Добавить',
                       style: CustomTextStyles.basic.copyWith(
-                          color: Colors.blue
+                          color: CustomColors.blue
                       ),
                     ),
                     onPressed: () {

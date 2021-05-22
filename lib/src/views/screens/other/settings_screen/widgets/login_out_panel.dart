@@ -35,7 +35,7 @@ class LoginOutPanel extends StatelessWidget {
                         child: Text(
                           'Выйти',
                           style: CustomTextStyles.basic.copyWith(
-                              color: Colors.blue
+                              color: CustomColors.blue
                           ),
                         ),
                         onPressed: () {
