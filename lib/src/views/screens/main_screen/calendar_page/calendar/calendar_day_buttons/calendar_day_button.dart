@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/calendar_page/calendar/calendar_day_buttons/calendar_day_button_events_and_note_marks.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_border_radius.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
@@ -39,7 +38,7 @@ class CalendarDayButton extends StatelessWidget {
           ),
           decoration: BoxDecoration(
               color: isToday ? CustomColors.purpleMegaDark : null,
-              borderRadius: CustomBorderRadius(dp(12)),
+              borderRadius: BorderRadius.all(Radius.circular(dp(12))), //TODO: edit this radius
               border: selected ? Border.all(width: dp(2), color: CustomColors.main.withAlpha(0xA3)) : null
           ),
       ),

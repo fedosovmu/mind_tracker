@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:mind_tracker/src/views/utils/content.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_border_radius.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_border_shape.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
@@ -22,10 +22,12 @@ class MoodAssessmentEmptyCard extends StatelessWidget {
       padding: EdgeInsets.only(left: dp(24.5), right: dp(32)),
       width: double.infinity,
       height: dp(136),
-      decoration: BoxDecoration(
+      decoration: ShapeDecoration(
           color: CustomColors.purpleSuperDark,
-          borderRadius: CustomBorderRadius(dp(16)),
-          border: Border.all(color: CustomColors.purpleMegaDark.withOpacity(0.32), width: dp(1))
+          shape: CustomBorderShape(
+            dp(16),
+            side: BorderSide(color: CustomColors.purpleMegaDark.withOpacity(0.32), width: dp(1))
+          ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

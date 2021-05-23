@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_border_radius.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_border_shape.dart';
 import '../../utils/theme/custom_text_styles.dart';
 import '../../utils/theme/custom_colors.dart';
 import '../../utils/metrics.dart';
@@ -111,9 +111,7 @@ class OnboardingScreen extends StatelessWidget {
                   padding: EdgeInsets.only(left: dp(16), right: dp(16)),
                   child: FlatButton (
                       color: CustomColors.main,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: CustomBorderRadius(dp(16)),
-                      ),
+                      shape: CustomBorderShape(dp(16)),
                       onPressed: () { _goToNextScreen(context); },
                       child: Text(
                         _isThisLastPage() ? _nextButtonStartText : _nextButtonNextText,

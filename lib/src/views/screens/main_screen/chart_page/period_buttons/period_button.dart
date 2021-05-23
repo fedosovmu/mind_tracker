@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_border_radius.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_border_shape.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
@@ -27,9 +27,9 @@ class PeriodButton extends StatelessWidget {
               ),
             ),
           ),
-          decoration: BoxDecoration(
+          decoration: ShapeDecoration(
             color: isPressed ? CustomColors.main : CustomColors.purpleSuperDark,
-            borderRadius: CustomBorderRadius(dp(12))
+            shape: CustomBorderShape(dp(12)),
           ),
       ),
     );

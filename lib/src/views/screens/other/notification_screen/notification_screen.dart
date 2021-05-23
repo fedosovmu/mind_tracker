@@ -4,7 +4,7 @@ import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
 import 'package:mind_tracker/src/views/screens/other/notification_screen/widgets/notification_time_box.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_border_radius.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_border_shape.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
@@ -61,9 +61,10 @@ class NotificationScreen extends StatelessWidget {
             Container(
               height: dp(200),
               width: double.infinity,
-              decoration: BoxDecoration(
+              decoration: ShapeDecoration(
                 color: CustomColors.purpleSuperDark,
-                borderRadius: CustomBorderRadius(dp(16))
+                shape: CustomBorderShape(dp(16)),
+                //borderRadius: CustomBorderRadius(dp(16))
               ),
             )
           ],

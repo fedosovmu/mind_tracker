@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_assessments_provider.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_border_radius.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:provider/provider.dart';
 
@@ -49,7 +48,7 @@ class _Mark extends StatelessWidget {
       width: dp(8),
       decoration: BoxDecoration(
         color: enabled ? CustomColors.purpleLight : Colors.transparent,
-        borderRadius: CustomBorderRadius(dp(1))
+        borderRadius: BorderRadius.all(Radius.circular(dp(1)))
       ),
     );
   }

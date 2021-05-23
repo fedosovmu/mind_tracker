@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/mood_assessor/mood_assessor_slider.dart';
 import 'package:mind_tracker/src/views/utils/content.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_border_radius.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_border_shape.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
@@ -29,9 +29,9 @@ class MoodAssessor extends StatelessWidget {
           Container(
             height: dp(210),
             margin: EdgeInsets.symmetric(horizontal: dp(16)),
-            decoration: BoxDecoration(
-              borderRadius: CustomBorderRadius(dp(16)),
+            decoration: ShapeDecoration(
               color: CustomColors.purpleSuperDark,
+              shape: CustomBorderShape(dp(16))
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
