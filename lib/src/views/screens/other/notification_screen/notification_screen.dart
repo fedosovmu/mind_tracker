@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
+import 'package:mind_tracker/src/views/screens/other/notification_screen/widgets/notification_time_box.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_border_radius.dart';
@@ -68,72 +69,6 @@ class NotificationScreen extends StatelessWidget {
           ],
         ),
       )
-    );
-  }
-}
-
-
-class NotificationTimeBox extends StatelessWidget {
-  final bool selected;
-
-  NotificationTimeBox({this.selected = false});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: dp(86+8),
-      width: dp(70+8),
-      child: Stack(
-        children: [
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Container(
-              height: dp(86),
-              width: dp(70),
-              decoration: BoxDecoration(
-                color: selected ? CustomColors.main : CustomColors.purpleSuperDark,
-                border: Border.all(
-                  color: selected ? CustomColors.main : CustomColors.purpleMegaDark,
-                  width: dp(1)
-                ),
-                borderRadius: CustomBorderRadius(dp(16)),                 
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.topRight,
-            child: CrossInRedCircle()
-          )
-        ],
-      ),
-    );
-  }
-}
-
-
-class CrossInRedCircle extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        print('Press red cross');
-      },
-      child: Container(
-        height: dp(24),
-        width: dp(24),
-        decoration: BoxDecoration(
-            color: CustomColors.red,
-            shape: BoxShape.circle
-        ),
-        child: Center(
-          child: Image.asset(
-            CustomIconPaths.close,
-            color: CustomColors.purpleDark,
-            height: dp(16),
-            width: dp(16),
-          ),
-        ),
-      ),
     );
   }
 }
