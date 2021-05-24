@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/business_logic/models/notification_time.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
+import 'package:mind_tracker/src/views/common_widgets/standard_button.dart';
 import 'package:mind_tracker/src/views/screens/other/notification_screen/widgets/notification_time_box.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
@@ -52,9 +54,9 @@ class NotificationScreen extends StatelessWidget {
             SizedBox(height: dp(32)),
             Row(
               children: [
-                NotificationTimeBox(selected: true),
+                NotificationTimeBox(NotificationTime(9, 0) ,selected: true),
                 SizedBox(width: dp(8)),
-                NotificationTimeBox(),
+                NotificationTimeBox(NotificationTime(13, 30)),
               ],
             ),
             SizedBox(height: dp(16)),
@@ -64,8 +66,14 @@ class NotificationScreen extends StatelessWidget {
               decoration: ShapeDecoration(
                 color: CustomColors.purpleSuperDark,
                 shape: CustomBorderShape(dp(16)),
-                //borderRadius: CustomBorderRadius(dp(16))
               ),
+            ),
+            Spacer(),
+            StandardButton(
+                title: 'Сохранить',
+                onPressed: () {
+                  print('Press save button');
+                }
             )
           ],
         ),
