@@ -3,6 +3,7 @@ import 'package:mind_tracker/src/business_logic/models/notification_time.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
 import 'package:mind_tracker/src/views/common_widgets/standard_button.dart';
+import 'package:mind_tracker/src/views/screens/other/notification_screen/widgets/custom_time_picker.dart';
 import 'package:mind_tracker/src/views/screens/other/notification_screen/widgets/notification_time_box.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
@@ -60,14 +61,7 @@ class NotificationScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: dp(16)),
-            Container(
-              height: dp(200),
-              width: double.infinity,
-              decoration: ShapeDecoration(
-                color: CustomColors.purpleSuperDark,
-                shape: CustomBorderShape(dp(16)),
-              ),
-            ),
+            CustomTimePicker(),
             Spacer(),
             StandardButton(
                 title: 'Сохранить',
