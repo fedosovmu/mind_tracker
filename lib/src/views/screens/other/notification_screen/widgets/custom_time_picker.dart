@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:mind_tracker/src/views/common_widgets/glow_disabler.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_border_shape.dart';
@@ -31,12 +32,28 @@ class CustomDrum extends StatefulWidget {
 
 class _CustomDrumState extends State<CustomDrum> {
   ScrollController _controller;
+  int _selectedItemIndex = 2;
 
   @override
   void initState() {
     super.initState();
     _controller = ScrollController(
       initialScrollOffset: CustomDrumItem.height
+    );
+    Future.delayed(Duration(seconds: 5)).then((value) => _animateToNearestItem());
+  }
+
+  void _animateToNearestItem() {
+    Future.delayed(
+        Duration(milliseconds: 10)
+    ).then((_) {
+        final nearestItemIndex = (_controller.offset / CustomDrumItem.height).round();
+        _controller.animateTo(
+            CustomDrumItem.height * nearestItemIndex,
+            duration: Duration(milliseconds: 500),
+            curve: Curves.ease
+        );
+      }
     );
   }
 
@@ -49,22 +66,23 @@ class _CustomDrumState extends State<CustomDrum> {
         child: NotificationListener<ScrollNotification>(
           onNotification: (scrollNotification) {
             print(scrollNotification);
-            if (scrollNotification is ScrollEndNotification) {
-              final offset = _controller.offset;
-              final nearestItemIndex = 1; //(offset / CustomDrumItem.height).round() + 1;
-              print('Nearest index: $nearestItemIndex');
-              _controller.animateTo(
-                  nearestItemIndex * CustomDrumItem.height,
-                  duration: Duration(milliseconds: 500),
-                  curve: Curves.easeInOut
-              );
+            if (scrollNotification is UserScrollNotification) {
+              if (scrollNotification.direction == ScrollDirection.idle) {
+                _animateToNearestItem();
+              }
+            }
+            if (scrollNotification is ScrollUpdateNotification) {
+              setState(() {
+                _selectedItemIndex = (_controller.offset / CustomDrumItem.height).round() + 1;
+              });
             }
             return false;
           },
           child: ListView.builder(
             controller: _controller,
             itemBuilder: (context, index) {
-              return CustomDrumItem('${index}', 1 - 0.1 * (index % 10));
+              final double opacity = _selectedItemIndex == index ? 1 : 0.5;
+              return CustomDrumItem('${index}', opacity);
             },
           ),
         ),
