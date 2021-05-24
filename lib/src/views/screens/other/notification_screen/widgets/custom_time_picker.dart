@@ -1,6 +1,4 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter/physics.dart';
 import 'package:mind_tracker/src/views/common_widgets/glow_disabler.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_border_shape.dart';
@@ -66,7 +64,7 @@ class _CustomDrumState extends State<CustomDrum> {
           child: ListView.builder(
             controller: _controller,
             itemBuilder: (context, index) {
-              return CustomDrumItem('${index}', 1 - (0.1 * (index % 10)));
+              return CustomDrumItem('${index}', 1 - 0.1 * (index % 10));
             },
           ),
         ),
