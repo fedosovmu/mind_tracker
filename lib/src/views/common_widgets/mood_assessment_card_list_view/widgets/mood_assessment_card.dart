@@ -3,6 +3,7 @@ import 'package:mind_tracker/src/business_logic/models/event.dart';
 import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 import 'package:mind_tracker/src/views/utils/content.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_border_shape.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
@@ -120,9 +121,9 @@ class MoodAssessmentCard extends StatelessWidget {
           )
         ],
       ),
-      decoration: BoxDecoration(
+      decoration: ShapeDecoration(
         color: CustomColors.purpleSuperDark,
-        borderRadius: BorderRadius.all(Radius.elliptical(16, 16)),
+        shape: CustomBorderShape(dp(16)),
       ),
     );
   }
