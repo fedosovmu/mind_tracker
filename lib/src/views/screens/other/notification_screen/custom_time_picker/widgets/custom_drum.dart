@@ -124,13 +124,9 @@ class CustomScrollPhysics extends ScrollPhysics {
   Simulation createBallisticSimulation(
       ScrollMetrics position, double velocity) {
     print('create ballistic simulation');
-    //return ClampingScrollSimulation(
-    //    position: position.pixels,
-    //    velocity: velocity
-    //);
     return CustomSimulation(
       initPosition: position.pixels,
-      velocity: velocity
+      initVelocity: velocity
     );
   }
 }
@@ -138,21 +134,21 @@ class CustomScrollPhysics extends ScrollPhysics {
 
 class CustomSimulation extends Simulation {
   final double initPosition;
-  final double velocity;
+  final double initVelocity;
 
-  CustomSimulation({this.initPosition, this.velocity});
+  CustomSimulation({this.initPosition, this.initVelocity});
 
   @override
   double x(double time) {
-    final x = initPosition + velocity / (time + 1);
-    print('x: $x');
+    final x = initPosition + initVelocity * time;
+    print('x: $x, time: $time');
     return x;
   }
 
   @override
   double dx(double time) {
-    print('velocity: $velocity');
-    return velocity / time;
+    print('velocity: $initVelocity');
+    return initVelocity;
   }
 
   @override
