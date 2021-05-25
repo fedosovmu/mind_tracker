@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/auth_provider.dart';
-import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
-import 'package:mind_tracker/src/views/common_widgets/standard_button.dart';
+import 'package:mind_tracker/src/views/common_widgets/app_bar/custom_app_bar.dart';
+import 'package:mind_tracker/src/views/common_widgets/other/standard_button.dart';
 import 'package:mind_tracker/src/views/screens/other/login_screen/widgets/custom_text_button.dart';
-import 'package:mind_tracker/src/views/common_widgets/email_input.dart';
-import 'package:mind_tracker/src/views/common_widgets/password_input.dart';
+import 'package:mind_tracker/src/views/common_widgets/inputs/email_input.dart';
+import 'package:mind_tracker/src/views/common_widgets/inputs/password_input.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:provider/provider.dart';
 

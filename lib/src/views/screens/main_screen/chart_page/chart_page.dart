@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
+import 'package:mind_tracker/src/views/common_widgets/app_bar/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/chart_page/chart_card/chart_card.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/chart_page/period_buttons/period_toggle_buttons.dart';
 import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';

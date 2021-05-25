@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mind_tracker/src/views/common_widgets/custom_app_bar.dart';
-import 'package:mind_tracker/src/views/common_widgets/custom_leading.dart';
-import 'package:mind_tracker/src/views/common_widgets/glow_disabler.dart';
-import 'package:mind_tracker/src/views/common_widgets/standard_button.dart';
+import 'package:mind_tracker/src/views/common_widgets/app_bar/custom_app_bar.dart';
+import 'package:mind_tracker/src/views/common_widgets/app_bar/custom_leading.dart';
+import 'package:mind_tracker/src/views/common_widgets/other/glow_disabler.dart';
+import 'package:mind_tracker/src/views/common_widgets/other/standard_button.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/create_user_event/widgets/event_icon_without_text.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
