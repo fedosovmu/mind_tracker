@@ -88,7 +88,7 @@ class MindTrackerApp extends StatelessWidget {
             screenToGo = Consumer<AuthProvider>(
               builder: (context, authProvider, child) {
                 if (authProvider.isAuthorized) {
-                  return NotificationScreen(); //TODO delete this line
+                  return NotificationScreen(); //TODO: delete this line
                   return LoadingScreen();
                 } else {
                   return LoginScreen();

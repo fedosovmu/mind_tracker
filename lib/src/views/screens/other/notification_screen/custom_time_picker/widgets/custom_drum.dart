@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:mind_tracker/src/views/common_widgets/other/glow_disabler.dart';
@@ -28,7 +29,9 @@ class _CustomDrumState extends State<CustomDrum> {
         initialScrollOffset: firstItemInitValue * CustomDrumItem.height,
     );
     //Future.delayed(Duration(seconds: 3)).then(
-    //        (_) => _controller.animateTo(100.0, duration: Duration(seconds: 3), curve: Curves.ease)
+    //  (_) {
+        //_controller.animateTo(100.0, duration: Duration(seconds: 3), curve: Curves.ease);
+    //  }
     //);
   }
 
@@ -57,19 +60,19 @@ class _CustomDrumState extends State<CustomDrum> {
       child: GlowDisabler(
         child: GestureDetector(
           onVerticalDragStart: (dragStartDetails) {
-            print('on vertical drag start $dragStartDetails');
+            //print('on vertical drag start $dragStartDetails');
           },
           onVerticalDragDown: (dragDownDetails) {
-            print('on drag down $dragDownDetails');
+            //print('on drag down $dragDownDetails');
           },
           onVerticalDragEnd: (dragEndDetails) {
-            print('on drag end $dragEndDetails');
+            //print('on drag end $dragEndDetails');
           },
           onVerticalDragCancel: () {
-            print('drag cancel');
+            //print('drag cancel');
           },
           onVerticalDragUpdate: (dragUpdateDetails) {
-            print('on drag update $dragUpdateDetails');
+            //print('on drag update $dragUpdateDetails');
           },
           child: NotificationListener<UserScrollNotification>(
             onNotification: (userScrollNotification) {
@@ -89,8 +92,10 @@ class _CustomDrumState extends State<CustomDrum> {
                 return false;
               },
               child: ListView.builder(
+                //physics: ClampingScrollPhysics(),
                 //physics: AlwaysScrollableScrollPhysics(),
-                physics: NeverScrollableScrollPhysics(),
+                //physics: NeverScrollableScrollPhysics(),
+                physics: CustomScrollPhysics(),
                 controller: _controller,
                 itemBuilder: (context, index) {
                   final isSelected = _selectedItemIndex == index;
@@ -105,5 +110,53 @@ class _CustomDrumState extends State<CustomDrum> {
         ),
       ),
     );
+  }
+}
+
+
+class CustomScrollPhysics extends ScrollPhysics {
+  @override
+  ScrollPhysics applyTo(ScrollPhysics ancestor) {
+    return CustomScrollPhysics();
+  }
+
+  @override
+  Simulation createBallisticSimulation(
+      ScrollMetrics position, double velocity) {
+    print('create ballistic simulation');
+    //return ClampingScrollSimulation(
+    //    position: position.pixels,
+    //    velocity: velocity
+    //);
+    return CustomSimulation(
+      initPosition: position.pixels,
+      velocity: velocity
+    );
+  }
+}
+
+
+class CustomSimulation extends Simulation {
+  final double initPosition;
+  final double velocity;
+
+  CustomSimulation({this.initPosition, this.velocity});
+
+  @override
+  double x(double time) {
+    final x = initPosition + velocity / (time + 1);
+    print('x: $x');
+    return x;
+  }
+
+  @override
+  double dx(double time) {
+    print('velocity: $velocity');
+    return velocity / time;
+  }
+
+  @override
+  bool isDone(double time) {
+    return false;
   }
 }
