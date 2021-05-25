@@ -1,28 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:mind_tracker/src/views/common_widgets/other/glow_disabler.dart';
+import 'package:mind_tracker/src/views/screens/other/notification_screen/custom_time_picker/widgets/custom_drum_item.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_border_shape.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
-
-
-class CustomTimePicker extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: dp(200),
-      width: double.infinity,
-      decoration: ShapeDecoration(
-        color: CustomColors.purpleSuperDark,
-        shape: CustomBorderShape(dp(16)),
-      ),
-      child: Center(
-        child: CustomDrum(),
-      )
-    );
-  }
-}
 
 
 class CustomDrum extends StatefulWidget {
@@ -38,7 +18,7 @@ class _CustomDrumState extends State<CustomDrum> {
   void initState() {
     super.initState();
     _controller = ScrollController(
-      initialScrollOffset: CustomDrumItem.height
+        initialScrollOffset: CustomDrumItem.height
     );
     Future.delayed(Duration(seconds: 5)).then((value) => _animateToNearestItem());
   }
@@ -47,13 +27,13 @@ class _CustomDrumState extends State<CustomDrum> {
     Future.delayed(
         Duration(milliseconds: 10)
     ).then((_) {
-        final nearestItemIndex = (_controller.offset / CustomDrumItem.height).round();
-        _controller.animateTo(
-            CustomDrumItem.height * nearestItemIndex,
-            duration: Duration(milliseconds: 500),
-            curve: Curves.ease
-        );
-      }
+      final nearestItemIndex = (_controller.offset / CustomDrumItem.height).round();
+      _controller.animateTo(
+          CustomDrumItem.height * nearestItemIndex,
+          duration: Duration(milliseconds: 500),
+          curve: Curves.ease
+      );
+    }
     );
   }
 
@@ -86,35 +66,6 @@ class _CustomDrumState extends State<CustomDrum> {
             },
           ),
         ),
-      ),
-    );
-  }
-}
-
-
-class CustomDrumItem extends StatelessWidget {
-  static final height = dp(60);
-  final String text;
-  final double opacity;
-
-  CustomDrumItem(this.text, this.opacity);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      child: Center(
-        child: Text(
-          text,
-          style: CustomTextStyles.titleH1.copyWith(
-            color: Color.lerp(
-                CustomColors.white,
-                CustomColors.purpleLight,
-                1 - opacity
-            ).withOpacity(opacity),
-            fontSize: dp(44 - 20 * (1 - opacity)),
-          ),
-        )
       ),
     );
   }

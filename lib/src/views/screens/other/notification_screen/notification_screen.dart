@@ -3,7 +3,7 @@ import 'package:mind_tracker/src/business_logic/models/notification_time.dart';
 import 'package:mind_tracker/src/views/common_widgets/app_bar/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/app_bar/custom_leading.dart';
 import 'package:mind_tracker/src/views/common_widgets/other/standard_button.dart';
-import 'package:mind_tracker/src/views/screens/other/notification_screen/widgets/custom_time_picker.dart';
+import 'package:mind_tracker/src/views/screens/other/notification_screen/custom_time_picker/custom_time_picker.dart';
 import 'package:mind_tracker/src/views/screens/other/notification_screen/widgets/notification_time_box.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
