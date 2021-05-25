@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:mind_tracker/src/views/common_widgets/other/glow_disabler.dart';
 import 'package:mind_tracker/src/views/screens/other/notification_screen/custom_time_picker/widgets/custom_drum_item.dart';
-import 'package:mind_tracker/src/views/utils/metrics.dart';
 
 
 class CustomDrum extends StatefulWidget {
@@ -26,20 +25,18 @@ class _CustomDrumState extends State<CustomDrum> {
     super.initState();
     final firstItemInitValue = _topItemsCount + 1;
     _controller = ScrollController(
-        initialScrollOffset: firstItemInitValue * CustomDrumItem.height
+        initialScrollOffset: firstItemInitValue * CustomDrumItem.height,
     );
+    //Future.delayed(Duration(seconds: 3)).then(
+    //        (_) => _controller.animateTo(100.0, duration: Duration(seconds: 3), curve: Curves.ease)
+    //);
   }
 
   void _animateToNearestItem() {
-    Future.delayed(
-        Duration(milliseconds: 10)
-    ).then((_) {
-      _controller.animateTo(
-          CustomDrumItem.height * _firstItemOnScreenIndex,
-          duration: Duration(milliseconds: 500),
-          curve: Curves.ease
-      );
-    }
+    _controller.animateTo(
+        CustomDrumItem.height * _firstItemOnScreenIndex,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.ease
     );
   }
 
@@ -58,29 +55,52 @@ class _CustomDrumState extends State<CustomDrum> {
     return Container(
       width: double.infinity,
       child: GlowDisabler(
-        child: NotificationListener<ScrollNotification>(
-          onNotification: (scrollNotification) {
-            //print(scrollNotification); //TODO: delete this line
-            if (scrollNotification is UserScrollNotification) {
-              if (scrollNotification.direction == ScrollDirection.idle) {
-                _jumpToCenterItemWithSameIndex();
-                _animateToNearestItem();
-              }
-            }
-            if (scrollNotification is ScrollUpdateNotification) {
-              setState(() {});
-            }
-            return false;
+        child: GestureDetector(
+          onVerticalDragStart: (dragStartDetails) {
+            print('on vertical drag start $dragStartDetails');
           },
-          child: ListView.builder(
-            controller: _controller,
-            itemBuilder: (context, index) {
-              final isSelected = _selectedItemIndex == index;
-              final double opacity = isSelected ? 1 : 0.5;
-              final itemNumber = index % widget.itemsCount;
-              final itemNumberString = itemNumber.toString().padLeft(2, '0');
-              return CustomDrumItem('$itemNumberString ($index)', opacity);
+          onVerticalDragDown: (dragDownDetails) {
+            print('on drag down $dragDownDetails');
+          },
+          onVerticalDragEnd: (dragEndDetails) {
+            print('on drag end $dragEndDetails');
+          },
+          onVerticalDragCancel: () {
+            print('drag cancel');
+          },
+          onVerticalDragUpdate: (dragUpdateDetails) {
+            print('on drag update $dragUpdateDetails');
+          },
+          child: NotificationListener<UserScrollNotification>(
+            onNotification: (userScrollNotification) {
+              //print(userScrollNotification);
+              if (userScrollNotification.direction == ScrollDirection.idle) {
+                //_animateToNearestItem();
+                //_jumpToCenterItemWithSameIndex();
+              }
+              return false;
             },
+            child: NotificationListener<ScrollNotification>(
+              onNotification: (scrollNotification) {
+                //print(scrollNotification); //TODO: delete this line
+                if (scrollNotification is ScrollUpdateNotification) {
+                  setState(() {});
+                }
+                return false;
+              },
+              child: ListView.builder(
+                //physics: AlwaysScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
+                controller: _controller,
+                itemBuilder: (context, index) {
+                  final isSelected = _selectedItemIndex == index;
+                  final double opacity = isSelected ? 1 : 0.5;
+                  final itemNumber = index % widget.itemsCount;
+                  final itemNumberString = itemNumber.toString().padLeft(2, '0');
+                  return CustomDrumItem('$itemNumberString ($index)', opacity);
+                },
+              ),
+            ),
           ),
         ),
       ),
