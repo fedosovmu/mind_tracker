@@ -163,7 +163,7 @@ class _ChartPointPositionsCalculator {
     for (var i = 0; i <= daysCount; i++) {
       final date = endDate.subtract(Duration(days: daysCount - i));
       final moodAssessmentsForDay = moodAssessmentsProvider.getMoodAssessmentsForDate(date).toList();
-      final int pointsCountPerDay = 60 ~/ daysCount;
+      final int pointsCountPerDay = 60; //TODO: Edit this algorithm (60 ~/ daysCount);
       final averageMoodsForDay = _getAverageMoods(moodAssessmentsForDay, i == daysCount ? 1 : pointsCountPerDay);
       for (var j = 0; j < averageMoodsForDay.length; j++) {
         final mood = averageMoodsForDay[j];
