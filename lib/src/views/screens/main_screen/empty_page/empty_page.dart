@@ -5,7 +5,7 @@ import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
-class EmptyScreen extends StatelessWidget {
+class EmptyPage extends StatelessWidget {
   static const _pathToPlaceholderImage = 'assets/images/other/events_data_collection_in_progress.png';
 
   @override
