@@ -6,30 +6,36 @@ import 'package:mind_tracker/src/views/utils/metrics.dart';
 
 
 class CustomDrum extends StatefulWidget {
+  final int itemsCount;
+
+  CustomDrum(this.itemsCount);
+
   @override
   _CustomDrumState createState() => _CustomDrumState();
 }
 
 class _CustomDrumState extends State<CustomDrum> {
   ScrollController _controller;
-  int _selectedItemIndex = 2;
+  int get _firstItemOnScreenIndex => (_controller.offset / CustomDrumItem.height).round();
+  static const int _selectedItemIndexShift = 1;
+  int get _selectedItemIndex => _firstItemOnScreenIndex + _selectedItemIndexShift;
 
   @override
   void initState() {
     super.initState();
+    final firstItemInitValue = widget.itemsCount + 1;
     _controller = ScrollController(
-        initialScrollOffset: CustomDrumItem.height
+        initialScrollOffset: firstItemInitValue * CustomDrumItem.height
     );
-    Future.delayed(Duration(seconds: 5)).then((value) => _animateToNearestItem());
   }
 
   void _animateToNearestItem() {
     Future.delayed(
         Duration(milliseconds: 10)
     ).then((_) {
-      final nearestItemIndex = (_controller.offset / CustomDrumItem.height).round();
+      _jumpToCenterItemWithSameIndex();
       _controller.animateTo(
-          CustomDrumItem.height * nearestItemIndex,
+          CustomDrumItem.height * _firstItemOnScreenIndex,
           duration: Duration(milliseconds: 500),
           curve: Curves.ease
       );
@@ -37,11 +43,20 @@ class _CustomDrumState extends State<CustomDrum> {
     );
   }
 
+  void _jumpToCenterItemWithSameIndex() {
+    final centerItemWithSameIndex = _firstItemOnScreenIndex % 60 + widget.itemsCount;
+    if (_firstItemOnScreenIndex != centerItemWithSameIndex) {
+      final offsetShift = _controller.offset - _firstItemOnScreenIndex * CustomDrumItem.height;
+      _controller.jumpTo(
+          CustomDrumItem.height * centerItemWithSameIndex + offsetShift
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: dp(100),
-      //color: Colors.yellow,
+      width: double.infinity,
       child: GlowDisabler(
         child: NotificationListener<ScrollNotification>(
           onNotification: (scrollNotification) {
@@ -52,17 +67,18 @@ class _CustomDrumState extends State<CustomDrum> {
               }
             }
             if (scrollNotification is ScrollUpdateNotification) {
-              setState(() {
-                _selectedItemIndex = (_controller.offset / CustomDrumItem.height).round() + 1;
-              });
+              setState(() {});
             }
             return false;
           },
           child: ListView.builder(
             controller: _controller,
             itemBuilder: (context, index) {
-              final double opacity = _selectedItemIndex == index ? 1 : 0.5;
-              return CustomDrumItem('${index}', opacity);
+              final isSelected = _selectedItemIndex == index;
+              final double opacity = isSelected ? 1 : 0.5;
+              final itemNumber = index % widget.itemsCount;
+              final itemNumberString = itemNumber.toString().padLeft(2, '0');
+              return CustomDrumItem('$itemNumberString', opacity);
             },
           ),
         ),

@@ -17,7 +17,7 @@ class CustomTimePicker extends StatelessWidget {
         shape: CustomBorderShape(dp(16)),
       ),
       child: Center(
-        child: CustomDrum(),
+        child: CustomDrum(60),
       )
     );
   }
