@@ -19,11 +19,12 @@ class _CustomDrumState extends State<CustomDrum> {
   int get _firstItemOnScreenIndex => (_controller.offset / CustomDrumItem.height).round();
   static const int _selectedItemIndexShift = 1;
   int get _selectedItemIndex => _firstItemOnScreenIndex + _selectedItemIndexShift;
+  int get _topItemsCount => widget.itemsCount;
 
   @override
   void initState() {
     super.initState();
-    final firstItemInitValue = widget.itemsCount + 1;
+    final firstItemInitValue = _topItemsCount + 1;
     _controller = ScrollController(
         initialScrollOffset: firstItemInitValue * CustomDrumItem.height
     );
@@ -33,7 +34,6 @@ class _CustomDrumState extends State<CustomDrum> {
     Future.delayed(
         Duration(milliseconds: 10)
     ).then((_) {
-      _jumpToCenterItemWithSameIndex();
       _controller.animateTo(
           CustomDrumItem.height * _firstItemOnScreenIndex,
           duration: Duration(milliseconds: 500),
@@ -44,7 +44,7 @@ class _CustomDrumState extends State<CustomDrum> {
   }
 
   void _jumpToCenterItemWithSameIndex() {
-    final centerItemWithSameIndex = _firstItemOnScreenIndex % 60 + widget.itemsCount;
+    final centerItemWithSameIndex = _firstItemOnScreenIndex % widget.itemsCount + _topItemsCount;
     if (_firstItemOnScreenIndex != centerItemWithSameIndex) {
       final offsetShift = _controller.offset - _firstItemOnScreenIndex * CustomDrumItem.height;
       _controller.jumpTo(
@@ -60,9 +60,10 @@ class _CustomDrumState extends State<CustomDrum> {
       child: GlowDisabler(
         child: NotificationListener<ScrollNotification>(
           onNotification: (scrollNotification) {
-            print(scrollNotification); //TODO: delete this line
+            //print(scrollNotification); //TODO: delete this line
             if (scrollNotification is UserScrollNotification) {
               if (scrollNotification.direction == ScrollDirection.idle) {
+                _jumpToCenterItemWithSameIndex();
                 _animateToNearestItem();
               }
             }
@@ -78,7 +79,7 @@ class _CustomDrumState extends State<CustomDrum> {
               final double opacity = isSelected ? 1 : 0.5;
               final itemNumber = index % widget.itemsCount;
               final itemNumberString = itemNumber.toString().padLeft(2, '0');
-              return CustomDrumItem('$itemNumberString', opacity);
+              return CustomDrumItem('$itemNumberString ($index)', opacity);
             },
           ),
         ),
