@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:mind_tracker/src/views/common_widgets/other/glow_disabler.dart';
@@ -126,7 +125,9 @@ class CustomScrollPhysics extends ScrollPhysics {
     print('create ballistic simulation');
     return CustomSimulation(
       initPosition: position.pixels,
-      initVelocity: velocity
+      initVelocity: velocity,
+      itemsCount: 60,
+      itemHeight: CustomDrumItem.height
     );
   }
 }
@@ -135,8 +136,11 @@ class CustomScrollPhysics extends ScrollPhysics {
 class CustomSimulation extends Simulation {
   final double initPosition;
   final double initVelocity;
+  final int itemsCount;
+  final double itemHeight;
 
-  CustomSimulation({this.initPosition, this.initVelocity});
+  CustomSimulation({@required this.initPosition, @required this.initVelocity,
+    @required this.itemsCount, @required this.itemHeight});
 
   @override
   double x(double time) {
@@ -153,6 +157,6 @@ class CustomSimulation extends Simulation {
 
   @override
   bool isDone(double time) {
-    return false;
+    return time > 5;
   }
 }
