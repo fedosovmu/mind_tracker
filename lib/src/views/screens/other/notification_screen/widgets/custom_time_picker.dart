@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:mind_tracker/src/views/common_widgets/glow_disabler.dart';
+import 'package:mind_tracker/src/views/common_widgets/other/glow_disabler.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_border_shape.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
@@ -65,7 +65,7 @@ class _CustomDrumState extends State<CustomDrum> {
       child: GlowDisabler(
         child: NotificationListener<ScrollNotification>(
           onNotification: (scrollNotification) {
-            print(scrollNotification);
+            print(scrollNotification); //TODO: delete this line
             if (scrollNotification is UserScrollNotification) {
               if (scrollNotification.direction == ScrollDirection.idle) {
                 _animateToNearestItem();
