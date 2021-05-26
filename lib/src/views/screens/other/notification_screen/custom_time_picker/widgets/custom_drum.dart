@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:mind_tracker/src/views/common_widgets/other/glow_disabler.dart';
 import 'package:mind_tracker/src/views/screens/other/notification_screen/custom_time_picker/widgets/custom_drum_item.dart';
+import 'package:mind_tracker/src/views/screens/other/notification_screen/custom_time_picker/widgets/custom_scroll_physics.dart';
 
 
 class CustomDrum extends StatefulWidget {
@@ -109,54 +110,5 @@ class _CustomDrumState extends State<CustomDrum> {
         ),
       ),
     );
-  }
-}
-
-
-class CustomScrollPhysics extends ScrollPhysics {
-  @override
-  ScrollPhysics applyTo(ScrollPhysics ancestor) {
-    return CustomScrollPhysics();
-  }
-
-  @override
-  Simulation createBallisticSimulation(
-      ScrollMetrics position, double velocity) {
-    print('create ballistic simulation');
-    return CustomSimulation(
-      initPosition: position.pixels,
-      initVelocity: velocity,
-      itemsCount: 60,
-      itemHeight: CustomDrumItem.height
-    );
-  }
-}
-
-
-class CustomSimulation extends Simulation {
-  final double initPosition;
-  final double initVelocity;
-  final int itemsCount;
-  final double itemHeight;
-
-  CustomSimulation({@required this.initPosition, @required this.initVelocity,
-    @required this.itemsCount, @required this.itemHeight});
-
-  @override
-  double x(double time) {
-    final x = initPosition + initVelocity * time;
-    print('x: $x, time: $time');
-    return x;
-  }
-
-  @override
-  double dx(double time) {
-    print('velocity: $initVelocity');
-    return initVelocity;
-  }
-
-  @override
-  bool isDone(double time) {
-    return time > 5;
   }
 }
