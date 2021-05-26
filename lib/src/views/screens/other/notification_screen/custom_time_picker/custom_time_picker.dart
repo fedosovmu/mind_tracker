@@ -10,7 +10,7 @@ class CustomTimePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: dp(200),
+      height: dp(300),
       width: double.infinity,
       decoration: ShapeDecoration(
         color: CustomColors.purpleSuperDark,

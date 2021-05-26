@@ -17,7 +17,7 @@ class CustomScrollPhysics extends ScrollPhysics {
         initPosition: position.pixels,
         initVelocity: velocity,
         itemsCount: 60,
-        itemHeight: CustomDrumItem.height
+        itemSize: CustomDrumItem.height
     );
   }
 }

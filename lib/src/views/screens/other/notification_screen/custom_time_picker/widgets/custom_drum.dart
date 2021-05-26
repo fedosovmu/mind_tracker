@@ -92,14 +92,15 @@ class _CustomDrumState extends State<CustomDrum> {
                 return false;
               },
               child: ListView.builder(
-                //physics: ClampingScrollPhysics(),
                 //physics: AlwaysScrollableScrollPhysics(),
                 //physics: NeverScrollableScrollPhysics(),
+                //physics: ClampingScrollPhysics(),
                 physics: CustomScrollPhysics(),
                 controller: _controller,
                 itemBuilder: (context, index) {
                   final isSelected = _selectedItemIndex == index;
-                  final double opacity = isSelected ? 1 : 0.5;
+                  //final double opacity = isSelected ? 1 : 0.5;
+                  final double opacity = 0.5;
                   final itemNumber = index % widget.itemsCount;
                   final itemNumberString = itemNumber.toString().padLeft(2, '0');
                   return CustomDrumItem('$itemNumberString ($index)', opacity);
