@@ -38,7 +38,8 @@ class _CustomDrumState extends State<CustomDrum> {
   double _getItemOpacity(int itemIndex) {
     final itemPos = itemIndex * CustomDrumItem.height;
     final itemDistanceToCenter = (_drumCenter - itemPos).abs();
-    return 1.0 - min(itemDistanceToCenter / _drumHeight * 2, 1);
+    final normalizedDistance = 1.0 - min(itemDistanceToCenter / _drumHeight * 2, 1);
+    return Curves.easeIn.transform(normalizedDistance);
   }
 
   @override
