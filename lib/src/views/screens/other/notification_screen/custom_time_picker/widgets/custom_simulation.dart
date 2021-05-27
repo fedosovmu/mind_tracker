@@ -1,50 +1,73 @@
-import 'dart:math';
-
+//import 'dart:math';
 import 'package:flutter/material.dart';
+//import 'package:flutter/src/widgets/scroll_simulation.dart';
+// /Users/maxim/Documents/Libs/flutter/packages/flutter/lib/src/widgets/scroll_simulation.dart
 
-
-class CustomSimulation extends Simulation {
+class CustomSimulation implements Simulation {
+  ClampingScrollSimulation _scrollSimulation;
   final double initPosition;
   final double initVelocity;
   final int itemsCount;
   final double itemSize;
 
-  CustomSimulation({@required this.initPosition, @required this.initVelocity,
-    @required this.itemsCount, @required this.itemSize}) {
-    print('Start simulation:');
-    print('initPosition: $initPosition initVelocity: $initVelocity');
+  CustomSimulation({
+    @required this.initPosition,
+    @required this.initVelocity,
+    @required this.itemsCount,
+    @required this.itemSize}) {
+    _scrollSimulation = ClampingScrollSimulation(
+        position: initPosition,
+        velocity: initVelocity
+    );
   }
 
-  double _duration = 3;
+  int _getNearestItemIndex(double x) {
+    return x ~/ itemSize;
+  }
+
+  double _getCentredItemX(double x) {
+    final nearestItemIndex = _getNearestItemIndex(x);
+    final loopNumber = nearestItemIndex ~/ itemsCount;
+    if (loopNumber == 1) {
+      return x;
+    } else {
+      final nearestItemX = _getNearestItemIndex(x) * itemSize;
+      final shift = x - nearestItemX;
+      final centerItemIndex = nearestItemIndex % itemsCount + itemsCount;
+      return centerItemIndex * itemSize + shift;
+    }
+  }
+
+  var _doneTime;
 
   @override
   double x(double time) {
-    if (time == 0) {
-      return initPosition;
+    final isDone = _scrollSimulation.isDone(time);
+    final x = _scrollSimulation.x(time);
+    if (isDone) {
+      final centerItemX = _getCentredItemX(x);
+      //final nearestItemX = _getNearestItemIndex(x) * itemSize;
+      return centerItemX;
+    } else {
+      return x;
     }
-    _duration = initVelocity.abs() / (600 * 5);
-    final normalizedTime = min(1.0, time / _duration);
-    final deltaForAllTime = initVelocity * _duration;
-    //final curve = Curves.easeOutCubic;
-    //final curve = Curves.bounceOut;
-    final curve = Curves.easeOutCirc;
-    final delta = deltaForAllTime * curve.transform(normalizedTime);
-    final x = initPosition + delta;
-    //print('x: $x time: $time');
-    return x;
-    //Curves.ease.transform(t); I can use this
   }
 
   @override
   double dx(double time) {
-    if (time >= _duration) {
-      return 0;
-    }
-    return initVelocity;
+    return _scrollSimulation.dx(time);
   }
 
   @override
   bool isDone(double time) {
-    return time > 5;
+    return _scrollSimulation.isDone(time);
   }
+
+  @override
+  set tolerance(Tolerance _tolerance) {
+    _scrollSimulation.tolerance = _tolerance;
+  }
+
+  @override
+  Tolerance get tolerance => _scrollSimulation.tolerance;
 }

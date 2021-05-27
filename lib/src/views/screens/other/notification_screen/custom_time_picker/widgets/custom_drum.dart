@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:mind_tracker/src/views/common_widgets/other/glow_disabler.dart';
 import 'package:mind_tracker/src/views/screens/other/notification_screen/custom_time_picker/widgets/custom_drum_item.dart';
 import 'package:mind_tracker/src/views/screens/other/notification_screen/custom_time_picker/widgets/custom_scroll_physics.dart';
+import 'package:mind_tracker/src/views/utils/metrics.dart';
 
 
 class CustomDrum extends StatefulWidget {
@@ -28,85 +28,35 @@ class _CustomDrumState extends State<CustomDrum> {
     _controller = ScrollController(
         initialScrollOffset: firstItemInitValue * CustomDrumItem.height,
     );
-    //Future.delayed(Duration(seconds: 3)).then(
-    //  (_) {
-        //_controller.animateTo(100.0, duration: Duration(seconds: 3), curve: Curves.ease);
-    //  }
-    //);
-  }
-
-  void _animateToNearestItem() {
-    _controller.animateTo(
-        CustomDrumItem.height * _firstItemOnScreenIndex,
-        duration: Duration(milliseconds: 500),
-        curve: Curves.ease
-    );
-  }
-
-  void _jumpToCenterItemWithSameIndex() {
-    final centerItemWithSameIndex = _firstItemOnScreenIndex % widget.itemsCount + _topItemsCount;
-    if (_firstItemOnScreenIndex != centerItemWithSameIndex) {
-      final offsetShift = _controller.offset - _firstItemOnScreenIndex * CustomDrumItem.height;
-      _controller.jumpTo(
-          CustomDrumItem.height * centerItemWithSameIndex + offsetShift
-      );
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
+      width: dp(200),
       child: GlowDisabler(
-        child: GestureDetector(
-          onVerticalDragStart: (dragStartDetails) {
-            //print('on vertical drag start $dragStartDetails');
+        child: NotificationListener<ScrollNotification>(
+          onNotification: (scrollNotification) {
+            //print(scrollNotification); //TODO: delete this line
+            if (scrollNotification is ScrollUpdateNotification) {
+              setState(() {});
+            }
+            return false;
           },
-          onVerticalDragDown: (dragDownDetails) {
-            //print('on drag down $dragDownDetails');
-          },
-          onVerticalDragEnd: (dragEndDetails) {
-            //print('on drag end $dragEndDetails');
-          },
-          onVerticalDragCancel: () {
-            //print('drag cancel');
-          },
-          onVerticalDragUpdate: (dragUpdateDetails) {
-            //print('on drag update $dragUpdateDetails');
-          },
-          child: NotificationListener<UserScrollNotification>(
-            onNotification: (userScrollNotification) {
-              //print(userScrollNotification);
-              if (userScrollNotification.direction == ScrollDirection.idle) {
-                //_animateToNearestItem();
-                //_jumpToCenterItemWithSameIndex();
-              }
-              return false;
-            },
-            child: NotificationListener<ScrollNotification>(
-              onNotification: (scrollNotification) {
-                //print(scrollNotification); //TODO: delete this line
-                if (scrollNotification is ScrollUpdateNotification) {
-                  setState(() {});
-                }
-                return false;
-              },
-              child: ListView.builder(
-                //physics: AlwaysScrollableScrollPhysics(),
-                //physics: NeverScrollableScrollPhysics(),
-                //physics: ClampingScrollPhysics(),
-                physics: CustomScrollPhysics(),
-                controller: _controller,
-                itemBuilder: (context, index) {
-                  final isSelected = _selectedItemIndex == index;
-                  //final double opacity = isSelected ? 1 : 0.5;
-                  final double opacity = 0.5;
-                  final itemNumber = index % widget.itemsCount;
-                  final itemNumberString = itemNumber.toString().padLeft(2, '0');
-                  return CustomDrumItem('$itemNumberString ($index)', opacity);
-                },
-              ),
+          child: ListView.builder(
+            physics: CustomScrollPhysics(
+              itemsCount: widget.itemsCount,
+              itemSize: CustomDrumItem.height
             ),
+            controller: _controller,
+            itemBuilder: (context, index) {
+              final isSelected = _selectedItemIndex == index;
+              //final double opacity = isSelected ? 1 : 0.5;
+              final double opacity = 0.5;
+              final itemNumber = index % widget.itemsCount;
+              final itemNumberString = itemNumber.toString().padLeft(2, '0');
+              return CustomDrumItem('$itemNumberString ($index)', opacity);
+            },
           ),
         ),
       ),
