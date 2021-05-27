@@ -1,4 +1,6 @@
 //import 'dart:math';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 //import 'package:flutter/src/widgets/scroll_simulation.dart';
 // /Users/maxim/Documents/Libs/flutter/packages/flutter/lib/src/widgets/scroll_simulation.dart
@@ -34,21 +36,26 @@ class CustomSimulation implements Simulation {
     if (loopIndex == _topLoopsCount) {
       return x;
     } else {
-      final nearestItemX = _getNearestItemIndex(x) * itemSize;
-      final shift = x - nearestItemX;
+      final nextItemX = _getNearestItemIndex(x) * itemSize;
+      final shiftToNextItem = x - nextItemX;
       final centerItemIndex = nearestItemIndex % itemsCount + _topItemsCount;
-      return centerItemIndex * itemSize + shift;
+      return centerItemIndex * itemSize + shiftToNextItem;
     }
   }
+
+  static const _magneticAnimationDuration = 0.5;
 
   @override
   double x(double time) {
     final isDone = _scrollSimulation.isDone(time);
     final x = _scrollSimulation.x(time);
     if (isDone) {
+      final timeSinceDone = time - _getClampingScrollSimulationDuration();
+      final animation = min(timeSinceDone, _magneticAnimationDuration) / _magneticAnimationDuration;
       final centerItemX = _getCentredItemX(x);
-      final nearestItemX = _getNearestItemIndex(centerItemX) * itemSize;
-      return nearestItemX;
+      final nextItemX = _getNearestItemIndex(centerItemX) * itemSize;
+      final shiftToNextItemX = centerItemX - nextItemX;
+      return nextItemX + shiftToNextItemX * (1.0 - animation);
     } else {
       return x;
     }
@@ -71,4 +78,37 @@ class CustomSimulation implements Simulation {
 
   @override
   Tolerance get tolerance => _scrollSimulation.tolerance;
+
+
+  // ===============================
+  static const double _inflexion = 0.35;
+
+  static double _decelerationForFriction(double friction) {
+    return 9.80665 *
+        39.37 *
+        friction *
+        1.0 * // Flutter operates on logical pixels so the DPI should be 1.0.
+        160.0;
+  }
+
+  double _splineDeceleration(double velocity) {
+    final friction = _scrollSimulation.friction;
+    return log(_inflexion * velocity.abs() / (friction * _decelerationForFriction(0.84)));
+  }
+
+  static final double _kDecelerationRate = log(0.78) / log(0.9);
+
+  int _splineFlingDuration(double velocity) {
+    final double deceleration = _splineDeceleration(velocity);
+    return (1000 * exp(deceleration / (_kDecelerationRate - 1.0))).round();
+  }
+
+  double _getClampingScrollSimulationDuration() {
+    final velocity = _scrollSimulation.velocity;
+    return _splineFlingDuration(velocity) / 1000;
+  }
+
+  bool isClampingScrollSimulationDone(double time) {
+    return time >= _getClampingScrollSimulationDuration();
+  }
 }
