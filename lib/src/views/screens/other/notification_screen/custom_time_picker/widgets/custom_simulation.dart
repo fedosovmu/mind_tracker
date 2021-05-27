@@ -24,7 +24,7 @@ class CustomSimulation implements Simulation {
   }
 
   int _getNearestItemIndex(double x) {
-    return x ~/ itemSize;
+    return (x / itemSize).round();
   }
 
   int get _topLoopsCount => 100 ~/ itemsCount;
@@ -36,10 +36,10 @@ class CustomSimulation implements Simulation {
     if (loopIndex == _topLoopsCount) {
       return x;
     } else {
-      final nextItemX = _getNearestItemIndex(x) * itemSize;
-      final shiftToNextItem = x - nextItemX;
+      final nearestItemX = _getNearestItemIndex(x) * itemSize;
+      final shiftToNearestItem = x - nearestItemX;
       final centerItemIndex = nearestItemIndex % itemsCount + _topItemsCount;
-      return centerItemIndex * itemSize + shiftToNextItem;
+      return centerItemIndex * itemSize + shiftToNearestItem;
     }
   }
 
@@ -53,9 +53,9 @@ class CustomSimulation implements Simulation {
       final timeSinceDone = time - _getClampingScrollSimulationDuration();
       final animation = min(timeSinceDone, _magneticSimulationDuration) / _magneticSimulationDuration;
       final centerItemX = _getCentredItemX(x);
-      final nextItemX = _getNearestItemIndex(centerItemX) * itemSize;
-      final shiftToNextItemX = centerItemX - nextItemX;
-      return nextItemX + shiftToNextItemX * (1.0 - animation);
+      final nearestItemX = _getNearestItemIndex(centerItemX) * itemSize;
+      final shiftToNearestItem = centerItemX - nearestItemX;
+      return nearestItemX + shiftToNearestItem * (1.0 - animation);
     } else {
       return x;
     }
