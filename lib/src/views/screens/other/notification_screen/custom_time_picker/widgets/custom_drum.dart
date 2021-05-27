@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/other/glow_disabler.dart';
 import 'package:mind_tracker/src/views/screens/other/notification_screen/custom_time_picker/widgets/custom_drum_item.dart';
@@ -17,7 +19,7 @@ class CustomDrum extends StatefulWidget {
 class _CustomDrumState extends State<CustomDrum> {
   ScrollController _controller;
   int get _firstItemOnScreenIndex => (_controller.offset / CustomDrumItem.height).round();
-  static const int _selectedItemIndexShift = 1;
+  static const int _selectedItemIndexShift = 2;
   int get _selectedItemIndex => _firstItemOnScreenIndex + _selectedItemIndexShift;
   int get _topLoopsCount => 100 ~/ widget.itemsCount;
   int get _topItemsCount => _topLoopsCount * widget.itemsCount;
@@ -31,15 +33,22 @@ class _CustomDrumState extends State<CustomDrum> {
     );
   }
 
+  final _drumHeight = dp(300);
+  double get _drumCenter => _controller.offset + _drumHeight / 2 - CustomDrumItem.height / 2;
+  double _getItemOpacity(int itemIndex) {
+    final itemPos = itemIndex * CustomDrumItem.height;
+    final itemDistanceToCenter = (_drumCenter - itemPos).abs();
+    return 1.0 - min(itemDistanceToCenter / _drumHeight * 2, 1);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      //color: Colors.yellow,
       width: dp(100),
+      height: _drumHeight,
       child: GlowDisabler(
         child: NotificationListener<ScrollNotification>(
           onNotification: (scrollNotification) {
-            //print(scrollNotification); //TODO: delete this line
             if (scrollNotification is ScrollUpdateNotification) {
               setState(() {});
             }
@@ -52,9 +61,7 @@ class _CustomDrumState extends State<CustomDrum> {
             ),
             controller: _controller,
             itemBuilder: (context, index) {
-              final isSelected = _selectedItemIndex == index;
-              //final double opacity = isSelected ? 1 : 0.5;
-              final double opacity = 0.5;
+              final double opacity = _getItemOpacity(index);
               final itemNumber = index % widget.itemsCount;
               final itemNumberString = itemNumber.toString().padLeft(2, '0');
               return CustomDrumItem('$itemNumberString', opacity);

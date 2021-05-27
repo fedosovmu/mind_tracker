@@ -1,9 +1,6 @@
-//import 'dart:math';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-//import 'package:flutter/src/widgets/scroll_simulation.dart';
-// /Users/maxim/Documents/Libs/flutter/packages/flutter/lib/src/widgets/scroll_simulation.dart
+
 
 class CustomSimulation implements Simulation {
   ClampingScrollSimulation _scrollSimulation;
