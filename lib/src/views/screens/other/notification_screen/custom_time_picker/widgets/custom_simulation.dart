@@ -43,7 +43,7 @@ class CustomSimulation implements Simulation {
     }
   }
 
-  static const _magneticAnimationDuration = 0.5;
+  static const _magneticSimulationDuration = 0.5;
 
   @override
   double x(double time) {
@@ -51,7 +51,7 @@ class CustomSimulation implements Simulation {
     final x = _scrollSimulation.x(time);
     if (isDone) {
       final timeSinceDone = time - _getClampingScrollSimulationDuration();
-      final animation = min(timeSinceDone, _magneticAnimationDuration) / _magneticAnimationDuration;
+      final animation = min(timeSinceDone, _magneticSimulationDuration) / _magneticSimulationDuration;
       final centerItemX = _getCentredItemX(x);
       final nextItemX = _getNearestItemIndex(centerItemX) * itemSize;
       final shiftToNextItemX = centerItemX - nextItemX;
@@ -68,7 +68,8 @@ class CustomSimulation implements Simulation {
 
   @override
   bool isDone(double time) {
-    return _scrollSimulation.isDone(time);
+    final allSimulationsDuration = _getClampingScrollSimulationDuration() + _magneticSimulationDuration;
+    return time >= allSimulationsDuration;
   }
 
   @override
@@ -106,9 +107,5 @@ class CustomSimulation implements Simulation {
   double _getClampingScrollSimulationDuration() {
     final velocity = _scrollSimulation.velocity;
     return _splineFlingDuration(velocity) / 1000;
-  }
-
-  bool isClampingScrollSimulationDone(double time) {
-    return time >= _getClampingScrollSimulationDuration();
   }
 }
