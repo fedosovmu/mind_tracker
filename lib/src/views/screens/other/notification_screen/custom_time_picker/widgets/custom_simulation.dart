@@ -24,7 +24,7 @@ class CustomSimulation implements Simulation {
     return (x / itemSize).round();
   }
 
-  int get _topLoopsCount => 100 ~/ itemsCount;
+  int get _topLoopsCount => 1;
   int get _topItemsCount => _topLoopsCount * itemsCount;
 
   double _getCentredItemX(double x) {
@@ -46,15 +46,15 @@ class CustomSimulation implements Simulation {
   double x(double time) {
     final isDone = _scrollSimulation.isDone(time);
     final x = _scrollSimulation.x(time);
+    final centerItemX = _getCentredItemX(x);
     if (isDone) {
       final timeSinceDone = time - _getClampingScrollSimulationDuration();
       final animation = min(timeSinceDone, _magneticSimulationDuration) / _magneticSimulationDuration;
-      final centerItemX = _getCentredItemX(x);
       final nearestItemX = _getNearestItemIndex(centerItemX) * itemSize;
       final shiftToNearestItem = centerItemX - nearestItemX;
       return nearestItemX + shiftToNearestItem * (1.0 - animation);
     } else {
-      return x;
+      return centerItemX;
     }
   }
 

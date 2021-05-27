@@ -21,7 +21,7 @@ class _CustomDrumState extends State<CustomDrum> {
   int get _firstItemOnScreenIndex => (_controller.offset / CustomDrumItem.height).round();
   static const int _selectedItemIndexShift = 2;
   int get _selectedItemIndex => _firstItemOnScreenIndex + _selectedItemIndexShift;
-  int get _topLoopsCount => 100 ~/ widget.itemsCount;
+  int get _topLoopsCount => 1;
   int get _topItemsCount => _topLoopsCount * widget.itemsCount;
 
   @override
