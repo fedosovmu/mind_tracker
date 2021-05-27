@@ -4,6 +4,7 @@ import 'package:mind_tracker/src/views/screens/other/notification_screen/custom_
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_border_shape.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
 class CustomTimePicker extends StatelessWidget {
@@ -16,8 +17,19 @@ class CustomTimePicker extends StatelessWidget {
         color: CustomColors.purpleSuperDark,
         shape: CustomBorderShape(dp(16)),
       ),
-      child: Center(
-        child: CustomDrum(60),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CustomDrum(24),
+          Container(
+            child: Text(':',
+              style: CustomTextStyles.titleH1.copyWith(
+                fontSize: dp(44),
+              ),
+            ),
+          ),
+          CustomDrum(60)
+        ],
       )
     );
   }

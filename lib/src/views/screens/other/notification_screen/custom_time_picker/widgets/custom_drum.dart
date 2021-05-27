@@ -33,7 +33,8 @@ class _CustomDrumState extends State<CustomDrum> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: dp(200),
+      //color: Colors.yellow,
+      width: dp(100),
       child: GlowDisabler(
         child: NotificationListener<ScrollNotification>(
           onNotification: (scrollNotification) {
@@ -55,7 +56,7 @@ class _CustomDrumState extends State<CustomDrum> {
               final double opacity = 0.5;
               final itemNumber = index % widget.itemsCount;
               final itemNumberString = itemNumber.toString().padLeft(2, '0');
-              return CustomDrumItem('$itemNumberString ($index)', opacity);
+              return CustomDrumItem('$itemNumberString', opacity);
             },
           ),
         ),

@@ -46,8 +46,8 @@ class CustomSimulation implements Simulation {
     final x = _scrollSimulation.x(time);
     if (isDone) {
       final centerItemX = _getCentredItemX(x);
-      //final nearestItemX = _getNearestItemIndex(x) * itemSize;
-      return centerItemX;
+      final nearestItemX = _getNearestItemIndex(centerItemX) * itemSize;
+      return nearestItemX;
     } else {
       return x;
     }
