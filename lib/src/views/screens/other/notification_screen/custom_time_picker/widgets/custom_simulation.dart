@@ -25,20 +25,21 @@ class CustomSimulation implements Simulation {
     return x ~/ itemSize;
   }
 
+  int get _topLoopsCount => 100 ~/ itemsCount;
+  int get _topItemsCount => _topLoopsCount * itemsCount;
+
   double _getCentredItemX(double x) {
     final nearestItemIndex = _getNearestItemIndex(x);
-    final loopNumber = nearestItemIndex ~/ itemsCount;
-    if (loopNumber == 1) {
+    final loopIndex = nearestItemIndex ~/ itemsCount;
+    if (loopIndex == _topLoopsCount) {
       return x;
     } else {
       final nearestItemX = _getNearestItemIndex(x) * itemSize;
       final shift = x - nearestItemX;
-      final centerItemIndex = nearestItemIndex % itemsCount + itemsCount;
+      final centerItemIndex = nearestItemIndex % itemsCount + _topItemsCount;
       return centerItemIndex * itemSize + shift;
     }
   }
-
-  var _doneTime;
 
   @override
   double x(double time) {
