@@ -72,12 +72,14 @@ class _NotificationTimeBoxesState extends State<NotificationTimeBoxes> {
         }
       }
     }
+
     if (_notificationTimes.length < 4) {
       final addButton = AddNotificationButton(
         onPressed: () {
           setState(() {
             final newNotificationTime = widget.timePickerController.time;
             _notificationTimes.add(newNotificationTime);
+            _selectedTimeBoxIndex = _notificationTimes.length - 1;
           });
         },
       );
