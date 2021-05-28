@@ -12,12 +12,12 @@ class CustomTimePickerController extends ChangeNotifier {
     _minutes = initialTime.minutes;
   }
 
-  void changeHours(int hours) {
+  void attachHours(int hours) {
     _hours = hours;
     notifyListeners();
   }
 
-  void changeMinutes(int minutes) {
+  void attachMinutes(int minutes) {
     _minutes = minutes;
     notifyListeners();
   }

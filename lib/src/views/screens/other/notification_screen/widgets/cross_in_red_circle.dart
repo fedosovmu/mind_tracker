@@ -5,12 +5,14 @@ import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 
 
 class CrossInRedCircle extends StatelessWidget {
+  final Function onPressed;
+
+  CrossInRedCircle({@required this.onPressed});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        print('Press red cross');
-      },
+      onTap: onPressed,
       child: Container(
         height: dp(24),
         width: dp(24),

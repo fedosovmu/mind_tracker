@@ -13,65 +13,75 @@ import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 class NotificationTimeBox extends StatelessWidget {
   final bool selected;
   final NotificationTime notificationTime;
+  final Function onPressed;
+  final Function onDeleteButtonPressed;
 
-  NotificationTimeBox(this.notificationTime, {this.selected = false});
+  NotificationTimeBox(this.notificationTime, {this.selected = false,
+    @required this.onPressed, @required this.onDeleteButtonPressed,});
+
+  static final height = dp(86+8);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: dp(86+8),
+      height: height,
       width: dp(70+8),
       child: Stack(
         children: [
           Align(
             alignment: Alignment.bottomLeft,
-            child: Container(
-              margin: EdgeInsets.only(top: dp(8), right: dp(8)),
-              height: double.infinity,
-              width: double.infinity,
-              decoration: ShapeDecoration(
-                color: selected ? CustomColors.main : CustomColors.purpleSuperDark,
-                shape: CustomBorderShape(
-                  dp(16),
-                  side: BorderSide(
-                    width: dp(1),
-                    color: selected ? CustomColors.main : CustomColors.purpleMegaDark,
-                  )
+            child: GestureDetector(
+              onTap: onPressed,
+              child: Container(
+                margin: EdgeInsets.only(top: dp(8), right: dp(8)),
+                height: double.infinity,
+                width: double.infinity,
+                decoration: ShapeDecoration(
+                  color: selected ? CustomColors.main : CustomColors.purpleSuperDark,
+                  shape: CustomBorderShape(
+                    dp(16),
+                    side: BorderSide(
+                      width: dp(1),
+                      color: selected ? CustomColors.main : CustomColors.purpleMegaDark,
+                    )
+                  ),
                 ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    CustomIconPaths.partOfDays[
-                      PartOfDayBuilder.fromDateTime(notificationTime.toDateTime())
-                    ],
-                    height: dp(24),
-                    width: dp(24),
-                  ),
-                  SizedBox(height: dp(4)),
-                  Text(
-                    Content.getTimeString(context, notificationTime.toDateTime()),
-                    style: CustomTextStyles.basicH1Medium.copyWith(
-                      color: CustomColors.purpleWhite,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      CustomIconPaths.partOfDays[
+                        PartOfDayBuilder.fromDateTime(notificationTime.toDateTime())
+                      ],
+                      height: dp(24),
+                      width: dp(24),
                     ),
-                  ),
-                  SizedBox(height: dp(4)),
-                  Text(
-                     Content.partOfDayNames[
-                       PartOfDayBuilder.fromDateTime(notificationTime.toDateTime())
-                     ],
-                    style: CustomTextStyles.caption.copyWith(
-                      color: CustomColors.purpleWhite
+                    SizedBox(height: dp(4)),
+                    Text(
+                      Content.getTimeString(context, notificationTime.toDateTime()),
+                      style: CustomTextStyles.basicH1Medium.copyWith(
+                        color: CustomColors.purpleWhite,
+                      ),
                     ),
-                  )
-                ],
+                    SizedBox(height: dp(4)),
+                    Text(
+                       Content.partOfDayNames[
+                         PartOfDayBuilder.fromDateTime(notificationTime.toDateTime())
+                       ],
+                      style: CustomTextStyles.caption.copyWith(
+                        color: CustomColors.purpleWhite
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
           Align(
               alignment: Alignment.topRight,
-              child: CrossInRedCircle()
+              child: CrossInRedCircle(
+                onPressed: onDeleteButtonPressed,
+              )
           )
         ],
       ),

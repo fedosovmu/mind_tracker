@@ -23,7 +23,7 @@ class CustomTimePicker extends StatelessWidget {
             itemsCount: 24,
             initValue: controller.time.hours,
             onSelectedValueChanged: (hours) {
-              controller.changeHours(hours);
+              controller.attachHours(hours);
             },
           ),
           Container(
@@ -38,7 +38,7 @@ class CustomTimePicker extends StatelessWidget {
             itemsCount: 60,
             initValue: controller.time.minutes,
             onSelectedValueChanged: (minutes) {
-              controller.changeMinutes(minutes);
+              controller.attachMinutes(minutes);
             },
           )
         ],
