@@ -4,11 +4,11 @@ import 'package:mind_tracker/src/views/common_widgets/app_bar/custom_app_bar.dar
 import 'package:mind_tracker/src/views/common_widgets/app_bar/custom_leading.dart';
 import 'package:mind_tracker/src/views/common_widgets/other/standard_button.dart';
 import 'package:mind_tracker/src/views/screens/other/notification_screen/custom_time_picker/custom_time_picker.dart';
+import 'package:mind_tracker/src/views/screens/other/notification_screen/custom_time_picker/custom_time_picker_controller.dart';
 import 'package:mind_tracker/src/views/screens/other/notification_screen/widgets/add_notification_button.dart';
 import 'package:mind_tracker/src/views/screens/other/notification_screen/widgets/notification_time_box.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_border_shape.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
@@ -16,6 +16,12 @@ import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final timePickerController = CustomTimePickerController(
+        initialTime: NotificationTime(10, 20)
+    );
+    timePickerController.addListener(() {
+      print('Time changed: ${timePickerController.time}');
+    });
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Напоминания',
@@ -56,9 +62,9 @@ class NotificationScreen extends StatelessWidget {
             SizedBox(height: dp(32)),
             Row(
               children: [
-                NotificationTimeBox(NotificationTime(9, 0) ,selected: true),
+                NotificationTimeBox(NotificationTime(9, 30) ,selected: true),
                 SizedBox(width: dp(8)),
-                NotificationTimeBox(NotificationTime(13, 30)),
+                NotificationTimeBox(NotificationTime(13, 50)),
                 SizedBox(width: dp(8)),
                 AddNotificationButton(
                   onPressed: () { print('Add new notification'); },
@@ -66,7 +72,9 @@ class NotificationScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: dp(16)),
-            CustomTimePicker(),
+            CustomTimePicker(
+              controller: timePickerController,
+            ),
             Spacer(),
             StandardButton(
                 title: 'Готово',

@@ -8,8 +8,10 @@ import 'package:mind_tracker/src/views/utils/metrics.dart';
 
 class CustomDrum extends StatefulWidget {
   final int itemsCount;
+  final int initValue;
+  final Function onSelectedValueChanged;
 
-  CustomDrum(this.itemsCount);
+  CustomDrum({@required this.itemsCount, this.initValue, this.onSelectedValueChanged});
 
   @override
   _CustomDrumState createState() => _CustomDrumState();
@@ -19,11 +21,16 @@ class _CustomDrumState extends State<CustomDrum> {
   ScrollController _controller;
   int get _topLoopsCount => 1;
   int get _topItemsCount => _topLoopsCount * widget.itemsCount;
+  int get _firstItemOnScreenIndex => (_controller.offset / CustomDrumItem.height).round();
+  static const int _selectedItemIndexShift = 2;
+  int get _selectedItemIndex => _firstItemOnScreenIndex + _selectedItemIndexShift;
+  int _lastSelectedItemIndex;
 
   @override
   void initState() {
     super.initState();
-    final firstItemInitValue = _topItemsCount + 1;
+    _lastSelectedItemIndex = _topItemsCount + widget.initValue;
+    final firstItemInitValue = _topItemsCount + widget.initValue - _selectedItemIndexShift;
     _controller = ScrollController(
         initialScrollOffset: firstItemInitValue * CustomDrumItem.height,
     );
@@ -47,7 +54,13 @@ class _CustomDrumState extends State<CustomDrum> {
         child: NotificationListener<ScrollNotification>(
           onNotification: (scrollNotification) {
             if (scrollNotification is ScrollUpdateNotification) {
-              setState(() {});
+              setState(() {
+                if (_lastSelectedItemIndex != _selectedItemIndex) {
+                  _lastSelectedItemIndex = _selectedItemIndex;
+                  final selectedValue = _selectedItemIndex % widget.itemsCount;
+                  widget.onSelectedValueChanged(selectedValue);
+                }
+              });
             }
             return false;
           },
