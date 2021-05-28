@@ -14,24 +14,30 @@ class AddNotificationButton extends StatefulWidget {
 }
 
 class _AddNotificationButtonState extends State<AddNotificationButton> with SingleTickerProviderStateMixin {
-  AnimationController _animation;
+  AnimationController _animationController;
 
   @override
   void initState() {
-    _animation = AnimationController(
+    _animationController = AnimationController(
         vsync: this,
         duration: Duration(milliseconds: 100)
     );
-    _animation.value = 0;
+    _animationController.value = 0;
     super.initState();
   }
 
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
   void _startAnimation() {
-    _animation.forward();
+    _animationController.forward();
   }
 
   void _stopAnimation() {
-    _animation.reverse();
+    _animationController.reverse();
   }
 
   @override
@@ -42,9 +48,9 @@ class _AddNotificationButtonState extends State<AddNotificationButton> with Sing
       onTapCancel: () => _stopAnimation(),
       onTap: widget.onPressed,
       child: AnimatedBuilder(
-        animation: _animation,
+        animation: _animationController,
         builder: (context, child) {
-          final animationValue = Curves.easeInOut.transform(_animation.value);
+          final animationValue = Curves.easeInOut.transform(_animationController.value);
           final scale = 1 - 0.1 * animationValue;
           return Transform.scale(
             scale: scale,
