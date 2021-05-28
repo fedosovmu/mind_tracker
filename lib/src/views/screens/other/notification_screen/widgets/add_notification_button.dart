@@ -1,0 +1,73 @@
+import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
+import 'package:mind_tracker/src/views/utils/metrics.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
+
+
+class AddNotificationButton extends StatefulWidget {
+  final Function onPressed;
+
+  AddNotificationButton({@required this.onPressed});
+
+  @override
+  _AddNotificationButtonState createState() => _AddNotificationButtonState();
+}
+
+class _AddNotificationButtonState extends State<AddNotificationButton> with SingleTickerProviderStateMixin {
+  AnimationController _animation;
+
+  @override
+  void initState() {
+    _animation = AnimationController(
+        vsync: this,
+        duration: Duration(milliseconds: 100)
+    );
+    _animation.value = 0;
+    super.initState();
+  }
+
+  void _startAnimation() {
+    _animation.forward();
+  }
+
+  void _stopAnimation() {
+    _animation.reverse();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTapDown: (_) => _startAnimation(),
+      onTapUp: (_) => _stopAnimation(),
+      onTapCancel: () => _stopAnimation(),
+      onTap: widget.onPressed,
+      child: AnimatedBuilder(
+        animation: _animation,
+        builder: (context, child) {
+          final animationValue = Curves.easeInOut.transform(_animation.value);
+          final scale = 1 - 0.1 * animationValue;
+          return Transform.scale(
+            scale: scale,
+            child: child
+          );
+        },
+        child: Container(
+          height: dp(48),
+          width: dp(48),
+          decoration: BoxDecoration( //TODO: edit box shape
+              color: CustomColors.purpleSuperDark,
+              borderRadius: BorderRadius.all(Radius.circular(dp(16))),
+              border: Border.all(width: dp(1), color: CustomColors.purpleMegaDark)
+          ),
+          child: Center(
+            child: Image.asset(
+              CustomIconPaths.plusInCircle,
+              height: dp(24),
+              width: dp(24),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

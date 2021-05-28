@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/views/common_widgets/other/glow_disabler.dart';
 import 'package:mind_tracker/src/views/screens/other/notification_screen/custom_time_picker/widgets/custom_drum_item.dart';
@@ -18,9 +17,6 @@ class CustomDrum extends StatefulWidget {
 
 class _CustomDrumState extends State<CustomDrum> {
   ScrollController _controller;
-  int get _firstItemOnScreenIndex => (_controller.offset / CustomDrumItem.height).round();
-  static const int _selectedItemIndexShift = 2;
-  int get _selectedItemIndex => _firstItemOnScreenIndex + _selectedItemIndexShift;
   int get _topLoopsCount => 1;
   int get _topItemsCount => _topLoopsCount * widget.itemsCount;
 
@@ -33,7 +29,7 @@ class _CustomDrumState extends State<CustomDrum> {
     );
   }
 
-  final _drumHeight = dp(300);
+  final _drumHeight = dp(250);
   double get _drumCenter => _controller.offset + _drumHeight / 2 - CustomDrumItem.height / 2;
   double _getItemOpacity(int itemIndex) {
     final itemPos = itemIndex * CustomDrumItem.height;

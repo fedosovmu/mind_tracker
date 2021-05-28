@@ -4,6 +4,7 @@ import 'package:mind_tracker/src/views/common_widgets/app_bar/custom_app_bar.dar
 import 'package:mind_tracker/src/views/common_widgets/app_bar/custom_leading.dart';
 import 'package:mind_tracker/src/views/common_widgets/other/standard_button.dart';
 import 'package:mind_tracker/src/views/screens/other/notification_screen/custom_time_picker/custom_time_picker.dart';
+import 'package:mind_tracker/src/views/screens/other/notification_screen/widgets/add_notification_button.dart';
 import 'package:mind_tracker/src/views/screens/other/notification_screen/widgets/notification_time_box.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
@@ -58,13 +59,17 @@ class NotificationScreen extends StatelessWidget {
                 NotificationTimeBox(NotificationTime(9, 0) ,selected: true),
                 SizedBox(width: dp(8)),
                 NotificationTimeBox(NotificationTime(13, 30)),
+                SizedBox(width: dp(8)),
+                AddNotificationButton(
+                  onPressed: () { print('Add new notification'); },
+                )
               ],
             ),
             SizedBox(height: dp(16)),
             CustomTimePicker(),
             Spacer(),
             StandardButton(
-                title: 'Сохранить',
+                title: 'Готово',
                 onPressed: () {
                   print('Press save button');
                 }

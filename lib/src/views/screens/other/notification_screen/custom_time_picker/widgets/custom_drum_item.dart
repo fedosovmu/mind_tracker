@@ -5,7 +5,7 @@ import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
 class CustomDrumItem extends StatelessWidget {
-  static final height = dp(60);
+  static final height = dp(50);
   final String text;
   final double opacity;
 
