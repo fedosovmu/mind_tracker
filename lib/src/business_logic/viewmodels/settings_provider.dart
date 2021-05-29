@@ -11,12 +11,17 @@ class SettingsProvider extends ChangeNotifier {
     notificationTimes = [];
     final settings = await CloudFirestoreProvider.getSettings();
     if (settings != null) {
-      if (settings.containsKey('notification_times')) {
-        notificationTimes = settings['notification_times'];
-      }
+      _parseNotificationTimesFromSettings(settings);
     }
     notifyListeners();
     return;
+  }
+
+  void _parseNotificationTimesFromSettings(Map<String, dynamic> settings) {
+    if (settings.containsKey('notification_times')) {
+      notificationTimes = (settings['notification_times'] as List<dynamic>).map(
+              (timeString) => NotificationTime.fromString(timeString)).toList();
+    }
   }
 
   void setNotificationTimes(List<NotificationTime> times) {
