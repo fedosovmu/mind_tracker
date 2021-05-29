@@ -8,9 +8,7 @@ import 'package:mind_tracker/src/business_logic/services/firebase_auth_provider.
 class CloudFirestoreProvider {
   CloudFirestoreProvider._();
 
-  static final _userEventsCollection = FirebaseFirestore.instance.collection('user_events');
   static final _moodAssessmentsCollection = FirebaseFirestore.instance.collection('mood_assessments');
-
   static Future<List<MoodAssessment>> getAllMoodAssessmentsOfAuthorizedUser () async {
     final uid = FirebaseAuthProvider.uid;
     if (uid != null) {
@@ -48,6 +46,7 @@ class CloudFirestoreProvider {
     }
   }
 
+  static final _userEventsCollection = FirebaseFirestore.instance.collection('user_events');
   static Future<List<Event>> getUserEventsOfAuthorizedUser () async {
     final uid = FirebaseAuthProvider.uid;
     if (uid != null) {

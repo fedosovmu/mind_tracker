@@ -7,24 +7,24 @@ import 'package:mind_tracker/src/views/utils/metrics.dart';
 
 
 class NotificationTimeBoxes extends StatefulWidget {
+  List<NotificationTime> notificationTimes;
   CustomTimePickerController timePickerController;
 
-  NotificationTimeBoxes({@required this.timePickerController});
+  NotificationTimeBoxes({@required this.timePickerController, @required this.notificationTimes});
 
   @override
   _NotificationTimeBoxesState createState() => _NotificationTimeBoxesState();
 }
 
 class _NotificationTimeBoxesState extends State<NotificationTimeBoxes> {
-  int _selectedTimeBoxIndex = 0;
-  List<NotificationTime> _notificationTimes = [];
+  int _selectedTimeBoxIndex;
 
   @override
   void initState() {
     widget.timePickerController.addListener(() {
       if (_selectedTimeBoxIndex != null) {
         setState(() {
-          _notificationTimes[_selectedTimeBoxIndex] = widget.timePickerController.time;
+          widget.notificationTimes[_selectedTimeBoxIndex] = widget.timePickerController.time;
         });
       }
     });
@@ -34,15 +34,15 @@ class _NotificationTimeBoxesState extends State<NotificationTimeBoxes> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> widgets = [];
-    for (var index = 0; index < _notificationTimes.length; index++) {
+    for (var index = 0; index < widget.notificationTimes.length; index++) {
       final timeBox = NotificationTimeBox(
-        _notificationTimes[index],
+        widget.notificationTimes[index],
         selected: index == _selectedTimeBoxIndex,
         onPressed: () {
           setState(() {
             if (_selectedTimeBoxIndex != index) {
               _selectedTimeBoxIndex = index;
-              widget.timePickerController.setTime(_notificationTimes[index]);
+              widget.timePickerController.setTime(widget.notificationTimes[index]);
             } else {
               _selectedTimeBoxIndex = null;
             }
@@ -57,12 +57,12 @@ class _NotificationTimeBoxesState extends State<NotificationTimeBoxes> {
                 _selectedTimeBoxIndex -= 1;
               }
             }
-            _notificationTimes.removeAt(index);
+            widget.notificationTimes.removeAt(index);
           });
         },
       );
       widgets.add(timeBox);
-      if (_notificationTimes.length < 4) {
+      if (widget.notificationTimes.length < 4) {
         widgets.add(SizedBox(width: dp(8)));
       } else {
         if (index < 4) {
@@ -71,13 +71,13 @@ class _NotificationTimeBoxesState extends State<NotificationTimeBoxes> {
       }
     }
 
-    if (_notificationTimes.length < 4) {
+    if (widget.notificationTimes.length < 4) {
       final addButton = AddNotificationButton(
         onPressed: () {
           setState(() {
             final newNotificationTime = widget.timePickerController.time;
-            _notificationTimes.add(newNotificationTime);
-            _selectedTimeBoxIndex = _notificationTimes.length - 1;
+            widget.notificationTimes.add(newNotificationTime);
+            _selectedTimeBoxIndex = widget.notificationTimes.length - 1;
           });
         },
       );

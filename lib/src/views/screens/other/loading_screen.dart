@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/events_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_assessments_provider.dart';
+import 'package:mind_tracker/src/business_logic/viewmodels/settings_provider.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/main_screen.dart';
 import 'package:mind_tracker/src/views/utils/custom_image_paths.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
@@ -29,6 +30,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void _loadData() async {
     await Provider.of<MoodAssessmentsProvider>(context, listen: false).loadData();
     await Provider.of<EventsProvider>(context, listen: false).loadData();
+    await Provider.of<SettingsProvider>(context, listen: false).loadData();
     Navigator.of(context).pushNamedAndRemoveUntil('/main', (route) => false);
   }
 
