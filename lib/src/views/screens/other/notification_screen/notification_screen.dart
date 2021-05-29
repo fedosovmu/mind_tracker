@@ -20,11 +20,11 @@ class NotificationScreen extends StatelessWidget {
     return Consumer<SettingsProvider>(
       builder: (context, settingsProvider, child) {
         final timePickerController = CustomTimePickerController(
-            initialTime: NotificationTime(9, 30)
+            initialTime: NotificationTime(9, 0)
         );
         final notificationTimeBoxes = NotificationTimeBoxes(
           timePickerController: timePickerController,
-          notificationTimes: settingsProvider.notificationTimes,
+          notificationTimes: settingsProvider.notificationTimes.toList(),
         );
         return Scaffold(
             appBar: CustomAppBar(
