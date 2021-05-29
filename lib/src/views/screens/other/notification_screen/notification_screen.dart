@@ -67,6 +67,7 @@ class NotificationScreen extends StatelessWidget {
                 title: 'Готово',
                 onPressed: () {
                   print('Press save button');
+                  Navigator.pop(context);
                 }
             )
           ],
