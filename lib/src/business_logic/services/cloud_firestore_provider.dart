@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mind_tracker/src/business_logic/models/event.dart';
 import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
+import 'package:mind_tracker/src/business_logic/models/notification_time.dart';
 import 'package:mind_tracker/src/business_logic/services/firebase_auth_provider.dart';
 
 
@@ -70,6 +71,29 @@ class CloudFirestoreProvider {
       _userEventsCollection.add(
           userEventMap
       );
+    }
+  }
+
+  static final _settingsCollection = FirebaseFirestore.instance.collection('settings');
+  static void setSettingsNotificationTimes(List<NotificationTime> times) {
+    final uid = FirebaseAuthProvider.uid;
+    if (uid != null) {
+      print('[FIREBASE] Create default settings document');
+      final settingsMap = {
+        'email': FirebaseAuthProvider.email,
+        'notification_times': times.map((e) => e.toString()).toList(),
+      };
+      _settingsCollection.doc(uid).set(settingsMap);
+    }
+  }
+
+  static Future<Map<String, dynamic>> getSettings() async {
+    final uid = FirebaseAuthProvider.uid;
+    if (uid != null) {
+      final settingsDoc = await _settingsCollection.doc(uid).get();
+      final settings = settingsDoc.data();
+      print('[FIRABASE] Settings loaded $settings}');
+      return settings;
     }
   }
 }
