@@ -45,6 +45,7 @@ class _NotificationTimeBoxesState extends State<NotificationTimeBoxes> {
           setState(() {
             if (_selectedTimeBoxIndex != index) {
               _selectedTimeBoxIndex = index;
+              widget.timePickerController.setTime(_notificationTimes[index]);
             } else {
               _selectedTimeBoxIndex = null;
             }

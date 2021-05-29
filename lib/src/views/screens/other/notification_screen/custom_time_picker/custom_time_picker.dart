@@ -20,11 +20,7 @@ class CustomTimePicker extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomDrum(
-            itemsCount: 24,
-            initValue: controller.time.hours,
-            onSelectedValueChanged: (hours) {
-              controller.attachHours(hours);
-            },
+            controller: controller.hoursDrumController,
           ),
           Container(
             padding: EdgeInsets.only(bottom: dp(8)),
@@ -35,11 +31,7 @@ class CustomTimePicker extends StatelessWidget {
             ),
           ),
           CustomDrum(
-            itemsCount: 60,
-            initValue: controller.time.minutes,
-            onSelectedValueChanged: (minutes) {
-              controller.attachMinutes(minutes);
-            },
+            controller: controller.minutesDrumController,
           )
         ],
       )
