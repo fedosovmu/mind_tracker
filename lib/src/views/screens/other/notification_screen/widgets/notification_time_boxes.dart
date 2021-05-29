@@ -16,11 +16,8 @@ class NotificationTimeBoxes extends StatefulWidget {
 }
 
 class _NotificationTimeBoxesState extends State<NotificationTimeBoxes> {
-  int _selectedTimeBoxIndex = 1;
-  List<NotificationTime> _notificationTimes = [
-    NotificationTime(8, 0),
-    NotificationTime(14, 30)
-  ];
+  int _selectedTimeBoxIndex = 0;
+  List<NotificationTime> _notificationTimes = [];
 
   @override
   void initState() {
