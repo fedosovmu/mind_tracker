@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mind_tracker/src/business_logic/services/local_notifications_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/events_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_assessments_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/settings_provider.dart';
