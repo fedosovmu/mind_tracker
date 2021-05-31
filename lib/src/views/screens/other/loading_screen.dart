@@ -39,6 +39,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       await Provider.of<MoodAssessmentsProvider>(context, listen: false).loadData();
       await Provider.of<EventsProvider>(context, listen: false).loadData();
       await Provider.of<SettingsProvider>(context, listen: false).loadData();
+      LocalNotificationsProvider.showNotification();
       Navigator.of(context).pushNamedAndRemoveUntil('/main', (route) => false);
     } on Exception catch (e, stacktrace) {
       print('[LOAD DATA ERROR] ${e.toString()}');
