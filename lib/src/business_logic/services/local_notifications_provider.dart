@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class LocalNotificationsProvider {
@@ -19,22 +20,38 @@ class LocalNotificationsProvider {
     _localeNotification = FlutterLocalNotificationsPlugin();
     await _localeNotification.initialize(
         initializationSettings,
-        onSelectNotification: _onSelectNotificationCallback
+        onSelectNotification: _onSelectNotification
     );
   }
 
-  static Future<void> _onSelectNotificationCallback(String payload) async {
-    print('Notification selected $payload');
+  static Future<void> _onSelectNotification(String payload) async {
+    print('Notification selected: $payload');
   }
 
   static Future<void> _setNotificationTasks() async {
     final now = DateTime.now();
-    //await _localeNotification.cancelAll();
+    await _localeNotification.cancelAll();
 
-    _localeNotification.show(0, 'now', 'body', _getNotificationDetails());
+    //_localeNotification.show(0, 'now', 'body', _getNotificationDetails(), payload: 'test');
+
+    tz.initializeTimeZones();
+    final scheduledDate = tz.TZDateTime.now(tz.local).add(Duration(seconds: 5));
+
+    _localeNotification.zonedSchedule(
+      1,
+      'zoned schedue',
+      'body',
+      scheduledDate,
+      _getNotificationDetails(),
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+      androidAllowWhileIdle: false,
+      payload: 'test schedue'
+    );
 
     final pendingNotificationsRequests = await _localeNotification.pendingNotificationRequests();
-    print('[LOCALE NOTIFICATIONS] ${pendingNotificationsRequests.map((e) => e.id)}');
+    print('[LOCALE NOTIFICATIONS] ${pendingNotificationsRequests.map((pendingNotification) {
+      return '{${pendingNotification.id}, ${pendingNotification.title}}';
+    }).toList()}');
   }
 
   static NotificationDetails _getNotificationDetails() {
@@ -48,7 +65,7 @@ class LocalNotificationsProvider {
     final iosNotificationDetails = IOSNotificationDetails();
     return NotificationDetails(
       android: androidNotificationDetails,
-      iOS: iosNotificationDetails
+      //iOS: iosNotificationDetails
     );
   }
 }
