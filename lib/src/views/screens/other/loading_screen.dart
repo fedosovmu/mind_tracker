@@ -28,6 +28,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     _loadData();
   }
 
+
   @override
   void didChangeDependencies() {
     CustomImagePaths.loadImages(context);
@@ -39,13 +40,14 @@ class _LoadingScreenState extends State<LoadingScreen> {
       await Provider.of<MoodAssessmentsProvider>(context, listen: false).loadData();
       await Provider.of<EventsProvider>(context, listen: false).loadData();
       await Provider.of<SettingsProvider>(context, listen: false).loadData();
-      LocalNotificationsProvider.showNotification();
+      await LocalNotificationsProvider.initialize();
       Navigator.of(context).pushNamedAndRemoveUntil('/main', (route) => false);
     } on Exception catch (e, stacktrace) {
       print('[LOAD DATA ERROR] ${e.toString()}');
       setState(() {
         _dataLoadingError = true;
-        _errorMessage = e.toString() + '\n' + stacktrace.toString();
+        _errorMessage = 'Пожалуйста отправьте сообщение об ошибке администратору:\n\n'
+            + e.toString() + '\n' + stacktrace.toString();
       });
     }
   }
@@ -58,26 +60,35 @@ class _LoadingScreenState extends State<LoadingScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(!_dataLoadingError ? 'Идет загрузка данных...' : 'Ошибка загрузки данных!',
-              textAlign: TextAlign.center,
-              style: CustomTextStyles.titleH1.copyWith(
-                  color: !_dataLoadingError ? CustomColors.purpleMedium : CustomColors.red
-              )
-            ),
-            _dataLoadingError ? Container(
-              height: dp(300),
-              width: dp(300),
-              padding: EdgeInsets.only(top: dp(16)),
-              child: GlowDisabler(
-                child: SingleChildScrollView(
-                  child: SelectableText(_errorMessage,
-                      style: CustomTextStyles.caption.copyWith(
-                          color: !_dataLoadingError ? CustomColors.purpleMedium : CustomColors.red
-                      )
-                  ),
+            Expanded(
+              flex: 1,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Text(!_dataLoadingError ? 'Идет загрузка данных...' : 'Ошибка загрузки данных!',
+                  textAlign: TextAlign.center,
+                  style: CustomTextStyles.titleH1.copyWith(
+                      color: !_dataLoadingError ? CustomColors.purpleMedium : CustomColors.red
+                  )
                 ),
               ),
-            ) : SizedBox.shrink()
+            ),
+            Expanded(
+              flex: _dataLoadingError ? 2 : 1,
+              child: _dataLoadingError ? Container(
+                height: double.infinity,
+                width: double.infinity,
+                padding: EdgeInsets.all(dp(16)),
+                child: GlowDisabler(
+                  child: SingleChildScrollView(
+                    child: SelectableText(_errorMessage,
+                        style: CustomTextStyles.caption.copyWith(
+                            color: CustomColors.red.withOpacity(0.64)
+                        )
+                    ),
+                  ),
+                ),
+              ) : SizedBox.shrink(),
+            )
           ],
         ),
       )

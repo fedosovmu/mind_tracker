@@ -1,49 +1,54 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class LocalNotificationsProvider {
   static FlutterLocalNotificationsPlugin _localeNotification;
 
-  static void initialize() {
+  static Future<void> initialize() async {
+    await _initializeLocalNotificationPlugin();
+    await _setNotificationTasks();
+  }
+
+  static Future<void> _initializeLocalNotificationPlugin() async {
     final androidInitializationSettings = AndroidInitializationSettings('notification_icon');
     final iosInitializationSettings = IOSInitializationSettings();
     final initializationSettings = InitializationSettings(
-      android: androidInitializationSettings,
-      iOS: iosInitializationSettings
+        android: androidInitializationSettings,
+        iOS: iosInitializationSettings
     );
     _localeNotification = FlutterLocalNotificationsPlugin();
-    _localeNotification.initialize(
-      initializationSettings,
-      onSelectNotification: (payload) async {
-        print('Notification pressed');
-      }
+    await _localeNotification.initialize(
+        initializationSettings,
+        onSelectNotification: _onSelectNotificationCallback
     );
   }
 
-  static Future showNotification() async {
+  static Future<void> _onSelectNotificationCallback(String payload) async {
+    print('Notification selected $payload');
+  }
+
+  static Future<void> _setNotificationTasks() async {
+    final now = DateTime.now();
+    //await _localeNotification.cancelAll();
+
+    _localeNotification.show(0, 'now', 'body', _getNotificationDetails());
+
+    final pendingNotificationsRequests = await _localeNotification.pendingNotificationRequests();
+    print('[LOCALE NOTIFICATIONS] ${pendingNotificationsRequests.map((e) => e.id)}');
+  }
+
+  static NotificationDetails _getNotificationDetails() {
     final androidNotificationDetails = AndroidNotificationDetails(
-      'MoodAssessments',
-      'Assess mood notifications',
-      'Notifications that ask assess mood',
+      'mindTrackerChannel',
+      'Mind tracker assess mood notifications',
+      'Channel with notifications that ask assess mood',
       importance: Importance.max,
       priority: Priority.high,
-      enableVibration: true,
-      icon: 'notification_icon',
-      largeIcon: DrawableResourceAndroidBitmap('notification_icon')
     );
     final iosNotificationDetails = IOSNotificationDetails();
-    final notificationDetails = NotificationDetails(
+    return NotificationDetails(
       android: androidNotificationDetails,
       iOS: iosNotificationDetails
     );
-    await _localeNotification.show(0, 'Оцени своё настроение', 'Нажми для оценки', notificationDetails, payload: '20:00');
-    //final now = DateTime.now();
-    //final scheduleDateTime = tz.TZDateTime(tz.local, now.year, now.month, now.day, now.hour, 14);
-    //_localeNotification.zonedSchedule(0, 'Title', 'body', scheduleDateTime, notificationDetails,
-    //    uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-    //    androidAllowWhileIdle: true);
-
   }
 }
