@@ -7,7 +7,7 @@ class LocalNotificationsProvider {
 
   static Future<void> initialize() async {
     await _initializeLocalNotificationPlugin();
-    await _setNotificationTasks();
+    tz.initializeTimeZones();
   }
 
   static Future<void> _initializeLocalNotificationPlugin() async {
@@ -20,38 +20,36 @@ class LocalNotificationsProvider {
     _localeNotification = FlutterLocalNotificationsPlugin();
     await _localeNotification.initialize(
         initializationSettings,
-        onSelectNotification: _onSelectNotification
+        onSelectNotification: (payload) async {
+          print('Notification selected: $payload');
+        }
     );
   }
 
-  static Future<void> _onSelectNotification(String payload) async {
-    print('Notification selected: $payload');
-  }
+  static Future<void> setNotificationTasks() async {
+    //await _localeNotification.cancelAll();
 
-  static Future<void> _setNotificationTasks() async {
-    final now = DateTime.now();
-    await _localeNotification.cancelAll();
-
-    //_localeNotification.show(0, 'now', 'body', _getNotificationDetails(), payload: 'test');
-
-    tz.initializeTimeZones();
-    final scheduledDate = tz.TZDateTime.now(tz.local).add(Duration(seconds: 5));
-
-    _localeNotification.zonedSchedule(
-      1,
-      'zoned schedue',
-      'body',
-      scheduledDate,
-      _getNotificationDetails(),
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-      androidAllowWhileIdle: false,
-      payload: 'test schedue'
-    );
+    final notificationDatetime = DateTime.now().add(Duration(seconds: 5));
+    _createScheduleNotification(1, notificationDatetime, payload: 'Assess mood');
 
     final pendingNotificationsRequests = await _localeNotification.pendingNotificationRequests();
     print('[LOCALE NOTIFICATIONS] ${pendingNotificationsRequests.map((pendingNotification) {
       return '{${pendingNotification.id}, ${pendingNotification.title}}';
     }).toList()}');
+  }
+
+  static _createScheduleNotification(int id, DateTime notificationDatetime, {String payload}) {
+    final scheduledDatetime = tz.TZDateTime.from(notificationDatetime, tz.local);
+    _localeNotification.zonedSchedule(
+        id,
+        'Оцени своё настроение',
+        'Нажми для оценки',
+        scheduledDatetime,
+        _getNotificationDetails(),
+        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+        androidAllowWhileIdle: false,
+        payload: payload
+    );
   }
 
   static NotificationDetails _getNotificationDetails() {
@@ -65,7 +63,7 @@ class LocalNotificationsProvider {
     final iosNotificationDetails = IOSNotificationDetails();
     return NotificationDetails(
       android: androidNotificationDetails,
-      //iOS: iosNotificationDetails
+      iOS: iosNotificationDetails
     );
   }
 }
