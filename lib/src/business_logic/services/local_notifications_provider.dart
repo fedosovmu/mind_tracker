@@ -3,7 +3,7 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class LocalNotificationsProvider {
-  static FlutterLocalNotificationsPlugin _localeNotification;
+  static FlutterLocalNotificationsPlugin _localNotification;
   static NotificationAppLaunchDetails launchDetails;
 
   static Future<void> initialize() async {
@@ -18,30 +18,30 @@ class LocalNotificationsProvider {
         android: androidInitializationSettings,
         iOS: iosInitializationSettings
     );
-    _localeNotification = FlutterLocalNotificationsPlugin();
-    await _localeNotification.initialize(
+    _localNotification = FlutterLocalNotificationsPlugin();
+    await _localNotification.initialize(
         initializationSettings,
         onSelectNotification: (payload) async {
           print('Notification selected: $payload');
         }
     );
 
-    final pendingNotificationsRequests = await _localeNotification.pendingNotificationRequests();
-    print('[LOCALE NOTIFICATIONS] ${pendingNotificationsRequests.map((pendingNotification) {
+    final pendingNotificationsRequests = await _localNotification.pendingNotificationRequests();
+    print('[LOCAL NOTIFICATIONS] ${pendingNotificationsRequests.map((pendingNotification) {
       return '{${pendingNotification.id}, ${pendingNotification.payload}}';
     }).toList()}');
 
-    launchDetails = await _localeNotification.getNotificationAppLaunchDetails();
-    print('[LOCALE NOTIFICATIONS] did notification launch app: ${launchDetails.didNotificationLaunchApp}');
+    launchDetails = await _localNotification.getNotificationAppLaunchDetails();
+    print('[LOCAL NOTIFICATIONS] did notification launch app: ${launchDetails.didNotificationLaunchApp}');
   }
 
   static Future<void> cancelAllNotifications() async {
-    await _localeNotification.cancelAll();
+    await _localNotification.cancelAll();
   }
 
   static createDelayedNotification(int id, DateTime notificationTime) {
     final scheduledDatetime = tz.TZDateTime.from(notificationTime, tz.local);
-    _localeNotification.zonedSchedule(
+    _localNotification.zonedSchedule(
         id,
         'Оцени своё настроение',
         'Нажми для оценки',
