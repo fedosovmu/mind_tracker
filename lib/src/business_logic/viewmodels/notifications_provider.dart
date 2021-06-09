@@ -30,16 +30,18 @@ class NotificationsProvider extends ChangeNotifier {
 
   void _setNotificationTasks() {
     LocalNotificationsProvider.cancelAllNotifications();
-    final now = DateTime.now();
-    int notificationId = 0;
-    for (int dayNumber = 0; dayNumber < DateTime.daysPerWeek; dayNumber++) {
-      notificationTimes.forEach((notificationTime) {
-        final delayedNotificationTime = DateTime(now.year, now.month, now.day,
-            notificationTime.hours, notificationTime.minutes);
-        if (delayedNotificationTime.isAfter(now))
-          LocalNotificationsProvider.createDelayedNotification(notificationId++, delayedNotificationTime);
-        }
-      );
+    if (notificationTimes.isNotEmpty) {
+      final now = DateTime.now();
+      int notificationId = 0;
+      for (int dayNumber = 0; dayNumber < DateTime.daysPerWeek; dayNumber++) {
+        notificationTimes.forEach((notificationTime) {
+            final delayedNotificationTime = DateTime(now.year, now.month, now.day,
+                notificationTime.hours, notificationTime.minutes).add(Duration(days: dayNumber));
+            if (delayedNotificationTime.isAfter(now))
+              LocalNotificationsProvider.createDelayedNotification(notificationId++, delayedNotificationTime);
+          }
+        );
+      }
     }
   }
 

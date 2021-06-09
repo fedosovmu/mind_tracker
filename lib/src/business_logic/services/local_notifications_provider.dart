@@ -28,11 +28,11 @@ class LocalNotificationsProvider {
 
     final pendingNotificationsRequests = await _localeNotification.pendingNotificationRequests();
     print('[LOCALE NOTIFICATIONS] ${pendingNotificationsRequests.map((pendingNotification) {
-      return '{${pendingNotification.id}, ${pendingNotification.title}}';
+      return '{${pendingNotification.id}, ${pendingNotification.payload}}';
     }).toList()}');
 
     launchDetails = await _localeNotification.getNotificationAppLaunchDetails();
-    print('[LOCALE NOTIFICATIONS] ${launchDetails.didNotificationLaunchApp}');
+    print('[LOCALE NOTIFICATIONS] did notification launch app: ${launchDetails.didNotificationLaunchApp}');
   }
 
   static Future<void> cancelAllNotifications() async {
@@ -49,7 +49,7 @@ class LocalNotificationsProvider {
         _getNotificationDetails(),
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
         androidAllowWhileIdle: false,
-        payload: '${notificationTime.hour}:${notificationTime.minute}'
+        payload: '${notificationTime}'
     );
   }
 
