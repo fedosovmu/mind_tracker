@@ -39,7 +39,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       await Provider.of<MoodAssessmentsProvider>(context, listen: false).loadData();
       await Provider.of<EventsProvider>(context, listen: false).loadData();
       await Provider.of<NotificationsProvider>(context, listen: false).loadData();
-      goToNextScreen();
+      _goToNextScreen();
     } on Exception catch (e, stacktrace) {
       print('[LOAD DATA ERROR] ${e.toString()}');
       setState(() {
@@ -49,7 +49,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     }
   }
 
-  void goToNextScreen() {
+  void _goToNextScreen() {
     Navigator.of(context).pushNamedAndRemoveUntil('/main', (route) => false);
     final didNotificationLaunchApp = Provider.of<NotificationsProvider>(context, listen: false)
         .didNotificationLaunchApp;
