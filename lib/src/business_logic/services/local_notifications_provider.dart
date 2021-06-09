@@ -4,6 +4,7 @@ import 'package:timezone/timezone.dart' as tz;
 
 class LocalNotificationsProvider {
   static FlutterLocalNotificationsPlugin _localeNotification;
+  static NotificationAppLaunchDetails launchDetails;
 
   static Future<void> initialize() async {
     await _initializeLocalNotificationPlugin();
@@ -36,6 +37,9 @@ class LocalNotificationsProvider {
     print('[LOCALE NOTIFICATIONS] ${pendingNotificationsRequests.map((pendingNotification) {
       return '{${pendingNotification.id}, ${pendingNotification.title}}';
     }).toList()}');
+
+    launchDetails = await _localeNotification.getNotificationAppLaunchDetails();
+    print('[LOCALE NOTIFICATIONS] ${launchDetails.didNotificationLaunchApp}');
   }
 
   static _createScheduleNotification(int id, DateTime notificationDatetime, {String payload}) {

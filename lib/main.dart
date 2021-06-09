@@ -22,6 +22,10 @@ void main() async {
   final settingsProvider = SettingsProvider();
   final authProvider = AuthProvider();
 
+  print('start initializing locale notifications');
+  await LocalNotificationsProvider.initialize();
+  await LocalNotificationsProvider.setNotificationTasks();
+
   print('start app');
   runApp(
       MultiProvider(

@@ -40,24 +40,50 @@ class _LoadingScreenState extends State<LoadingScreen> {
       await Provider.of<MoodAssessmentsProvider>(context, listen: false).loadData();
       await Provider.of<EventsProvider>(context, listen: false).loadData();
       await Provider.of<SettingsProvider>(context, listen: false).loadData();
-      await LocalNotificationsProvider.initialize();
-      await LocalNotificationsProvider.setNotificationTasks();
-      Navigator.of(context).pushNamedAndRemoveUntil('/main', (route) => false);
+      goToNextScreen();
     } on Exception catch (e, stacktrace) {
       print('[LOAD DATA ERROR] ${e.toString()}');
       setState(() {
         _dataLoadingError = true;
-        _errorMessage = 'Пожалуйста отправьте сообщение об ошибке администратору:\n\n'
-            + e.toString() + '\n' + stacktrace.toString();
+        _errorMessage = e.toString() + '\n' + stacktrace.toString();
       });
     }
   }
 
+  void goToNextScreen() {
+    Navigator.of(context).pushNamedAndRemoveUntil('/main', (route) => false);
+    final didNotificationLaunchApp = LocalNotificationsProvider.launchDetails.didNotificationLaunchApp;
+    if (didNotificationLaunchApp) {
+      Navigator.of(context).pushNamed('/moodAssessment', arguments: {'startMode': 'now'});
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    if (_dataLoadingError) {
+      return _buildErrorMessage();
+    } else {
+      return _buildLoadingMessage();
+    }
+  }
+
+  Widget _buildLoadingMessage() {
     return Scaffold(
       body: Center(
-        child: Column(
+        child: Text('Идет загрузка данных...',
+          textAlign: TextAlign.center,
+          style: CustomTextStyles.titleH1.copyWith(
+            color: CustomColors.purpleMedium
+          )
+        )
+      ),
+    );
+  }
+
+  Widget _buildErrorMessage() {
+    return Scaffold(
+        body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -65,34 +91,34 @@ class _LoadingScreenState extends State<LoadingScreen> {
               flex: 1,
               child: Align(
                 alignment: Alignment.bottomCenter,
-                child: Text(!_dataLoadingError ? 'Идет загрузка данных...' : 'Ошибка загрузки данных!',
-                  textAlign: TextAlign.center,
-                  style: CustomTextStyles.titleH1.copyWith(
-                      color: !_dataLoadingError ? CustomColors.purpleMedium : CustomColors.red
-                  )
+                child: Text('Ошибка загрузки данных!',
+                    textAlign: TextAlign.center,
+                    style: CustomTextStyles.titleH1.copyWith(
+                        color: CustomColors.red
+                    )
                 ),
               ),
             ),
             Expanded(
-              flex: _dataLoadingError ? 2 : 1,
-              child: _dataLoadingError ? Container(
+              flex: 2,
+              child: Container(
                 height: double.infinity,
                 width: double.infinity,
                 padding: EdgeInsets.all(dp(16)),
                 child: GlowDisabler(
                   child: SingleChildScrollView(
-                    child: SelectableText(_errorMessage,
+                    child: SelectableText(
+                        'Пожалуйста отправьте сообщение об ошибке администратору:\n\n' + _errorMessage,
                         style: CustomTextStyles.caption.copyWith(
                             color: CustomColors.red.withOpacity(0.64)
                         )
                     ),
                   ),
                 ),
-              ) : SizedBox.shrink(),
+              ),
             )
           ],
-        ),
-      )
+        )
     );
   }
 }
