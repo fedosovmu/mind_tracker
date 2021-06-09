@@ -25,13 +25,6 @@ class LocalNotificationsProvider {
           print('Notification selected: $payload');
         }
     );
-  }
-
-  static Future<void> setNotificationTasks() async {
-    //await _localeNotification.cancelAll();
-
-    final notificationDatetime = DateTime.now().add(Duration(seconds: 5));
-    _createScheduleNotification(1, notificationDatetime, payload: 'Assess mood');
 
     final pendingNotificationsRequests = await _localeNotification.pendingNotificationRequests();
     print('[LOCALE NOTIFICATIONS] ${pendingNotificationsRequests.map((pendingNotification) {
@@ -42,8 +35,12 @@ class LocalNotificationsProvider {
     print('[LOCALE NOTIFICATIONS] ${launchDetails.didNotificationLaunchApp}');
   }
 
-  static _createScheduleNotification(int id, DateTime notificationDatetime, {String payload}) {
-    final scheduledDatetime = tz.TZDateTime.from(notificationDatetime, tz.local);
+  static Future<void> cancelAllNotifications() async {
+    await _localeNotification.cancelAll();
+  }
+
+  static createDelayedNotification(int id, DateTime notificationTime) {
+    final scheduledDatetime = tz.TZDateTime.from(notificationTime, tz.local);
     _localeNotification.zonedSchedule(
         id,
         'Оцени своё настроение',
@@ -52,7 +49,7 @@ class LocalNotificationsProvider {
         _getNotificationDetails(),
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
         androidAllowWhileIdle: false,
-        payload: payload
+        payload: '${notificationTime.hour}:${notificationTime.minute}'
     );
   }
 

@@ -1,10 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:mind_tracker/src/business_logic/services/local_notifications_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/auth_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/events_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_assessments_provider.dart';
-import 'package:mind_tracker/src/business_logic/viewmodels/settings_provider.dart';
+import 'package:mind_tracker/src/business_logic/viewmodels/notifications_provider.dart';
 import 'package:provider/provider.dart';
 import 'src/app.dart';
 
@@ -19,12 +18,8 @@ void main() async {
   print('start creating providers');
   final moodAssessmentsProvider = MoodAssessmentsProvider();
   final eventsProvider = EventsProvider();
-  final settingsProvider = SettingsProvider();
+  final notificationsProvider = NotificationsProvider();
   final authProvider = AuthProvider();
-
-  print('start initializing locale notifications');
-  await LocalNotificationsProvider.initialize();
-  await LocalNotificationsProvider.setNotificationTasks();
 
   print('start app');
   runApp(
@@ -40,7 +35,7 @@ void main() async {
             return authProvider;
           }),
           ChangeNotifierProvider(create: (_) {
-            return settingsProvider;
+            return notificationsProvider;
           })
         ],
         child: MindTrackerApp(),

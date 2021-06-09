@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mind_tracker/src/business_logic/services/local_notifications_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/events_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_assessments_provider.dart';
-import 'package:mind_tracker/src/business_logic/viewmodels/settings_provider.dart';
+import 'package:mind_tracker/src/business_logic/viewmodels/notifications_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/other/glow_disabler.dart';
 import 'package:mind_tracker/src/views/utils/custom_image_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
@@ -39,7 +38,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     try {
       await Provider.of<MoodAssessmentsProvider>(context, listen: false).loadData();
       await Provider.of<EventsProvider>(context, listen: false).loadData();
-      await Provider.of<SettingsProvider>(context, listen: false).loadData();
+      await Provider.of<NotificationsProvider>(context, listen: false).loadData();
       goToNextScreen();
     } on Exception catch (e, stacktrace) {
       print('[LOAD DATA ERROR] ${e.toString()}');
@@ -52,7 +51,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   void goToNextScreen() {
     Navigator.of(context).pushNamedAndRemoveUntil('/main', (route) => false);
-    final didNotificationLaunchApp = LocalNotificationsProvider.launchDetails.didNotificationLaunchApp;
+    final didNotificationLaunchApp = Provider.of<NotificationsProvider>(context, listen: false)
+        .didNotificationLaunchApp;
     if (didNotificationLaunchApp) {
       Navigator.of(context).pushNamed('/moodAssessment', arguments: {'startMode': 'now'});
     }

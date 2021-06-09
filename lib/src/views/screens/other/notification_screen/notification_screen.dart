@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/notification_time.dart';
-import 'package:mind_tracker/src/business_logic/viewmodels/settings_provider.dart';
+import 'package:mind_tracker/src/business_logic/viewmodels/notifications_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/app_bar/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/app_bar/custom_leading.dart';
 import 'package:mind_tracker/src/views/common_widgets/other/standard_button.dart';
@@ -17,14 +17,14 @@ import 'package:provider/provider.dart';
 class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<SettingsProvider>(
-      builder: (context, settingsProvider, child) {
+    return Consumer<NotificationsProvider>(
+      builder: (context, notificationsProvider, child) {
         final timePickerController = CustomTimePickerController(
             initialTime: NotificationTime(9, 0)
         );
         final notificationTimeBoxes = NotificationTimeBoxes(
           timePickerController: timePickerController,
-          notificationTimes: settingsProvider.notificationTimes.toList(),
+          notificationTimes: notificationsProvider.notificationTimes.toList(),
         );
         return Scaffold(
             appBar: CustomAppBar(
@@ -73,7 +73,7 @@ class NotificationScreen extends StatelessWidget {
                       title: 'Готово',
                       onPressed: () {
                         print('Press save button');
-                        Provider.of<SettingsProvider>(context, listen: false).setNotificationTimes(
+                        Provider.of<NotificationsProvider>(context, listen: false).setNotificationTimes(
                             notificationTimeBoxes.notificationTimes
                         );
                         Navigator.pop(context);
