@@ -1,19 +1,16 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:mind_tracker/src/app.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class LocalNotificationsProvider {
   static FlutterLocalNotificationsPlugin _localNotification;
   static NotificationAppLaunchDetails launchDetails;
-  static Function _onSelectNotification;
 
   static Future<void> initialize() async {
     await _initializeLocalNotificationPlugin();
     tz.initializeTimeZones();
-  }
-
-  static void setOnSelectNotification(Function onSelectNotification) {
-    _onSelectNotification = onSelectNotification;
   }
 
   static Future<void> _initializeLocalNotificationPlugin() async {
@@ -26,13 +23,7 @@ class LocalNotificationsProvider {
     _localNotification = FlutterLocalNotificationsPlugin();
     await _localNotification.initialize(
         initializationSettings,
-        onSelectNotification: (payload) async {
-          print('[Notification selected]: $payload');
-          if (_onSelectNotification != null) {
-            print('On select notification execute');
-            _onSelectNotification();
-          }
-        }
+        onSelectNotification: _onSelectNotification
     );
 
     final pendingNotificationsRequests = await _localNotification.pendingNotificationRequests();
@@ -42,6 +33,16 @@ class LocalNotificationsProvider {
 
     launchDetails = await _localNotification.getNotificationAppLaunchDetails();
     print('[LOCAL NOTIFICATIONS] did notification launch app: ${launchDetails.didNotificationLaunchApp}');
+  }
+
+  static void showNotification() {
+    _localNotification.show(0, 'Test', 'body', _getNotificationDetails());
+  }
+
+  static Future<void> _onSelectNotification (String payload) async {
+    print('[NOTIFICATION]: $payload');
+    final context = App.navigatorKey.currentContext;
+    Navigator.of(context).pushNamed('/moodAssessment', arguments: {'startMode': 'now'});
   }
 
   static Future<void> cancelAllNotifications() async {

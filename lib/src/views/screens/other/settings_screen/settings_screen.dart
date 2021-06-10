@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/business_logic/services/local_notifications_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/app_bar/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/app_bar/custom_leading.dart';
 import 'package:mind_tracker/src/views/screens/other/settings_screen/widgets/login_out_panel.dart';
 import 'package:mind_tracker/src/views/screens/other/settings_screen/widgets/notification_panel.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
-import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
 class SettingsScreen extends StatelessWidget {
@@ -30,7 +29,12 @@ class SettingsScreen extends StatelessWidget {
             SizedBox(height: dp(16)),
             LoginOutPanel(),
             SizedBox(height: dp(16)),
-            NotificationPanel()
+            NotificationPanel(),
+            TextButton(onPressed: () {
+                LocalNotificationsProvider.showNotification();
+              },
+              child: Text('Показать уведомление')
+            )
           ],
         ),
       ),

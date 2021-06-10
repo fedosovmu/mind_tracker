@@ -21,17 +21,6 @@ class NotificationsProvider extends ChangeNotifier {
     return;
   }
 
-  void setOnSelectNotification(BuildContext context) {
-    LocalNotificationsProvider.setOnSelectNotification(() {
-      final routeName = ModalRoute.of(context).settings.name;
-      final availableScreens = ['/main', '/settings', '/notification'];
-      print('[ROUTE NAME] $routeName');
-      if (availableScreens.contains(routeName)) {
-        Navigator.of(context).pushNamed('/moodAssessment', arguments: {'startMode': 'now'});
-      }
-    });
-  }
-
   void _parseNotificationTimesFromSettings(Map<String, dynamic> settings) {
     if (settings.containsKey('notification_times')) {
       notificationTimes = (settings['notification_times'] as List<dynamic>).map(
