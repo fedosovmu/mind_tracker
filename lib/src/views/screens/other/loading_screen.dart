@@ -36,9 +36,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   void _loadData() async {
     try {
-      await Provider.of<MoodAssessmentsProvider>(context, listen: false).loadData();
-      await Provider.of<EventsProvider>(context, listen: false).loadData();
-      await Provider.of<NotificationsProvider>(context, listen: false).loadData();
+      await Future.wait([
+        Provider.of<MoodAssessmentsProvider>(context, listen: false).loadData(),
+        Provider.of<EventsProvider>(context, listen: false).loadData(),
+        Provider.of<NotificationsProvider>(context, listen: false).loadData()
+      ]);
       _goToNextScreen();
     } on Exception catch (e, stacktrace) {
       print('[LOAD DATA ERROR] ${e.toString()}');
