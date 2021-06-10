@@ -39,7 +39,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       await Future.wait([
         Provider.of<MoodAssessmentsProvider>(context, listen: false).loadData(),
         Provider.of<EventsProvider>(context, listen: false).loadData(),
-        Provider.of<NotificationsProvider>(context, listen: false).loadData()
+        Provider.of<NotificationsProvider>(context, listen: false).loadData(),
       ]);
       _goToNextScreen();
     } on Exception catch (e, stacktrace) {

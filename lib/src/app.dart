@@ -37,9 +37,6 @@ class MindTrackerApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown
     ]);
-    SystemChrome.setSystemUIOverlayStyle(
-        appSystemUiOverlayStyle
-    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Mind Tracker',
@@ -99,7 +96,10 @@ class MindTrackerApp extends StatelessWidget {
           settings: settings,
           builder: (context) {
             Provider.of<NotificationsProvider>(context).setOnSelectNotification(context);
-            return screenToGo;
+            return AnnotatedRegion<SystemUiOverlayStyle>(
+              value: settings.name == '/main' ? appSystemUiOverlayStyleDark : appSystemUiOverlayStyle,
+              child: screenToGo
+            );
           }
         );
       },
