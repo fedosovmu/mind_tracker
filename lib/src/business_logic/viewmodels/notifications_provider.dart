@@ -15,7 +15,7 @@ class NotificationsProvider extends ChangeNotifier {
     final settings = await CloudFirestoreProvider.getSettings();
     if (settings != null) {
       _parseNotificationTimesFromSettings(settings);
-      _setNotificationTasks();
+      _updateNotificationTasks();
     }
     notifyListeners();
     return;
@@ -39,7 +39,7 @@ class NotificationsProvider extends ChangeNotifier {
     }
   }
 
-  void _setNotificationTasks() {
+  void _updateNotificationTasks() {
     LocalNotificationsProvider.cancelAllNotifications();
     if (notificationTimes.isNotEmpty) {
       final now = DateTime.now();
@@ -59,7 +59,7 @@ class NotificationsProvider extends ChangeNotifier {
   void setNotificationTimes(List<NotificationTime> times) {
     notificationTimes = times;
     CloudFirestoreProvider.setSettingsNotificationTimes(times);
-    _setNotificationTasks();
+    _updateNotificationTasks();
     notifyListeners();
   }
 }

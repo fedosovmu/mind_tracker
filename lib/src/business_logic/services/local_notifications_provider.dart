@@ -17,7 +17,7 @@ class LocalNotificationsProvider {
   }
 
   static Future<void> _initializeLocalNotificationPlugin() async {
-    final androidInitializationSettings = AndroidInitializationSettings('notification_icon');
+    final androidInitializationSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
     final iosInitializationSettings = IOSInitializationSettings();
     final initializationSettings = InitializationSettings(
         android: androidInitializationSettings,
@@ -27,8 +27,9 @@ class LocalNotificationsProvider {
     await _localNotification.initialize(
         initializationSettings,
         onSelectNotification: (payload) async {
-          print('Notification selected: $payload');
+          print('[Notification selected]: $payload');
           if (_onSelectNotification != null) {
+            print('On select notification execute');
             _onSelectNotification();
           }
         }

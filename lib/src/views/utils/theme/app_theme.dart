@@ -12,10 +12,5 @@ final appTheme = ThemeData(
 
 const appSystemUiOverlayStyle = SystemUiOverlayStyle(
   statusBarColor: CustomColors.purpleDark,
-  systemNavigationBarColor: CustomColors.purpleDark
-);
-
-final appSystemUiOverlayStyleDark = appSystemUiOverlayStyle.copyWith(
   systemNavigationBarColor: CustomColors.purpleSuperDark
 );
-
