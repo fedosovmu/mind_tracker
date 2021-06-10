@@ -5,10 +5,15 @@ import 'package:timezone/timezone.dart' as tz;
 class LocalNotificationsProvider {
   static FlutterLocalNotificationsPlugin _localNotification;
   static NotificationAppLaunchDetails launchDetails;
+  static Function _onSelectNotification;
 
   static Future<void> initialize() async {
     await _initializeLocalNotificationPlugin();
     tz.initializeTimeZones();
+  }
+
+  static void setOnSelectNotification(Function onSelectNotification) {
+    _onSelectNotification = onSelectNotification;
   }
 
   static Future<void> _initializeLocalNotificationPlugin() async {
@@ -23,6 +28,9 @@ class LocalNotificationsProvider {
         initializationSettings,
         onSelectNotification: (payload) async {
           print('Notification selected: $payload');
+          if (_onSelectNotification != null) {
+            _onSelectNotification();
+          }
         }
     );
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mind_tracker/src/business_logic/services/firebase_auth_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/auth_provider.dart';
+import 'package:mind_tracker/src/business_logic/viewmodels/notifications_provider.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/create_user_event/create_user_event_select_icon_screen.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/create_user_event/create_user_event_title_screen.dart';
 import 'package:mind_tracker/src/views/screens/other/loading_screen.dart';
@@ -97,6 +98,7 @@ class MindTrackerApp extends StatelessWidget {
         return MaterialPageRoute(
           settings: settings,
           builder: (context) {
+            Provider.of<NotificationsProvider>(context).setOnSelectNotification(context);
             return screenToGo;
           }
         );
