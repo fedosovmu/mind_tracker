@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mind_tracker/src/business_logic/services/local_notifications_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/app_bar/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/app_bar/custom_leading.dart';
 import 'package:mind_tracker/src/views/screens/other/settings_screen/widgets/login_out_panel.dart';
