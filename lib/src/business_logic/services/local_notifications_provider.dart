@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mind_tracker/src/app.dart';
+import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -36,7 +37,7 @@ class LocalNotificationsProvider {
   }
 
   static void showNotification() {
-    _localNotification.show(0, 'Test', 'body', _getNotificationDetails());
+    _localNotification.show(0, 'Оцени своё настроение', 'Нажми для оценки', _getNotificationDetails(DateTime.now()));
   }
 
   static Future<void> _onSelectNotification (String payload) async {
@@ -56,20 +57,22 @@ class LocalNotificationsProvider {
         'Оцени своё настроение',
         'Нажми для оценки',
         scheduledDatetime,
-        _getNotificationDetails(),
+        _getNotificationDetails(scheduledDatetime),
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
         androidAllowWhileIdle: false,
         payload: '${notificationTime}'
     );
   }
 
-  static NotificationDetails _getNotificationDetails() {
+  static NotificationDetails _getNotificationDetails(DateTime notificationTime) {
+    final partOfDay = PartOfDayBuilder.fromDateTime(notificationTime);
     final androidNotificationDetails = AndroidNotificationDetails(
       'mindTrackerChannel',
       'Mind tracker assess mood notifications',
       'Channel with notifications that ask assess mood',
       importance: Importance.max,
       priority: Priority.high,
+      icon: 'notification_${partOfDay.toShortString()}'
     );
     final iosNotificationDetails = IOSNotificationDetails();
     return NotificationDetails(
