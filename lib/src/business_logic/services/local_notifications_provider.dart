@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:mind_tracker/src/app.dart';
+import 'package:get/get.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -37,13 +36,22 @@ class LocalNotificationsProvider {
   }
 
   static void showNotification() {
-    _localNotification.show(0, 'Оцени своё настроение', 'Нажми для оценки', _getNotificationDetails(DateTime.now()));
+    _localNotification.show(
+      0,
+      'Оцени своё настроение',
+      'Нажми для оценки',
+      _getNotificationDetails(DateTime.now())
+    );
   }
 
   static Future<void> _onSelectNotification (String payload) async {
     print('[NOTIFICATION]: $payload');
-    final context = App.navigatorKey.currentContext;
-    Navigator.of(context).pushNamed('/moodAssessment', arguments: {'startMode': 'now'});
+    final currentRoute = Get.currentRoute;
+    print('Current route: $currentRoute');
+    const availableRouts = ['/main', '/settings'];
+    if (availableRouts.contains(currentRoute)) {
+      Get.toNamed('/moodAssessment', arguments: {'startMode': 'now'});
+    }
   }
 
   static Future<void> cancelAllNotifications() async {

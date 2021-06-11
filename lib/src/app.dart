@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:mind_tracker/src/business_logic/services/firebase_auth_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/auth_provider.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/create_user_event/create_user_event_select_icon_screen.dart';
@@ -16,10 +17,6 @@ import 'views/utils/theme/app_theme.dart';
 import 'views/screens/other/onboarding_screen.dart';
 import 'views/screens/mood_assessment/mood_assessment_screen/mood_assessment_screen.dart';
 import 'views/screens/main_screen/main_screen.dart';
-
-class App {
-  static final navigatorKey = GlobalKey<NavigatorState>();
-}
 
 
 class MindTrackerApp extends StatelessWidget {
@@ -43,8 +40,7 @@ class MindTrackerApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(
       appSystemUiOverlayStyle
     );
-    return MaterialApp(
-      navigatorKey: App.navigatorKey,
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Mind Tracker',
       theme: appTheme,
