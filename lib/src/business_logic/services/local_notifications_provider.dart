@@ -35,15 +35,6 @@ class LocalNotificationsProvider {
     print('[LOCAL NOTIFICATIONS] did notification launch app: ${launchDetails.didNotificationLaunchApp}');
   }
 
-  static void showNotification() {
-    _localNotification.show(
-      0,
-      'Оцени своё настроение',
-      'Нажми для оценки',
-      _getNotificationDetails(DateTime.now())
-    );
-  }
-
   static Future<void> _onSelectNotification (String payload) async {
     print('[NOTIFICATION]: $payload');
     final currentRoute = Get.currentRoute;

@@ -30,11 +30,6 @@ class SettingsScreen extends StatelessWidget {
             LoginOutPanel(),
             SizedBox(height: dp(16)),
             NotificationPanel(),
-            TextButton(onPressed: () {
-                LocalNotificationsProvider.showNotification();
-              },
-              child: Text('Показать уведомление')
-            )
           ],
         ),
       ),
