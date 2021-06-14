@@ -5,7 +5,6 @@ import 'package:mind_tracker/src/views/screens/main_screen/chart_page/chart_card
 import 'package:mind_tracker/src/views/screens/main_screen/chart_page/mood_frequency_cards/mood_frequency_cards.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/chart_page/period_buttons/period_toggle_buttons.dart';
 import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';
-import 'package:mind_tracker/src/views/utils/metrics.dart';
 
 
 class ChartPage extends StatefulWidget {

@@ -21,15 +21,15 @@ class MoodAssessmentsProvider extends ChangeNotifier {
     return moodAssessmentsForDate;
   }
 
-  List<MoodAssessment> getMoodAssessmentForPeriod ({@required DateTime startDate, @required DateTime endDate}) {
-    final List<MoodAssessment> weekMoodAssessments = _moodAssessments.where((moodAssessment) {
+  List<MoodAssessment> getMoodAssessmentsForPeriod ({@required DateTime startDate, @required DateTime endDate}) {
+    final List<MoodAssessment> moodAssessmentsForPeriod = _moodAssessments.where((moodAssessment) {
       final DateTime date = moodAssessment.date;
       final bool isAfterOrAtTheSameTime = date.isAfter(startDate) || date == startDate;
       final bool isBeforeOrAtTheSameTime = date.isBefore(endDate) || date == endDate;
       return isAfterOrAtTheSameTime && isBeforeOrAtTheSameTime;
     }).toList();
-    weekMoodAssessments.sort();
-    return weekMoodAssessments;
+    moodAssessmentsForPeriod.sort();
+    return moodAssessmentsForPeriod;
   }
 
   void add(MoodAssessment moodAssessment) async {
