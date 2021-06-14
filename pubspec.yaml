@@ -54,6 +54,7 @@ flutter:
     - assets/icons/ui/
     - assets/icons/events/
     - assets/images/common/mood_spheres/
+    - assets/images/common/mood_spheres_mini/
     - assets/images/onboarding/
     - assets/images/mood_assessment/
     - assets/images/other/
