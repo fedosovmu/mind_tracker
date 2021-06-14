@@ -16,9 +16,10 @@ class MoodFrequencyCards extends StatelessWidget {
     for (int i = 0; i <= partOfDayCount; i++) {
       final partOfDay = PartOfDay.values[(i + 1) % partOfDayCount];
       final card = MoodFrequencyCard(
-          startDate: startDate,
-          endDate: endDate,
-          partOfDay: partOfDay
+        mood: i+3,
+        partOfDay: partOfDay,
+        moodAssessmentsWithSameMoodCount: 3+i*3,
+        moodAssessmentsAllCount: 10+i,
       );
       moodFrequencyCards.add(card);
     }

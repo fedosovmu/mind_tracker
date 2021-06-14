@@ -10,14 +10,18 @@ import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 class MoodFrequencyCard extends StatelessWidget {
   static final height = dp(90);
   static final width = dp(160);
-  final DateTime startDate;
-  final DateTime endDate;
+  final int mood;
   final PartOfDay partOfDay;
+  final int moodAssessmentsWithSameMoodCount;
+  final int moodAssessmentsAllCount;
 
-  MoodFrequencyCard({@required this.startDate, @required this.endDate, this.partOfDay});
+  MoodFrequencyCard({@required this.mood, @required this.partOfDay,
+    @required this.moodAssessmentsWithSameMoodCount, @required this.moodAssessmentsAllCount});
 
   @override
   Widget build(BuildContext context) {
+    final lineWidth = width - dp(16*2);
+    final coloredLineWidth = lineWidth * (moodAssessmentsWithSameMoodCount / moodAssessmentsAllCount);
     return Container(
       height: height,
       width: width,
@@ -33,7 +37,7 @@ class MoodFrequencyCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Нормальное',
+                  Content.moodNames[mood],
                   style: CustomTextStyles.caption.copyWith(
                     fontWeight: FontWeight.w500
                   ),
@@ -42,7 +46,7 @@ class MoodFrequencyCard extends StatelessWidget {
                   height: dp(24),
                   width: dp(24),
                   decoration: BoxDecoration(
-                    color: CustomColors.moods[4],
+                    color: CustomColors.moods[mood],
                     shape: BoxShape.circle
                   ),
                 )
@@ -61,11 +65,11 @@ class MoodFrequencyCard extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '9',
+                      '$moodAssessmentsWithSameMoodCount',
                       style: CustomTextStyles.caption,
                     ),
                     Text(
-                      '/16',
+                      '/$moodAssessmentsAllCount',
                       style: CustomTextStyles.caption.copyWith(
                         color: CustomColors.purpleMedium
                       ),
@@ -73,6 +77,26 @@ class MoodFrequencyCard extends StatelessWidget {
                   ],
                 )
               ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: dp(16), right: dp(16), top: dp(8)),
+            child: Container(
+              alignment: Alignment.centerLeft,
+              height: dp(4),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: CustomColors.purpleDark,
+                borderRadius: BorderRadius.all(Radius.circular(dp(2)))
+              ),
+              child: Container(
+                height: double.infinity,
+                width: coloredLineWidth,
+                decoration: BoxDecoration(
+                    color: CustomColors.moods[mood],
+                    borderRadius: BorderRadius.all(Radius.circular(dp(2)))
+                ),
+              ),
             ),
           )
         ],
