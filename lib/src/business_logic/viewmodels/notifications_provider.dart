@@ -9,14 +9,11 @@ class NotificationsProvider extends ChangeNotifier {
   bool get hasNotifications => notificationTimes.isNotEmpty;
   List<NotificationTime> notificationTimes;
 
-  Future<void> loadData() async {
+  Future<void> initialize(Map<String, dynamic> settings) async {
     await LocalNotificationsProvider.initialize();
     notificationTimes = [];
-    final settings = await CloudFirestoreProvider.getSettings();
-    if (settings != null) {
-      _parseNotificationTimesFromSettings(settings);
-      _updateNotificationTasks();
-    }
+    _parseNotificationTimesFromSettings(settings);
+    _updateNotificationTasks();
     notifyListeners();
     return;
   }
@@ -47,7 +44,7 @@ class NotificationsProvider extends ChangeNotifier {
 
   void setNotificationTimes(List<NotificationTime> times) {
     notificationTimes = times;
-    CloudFirestoreProvider.setSettingsNotificationTimes(times);
+    CloudFirestoreProvider.updateSettingsNotificationTimes(times);
     _updateNotificationTasks();
     notifyListeners();
   }

@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/events_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_assessments_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/notifications_provider.dart';
+import 'package:mind_tracker/src/business_logic/viewmodels/settings_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/other/glow_disabler.dart';
 import 'package:mind_tracker/src/views/utils/custom_image_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
@@ -39,8 +40,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
       await Future.wait([
         Provider.of<MoodAssessmentsProvider>(context, listen: false).loadData(),
         Provider.of<EventsProvider>(context, listen: false).loadData(),
-        Provider.of<NotificationsProvider>(context, listen: false).loadData(),
+        Provider.of<SettingsProvider>(context, listen: false).loadData(),
       ]);
+      final settings = Provider.of<SettingsProvider>(context, listen: false).settings;
+      Provider.of<NotificationsProvider>(context, listen: false).initialize(settings);
       _goToNextScreen();
     } on Exception catch (e, stacktrace) {
       print('[LOAD DATA ERROR] ${e.toString()}');

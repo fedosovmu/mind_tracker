@@ -75,15 +75,50 @@ class CloudFirestoreProvider {
   }
 
   static final _settingsCollection = FirebaseFirestore.instance.collection('settings');
-  static void setSettingsNotificationTimes(List<NotificationTime> times) {
+  static const _appVersion = '0.1.0 (8+)';
+  static Map<String, dynamic> _getStartAppInformation() {
+    return {
+      'app_version': _appVersion,
+      'email': FirebaseAuthProvider.email,
+      'start_time': DateTime.now(),
+    };
+  }
+
+  static Future<bool> createSettingsDocIfNotExists() async {
+    final uid = FirebaseAuthProvider.uid;
+    if (uid != null) {
+      final settingsDoc = await _settingsCollection.doc(uid).get();
+      if (!settingsDoc.exists) {
+        _settingsCollection.doc(uid).set(
+          {
+            'last_start_app_information': _getStartAppInformation()
+          }
+        );
+        return true;
+      }
+    }
+    return false;
+  }
+
+  static Future<void> updateSettingsLastStartAppInformation() async {
+    final uid = FirebaseAuthProvider.uid;
+    if (uid != null) {
+      final settingsMap = {
+        'last_start_app_information': _getStartAppInformation()
+      };
+      await _settingsCollection.doc(uid).update(settingsMap);
+    }
+    return;
+  }
+
+  static void updateSettingsNotificationTimes(List<NotificationTime> times) {
     final uid = FirebaseAuthProvider.uid;
     if (uid != null) {
       print('[FIREBASE] Create default settings document');
       final settingsMap = {
-        'email': FirebaseAuthProvider.email,
         'notification_times': times.map((e) => e.toString()).toList(),
       };
-      _settingsCollection.doc(uid).set(settingsMap);
+      _settingsCollection.doc(uid).update(settingsMap);
     }
   }
 
