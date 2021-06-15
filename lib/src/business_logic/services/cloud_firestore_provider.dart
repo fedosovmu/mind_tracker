@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mind_tracker/src/business_logic/models/event.dart';
 import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
@@ -81,6 +82,7 @@ class CloudFirestoreProvider {
       'app_version': _appVersion,
       'email': FirebaseAuthProvider.email,
       'start_time': DateTime.now(),
+      'platform': Platform.isAndroid ? 'Android' : (Platform.isIOS ? 'IOS' : Platform.environment)
     };
   }
 
