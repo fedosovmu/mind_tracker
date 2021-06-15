@@ -54,7 +54,6 @@ class MoodFrequencyCards extends StatelessWidget {
     for (int i = 0; i < partOfDayCount; i++) {
       final partOfDay = PartOfDay.values[(i + 1) % partOfDayCount];
       final card = _createMoodFrequencyCard(partOfDay, moodAssessmentsForPeriod);
-      print('=== Card: $partOfDay : $card');
       if (card != null) {
         moodFrequencyCards.add(card);
       }
