@@ -81,8 +81,8 @@ class CloudFirestoreProvider {
     return {
       'app_version': _appVersion,
       'email': FirebaseAuthProvider.email,
+      'platform': Platform.isAndroid ? 'Android' : (Platform.isIOS ? 'IOS' : Platform.environment),
       'start_time': DateTime.now(),
-      'platform': Platform.isAndroid ? 'Android' : (Platform.isIOS ? 'IOS' : Platform.environment)
     };
   }
 
