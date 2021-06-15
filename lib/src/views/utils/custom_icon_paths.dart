@@ -25,6 +25,8 @@ class CustomIconPaths {
   static const edit = '$_pathToUiIcons/edit.png';
   static const note = '$_pathToUiIcons/note.png';
   static const settings = '$_pathToUiIcons/settings.png';
+  static const profile = '$_pathToUiIcons/profile.png';
+  static const trashBin = '$_pathToUiIcons/trash_bin.png';
 
   static const _pathToEventIcons = 'assets/icons/events';
   static const _eventNames = ['alarm', 'alcohol', 'angry', 'bed', 'bell', 'bicycle',

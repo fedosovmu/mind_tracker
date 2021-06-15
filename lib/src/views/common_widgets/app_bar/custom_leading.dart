@@ -13,8 +13,7 @@ class CustomLeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      iconSize: iconSize ?? dp(32),
-      icon: Image.asset(pathToIcon),
+      icon: Image.asset(pathToIcon, height: iconSize ?? dp(32)),
       onPressed: onPressed,
     );
   }

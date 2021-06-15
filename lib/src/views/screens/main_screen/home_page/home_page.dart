@@ -20,10 +20,10 @@ class _HomePageState extends State<HomePage> {
     final today = DateTime.now().date;
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Твоё настроение',
+        title: 'Настроение',
         rightLeading: CustomLeading(
-          iconSize: dp(24),
-          pathToIcon: CustomIconPaths.settings,
+          iconSize: dp(20),
+          pathToIcon: CustomIconPaths.profile,
           onPressed: () {
             print('Settings button pressed');
             Navigator.of(context).pushNamed('/settings');

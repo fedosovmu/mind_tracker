@@ -23,21 +23,24 @@ class CustomAppBar extends StatelessWidget implements ObstructingPreferredSizeWi
         child: Container(
           height: _appBarHeight,
           width: double.infinity,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Stack(
             children: [
+              Center(
+                child: Text(
+                  title,
+                  style: CustomTextStyles.titleH1.copyWith(
+                    color: CustomColors.purpleWhite
+                  ),
+                ),
+              ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   _buildLeading(),
-                  Text(
-                    title,
-                    style: CustomTextStyles.titleH1,
-                  )
+                  _buildRightLeading()
                 ],
-              ),
-              if(rightLeading != null) _buildRightLeading()
+              )
             ],
           ),
         ),
@@ -54,15 +57,22 @@ class CustomAppBar extends StatelessWidget implements ObstructingPreferredSizeWi
         child: leading,
       );
     } else {
-      return SizedBox(width: dp(16));
+      return SizedBox(width: dp(32));
     }
   }
 
   Widget _buildRightLeading() {
-    return Container(
-      margin: EdgeInsets.only(right: dp(20)),
-      child: rightLeading,
-    );
+    if (rightLeading != null) {
+      return Container(
+        width: _appBarHeight,
+        height: _appBarHeight,
+        alignment: Alignment.center,
+        child: rightLeading,
+        margin: EdgeInsets.only(right: dp(8)),
+      );
+    } else {
+      return SizedBox(width: dp(32));
+    }
   }
 
   @override

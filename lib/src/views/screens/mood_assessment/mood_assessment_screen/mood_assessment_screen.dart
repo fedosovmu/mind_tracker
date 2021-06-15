@@ -4,10 +4,14 @@ import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_assessments_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/app_bar/custom_leading.dart';
 import 'package:mind_tracker/src/views/common_widgets/other/standard_button.dart';
-import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/mood_assessor/mood_assessor.dart';
-import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/add_button.dart';
-import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/edit_note_button.dart';
-import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/edit_selected_events_button.dart';
+import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/'
+    'mood_assessor/mood_assessor.dart';
+import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/'
+    'add_button.dart';
+import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/'
+    'edit_note_button.dart';
+import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/'
+    'edit_selected_events_button.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:provider/provider.dart';
@@ -189,7 +193,6 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //resizeToAvoidBottomPadding: false, //TODO: Проверить что все работает на IOS
       appBar: CustomAppBar(
         title: _getTitle(context),
         leading: CustomLeading(
@@ -197,6 +200,13 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
           onPressed: () {
             print('Press close button');
             _goToHomeScreen();
+          },
+        ),
+        rightLeading: CustomLeading(
+          pathToIcon: CustomIconPaths.trashBin,
+          iconSize: dp(24),
+          onPressed: () {
+            print('Press delete button');
           },
         ),
       ),
