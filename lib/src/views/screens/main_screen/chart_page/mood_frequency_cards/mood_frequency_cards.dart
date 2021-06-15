@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_assessments_provider.dart';
-import 'package:mind_tracker/src/views/screens/main_screen/chart_page/mood_frequency_cards/mood_frequency_card.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/chart_page/mood_frequency_cards/'
+    'mood_frequency_card.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:provider/provider.dart';
 import 'package:collection/collection.dart';

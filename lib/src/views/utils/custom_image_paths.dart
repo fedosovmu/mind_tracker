@@ -16,4 +16,10 @@ class CustomImagePaths {
       await precacheImage(image, context);
     }
   }
+
+  static final Map<int, String> pathsToMoodSphereMiniImages = Map.fromIterable(
+    List.generate(7, (index) => index),
+    key: (index) => index + 1,
+    value: (index) => 'assets/images/common/mood_spheres_mini/${index+1}.png'
+  );
 }

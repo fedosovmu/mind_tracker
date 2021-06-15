@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 import 'package:mind_tracker/src/views/utils/content.dart';
+import 'package:mind_tracker/src/views/utils/custom_image_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_border_shape.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
@@ -27,14 +28,15 @@ class MoodFrequencyCard extends StatelessWidget {
       width: width,
       decoration: ShapeDecoration(
         color: CustomColors.purpleSuperDark,
-        shape: CustomBorderShape(dp(16))
+        shape: CustomBorderShape(dp(12))
       ),
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(left: dp(16), top: dp(16), right: dp(12)),
+            padding: EdgeInsets.only(left: dp(16), top: dp(12), right: dp(12)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   Content.moodNames[mood],
@@ -42,13 +44,10 @@ class MoodFrequencyCard extends StatelessWidget {
                     fontWeight: FontWeight.w500
                   ),
                 ),
-                Container(
+                Image.asset(
+                  CustomImagePaths.pathsToMoodSphereMiniImages[mood],
                   height: dp(24),
                   width: dp(24),
-                  decoration: BoxDecoration(
-                    color: CustomColors.moods[mood],
-                    shape: BoxShape.circle
-                  ),
                 )
               ],
             ),
