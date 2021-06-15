@@ -73,7 +73,7 @@ class NotificationScreen extends StatelessWidget {
                       title: 'Готово',
                       onPressed: () {
                         print('Press save button');
-                        Provider.of<NotificationsProvider>(context, listen: false).setNotificationTimes(
+                        Provider.of<NotificationsProvider>(context, listen: false).updateNotificationTimes(
                             notificationTimeBoxes.notificationTimes
                         );
                         Navigator.pop(context);
