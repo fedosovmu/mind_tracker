@@ -48,6 +48,7 @@ class MoodFrequencyCard extends StatelessWidget {
                   CustomImagePaths.pathsToMoodSphereMiniImages[mood],
                   height: dp(24),
                   width: dp(24),
+                  filterQuality: FilterQuality.high,
                 )
               ],
             ),
