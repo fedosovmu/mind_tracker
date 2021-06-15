@@ -202,13 +202,13 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
             _goToHomeScreen();
           },
         ),
-        rightLeading: CustomLeading(
+        rightLeading: widget.arguments['startMode'] == 'update' ? CustomLeading(
           pathToIcon: CustomIconPaths.trashBin,
           iconSize: dp(24),
           onPressed: () {
             print('Press delete button');
           },
-        ),
+        ) : null,
       ),
       body: SafeArea(
         minimum: EdgeInsets.only(bottom: dp(16)),
