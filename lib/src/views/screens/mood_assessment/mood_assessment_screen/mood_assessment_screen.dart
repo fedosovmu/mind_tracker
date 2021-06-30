@@ -209,8 +209,12 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
           iconSize: dp(24),
           onPressed: () async {
             print('Press delete button');
-            final isDeleteButtonPressed = await DeleteDialog.show(context);
-            print('Dialog result: $isDeleteButtonPressed');
+            final isDeleteButtonPressed = await DeleteDialog.show(context, 'Удалить оценку?');
+            if (isDeleteButtonPressed) {
+              final MoodAssessment moodAssessmentForDelete = widget.arguments['moodAssessment'];
+              Provider.of<MoodAssessmentsProvider>(context, listen: false).delete(moodAssessmentForDelete);
+              Navigator.pop(context);
+            }
           },
         ) : null,
       ),

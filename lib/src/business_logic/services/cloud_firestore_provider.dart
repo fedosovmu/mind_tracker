@@ -13,66 +13,54 @@ class CloudFirestoreProvider {
   static final _moodAssessmentsCollection = FirebaseFirestore.instance.collection('mood_assessments');
   static Future<List<MoodAssessment>> getAllMoodAssessmentsOfAuthorizedUser () async {
     final uid = FirebaseAuthProvider.uid;
-    if (uid != null) {
-      final moodAssessmentsQuerySnapshot = await _moodAssessmentsCollection
-          .where('uid', isEqualTo: uid).get();
-      print('[FIREBASE] Mood assessments loaded (${moodAssessmentsQuerySnapshot.docs.length})');
+    final moodAssessmentsQuerySnapshot = await _moodAssessmentsCollection
+        .where('uid', isEqualTo: uid).get();
+    print('[FIREBASE] Mood assessments loaded (${moodAssessmentsQuerySnapshot.docs.length})');
 
-      final List<MoodAssessment> moodAssessments = moodAssessmentsQuerySnapshot.docs.map((moodAssessmentDoc) {
-        return MoodAssessment.fromMap(moodAssessmentDoc.data(), moodAssessmentDoc.id);
-      }).toList();
+    final List<MoodAssessment> moodAssessments = moodAssessmentsQuerySnapshot.docs.map((moodAssessmentDoc) {
+      return MoodAssessment.fromMap(moodAssessmentDoc.data(), moodAssessmentDoc.id);
+    }).toList();
 
-      return moodAssessments;
-    } else {
-      return [];
-    }
+    return moodAssessments;
   }
 
   static Future<String> addMoodAssessment(MoodAssessment moodAssessment) async {
     final uid = FirebaseAuthProvider.uid;
-    if (uid != null) {
-      print('[FIREBASE] Add mood assessment $moodAssessment');
-      var moodAssessmentMap = moodAssessment.toMapForCreate(uid);
-      final documentRef = await _moodAssessmentsCollection.add(moodAssessmentMap);
-      return documentRef.id;
-    } else {
-      return null;
-    }
+    print('[FIREBASE] Add mood assessment $moodAssessment');
+    var moodAssessmentMap = moodAssessment.toMapForCreate(uid);
+    final documentRef = await _moodAssessmentsCollection.add(moodAssessmentMap);
+    return documentRef.id;
   }
 
   static void updateMoodAssessment(MoodAssessment updatedMoodAssessment, String docId) {
-    final uid = FirebaseAuthProvider.uid;
-    if (uid != null) {
-      print('[FIREBASE] Update mood assessment $updatedMoodAssessment');
-      _moodAssessmentsCollection.doc(docId).update(updatedMoodAssessment.toMapForUpdate());
-    }
+    print('[FIREBASE] Update mood assessment $updatedMoodAssessment');
+    _moodAssessmentsCollection.doc(docId).update(updatedMoodAssessment.toMapForUpdate());
+  }
+
+  static void deleteMoodAssessment(MoodAssessment moodAssessmentForDelete) {
+    print('[FIREBASE] Delete mood assessment $moodAssessmentForDelete');
+    _moodAssessmentsCollection.doc(moodAssessmentForDelete.docId).delete();
   }
 
   static final _userEventsCollection = FirebaseFirestore.instance.collection('user_events');
   static Future<List<Event>> getUserEventsOfAuthorizedUser () async {
     final uid = FirebaseAuthProvider.uid;
-    if (uid != null) {
-      final eventQuerySnapshot = await _userEventsCollection.where('uid', isEqualTo: uid).get();
-      print('[FIREBASE] User events loaded (${eventQuerySnapshot.docs.length})');
-      final List<Event> events = eventQuerySnapshot.docs.map((eventDoc) {
-        return Event.fromMap(eventDoc.data()) ;
-      }).toList();
-      return events;
-    } else {
-      return [];
-    }
+    final eventQuerySnapshot = await _userEventsCollection.where('uid', isEqualTo: uid).get();
+    print('[FIREBASE] User events loaded (${eventQuerySnapshot.docs.length})');
+    final List<Event> events = eventQuerySnapshot.docs.map((eventDoc) {
+      return Event.fromMap(eventDoc.data()) ;
+    }).toList();
+    return events;
   }
 
   static void addUserEvent (Event userEvent) {
     final uid = FirebaseAuthProvider.uid;
-    if (uid != null) {
-      print('[FIREBASE] Add user event $userEvent');
-      var userEventMap = userEvent.toMap();
-      userEventMap['uid'] = uid;
-      _userEventsCollection.add(
-          userEventMap
-      );
-    }
+    print('[FIREBASE] Add user event $userEvent');
+    var userEventMap = userEvent.toMap();
+    userEventMap['uid'] = uid;
+    _userEventsCollection.add(
+        userEventMap
+    );
   }
 
   static final _settingsCollection = FirebaseFirestore.instance.collection('settings');
@@ -88,49 +76,41 @@ class CloudFirestoreProvider {
 
   static Future<bool> createSettingsDocIfNotExists() async {
     final uid = FirebaseAuthProvider.uid;
-    if (uid != null) {
-      final settingsDoc = await _settingsCollection.doc(uid).get();
-      if (!settingsDoc.exists) {
-        _settingsCollection.doc(uid).set(
+    final settingsDoc = await _settingsCollection.doc(uid).get();
+    if (!settingsDoc.exists) {
+      _settingsCollection.doc(uid).set(
           {
             'last_start_app_information': _getStartAppInformation()
           }
-        );
-        return true;
-      }
+      );
+      return true;
     }
     return false;
   }
 
   static Future<void> updateSettingsLastStartAppInformation() async {
     final uid = FirebaseAuthProvider.uid;
-    if (uid != null) {
-      final settingsMap = {
-        'last_start_app_information': _getStartAppInformation()
-      };
-      await _settingsCollection.doc(uid).update(settingsMap);
-    }
+    final settingsMap = {
+      'last_start_app_information': _getStartAppInformation()
+    };
+    await _settingsCollection.doc(uid).update(settingsMap);
     return;
   }
 
   static void updateSettingsNotificationTimes(List<NotificationTime> times) {
     final uid = FirebaseAuthProvider.uid;
-    if (uid != null) {
-      print('[FIREBASE] Create default settings document');
-      final settingsMap = {
-        'notification_times': times.map((e) => e.toString()).toList(),
-      };
-      _settingsCollection.doc(uid).update(settingsMap);
-    }
+    print('[FIREBASE] Create default settings document');
+    final settingsMap = {
+      'notification_times': times.map((e) => e.toString()).toList(),
+    };
+    _settingsCollection.doc(uid).update(settingsMap);
   }
 
   static Future<Map<String, dynamic>> getSettings() async {
     final uid = FirebaseAuthProvider.uid;
-    if (uid != null) {
-      final settingsDoc = await _settingsCollection.doc(uid).get();
-      final settings = settingsDoc.data();
-      print('[FIRABASE] Settings loaded $settings}');
-      return settings;
-    }
+    final settingsDoc = await _settingsCollection.doc(uid).get();
+    final settings = settingsDoc.data();
+    print('[FIRABASE] Settings loaded $settings}');
+    return settings;
   }
 }

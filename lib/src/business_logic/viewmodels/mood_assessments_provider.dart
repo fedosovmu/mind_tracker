@@ -33,24 +33,24 @@ class MoodAssessmentsProvider extends ChangeNotifier {
   }
 
   void add(MoodAssessment moodAssessment) async {
-    final uid = FirebaseAuthProvider.uid;
-    if (uid != null) {
-      _moodAssessments.add(moodAssessment);
-      notifyListeners();
-      final docId = await CloudFirestoreProvider.addMoodAssessment(moodAssessment);
-      moodAssessment.docId = docId;
-      print('[MOOD ASSESSMENT PROVIDER] Mood assessment id updated $moodAssessment');
-      notifyListeners();
-    }
+    _moodAssessments.add(moodAssessment);
+    notifyListeners();
+    final docId = await CloudFirestoreProvider.addMoodAssessment(moodAssessment);
+    moodAssessment.docId = docId;
+    print('[MOOD ASSESSMENT PROVIDER] Mood assessment id updated $moodAssessment');
+    notifyListeners();
   }
 
   void update(MoodAssessment updatedMoodAssessment) {
-    final uid = FirebaseAuthProvider.uid;
-    if (uid != null) {
-      _moodAssessments.removeWhere((moodAssessment) => moodAssessment.docId == updatedMoodAssessment.docId);
-      _moodAssessments.add(updatedMoodAssessment);
-      CloudFirestoreProvider.updateMoodAssessment(updatedMoodAssessment, updatedMoodAssessment.docId);
-      notifyListeners();
-    }
+    _moodAssessments.removeWhere((moodAssessment) => moodAssessment.docId == updatedMoodAssessment.docId);
+    _moodAssessments.add(updatedMoodAssessment);
+    CloudFirestoreProvider.updateMoodAssessment(updatedMoodAssessment, updatedMoodAssessment.docId);
+    notifyListeners();
+  }
+
+  void delete(MoodAssessment moodAssessmentForDelete) {
+    _moodAssessments.removeWhere((moodAssessment) => moodAssessment.docId == moodAssessmentForDelete.docId);
+    CloudFirestoreProvider.deleteMoodAssessment(moodAssessmentForDelete);
+    notifyListeners();
   }
 }

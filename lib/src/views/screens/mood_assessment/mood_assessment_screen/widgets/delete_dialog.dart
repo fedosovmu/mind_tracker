@@ -8,13 +8,16 @@ import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 
 class DeleteDialog extends StatelessWidget {
+  final String text;
 
-  static dynamic show(BuildContext context) async {
+  DeleteDialog(this.text);
+
+  static Future<bool> show(BuildContext context, String text) async {
     return await showDialog(
       barrierColor: CustomColors.purpleDark.withOpacity(0.8),
       context: context,
       builder: (context) {
-        return DeleteDialog();
+        return DeleteDialog(text);
       }
     );
   }
@@ -44,7 +47,7 @@ class DeleteDialog extends StatelessWidget {
               margin: EdgeInsets.only(left: dp(32), right: dp(32), top: dp(64)),
               alignment: Alignment.topCenter,
               child: Text(
-                'Удалить событие "Выход на природу"',
+                text,
                 style: CustomTextStyles.titleH1,
                 textAlign: TextAlign.center,
               ),
