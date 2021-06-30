@@ -9,6 +9,8 @@ import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_s
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/'
     'add_button.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/'
+    'delete_dialog.dart';
+import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/'
     'edit_note_button.dart';
 import 'package:mind_tracker/src/views/screens/mood_assessment/mood_assessment_screen/widgets/'
     'edit_selected_events_button.dart';
@@ -205,8 +207,10 @@ class _MoodAssessmentScreenState extends State<MoodAssessmentScreen> {
         rightLeading: widget.arguments['startMode'] == 'update' ? CustomLeading(
           pathToIcon: CustomIconPaths.trashBin,
           iconSize: dp(24),
-          onPressed: () {
+          onPressed: () async {
             print('Press delete button');
+            final isDeleteButtonPressed = await DeleteDialog.show(context);
+            print('Dialog result: $isDeleteButtonPressed');
           },
         ) : null,
       ),
