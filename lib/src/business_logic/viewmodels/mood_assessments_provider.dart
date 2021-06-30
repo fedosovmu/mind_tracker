@@ -35,7 +35,7 @@ class MoodAssessmentsProvider extends ChangeNotifier {
   void add(MoodAssessment moodAssessment) async {
     _moodAssessments.add(moodAssessment);
     notifyListeners();
-    final docId = await CloudFirestoreProvider.addMoodAssessment(moodAssessment);
+    final docId = await CloudFirestoreProvider.createMoodAssessment(moodAssessment);
     moodAssessment.docId = docId;
     print('[MOOD ASSESSMENT PROVIDER] Mood assessment id updated $moodAssessment');
     notifyListeners();

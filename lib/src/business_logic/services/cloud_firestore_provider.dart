@@ -24,9 +24,9 @@ class CloudFirestoreProvider {
     return moodAssessments;
   }
 
-  static Future<String> addMoodAssessment(MoodAssessment moodAssessment) async {
+  static Future<String> createMoodAssessment(MoodAssessment moodAssessment) async {
     final uid = FirebaseAuthProvider.uid;
-    print('[FIREBASE] Add mood assessment $moodAssessment');
+    print('[FIREBASE] Create mood assessment $moodAssessment');
     var moodAssessmentMap = moodAssessment.toMapForCreate(uid);
     final documentRef = await _moodAssessmentsCollection.add(moodAssessmentMap);
     return documentRef.id;
