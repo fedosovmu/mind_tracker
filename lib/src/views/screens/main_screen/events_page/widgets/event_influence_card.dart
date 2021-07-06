@@ -36,8 +36,8 @@ class EventInfluenceCard extends StatelessWidget {
           ),
           Column(
             children: [
-              Text('Хороший код'),
-              
+              //Text('Хороший код'),
+              Text('Экран находится в процессе разработки'),
             ],
           )
         ],

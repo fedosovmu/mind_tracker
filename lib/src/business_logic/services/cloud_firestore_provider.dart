@@ -64,7 +64,7 @@ class CloudFirestoreProvider {
   }
 
   static final _settingsCollection = FirebaseFirestore.instance.collection('settings');
-  static const _appVersion = '0.1.0 (8+)';
+  static const _appVersion = '0.1.0 (9)';
   static Map<String, dynamic> _getStartAppInformation() {
     return {
       'app_version': _appVersion,
