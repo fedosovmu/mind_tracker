@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mind_tracker/src/app.dart';
 import 'package:mind_tracker/src/business_logic/models/event.dart';
 import 'package:mind_tracker/src/business_logic/models/mood_assessment.dart';
 import 'package:mind_tracker/src/business_logic/models/notification_time.dart';
@@ -64,10 +65,9 @@ class CloudFirestoreProvider {
   }
 
   static final _settingsCollection = FirebaseFirestore.instance.collection('settings');
-  static const _appVersion = '0.1.0 (9)';
   static Map<String, dynamic> _getStartAppInformation() {
     return {
-      'app_version': _appVersion,
+      'app_version':  MindTrackerApp.version,
       'email': FirebaseAuthProvider.email,
       'platform': Platform.isAndroid ? 'Android' : (Platform.isIOS ? 'IOS' : Platform.environment),
       'start_time': DateTime.now(),

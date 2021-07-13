@@ -1,6 +1,7 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
+import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -71,7 +72,8 @@ class LocalNotificationsProvider {
       'Channel with notifications that ask assess mood',
       importance: Importance.max,
       priority: Priority.high,
-      icon: 'notification_${partOfDay.toShortString()}'
+      icon: 'notification',
+      color: CustomColors.pink
     );
     final iosNotificationDetails = IOSNotificationDetails();
     return NotificationDetails(

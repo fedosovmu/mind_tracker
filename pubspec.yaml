@@ -52,6 +52,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/icons/ui/
+    - assets/icons/ui/part_of_days/
+    - assets/icons/ui/influence/
     - assets/icons/events/
     - assets/images/common/mood_spheres/
     - assets/images/common/mood_spheres_mini/
