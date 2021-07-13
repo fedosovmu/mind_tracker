@@ -8,6 +8,7 @@ class CustomColors {
   static const red = Color(0xFFEC4B68);
   static const blue = Color(0xFF6C8AF3);
   static const pink = Color(0xFFFF709B);
+  static const green = Color(0xFF30BA00);
 
   static const white = Color(0xFFFFFFFF);
   static const main = Color(0xFF7F3FB0);
@@ -18,7 +19,7 @@ class CustomColors {
     4: pink,
     5: blue,
     6: Color(0xFF02C1B6),
-    7: Color(0xFF30BA00),
+    7: green,
   };
   static const purpleMegaDark = Color(0xFF191327);
   static const purpleSuperDark = Color(0xFF261E35);
