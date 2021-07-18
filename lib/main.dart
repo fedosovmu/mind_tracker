@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/auth_provider.dart';
+import 'package:mind_tracker/src/business_logic/viewmodels/event_influence_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/events_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/mood_assessments_provider.dart';
 import 'package:mind_tracker/src/business_logic/viewmodels/notifications_provider.dart';
@@ -22,6 +23,7 @@ void main() async {
   final notificationsProvider = NotificationsProvider();
   final settingsProvider = SettingsProvider();
   final authProvider = AuthProvider();
+  final eventInfluenceProvider = EventInfluenceProvider(moodAssessmentsProvider);
 
   print('start app');
   runApp(
@@ -41,6 +43,9 @@ void main() async {
           }),
           ChangeNotifierProvider(create: (_) {
             return settingsProvider;
+          }),
+          ChangeNotifierProvider(create: (_) {
+            return eventInfluenceProvider;
           }),
         ],
         child: MindTrackerApp(),

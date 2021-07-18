@@ -23,7 +23,7 @@ import 'views/screens/main_screen/main_screen.dart';
 
 
 class MindTrackerApp extends StatelessWidget {
-  static const version = '0.1.0 (9+)';
+  static const version = '0.1.0 (9++)';
 
   _addAuthStateListener(Widget screen) {
     return Builder(builder: (BuildContext context) {

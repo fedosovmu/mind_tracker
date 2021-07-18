@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mind_tracker/src/business_logic/models/event.dart';
-import 'package:mind_tracker/src/business_logic/viewmodels/mood_assessments_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/app_bar/custom_app_bar.dart';
-import 'package:mind_tracker/src/views/common_widgets/other/glow_disabler.dart';
 import 'package:mind_tracker/src/views/common_widgets/period_buttons/period_toggle_buttons.dart';
-import 'package:mind_tracker/src/views/screens/main_screen/events_page/influence_cards/influence_card.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/events_page/influence_cards/influence_cards.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
-import 'package:provider/provider.dart';
 import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';
 
 
