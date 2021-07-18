@@ -3,7 +3,7 @@ import 'package:mind_tracker/src/business_logic/viewmodels/events_provider.dart'
 import 'package:mind_tracker/src/views/common_widgets/app_bar/custom_app_bar.dart';
 import 'package:mind_tracker/src/views/common_widgets/other/glow_disabler.dart';
 import 'package:mind_tracker/src/views/common_widgets/period_buttons/period_toggle_buttons.dart';
-import 'package:mind_tracker/src/views/screens/main_screen/events_page/widgets/event_influence_card.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/events_page/influence_card/influence_card.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +43,7 @@ class _EventsPageState extends State<EventsPage> with SingleTickerProviderStateM
                     final events = eventsProvider.events;
                     return ListView(
                       children: events.map((event) {
-                        return EventInfluenceCard(event);
+                        return InfluenceCard(event);
                       }).toList(),
                     );
                   },
