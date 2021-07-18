@@ -1,0 +1,1 @@
+enum EventInfluence {superUp, up, neutral, down, superDown}

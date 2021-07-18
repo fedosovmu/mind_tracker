@@ -50,7 +50,7 @@ class NotificationTimeBox extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      CustomIconPaths.partOfDays[
+                      CustomIconPaths.partOfDayIcons[
                         PartOfDayBuilder.fromDateTime(notificationTime.toDateTime())
                       ],
                       height: dp(24),

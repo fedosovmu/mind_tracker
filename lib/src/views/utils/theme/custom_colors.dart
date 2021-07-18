@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mind_tracker/src/business_logic/models/event_influence.dart';
 
 
 class CustomColors {

@@ -1,5 +1,6 @@
 
 
+import 'package:mind_tracker/src/business_logic/models/event_influence.dart';
 import 'package:mind_tracker/src/business_logic/models/part_of_day.dart';
 
 class CustomIconPaths {
@@ -38,17 +39,19 @@ class CustomIconPaths {
       key: (e) => '$e', value: (e) => '$_pathToEventIcons/$e.png');
 
   static const _pathToPartOfDayIcons = '$_pathToUiIcons/part_of_days';
-  static const partOfDays = const {
+  static const partOfDayIcons = const {
     PartOfDay.night: '$_pathToPartOfDayIcons/night.png',
     PartOfDay.morning : '$_pathToPartOfDayIcons/morning.png',
     PartOfDay.day : '$_pathToPartOfDayIcons/day.png',
     PartOfDay.evening : '$_pathToPartOfDayIcons/evening.png',
   };
 
-  static const _pathToInfluenceIcons = '$_pathToUiIcons/influence';
-  static const superUp = '$_pathToInfluenceIcons/super_up.png';
-  static const up = '$_pathToInfluenceIcons/up.png';
-  static const neutral = '$_pathToInfluenceIcons/neutral.png';
-  static const down = '$_pathToInfluenceIcons/down.png';
-  static const superDown = '$_pathToInfluenceIcons/super_down.png';
+  static const _pathToEventInfluenceIcons = '$_pathToUiIcons/influence';
+  static const eventInfluenceIcons = {
+    EventInfluence.superUp: '$_pathToEventInfluenceIcons/super_up.png',
+    EventInfluence.up: '$_pathToEventInfluenceIcons/up.png',
+    EventInfluence.neutral: '$_pathToEventInfluenceIcons/neutral.png',
+    EventInfluence.down: '$_pathToEventInfluenceIcons/down.png',
+    EventInfluence.superDown: '$_pathToEventInfluenceIcons/super_down.png',
+  };
 }
