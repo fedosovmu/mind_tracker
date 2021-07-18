@@ -5,7 +5,6 @@ import 'package:mind_tracker/src/views/common_widgets/period_buttons/period_togg
 import 'package:mind_tracker/src/views/screens/main_screen/chart_page/chart_card/chart_card.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/chart_page/mood_frequency_cards/mood_frequency_cards.dart';
 import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';
-import 'package:mind_tracker/src/views/utils/metrics.dart';
 
 
 class ChartPage extends StatefulWidget {
@@ -31,7 +30,6 @@ class _ChartPageState extends State<ChartPage> with TickerProviderStateMixin {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: dp(16)),
               PeriodToggleButtons(
                 onSelectedToggleButtonChanged: (index) {
                   setState(() {

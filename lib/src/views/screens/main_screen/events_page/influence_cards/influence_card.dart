@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/event.dart';
 import 'package:mind_tracker/src/business_logic/models/event_influence.dart';
-import 'package:mind_tracker/src/views/screens/main_screen/events_page/influence_card/influence_card_light_strip.dart';
-import 'package:mind_tracker/src/views/screens/main_screen/events_page/influence_card/influence_card_event_icon.dart';
-import 'package:mind_tracker/src/views/screens/main_screen/events_page/influence_card/influence_card_title.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/events_page/influence_cards/influence_card_light_strip.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/events_page/influence_cards/influence_card_event_icon.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/events_page/influence_cards/influence_card_title.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_border_shape.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_colors.dart';

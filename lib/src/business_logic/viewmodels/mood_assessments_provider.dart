@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:mind_tracker/src/business_logic/services/cloud_firestore_provider.dart';
-import 'package:mind_tracker/src/business_logic/services/firebase_auth_provider.dart';
 import '../models/mood_assessment.dart';
 import 'package:mind_tracker/src/business_logic/services/date_time_and_string_extensions.dart';
 

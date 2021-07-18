@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mind_tracker/src/business_logic/models/event_influence.dart';
-import 'package:mind_tracker/src/views/screens/main_screen/events_page/influence_card/influence_colors.dart';
+import 'package:mind_tracker/src/views/screens/main_screen/events_page/influence_cards/influence_colors.dart';
 import 'package:mind_tracker/src/views/utils/custom_icon_paths.dart';
 import 'package:mind_tracker/src/views/utils/metrics.dart';
 import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
