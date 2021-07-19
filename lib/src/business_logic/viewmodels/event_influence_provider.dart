@@ -85,14 +85,28 @@ class EventInfluenceProvider extends ChangeNotifier {
       startDate: startDate,
       endDate: endDate
     );
+    final Map<Event, EventInfluence> eventsWithEventInfluence = Map.fromIterable(
+        uniqueEvents,
+        key: (event) => event,
+        value: (event) => _getEventInfluenceForPeriod(
+            event: event,
+            startDate: startDate,
+            endDate: endDate
+        )
+    );
+    final sortedEventsWithEventInfluence = eventsWithEventInfluence.entries.toList();
+    sortedEventsWithEventInfluence.sort(
+        (a, b) {
+          if (a.value.index == b.value.index) {
+            return a.key.title.compareTo(b.key.title);
+          }
+          return a.value.index.compareTo(b.value.index);
+        }
+    );
     return Map.fromIterable(
-      uniqueEvents,
-      key: (event) => event,
-      value: (event) => _getEventInfluenceForPeriod(
-          event: event,
-          startDate: startDate,
-          endDate: endDate
-      )
+      sortedEventsWithEventInfluence,
+      key: (item) => item.key,
+      value: (item) => item.value
     );
   }
 }
