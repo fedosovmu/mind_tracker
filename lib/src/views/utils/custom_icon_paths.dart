@@ -38,7 +38,7 @@ class CustomIconPaths {
   static Map<String, String> eventIcons = Map.fromIterable(_eventNames,
       key: (e) => '$e', value: (e) => '$_pathToEventIcons/$e.png');
 
-  static const _pathToPartOfDayIcons = '$_pathToUiIcons/part_of_days';
+  static const _pathToPartOfDayIcons = 'assets/icons/part_of_days';
   static const partOfDayIcons = const {
     PartOfDay.night: '$_pathToPartOfDayIcons/night.png',
     PartOfDay.morning : '$_pathToPartOfDayIcons/morning.png',
@@ -46,7 +46,7 @@ class CustomIconPaths {
     PartOfDay.evening : '$_pathToPartOfDayIcons/evening.png',
   };
 
-  static const _pathToEventInfluenceIcons = '$_pathToUiIcons/influence';
+  static const _pathToEventInfluenceIcons = 'assets/icons/influence';
   static const eventInfluenceIcons = {
     EventInfluence.superUp: '$_pathToEventInfluenceIcons/super_up.png',
     EventInfluence.up: '$_pathToEventInfluenceIcons/up.png',

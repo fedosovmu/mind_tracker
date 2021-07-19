@@ -17,7 +17,7 @@ class InfluenceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final eventInfluence = EventInfluence.superUp;
+    final eventInfluence = EventInfluence.neutral;
     return Container(
       height: dp(72),
       width: double.infinity,
