@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mind_tracker/src/business_logic/models/event.dart';
-import 'package:mind_tracker/src/business_logic/viewmodels/mood_assessments_provider.dart';
+import 'package:mind_tracker/src/business_logic/viewmodels/event_influence_provider.dart';
 import 'package:mind_tracker/src/views/common_widgets/other/glow_disabler.dart';
 import 'package:mind_tracker/src/views/screens/main_screen/events_page/influence_cards/influence_card.dart';
 import 'package:provider/provider.dart';
@@ -15,26 +14,18 @@ class InfluenceCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GlowDisabler(
-      child: Consumer<MoodAssessmentsProvider>(
-        builder: (context, moodAssessmentsProvider, child) {
-          final moodAssessmentsForPeriod = moodAssessmentsProvider.getMoodAssessmentsForPeriod(
+      child: Consumer<EventInfluenceProvider>(
+        builder: (context, eventInfluenceProvider, child) {
+          final eventInfluenceForPeriod = eventInfluenceProvider.getEventInfluenceForPeriod(
               startDate: startDate,
               endDate: endDate
           );
-          final moodAssessmentWithEvents = moodAssessmentsForPeriod.where(
-                  (moodAssessment) => moodAssessment.events != null);
-          final List<Event> uniqueEvents = [];
-          moodAssessmentWithEvents.forEach((moodAssessment) {
-            moodAssessment.events.forEach((event) {
-              if (!uniqueEvents.contains(event)) {
-                uniqueEvents.add(event);
-              }
-            });
-          });
           return ListView(
-            children: uniqueEvents.map((event) {
-              return InfluenceCard(event);
-            }).toList(),
+            children: eventInfluenceForPeriod.entries.map((item) {
+              final event = item.key;
+              final eventInfluence = item.value;
+              return InfluenceCard(event, eventInfluence);
+            }).toList()
           );
         },
       ),

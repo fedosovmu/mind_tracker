@@ -12,12 +12,12 @@ import 'package:mind_tracker/src/views/utils/theme/custom_text_styles.dart';
 
 class InfluenceCard extends StatelessWidget {
   final Event event;
+  final EventInfluence eventInfluence;
 
-  InfluenceCard(this.event);
+  InfluenceCard(this.event, this.eventInfluence);
 
   @override
   Widget build(BuildContext context) {
-    final eventInfluence = EventInfluence.neutral;
     return Container(
       height: dp(72),
       width: double.infinity,
